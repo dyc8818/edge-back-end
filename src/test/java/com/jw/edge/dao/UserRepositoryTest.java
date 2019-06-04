@@ -19,8 +19,6 @@ public class UserRepositoryTest {
 
         userRepository.save(new User("张三","是个男人"));
     }
-
-
     @Before
     public void before(){
         System.out.print("开始进行MongoDB测试");
