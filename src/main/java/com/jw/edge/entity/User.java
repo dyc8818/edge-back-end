@@ -37,8 +37,11 @@ public class User {
         this.userRemark = remark;
     }
 
+    public String getUserId() {
+        return userId;
+    }
 
-
-
-
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

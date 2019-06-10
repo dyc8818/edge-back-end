@@ -4,5 +4,13 @@ spring:
       host: 127.0.0.1
       port: 27017
       database: edge
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    mode: HTML5
+  resources:
+    static-locations: classpath:/static
+
 #      username:
 #      password:
+

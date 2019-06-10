@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>用户列表</title>
+    <div th:replace="common/header"></div>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div th:replace="common/nav"></div>
+
+    <div th:replace="common/menu">
+        <dd class="layui-this">
+            <a href="/pages/list2">产品列表</a>
+        </dd>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <h1 th:text="${hello}"></h1>
+        <table class="layui-table">
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>remark</th>
+            </tr>
+            <!--/*@thymesVar id="userList" type="java.util.List<User>"*/-->
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.userId}">0</td>
+
+                <td th:text="${user.userName}">zhansan</td>
+                <td th:text="${user.userRemark}">remark</td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div th:replace="common/footer"></div>
+</div>
+
+</body>
+</html>
