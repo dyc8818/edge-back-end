@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.junit.Assert.*;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductServiceImplTest {
@@ -19,17 +20,19 @@ public class ProductServiceImplTest {
     ProductServie productServie;
 
     @Test
-    public void testProductLists(){
+    public void testProductLists() {
         List<Product> products = productServie.findAllProduct();
-        System.out.println(products.get(0).getProductId()+products.get(0).getProductName());
+        System.out.println(products.get(0).getProductId() + products.get(0).getProductName());
     }
 
     @Test
     public void addProduct() {
-        Product product = new Product();
-        product.setProductName("传感器2");
-        product.setProductType("设备");
-        product.setProductConnectWay("wifi");
-        System.out.println(productServie.addProduct(product));
+        for (int i = 0; i < 20; i++) {
+            Product product = new Product();
+            product.setProductName("传感器"+(i+5));
+            product.setProductType("设备");
+            product.setProductConnectWay("wifi");
+            System.out.println(productServie.addProduct(product));
+        }
     }
 }

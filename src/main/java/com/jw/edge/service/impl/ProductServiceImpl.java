@@ -5,11 +5,12 @@ import com.jw.edge.entity.Product;
 import com.jw.edge.service.ProductServie;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
+
 
 @Service
 public class ProductServiceImpl implements ProductServie {
@@ -21,9 +22,14 @@ public class ProductServiceImpl implements ProductServie {
 
 
     @Override
-    public List<Product> findAllProduct() {
-        List<Product> products = productRepository.findAll();
+    public Page<Product> findAllProduct(Pageable pageable) {
+        Page<Product> products = productRepository.findAll(pageable);
         return products;
+    }
+
+    @Override
+    public List<Product> findAllProduct() {
+        return productRepository.findAll();
     }
 
     @Override
