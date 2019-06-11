@@ -3,14 +3,28 @@ package com.jw.edge.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document
 public class Product {
     @Id
     private String productId;
     private String productName;
-    private String productInfo;
+    private String productDesc;
     private String productType;
+    private Boolean productAccessForGateway;
+    private String productConnectWay;
+    private String productDataFormat;
 
+    public Date getProductCreateTime() {
+        return productCreateTime;
+    }
+
+    public void setProductCreateTime(Date productCreateTime) {
+        this.productCreateTime = productCreateTime;
+    }
+
+    private Date productCreateTime;
     public String getProductId() {
         return productId;
     }
@@ -27,12 +41,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductInfo() {
-        return productInfo;
+    public String getProductDesc() {
+        return productDesc;
     }
 
-    public void setProductInfo(String productInfo) {
-        this.productInfo = productInfo;
+    public void setProductDesc(String productDesc) {
+        this.productDesc = productDesc;
     }
 
     public String getProductType() {
@@ -41,5 +55,29 @@ public class Product {
 
     public void setProductType(String productType) {
         this.productType = productType;
+    }
+
+    public Boolean getProductAccessForGateway() {
+        return productAccessForGateway;
+    }
+
+    public void setProductAccessForGateway(Boolean productAccessForGateway) {
+        this.productAccessForGateway = productAccessForGateway;
+    }
+
+    public String getProductConnectWay() {
+        return productConnectWay;
+    }
+
+    public void setProductConnectWay(String productConnectWay) {
+        this.productConnectWay = productConnectWay;
+    }
+
+    public String getProductDataFormat() {
+        return productDataFormat;
+    }
+
+    public void setProductDataFormat(String productDataFormat) {
+        this.productDataFormat = productDataFormat;
     }
 }
