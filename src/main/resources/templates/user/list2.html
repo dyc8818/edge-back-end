@@ -1,41 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>用户列表</title>
-    <div th:replace="common/header"></div>
-</head>
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <div th:replace="common/nav"></div>
-    <div th:replace="~{common/menu :: memuLayout(~{::productList},_,_,_,_,_,_,_)}">
-        <dd class="layui-this" th:fragment="productList">
-            <a href="/pages/list2">产品列表</a>
-        </dd>
-    </div>
-    <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <!--        <a href="/test/test2">/test/test2</a>-->
-        <h1 th:text="${hello}"></h1>
-        <table class="layui-table">
-            <tr>
-                <th>ID</th>
-                <th>姓名</th>
-                <th>remark</th>
-            </tr>
-            <!--/*@thymesVar id="userList" type="java.util.List<User>"*/-->
-            <tr th:each="user : ${userList}">
-                <td th:text="${user.userId}">0</td>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, ~{::productList},_,_,_,_,_,_,_)}">
 
-                <td th:text="${user.userName}">zhansan</td>
-                <td th:text="${user.userRemark}">remark</td>
-            </tr>
-        </table>
-    </div>
+<title>产品列表</title>
+<content>
+    <h1 th:text="${hello}"></h1>
+    <table class="layui-table">
+        <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>remark</th>
+        </tr>
+        <!--/*@thymesVar id="userList" type="java.util.List<User>"*/-->
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.userId}">0</td>
 
-    <div th:replace="common/footer"></div>
-</div>
-</div>
+            <td th:text="${user.userName}">zhansan</td>
+            <td th:text="${user.userRemark}">remark</td>
+        </tr>
+    </table>
+</content>
 
+<dd class="layui-this" th:fragment="productList">
+    <a href="/pages/list2">产品列表</a>
+</dd>
 
-</body>
 </html>

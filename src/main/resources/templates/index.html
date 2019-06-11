@@ -1,24 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,_)}">
 
 <head>
-    <title>边缘计算平台</title>
-    <div th:replace="common/header"></div>
+    <title>主页</title>
 </head>
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <div th:replace="common/nav"></div>
+<content>
+    我是主页君
+</content>
 
-    <div th:replace="~{common/menu :: memuLayout(_,_,_,_,_,_,_,_)}" ></div>
-
-    <div class="layui-body ">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
-    </div>
-
-
-    <div th:replace="common/footer"></div>
-</div>
-
-</body>
 </html>
