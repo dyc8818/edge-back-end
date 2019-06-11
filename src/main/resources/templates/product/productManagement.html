@@ -6,7 +6,7 @@
 <content>
 
 
-    <div class="layui-fluid">
+    <div class="layui-fluid" style="padding: 15px;">
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md12">
                 <div class="layui-card">
@@ -15,7 +15,7 @@
                     </div>
                     <div>
                         <button type="button"
-                                class="  layui-col-md-offset10 layui-btn layui-btn-normal layui-btn-radius">
+                                class="  layui-btn layui-btn-normal layui-btn-radius">
                             创建产品
                         </button>
                     </div>
@@ -43,7 +43,7 @@
                 elem: '#productTable',
                 url: '/api/products/', //数据接口
                 page: true,  //开启分页
-                width: 1200,
+                //width: 1200,
 
                 cols: [[ //表头
                     {field: 'productId', title: 'ProductKey', sort: true, align: 'center'},
