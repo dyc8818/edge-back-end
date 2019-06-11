@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html th:fragment="Layout (content,title,users,productList, deviceList,deviceManagement1,deviceManagement2,
-rule1,rule2,logManagement,monitor)" lang="en" xmlns:th="http://www.thymeleaf.org">
+rule1,rule2,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:replace="${title}">边缘计算平台</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -62,7 +62,7 @@ rule1,rule2,logManagement,monitor)" lang="en" xmlns:th="http://www.thymeleaf.org
                                                                href="javascript:;">产品管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${productList}">
-                            <a href="javascript:;">产品列表</a>
+                            <a href="/pages/products">产品列表</a>
                         </dd>
                         <dd th:replace="${deviceList}">
                             <a href="javascript:;">设备列表</a>
@@ -114,7 +114,7 @@ rule1,rule2,logManagement,monitor)" lang="en" xmlns:th="http://www.thymeleaf.org
 </div>
 </body>
 <script th:src="@{/layui/layui.js}"></script>
-<script>
+<script th:replace="${script}">
     //JavaScript代码区域
     layui.use('element', function () {
         var element = layui.element;
