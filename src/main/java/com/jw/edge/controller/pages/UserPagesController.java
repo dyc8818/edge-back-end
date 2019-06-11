@@ -15,7 +15,7 @@ public class UserPagesController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/list2")
+    @RequestMapping("/users")
     public String userList2(Model model) throws Exception {
         model.addAttribute("hello","Hello, Spring Boot!");
         model.addAttribute("userList", userService.findAllUsers());
@@ -23,6 +23,6 @@ public class UserPagesController {
             ObjectId objectId = new ObjectId(user.getUserId());
             System.out.println(objectId.getDate()+","+objectId.getCounter());
         }
-        return "/user/list2";
+        return "user/userList";
     }
 }

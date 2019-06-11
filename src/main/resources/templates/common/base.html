@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:fragment="Layout (content,title,productList, deviceList,deviceManagement1,deviceManagement2,
+<html th:fragment="Layout (content,title,users,productList, deviceList,deviceManagement1,deviceManagement2,
 rule1,rule2,logManagement,monitor)" lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:replace="${title}">边缘计算平台</title>
@@ -50,10 +50,18 @@ rule1,rule2,logManagement,monitor)" lang="en" xmlns:th="http://www.thymeleaf.org
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed"><a class=""
+                                                               href="javascript:;">用户管理</a>
+                    <dl class="layui-nav-child">
+                        <dd th:replace="${users}">
+                            <a href="/pages/users">用户列表</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed"><a class=""
                                                                href="javascript:;">产品管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${productList}">
-                            <a href="/pages/list2">产品列表</a>
+                            <a href="javascript:;">产品列表</a>
                         </dd>
                         <dd th:replace="${deviceList}">
                             <a href="javascript:;">设备列表</a>

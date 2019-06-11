@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, ~{::productList},_,_,_,_,_,_,_)}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, ~{::users},_,_,_,_,_,_,_,_)}">
 
 <title>产品列表</title>
 <content>
@@ -21,8 +21,8 @@
     </table>
 </content>
 
-<dd class="layui-this" th:fragment="productList">
-    <a href="/pages/list2">产品列表</a>
+<dd class="layui-this" th:fragment="users">
+    <a href="/pages/users">用户列表</a>
 </dd>
 
 </html>
