@@ -27,7 +27,7 @@
 
 
                     <div class="layui-card-body">
-                        <table class="layui-hide" id="productTable"></table>
+                        <table class="layui-hide" id="productTable" lay-filter="table"></table>
                     </div>
                 </div>
             </div>
@@ -41,6 +41,11 @@
 </dd>
 <div th:fragment="scripts">
 
+    <script type="text/html" id="barDemo">
+        <button class="layui-btn layui-btn-xs" lay-event="detail">查看</button>
+        <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
+    </script>
+
     <script th:inline="none">
         layui.use('table', function () {
             var table = layui.table;
@@ -51,7 +56,7 @@
                 url: '/api/products/', //数据接口
                 page: true,  //开启分页
                 //width: 1200,
-
+                tool:'barDemo',
                 cols: [[ //表头
                     {field: 'productId', title: 'ProductKey', sort: true, align: 'center'},
                     {field: 'productName', title: '产品名称', align: 'center'},
@@ -59,13 +64,22 @@
                     {field: 'productCreateTime', title: '添加时间', sort: true, align: 'center'},
                     {
                         fixed: 'right', title: '操作', align: 'center',
-                        templet: function (data) {
-                            return "<a href='AdminInfo?id=" + data.id + "' title='查看' class='layui-btn layui-btn-xs layui-btn-normal'><icon class='layui-icon'>&#xe60b;</icon></a>" +
-                                "<a href='' title='编辑' class='layui-btn layui-btn-xs layui-btn-normal'><icon class='layui-icon'>&#xe642;</icon></a>" +
-                                "<a href='' title='删除' class='layui-btn layui-bg-red layui-btn-xs layui-btn-normal'><icon class='layui-icon'>&#xe640;</icon></a>";
-                        }
+                        toolbar: '#barDemo'
                     }
                 ]]
+            });
+            //监听工具条
+            table.on('tool(table)', function(obj){
+                var data = obj.data;
+                console.log(data);
+                if(obj.event === 'detail'){
+                    layer.msg('ID：'+ data.productName + ' 的查看操作');
+                } else if(obj.event === 'del'){
+                    layer.confirm('真的删除行么', function(index){
+                        obj.del();
+                        layer.close(index);
+                    });
+                }
             });
 
             var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
