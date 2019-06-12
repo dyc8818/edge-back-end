@@ -34,8 +34,8 @@
     <div class="layui-form-item">
         <label class="layui-form-label">是否接入网关</label>
         <div class=" layui-input-inline">
-            <input type="radio" name="productAccessForGateway" value="是" title="是" checked="">
-            <input type="radio" name="productAccessForGateway" value="否" title="否">
+            <input type="radio" name="productAccessForGateway" value="true" title="是" checked="">
+            <input type="radio" name="productAccessForGateway" value="false" title="否">
         </div>
     </div>
 
@@ -46,30 +46,30 @@
     <div class="layui-form-item">
         <label class="layui-form-label">连网方式</label>
         <div class="layui-input-inline">
-            <select name="interest" lay-filter="aihao">
+            <select name="productConnectWay" lay-filter="aihao">
                 <option value=""></option>
-                <option value="0" selected="">WIFI</option>
-                <option value="1">蜂窝(2G/3G/4G)</option>
-                <option value="2">以太网</option>
-                <option value="3">其他</option>
+                <option value="WIFI" selected="">WIFI</option>
+                <option value="蜂窝(2G/3G/4G)">蜂窝(2G/3G/4G)</option>
+                <option value="以太网">以太网</option>
+                <option value="其他">其他</option>
             </select>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">数据格式</label>
         <div class="layui-input-inline">
-            <select name="interest" lay-filter="aihao">
+            <select name="productDataFormat" lay-filter="aihao">
                 <option value=""></option>
-                <option value="0" selected="">ICA标准数据格式(JSON)</option>
-                <option value="1">透传/自定义</option>
+                <option value="ICA标准数据格式(JSON)" selected="">ICA标准数据格式(JSON)</option>
+                <option value="透传/自定义">透传/自定义</option>
             </select>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">使用认证</label>
         <div class="layui-input-inline">
-            <input type="radio" name="productAccessForGateway" value="是" title="是" checked="">
-            <input type="radio" name="productAccessForGateway" value="否" title="否">
+            <input type="radio" name="productSafe" value="true" title="是" checked="">
+            <input type="radio" name="productSafe" value="false" title="否">
         </div>
     </div>
 
@@ -80,85 +80,70 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">产品描述</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入产品描述" class="layui-textarea"></textarea>
+            <textarea name="productDesc"placeholder="请输入产品描述" class="layui-textarea"></textarea>
         </div>
     </div>
 
 
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="display: none">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button class="layui-btn" lay-submit="" lay-filter="formVerify">立即提交</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
-
-
 </form>
 </body>
-
 <script th:src="@{/layui/layui.js}"></script>
 <script>
     layui.use(['form', 'layedit', 'laydate'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
-
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
+        var form = layui.form;
         //自定义验证规则
-        form.verify({
-            title: function (value) {
-                if (value.length < 5) {
-                    return '标题至少得5个字符啊';
-                }
-            }
-            , pass: [
-                /^[\S]{6,12}$/
-                , '密码必须6到12位，且不能出现空格'
-            ]
-            , content: function (value) {
-                layedit.sync(editIndex);
-            }
-        });
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-
+        // form.verify({
+        //     title: function (value) {
+        //         if (value.length < 5) {
+        //             return '标题至少得5个字符啊';
+        //         }
+        //     }
+        //     , pass: [
+        //         /^[\S]{6,12}$/
+        //         , '密码必须6到12位，且不能出现空格'
+        //     ]
+        //     , content: function (value) {
+        //         layedit.sync(editIndex);
+        //     }
+        // });
         //监听提交
-        form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })
-            return false;
+        form.on('submit(formVerify)', function (data) {
+
+            var data = JSON.stringify(data.field);
+
+            var url = "/api/product";
+
+            var code = 0;
+            layui.jquery.ajax({
+                type: "post",
+                url: url,
+                async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                data: data,
+                contentType: "application/json",
+                // processData: false,
+                // cache: false,
+                success: function (ev) {
+                    code = ev.code;
+                }
+
+            });
+            if (code == 500) {
+                console.log("提交失败");
+            }
+
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+
+            parent.layer.close(index);
+
+            // 刷新表格（即点击分页控件的“确定”按钮）
+            parent.layui.$('#refreshButton').click();
         });
-
-        //表单初始赋值
-        form.val('example', {
-            "username": "贤心" // "name": "value"
-            , "password": "123456"
-            , "interest": 1
-            , "like[write]": true //复选框选中状态
-            , "close": true //开关状态
-            , "sex": "女"
-            , "desc": "我爱 layui"
-        })
-
-
     });
 </script>
 

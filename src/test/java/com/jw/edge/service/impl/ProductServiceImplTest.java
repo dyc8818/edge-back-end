@@ -29,7 +29,7 @@ public class ProductServiceImplTest {
     public void addProduct() {
         for (int i = 0; i < 20; i++) {
             Product product = new Product();
-            product.setProductName("传感器"+(i+5));
+            product.setProductName("传感器"+(i+2));
             product.setProductType("设备");
             product.setProductConnectWay("wifi");
             System.out.println(productServie.addProduct(product));
