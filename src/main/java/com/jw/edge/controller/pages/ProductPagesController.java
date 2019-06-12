@@ -12,26 +12,14 @@ import java.util.List;
 @RequestMapping("/pages")
 @Controller
 public class ProductPagesController {
-    @Autowired
-    ProductServie productServie;
-
-
-    @PostMapping("/product")
-    @ResponseBody
-    public Boolean addProduct(@RequestBody Product product) {
-        if (product != null) {
-            if (productServie.addProduct(product)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @GetMapping("/products")
     public String productList(Model model) throws Exception {
-        List<Product> products = productServie.findAllProduct();
-        model.addAttribute("products",products);
         return "product/productManagement";
+    }
+
+    @GetMapping("/productCreate")
+    public String productCreate(Model model) throws Exception {
+        return "product/productCreate";
     }
 
 }
