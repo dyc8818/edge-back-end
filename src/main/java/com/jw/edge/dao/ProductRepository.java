@@ -12,4 +12,5 @@ import java.util.List;
 public interface ProductRepository extends MongoRepository<Product,String> {
     public Product findProductByProductName(String productName);
     public Page<Product> findAll(Pageable pageable);
+    public Product findProductByProductId(String productId);
 }

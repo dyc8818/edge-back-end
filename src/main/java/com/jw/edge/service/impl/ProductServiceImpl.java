@@ -46,4 +46,15 @@ public class ProductServiceImpl implements ProductServie {
             return false;
         }
     }
+
+    @Override
+    public String deleteProduct(String productId) {
+        Product product = productRepository.findProductByProductId(productId);
+        if (product == null) {
+            return "不存在该产品";
+        } else {
+            productRepository.deleteById(productId);
+            return "删除成功";
+        }
+    }
 }

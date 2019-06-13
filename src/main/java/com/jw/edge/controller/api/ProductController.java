@@ -52,4 +52,12 @@ public class ProductController {
         }
         return false;
     }
+
+    @DeleteMapping("/product")
+    @ResponseBody
+    public LayuiTableResultUtil<String> deleteProduct(@RequestBody Product product){
+       // System.out.println(product.getProductId());
+        String deleteStatus = productServie.deleteProduct(product.getProductId());
+        return  new LayuiTableResultUtil<String>("",deleteStatus,0,1);
+    }
 }

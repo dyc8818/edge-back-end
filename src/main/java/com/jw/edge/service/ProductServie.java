@@ -10,4 +10,5 @@ public interface ProductServie {
     public Page<Product> findAllProduct(Pageable pageable);
     public List<Product> findAllProduct();
     public boolean addProduct(Product product);
+    public String deleteProduct(String productId);
 }
