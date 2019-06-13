@@ -25,6 +25,12 @@ public class ProductController {
         LayuiTableResultUtil<List<Product>> productsTable=new LayuiTableResultUtil<List<Product>>("",products.getContent(),0,(int)products.getTotalElements());
         return productsTable;
     }
+//    @GetMapping("/products2")
+//    @ResponseBody
+//    public LayuiTableResultUtil<List<Product>> getProducts2(@RequestParam Integer page, @RequestParam Integer limit) {
+//        LayuiTableResultUtil<List<Product>> productsTable=new LayuiTableResultUtil<List<Product>>("",products.getContent(),0,(int)products.getTotalElements());
+//        return productsTable;
+//    }
 
     @PostMapping("/product")
     @ResponseBody

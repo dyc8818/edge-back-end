@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,~{::monitor},~{::scripts})}">
+
+<title>实时监控</title>
+<content>
+
+    我是实时监控
+
+</content>
+
+
+<dd class="layui-this" th:fragment="monitor">
+    <a href="/pages/monitor">实时监控</a>
+</dd>
+
+<div th:fragment="scripts">
+
+     <script>
+
+    </script>
+
+
+</div>
+</html>
+

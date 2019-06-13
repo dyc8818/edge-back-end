@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,~{::ruleList},_,_,~{::scripts})}">
+
+<title>规则列表</title>
+<content>
+
+    我是规则列表
+
+</content>
+
+
+<dd class="layui-this" th:fragment="ruleList">
+    <a href="/pages/rules">规则列表</a>
+</dd>
+
+<div th:fragment="scripts">
+
+     <script>
+
+    </script>
+
+
+</div>
+</html>
+

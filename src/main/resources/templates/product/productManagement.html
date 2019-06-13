@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productList},_,_,_,_,_,_,_,~{::scripts})}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productList},_,_,_,_,~{::scripts})}">
 
 <title>产品列表</title>
 <content>
@@ -13,13 +13,13 @@
                         <h1>产品列表</h1>
                     </div>
 
-                    <div  id="layerRefresh">
+                    <div id="layerRefresh">
 
                         <button id="createButton" data-method="notice"
                                 class="layui-col-md-offset10    layui-btn layui-btn-normal layui-btn-radius">
                             创建产品
                         </button>
-                        <button id="refreshButton"data-method="fresh"
+                        <button id="refreshButton" data-method="fresh"
                                 class="layui-col-md-offset11   layui-btn layui-btn-checked layui-btn-radius">
                             刷新
                         </button>
@@ -27,7 +27,7 @@
 
 
                     <div class="layui-card-body">
-                        <table class="layui-hide" id="productTable" lay-filter="table"></table>
+                        <table class="layui-hide" id="test" lay-filter="test"></table>
                     </div>
                 </div>
             </div>
@@ -41,41 +41,76 @@
 </dd>
 <div th:fragment="scripts">
 
-    <script type="text/html" id="barDemo">
+    <script th:inline="none" type="text/html" id="barDemo">
         <button class="layui-btn layui-btn-xs" lay-event="detail">查看</button>
         <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
     </script>
 
-    <script th:inline="none">
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+            <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+        </div>
+    </script>
+
+    <script >
         layui.use('table', function () {
             var table = layui.table;
 
             //第一个实例
             table.render({
-                elem: '#productTable',
+                elem: '#test',
                 url: '/api/products/', //数据接口
                 page: true,  //开启分页
+                toolbar: '#toolbarDemo',
                 //width: 1200,
-                tool:'barDemo',
-                cols: [[ //表头
-                    {field: 'productId', title: 'ProductKey', sort: true, align: 'center'},
-                    {field: 'productName', title: '产品名称', align: 'center'},
-                    {field: 'productType', title: '节点类型', align: 'center'},
-                    {field: 'productCreateTime', title: '添加时间', sort: true, align: 'center'},
-                    {
-                        fixed: 'right', title: '操作', align: 'center',
-                        toolbar: '#barDemo'
-                    }
-                ]]
+                // tool:'barDemo',
+                cols: [
+                    [ //表头
+                        {type: 'checkbox', fixed: 'left'},
+                        {field: 'productId', title: 'ProductKey', sort: true, align: 'center'},
+                        {field: 'productName', title: '产品名称', align: 'center'},
+                        {field: 'productType', title: '节点类型', align: 'center'},
+                        {field: 'productCreateTime', title: '添加时间', sort: true, align: 'center'},
+                        {
+                            fixed: 'right', title: '操作', align: 'center',
+                            toolbar: '#barDemo'
+                        }
+                    ]
+                ]
             });
+
+            //头工具栏事件
+            table.on('toolbar(test)', function (obj) {
+                var checkStatus = table.checkStatus(obj.config.id);
+                console.log(checkStatus);
+                switch (obj.event) {
+                    case 'getCheckData':
+                        var data = checkStatus.data;
+                        layer.alert(JSON.stringify(data));
+                        break;
+                    case 'getCheckLength':
+                        var data = checkStatus.data;
+                        layer.msg('选中了：' + data.length + ' 个');
+                        break;
+                    case 'isAll':
+                        layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                        break;
+                }
+                ;
+            });
+
             //监听工具条
-            table.on('tool(table)', function(obj){
+            table.on('tool(test)', function (obj) {
                 var data = obj.data;
                 console.log(data);
-                if(obj.event === 'detail'){
-                    layer.msg('ID：'+ data.productName + ' 的查看操作');
-                } else if(obj.event === 'del'){
-                    layer.confirm('真的删除行么', function(index){
+                console.log(obj);
+                var tr = obj.tr;
+                if (obj.event === 'detail') {
+                    layer.msg('ID：' + data.productName + ' 的查看操作');
+                } else if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
                         obj.del();
                         layer.close(index);
                     });
@@ -101,7 +136,7 @@
                         ,
                         id: 'LAY_layuipro' //设定一个id，防止重复弹出
                         ,
-                        btn: ['提交', '重置','取消']
+                        btn: ['提交', '重置', '取消']
                         ,
                         btnAlign: 'c'
                         ,
@@ -128,7 +163,7 @@
                             // 弹出层关闭的操作在子层的js代码中完成
 
                         },
-                        btn2: function(index, layero){
+                        btn2: function (index, layero) {
                             //按钮【重置】的回调
                             // 获取弹出层中的form表单元素
                             var formSubmit = layer.getChildFrame('form', index);
