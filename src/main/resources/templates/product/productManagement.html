@@ -4,25 +4,22 @@
 
 <title>产品列表</title>
 <content>
-
+    <div class="layui-tab-brief layui-tab">
+        <ul class="layui-tab-title site-demo-title">
+            <li class="layui-this"><a><cite>产品列表</cite></a></li>
+        </ul>
+    </div>
     <div class="layui-fluid" style="padding: 15px;">
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md12">
                 <div class="layui-card">
-                    <div class="layui-card-header ">
-                        <h1>产品列表</h1>
-                    </div>
+                    <!--                    <div class="layui-card-header ">-->
+                    <!--                        <h1>产品列表</h1>-->
+                    <!--                    </div>-->
 
                     <div id="layerRefresh">
 
-                        <button id="createButton" data-method="notice"
-                                class="layui-col-md-offset10    layui-btn layui-btn-normal layui-btn-radius">
-                            创建产品
-                        </button>
-                        <button id="refreshButton" data-method="fresh"
-                                class="layui-col-md-offset11   layui-btn layui-btn-checked layui-btn-radius">
-                            刷新
-                        </button>
+
                     </div>
 
 
@@ -48,9 +45,14 @@
 
     <script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-            <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+            <button id="createButton" data-method="notice"
+                    class="   layui-btn layui-btn-normal layui-btn-radius">
+                创建产品
+            </button>
+            <button id="refreshButton" data-method="fresh"
+                    class="   layui-btn layui-btn-checked layui-btn-radius">
+                刷新
+            </button>
         </div>
     </script>
 
@@ -83,32 +85,33 @@
             });
 
             //头工具栏事件
-            table.on('toolbar(buttons)', function (obj) {
-
-                var checkStatus = table.checkStatus('test');
-                console.log(checkStatus);
-                switch (obj.event) {
-                    case 'getCheckData':
-                        var data = checkStatus.data;
-                        layer.alert(JSON.stringify(data));
-                        break;
-                    case 'getCheckLength':
-                        var data = checkStatus.data;
-                        layer.msg('选中了：' + data.length + ' 个');
-                        break;
-                    case 'isAll':
-                        layer.msg(checkStatus.isAll ? '全选' : '未全选');
-                        break;
-                }
-                ;
-            });
+            // table.on('toolbar(buttons)', function (obj) {
+            //
+            //     var checkStatus = table.checkStatus('test');
+            //     console.log(checkStatus);
+            //     switch (obj.event) {
+            //         case 'getCheckData':
+            //             var data = checkStatus.data;
+            //             layer.alert(JSON.stringify(data));
+            //             break;
+            //         case 'getCheckLength':
+            //             var data = checkStatus.data;
+            //             layer.msg('选中了：' + data.length + ' 个');
+            //             break;
+            //         case 'isAll':
+            //             layer.msg(checkStatus.isAll ? '全选' : '未全选');
+            //             break;
+            //     }
+            //     ;
+            // });
 
             //监听工具条
             table.on('tool(buttons)', function (obj) {
 
                 var data = obj.data;
                 if (obj.event === 'detail') {
-                    layer.msg('ID：' + data.productName + ' 的查看操作');
+                    // layer.('ID：' + data.productId + ' 的查看操作');
+                    location.href = "/pages/productDetails?productId=" + data.productId;
                 } else if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
 
@@ -121,11 +124,11 @@
                             // processData: false,
                             // cache: false,
                             success: function (ev) {
-                                if(ev.data=="删除成功"){
+                                if (ev.data == "删除成功") {
                                     obj.del();
                                     layer.msg(ev.data);
                                     layer.close(index);
-                                }else{
+                                } else {
                                     layer.msg(ev.data);
                                     layer.close(index);
                                 }

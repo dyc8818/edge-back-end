@@ -11,4 +11,5 @@ public interface ProductServie {
     public List<Product> findAllProduct();
     public boolean addProduct(Product product);
     public String deleteProduct(String productId);
+    public Product findProductByProductId(String productId);
 }

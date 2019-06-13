@@ -27,20 +27,7 @@ public class ProductController {
         return productsTable;
     }
 
-    @GetMapping("/productDetail")
-    @ResponseBody
-    public LayuiTableResultUtil<List<Product>> getProductDetail(@RequestParam Integer page, @RequestParam Integer limit) {
-        Pageable pageable = PageRequest.of(page-1, limit);
-        Page<Product> products =  productServie.findAllProduct(pageable);
-        LayuiTableResultUtil<List<Product>> productsTable=new LayuiTableResultUtil<List<Product>>("",products.getContent(),0,(int)products.getTotalElements());
-        return productsTable;
-    }
-//    @GetMapping("/products2")
-//    @ResponseBody
-//    public LayuiTableResultUtil<List<Product>> getProducts2(@RequestParam Integer page, @RequestParam Integer limit) {
-//        LayuiTableResultUtil<List<Product>> productsTable=new LayuiTableResultUtil<List<Product>>("",products.getContent(),0,(int)products.getTotalElements());
-//        return productsTable;
-//    }
+
 
     @PostMapping("/product")
     @ResponseBody

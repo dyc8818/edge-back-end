@@ -57,4 +57,9 @@ public class ProductServiceImpl implements ProductServie {
             return "删除成功";
         }
     }
+
+    @Override
+    public Product findProductByProductId(String productId) {
+        return productRepository.findProductByProductId(productId);
+    }
 }
