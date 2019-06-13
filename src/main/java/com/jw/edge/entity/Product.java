@@ -15,6 +15,7 @@ public class Product {
     private Boolean productAccessForGateway;
     private String productConnectWay;
     private String productDataFormat;
+    private Date productCreateTime;
 
     public Date getProductCreateTime() {
         return productCreateTime;
@@ -24,7 +25,6 @@ public class Product {
         this.productCreateTime = productCreateTime;
     }
 
-    private Date productCreateTime;
     public String getProductId() {
         return productId;
     }

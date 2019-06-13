@@ -50,21 +50,21 @@ rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed"><a class=""href="javascript:;">用户管理</a>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${users}">
                             <a href="/pages/users">用户列表</a>
                         </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed"><a class=""href="javascript:;">产品管理</a>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">产品管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${productList}">
                             <a href="/pages/products">产品列表</a>
                         </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed"><a class=""href="javascript:;">设备管理</a>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">设备管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${deviceList}">
                             <a href="/pages/devices">设备列表</a>
@@ -72,17 +72,17 @@ rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org
 
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed"><a class=""href="javascript:;">规则引擎</a>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">规则引擎</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${rule}">
                             <a href="/pages/rules">规则列表</a>
                         </dd>
-<!--                        <dd th:replace="${rule2}">-->
-<!--                            <a href="javascript:;">列表二</a>-->
-<!--                        </dd>-->
+                        <!--                        <dd th:replace="${rule2}">-->
+                        <!--                            <a href="javascript:;">列表二</a>-->
+                        <!--                        </dd>-->
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed"><a class=""href="javascript:;">系统管理</a>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">系统管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${logManagement}">
                             <a href="/pages/logManagement">日志管理</a>
@@ -103,9 +103,8 @@ rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org
         © jw.com - 北京交通大学 , xx实验室
     </div>
 </div>
-</body>
 <script th:src="@{/layui/layui.js}"></script>
-<script  >
+<script>
     //JavaScript代码区域
     layui.use('element', function () {
         var element = layui.element;
@@ -115,4 +114,6 @@ rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org
 <script th:replace="${script}">
 
 </script>
+</body>
+
 </html>

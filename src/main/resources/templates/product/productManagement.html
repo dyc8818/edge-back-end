@@ -27,7 +27,7 @@
 
 
                     <div class="layui-card-body">
-                        <table class="layui-hide" id="test" lay-filter="test"></table>
+                        <table class="layui-hide" id="productTable" lay-filter="buttons"></table>
                     </div>
                 </div>
             </div>
@@ -54,13 +54,13 @@
         </div>
     </script>
 
-    <script >
+    <script th:inline="none">
         layui.use('table', function () {
             var table = layui.table;
 
             //第一个实例
             table.render({
-                elem: '#test',
+                elem: '#productTable',
                 url: '/api/products/', //数据接口
                 page: true,  //开启分页
                 toolbar: '#toolbarDemo',
@@ -68,13 +68,13 @@
                 // tool:'barDemo',
                 cols: [
                     [ //表头
-                        {type: 'checkbox', fixed: 'left'},
+                        {type: 'checkbox'},
                         {field: 'productId', title: 'ProductKey', sort: true, align: 'center'},
                         {field: 'productName', title: '产品名称', align: 'center'},
                         {field: 'productType', title: '节点类型', align: 'center'},
                         {field: 'productCreateTime', title: '添加时间', sort: true, align: 'center'},
                         {
-                            fixed: 'right', title: '操作', align: 'center',
+                             title: '操作', align: 'center',
                             toolbar: '#barDemo'
                         }
                     ]
@@ -82,8 +82,9 @@
             });
 
             //头工具栏事件
-            table.on('toolbar(test)', function (obj) {
-                var checkStatus = table.checkStatus(obj.config.id);
+            table.on('toolbar(buttons)', function (obj) {
+
+                var checkStatus = table.checkStatus('test');
                 console.log(checkStatus);
                 switch (obj.event) {
                     case 'getCheckData':
@@ -102,7 +103,8 @@
             });
 
             //监听工具条
-            table.on('tool(test)', function (obj) {
+            table.on('tool(buttons)', function (obj) {
+
                 var data = obj.data;
                 console.log(data);
                 console.log(obj);
