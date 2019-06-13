@@ -1,4 +1,4 @@
-package com.jw.edge.controller;
+package com.jw.edge.controller.api;
 
 
 import com.jw.edge.entity.User;
