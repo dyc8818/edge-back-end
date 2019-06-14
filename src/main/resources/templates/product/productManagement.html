@@ -68,7 +68,7 @@
                 //width: 1200,
                 cols: [
                     [ //表头
-                        {type: 'checkbox'},
+                        // {type: 'checkbox'},
                         {field: 'productId', title: 'ProductKey', sort: true, align: 'center'},
                         {field: 'productName', title: '产品名称', align: 'center'},
                         {field: 'productType', title: '节点类型', align: 'center'},
@@ -186,14 +186,6 @@
                     }
                 });
             };
-
-            $('#createButton').on('click', function () {
-                var othis = $(this), method = othis.data('method');
-                active[method] ? active[method].call(this, othis) : '';
-            });
-
-
-
         });
 
     </script>
