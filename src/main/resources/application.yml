@@ -10,6 +10,9 @@ spring:
     mode: HTML5
   resources:
     static-locations: classpath:/static
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 #      username:
 #      password:

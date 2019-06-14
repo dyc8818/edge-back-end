@@ -1,6 +1,5 @@
 package com.jw.edge.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,7 +15,6 @@ public class Product {
     private Boolean productAccessForGateway;
     private String productConnectWay;
     private String productDataFormat;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date productCreateTime;
 
     public Date getProductCreateTime() {

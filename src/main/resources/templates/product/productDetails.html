@@ -23,7 +23,7 @@
                             <b>ProductKey:</b> <span th:text="${product.getProductId()}"></span>
                         </div>
                         <div class="layui-col-md4"><b>设备数：</b> 1</div>
-<!--                        <div class="layui-col-md4">c</div>-->
+                        <div class="layui-col-md4"><a href="" class="layui-btn">添加设备</a></div>
                     </div>
                     <br>
                     <!--卡片风格tab选项卡-->
@@ -40,54 +40,33 @@
                                 <table border="0" class="layui-table">
 
                                     <tr>
-                                        <th>产品名称</th>
+                                        <th><b>产品名称</b></th>
                                         <td th:text="${product.getProductName()}"></td>
-                                        <th>节点类型</th>
+                                        <th><b>节点类型</b></th>
                                         <td th:text="${product.getProductType()}"></td>
-                                        <th>创建时间</th>
-                                        <td th:text="${product.getProductCreateTime()}"></td>
+                                        <th><b>创建时间</b></th>
+                                        <td th:text="${#dates.format(product.getProductCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
                                     </tr>
                                     <tr>
-                                        <th>所属分类</th>
-                                        <td>环境监测</td>
-                                        <th>数据格式</th>
+                                        <th><b>所属分类</b></th>
+                                        <td th:text="${product.getProductType()}"></td>
+                                        <th><b>数据格式</b></th>
                                         <td colspan="5">ICA 标准数据格式 (Alink JSON)</td>
                                     </tr>
                                     <tr>
-                                        <th><span>动态注册</span><i class="next-icon next-icon-help next-icon-small"
-                                                                style="margin-left: 8px; color: rgb(204, 204, 204);"></i>
-                                        </th>
-                                        <td><span style="color: rgb(195, 197, 198);">已关闭</span>
-                                            <div class="next-switch next-switch-off next-switch-small" tabindex="0"
-                                                 aria-checked="false" style="position: relative; left: 8px; top: 3px;">
-                                                <div class="next-switch-trigger"></div>
-                                                <div class="next-switch-children"></div>
-                                            </div>
-                                        </td>
-                                        <th>ProductSecret</th>
-                                        <td colspan="3">
-                                            <div><span>********</span>
-                                                <button type="button"
-                                                        class="next-btn next-btn-text next-btn-normal next-btn-medium"
-                                                        style="margin-left: 8px;">显示
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>状态</th>
+                                        <th><b>状态</b></th>
                                         <td>
                                             <div style="margin: 0px;"><span
                                                     class="productInfo_development_41C1I"></span><span>开发中</span></div>
                                         </td>
-                                        <th>是否接入网关</th>
-                                        <td>否</td>
-                                        <th>连网协议</th>
-                                        <td colspan="3">其他</td>
+                                        <th><b>是否接入网关</b></th>
+                                        <td th:text="${product.getProductAccessForGateway()==true}?'是':'否'"></td>
+                                        <th><b>连网协议</b></th>
+                                        <td th:text="${product.getProductConnectWay()}"></td>
                                     </tr>
                                     <tr>
-                                        <th>产品描述</th>
-                                        <td colspan="5"></td>
+                                        <th><b>产品描述</b></th>
+                                            <td colspan="5" th:text="${product.getProductDesc()}"></td>
                                     </tr>
                                 </table>
                             </div>
