@@ -142,7 +142,8 @@
             parent.layer.close(index);
 
             // 刷新表格（即点击分页控件的“确定”按钮）
-            parent.layui.$('#refreshButton').click();
+            parent.layui.table.reload("productTable");
+
         });
     });
 </script>

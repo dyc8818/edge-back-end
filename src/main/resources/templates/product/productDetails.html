@@ -41,11 +41,11 @@
 
                                     <tr>
                                         <th>产品名称</th>
-                                        <td>温湿度传感器</td>
+                                        <td th:text="${product.getProductName()}"></td>
                                         <th>节点类型</th>
-                                        <td>设备</td>
+                                        <td th:text="${product.getProductType()}"></td>
                                         <th>创建时间</th>
-                                        <td>2019/06/03 09:16:43</td>
+                                        <td th:text="${product.getProductCreateTime()}"></td>
                                     </tr>
                                     <tr>
                                         <th>所属分类</th>
