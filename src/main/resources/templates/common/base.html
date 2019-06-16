@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html th:fragment="Layout (content,title,users,productList, deviceList,
-rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org">
+rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title th:replace="${title}">边缘计算平台</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -33,7 +34,14 @@ rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item"><a href="javascript:;"> 用户名称 </a>
+
+            <li class="layui-nav-item">
+
+                <a href="javascript:;">
+                    <div sec:authorize="isAuthenticated()">
+                        <p>你好：<span sec:authentication="name"></span>!</p>
+                    </div>
+                </a>
                 <dl class="layui-nav-child">
                     <dd>
                         <a href="">基本资料</a>
@@ -44,12 +52,12 @@ rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org
                 </dl>
             </li>
             <li class="layui-nav-item">
-<!--                <a href="">登出</a>-->
-<!--                <form action="/logout" method="post">-->
-<!--                    <input type="submit" value="登出"/>-->
-<!--                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+                <a href="#" onclick="document.getElementById('logout').submit()">登出</a>
 
-<!--                </form>-->
+                <form id="logout" action="/logout" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+                </form>
             </li>
         </ul>
     </div>
