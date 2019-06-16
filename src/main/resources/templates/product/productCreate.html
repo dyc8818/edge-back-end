@@ -113,9 +113,9 @@
         //     }
         // });
         //监听提交
-        form.on('submit(formVerify)', function (data) {
+        form.on('submit(formVerify)', function (obj) {
 
-            var data = JSON.stringify(data.field);
+            var data = JSON.stringify(obj.field);
 
             var url = "/api/product";
 
