@@ -57,7 +57,7 @@
         var element = layui.element;
 
     });
-    layui.use(['form', 'layedit', 'laydate'], function () {
+    layui.use(['form'], function () {
         var form = layui.form;
         //自定义验证规则
         // form.verify({
@@ -98,6 +98,7 @@
             if (code == 500) {
                 console.log("提交失败");
             }
+            window.location.href="/";
 
 
 
