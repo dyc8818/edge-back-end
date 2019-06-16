@@ -16,7 +16,7 @@ public class LoginAndOutPagesController {
 
     @GetMapping("/register")
     public String register(Model model) throws Exception {
-        System.out.println("!!!!!!!!!!");
+//        System.out.println("!!!!!!!!!!");
         return "loginAndOut/register";
     }
 }

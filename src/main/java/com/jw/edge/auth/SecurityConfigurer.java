@@ -23,7 +23,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/layui/**")
-        .and().ignoring().antMatchers("/pages/register");
+        .and().ignoring().antMatchers("/pages/register")
+        .and().ignoring().antMatchers("/api/userAdd");
     }
 
     //配置spring security
