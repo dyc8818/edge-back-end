@@ -13,4 +13,8 @@ public class LoginAndOutPagesController {
         public String login(Model model) throws Exception {
             return "loginAndOut/login";
         }
+    @GetMapping("/logout")
+    public String logout(Model model) throws Exception {
+        return "loginAndOut/logout";
+    }
 }
