@@ -35,7 +35,7 @@
 <!--                    <input type="checkbox" name="agreement" lay-skin="primary" title="同意用户协议" checked=""><div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>同意用户协议</span><i class="layui-icon layui-icon-ok"></i></div>-->
 <!--                </div>-->
                 <div class="layui-form-item">
-                    <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="LAY-user-reg-submit">注 册</button>
+                    <button type="button" class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="LAY-user-reg-submit">注 册</button>
                 </div>
 
             </div>
@@ -81,7 +81,6 @@
             console.log(data);
             var url = "/api/userAdd";
 
-            var code = 0;
             layui.jquery.ajax({
                 type: "post",
                 url: url,
@@ -92,13 +91,12 @@
                 // cache: false,
                 success: function (ev) {
                     code = ev.code;
+                    window.location.href="/";
+                    return false;
                 }
 
             });
-            if (code == 500) {
-                console.log("提交失败");
-            }
-            window.location.href="/";
+
 
 
 
