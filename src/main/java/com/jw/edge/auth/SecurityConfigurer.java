@@ -22,14 +22,17 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     //忽视拦截静态资源
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/layui/**");
+        web.ignoring().antMatchers("/layui/**")
+        .and().ignoring().antMatchers("/pages/register");
     }
 
     //配置spring security
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
-        http.authorizeRequests().anyRequest().authenticated()
+        http.authorizeRequests()
+//                antMatchers("/pages/register").permitAll()
+                .anyRequest().authenticated()
                 //允许frame
                 .and().headers().frameOptions().sameOrigin()
                 //登录
