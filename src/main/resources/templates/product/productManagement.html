@@ -126,7 +126,13 @@
                                     layer.msg(ev.data);
                                     layer.close(index);
                                 }
+                            },
+                            error:function(ev){
+                                console.log("删除失败"+ev.responseText);
+                                layer.msg("删除失败");
+                                layer.close(index);
                             }
+
                         });
                     });
                 }

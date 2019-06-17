@@ -55,7 +55,9 @@ rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org
                 <a href="#" onclick="document.getElementById('logout').submit()">登出</a>
 
                 <form id="logout" action="/logout" method="post">
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <input type="hidden"/>
+
+                    <!--                           th:name="${_csrf.parameterName}" th:value="${_csrf.token}"-->
 
                 </form>
             </li>
