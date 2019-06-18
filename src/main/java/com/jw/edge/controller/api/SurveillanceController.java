@@ -29,5 +29,11 @@ public class SurveillanceController {
         return surveillanceService.findByType(type);
     }
 
+    @GetMapping("/somesurveillance")
+    @ResponseBody
+    public List<Surveillance> getTypeOfValue(@RequestParam String type, @RequestParam int from, @RequestParam int to){
+        return surveillanceService.findByTypeAndValue(type,from,to);
+    }
+
 
 }
