@@ -2,14 +2,18 @@ package com.jw.edge.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 
 @Document
 public class Surveillance {
     @Id
-    private String surveillanceID;
+    private String surveillanceId;
+    @Field("name")
     private String surveillanceName;
-    private String surveillanceFeature;
+    @Field("type")
+    private String surveillanceFeatureType;
+    @Field("value")
     private int surveillanceFeatureValue;
 
     public Surveillance() {
@@ -17,7 +21,7 @@ public class Surveillance {
 
     public Surveillance(String name, String feature, int value) {
         this.surveillanceName = name;
-        this.surveillanceFeature = feature;
+        this.surveillanceFeatureType = feature;
         this.surveillanceFeatureValue = value;
     }
 
@@ -29,20 +33,20 @@ public class Surveillance {
         this.surveillanceName = name;
     }
 
-    public String getSurveillanceFeature() {
-        return surveillanceFeature;
+    public String getSurveillanceFeatureType() {
+        return surveillanceFeatureType;
     }
 
-    public void setSurveillanceFeature(String feature) {
-        this.surveillanceFeature = feature;
+    public void setSurveillanceFeatureType(String feature) {
+        this.surveillanceFeatureType = feature;
     }
 
-    public String getSurveillanceID() {
-        return surveillanceID;
+    public String getSurveillanceId() {
+        return surveillanceId;
     }
 
-    public void setSurveillanceID(String id) {
-        this.surveillanceID = id;
+    public void setSurveillanceId(String id) {
+        this.surveillanceId = id;
     }
 
     public int getSurveillanceFeatureValue(){

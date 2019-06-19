@@ -7,8 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends MongoRepository<User,String> {
     //自定义的查询方法
-    public User findByUserName(String name);
-    public void deleteByUserName(String name);
-
+    public void deleteByUsername(String name);
+    public User findUserByUsername(String name);
 
 }

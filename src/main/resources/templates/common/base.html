@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html th:fragment="Layout (content,title,users,productList, deviceList,deviceManagement1,deviceManagement2,
-rule1,rule2,logManagement,monitor)" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:fragment="Layout (content,title,users,productList, deviceList,
+rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title th:replace="${title}">边缘计算平台</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -33,7 +34,14 @@ rule1,rule2,logManagement,monitor)" lang="en" xmlns:th="http://www.thymeleaf.org
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item"><a href="javascript:;"> 用户名称 </a>
+
+            <li class="layui-nav-item">
+
+                <a href="javascript:;">
+                    <div sec:authorize="isAuthenticated()">
+                        <p>你好：<span sec:authentication="name"></span>!</p>
+                    </div>
+                </a>
                 <dl class="layui-nav-child">
                     <dd>
                         <a href="">基本资料</a>
@@ -43,61 +51,59 @@ rule1,rule2,logManagement,monitor)" lang="en" xmlns:th="http://www.thymeleaf.org
                     </dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">登出</a></li>
+            <li class="layui-nav-item">
+                <a href="#" onclick="document.getElementById('logout').submit()">登出</a>
+
+                <form id="logout" action="/logout" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+                </form>
+            </li>
         </ul>
     </div>
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed"><a class=""
-                                                               href="javascript:;">用户管理</a>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${users}">
                             <a href="/pages/users">用户列表</a>
                         </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed"><a class=""
-                                                               href="javascript:;">产品管理</a>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">产品管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${productList}">
-                            <a href="javascript:;">产品列表</a>
+                            <a href="/pages/products">产品列表</a>
                         </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">设备管理</a>
+                    <dl class="layui-nav-child">
                         <dd th:replace="${deviceList}">
-                            <a href="javascript:;">设备列表</a>
+                            <a href="/pages/devices">设备列表</a>
                         </dd>
 
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:;">设备管理</a>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">规则引擎</a>
                     <dl class="layui-nav-child">
-                        <dd th:replace="${deviceManagement1}">
-                            <a href="javascript:;">列表一</a>
+                        <dd th:replace="${rule}">
+                            <a href="/pages/rules">规则列表</a>
                         </dd>
-                        <dd th:replace="${deviceManagement2}">
-                            <a href="javascript:;">列表二</a>
-                        </dd>
-
+                        <!--                        <dd th:replace="${rule2}">-->
+                        <!--                            <a href="javascript:;">列表二</a>-->
+                        <!--                        </dd>-->
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:;">规则引擎</a>
-                    <dl class="layui-nav-child">
-                        <dd th:replace="${rule1}">
-                            <a href="javascript:;">列表一</a>
-                        </dd>
-                        <dd th:replace="${rule2}">
-                            <a href="javascript:;">列表二</a>
-                        </dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="javascript:;">系统管理</a>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">系统管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${logManagement}">
-                            <a href="javascript:;">日志管理</a>
+                            <a href="/pages/logManagement">日志管理</a>
                         </dd>
                         <dd th:replace="${monitor}">
-                            <a href="javascript:;">实时监控</a>
+                            <a href="/pages/monitor">实时监控</a>
                         </dd>
 
                     </dl>
@@ -112,7 +118,6 @@ rule1,rule2,logManagement,monitor)" lang="en" xmlns:th="http://www.thymeleaf.org
         © jw.com - 北京交通大学 , xx实验室
     </div>
 </div>
-</body>
 <script th:src="@{/layui/layui.js}"></script>
 <script>
     //JavaScript代码区域
@@ -121,4 +126,9 @@ rule1,rule2,logManagement,monitor)" lang="en" xmlns:th="http://www.thymeleaf.org
 
     });
 </script>
+<script th:replace="${script}">
+
+</script>
+</body>
+
 </html>

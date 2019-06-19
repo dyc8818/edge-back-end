@@ -4,6 +4,7 @@ package com.jw.edge.controller.api;
 import com.jw.edge.entity.User;
 import com.jw.edge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RequestMapping("/api")
@@ -12,6 +13,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping("/users")
     @ResponseBody
@@ -25,10 +29,11 @@ public class UserController {
         return userService.findUser(name);
     }
 
-    @PostMapping("/user")
+    @PostMapping("/userAdd")
     @ResponseBody
     public String addUser(@RequestBody User user) {
         try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userService.addUser(user);
             return "success";
         }catch (Exception e){

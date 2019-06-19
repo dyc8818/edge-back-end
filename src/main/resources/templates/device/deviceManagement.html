@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,~{::deviceList},_,_,_,~{::scripts})}">
+
+<title>设备列表</title>
+<content>
+
+    我是设备列表
+
+</content>
+
+
+<dd class="layui-this" th:fragment="deviceList">
+    <a href="/pages/devices">设备列表</a>
+</dd>
+
+<div th:fragment="scripts">
+
+     <script>
+
+    </script>
+
+
+</div>
+</html>
+

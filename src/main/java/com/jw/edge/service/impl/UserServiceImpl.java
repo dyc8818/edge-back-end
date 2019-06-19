@@ -21,17 +21,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String name) {
-        userRepository.deleteByUserName(name);
+        userRepository.deleteByUsername(name);
     }
 
     @Override
     public User findUser(String name) {
-        return userRepository.findByUserName(name);
+        return userRepository.findUserByUsername(name);
     }
 
     @Override
     public void updateUser(User user) {
-        User user1 = findUser(user.getUserName());
+        User user1 = findUser(user.getUsername());
         user1.setUserRemark(user.getUserRemark());
         userRepository.save(user1);
     }

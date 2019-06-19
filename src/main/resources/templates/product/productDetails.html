@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productList},_,_,_,_,~{::scripts})}">
+
+<title>产品列表</title>
+<content>
+
+    <div class="layui-tab-brief layui-tab">
+        <ul class="layui-tab-title site-demo-title">
+            <li><a href="/pages/products">产品列表</a></li>
+            <li class="layui-this"><a><cite>产品详情</cite></a></li>
+        </ul>
+    </div>
+    <div class="layui-fluid">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <br>
+                <h1 th:text="${product.getProductName()}"></h1>
+                <br>
+                <div class="layui-card-body">
+                    <div class="layui-row">
+                        <div class="layui-col-md4">
+                            <b>ProductKey:</b> <span th:text="${product.getProductId()}"></span>
+                        </div>
+                        <div class="layui-col-md4"><b>设备数：</b> 1</div>
+                        <div class="layui-col-md4"><a href="" class="layui-btn">添加设备</a></div>
+                    </div>
+                    <br>
+                    <!--卡片风格tab选项卡-->
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">产品信息</li>
+                            <li>功能定义</li>
+                        </ul>
+                        <div class="layui-tab-content" style="height: 100px;">
+                            <div class="layui-tab-item layui-show">
+                                <br/>
+                                <b><h2>产品信息</h2></b>
+                                <br/>
+                                <table border="0" class="layui-table">
+
+                                    <tr>
+                                        <th><b>产品名称</b></th>
+                                        <td th:text="${product.getProductName()}"></td>
+                                        <th><b>节点类型</b></th>
+                                        <td th:text="${product.getProductType()}"></td>
+                                        <th><b>创建时间</b></th>
+                                        <td th:text="${#dates.format(product.getProductCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>所属分类</b></th>
+                                        <td th:text="${product.getProductType()}"></td>
+                                        <th><b>数据格式</b></th>
+                                        <td colspan="5">ICA 标准数据格式 (Alink JSON)</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>状态</b></th>
+                                        <td>
+                                            <div style="margin: 0px;"><span
+                                                    class="productInfo_development_41C1I"></span><span>开发中</span></div>
+                                        </td>
+                                        <th><b>是否接入网关</b></th>
+                                        <td th:text="${product.getProductAccessForGateway()==true}?'是':'否'"></td>
+                                        <th><b>连网协议</b></th>
+                                        <td th:text="${product.getProductConnectWay()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>产品描述</b></th>
+                                            <td colspan="5" th:text="${product.getProductDesc()}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="layui-tab-item">内容2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <h1></h1>
+</content>
+
+<dd class="layui-this" th:fragment="productList">
+    <a href="/pages/products">产品列表</a>
+</dd>
+<div th:fragment="scripts">
+
+
+</div>
+</html>
+

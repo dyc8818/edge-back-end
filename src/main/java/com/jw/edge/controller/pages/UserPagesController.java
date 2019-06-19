@@ -19,10 +19,10 @@ public class UserPagesController {
     public String userList2(Model model) throws Exception {
         model.addAttribute("hello","Hello, Spring Boot!");
         model.addAttribute("userList", userService.findAllUsers());
-        for(User user:userService.findAllUsers()){
-            ObjectId objectId = new ObjectId(user.getUserId());
-            System.out.println(objectId.getDate()+","+objectId.getCounter());
-        }
+//        for(User user:userService.findAllUsers()){
+//            ObjectId objectId = new ObjectId(user.getUserId());
+//            System.out.println(objectId.getDate()+","+objectId.getCounter());
+//        }
         return "user/userList";
     }
 }

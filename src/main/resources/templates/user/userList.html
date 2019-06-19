@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, ~{::users},_,_,_,_,_,_,_,_)}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, ~{::users},_,_,_,_,_,~{::scripts})}">
 
-<title>产品列表</title>
+<title>用户列表</title>
 <content>
     <h1 th:text="${hello}"></h1>
     <table class="layui-table">
@@ -15,7 +15,7 @@
         <tr th:each="user : ${userList}">
             <td th:text="${user.userId}">0</td>
 
-            <td th:text="${user.userName}">zhansan</td>
+            <td th:text="${user.username}">zhansan</td>
             <td th:text="${user.userRemark}">remark</td>
         </tr>
     </table>
@@ -25,4 +25,12 @@
     <a href="/pages/users">用户列表</a>
 </dd>
 
+<div th:fragment="scripts">
+
+    <script>
+
+    </script>
+
+
+</div>
 </html>
