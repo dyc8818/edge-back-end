@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,~{::rule},_,_,~{::scripts})}">
+
+<title>规则列表</title>
+<content>
+
+    <div class="layui-tab-brief layui-tab">
+        <ul class="layui-tab-title site-demo-title">
+            <li><a href="/pages/rules">规则列表</a></li>
+            <li class="layui-this"><a><cite>规则详情</cite></a></li>
+        </ul>
+    </div>
+    <div class="layui-fluid">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <br>
+                <h1 th:text="${rule.getRuleName()}"></h1>
+                <br>
+                <div class="layui-card-body">
+                    <div class="layui-row">
+                        <div class="layui-col-md4">
+                            <b>RuleKey:</b> <span th:text="${rule.getRuleId()}"></span>
+                        </div>
+                    <br>
+                    <!--卡片风格tab选项卡-->
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">规则信息</li>
+                        </ul>
+                        <div class="layui-tab-content" style="height: 100px;">
+                            <div class="layui-tab-item layui-show">
+                                <br/>
+                                <b><h2>规则信息</h2></b>
+                                <br/>
+                                <table border="0" class="layui-table">
+
+                                    <tr>
+                                        <th><b>规则名称</b></th>
+                                        <td th:text="${rule.getRuleName()}"></td>
+                                        <th><b>数据格式</b></th>
+                                        <td th:text="${rule.getRuleFormat()}"></td>
+                                        <th><b>创建时间</b></th>
+                                        <td th:text="${#dates.format(rule.getRuleCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>规则执行语句</b></th>
+                                        <td th:text="${rule.getRuleSQL()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>状态</b></th>
+                                        <td>
+                                            <div style="margin: 0px;"><span
+                                                    class="ruleInfo_development_41C1I"></span><span>正在运行</span></div>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th><b>规则描述</b></th>
+                                            <td colspan="5" th:text="${rule.getRuleDescribe()}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <h1></h1>
+</content>
+
+<dd class="layui-this" th:fragment="rule">
+    <a href="/pages/rules">规则列表</a>
+</dd>
+<div th:fragment="scripts">
+
+
+</div>
+</html>
+
