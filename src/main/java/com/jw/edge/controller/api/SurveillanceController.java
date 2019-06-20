@@ -2,11 +2,7 @@ package com.jw.edge.controller.api;
 
 import com.jw.edge.entity.Surveillance;
 import com.jw.edge.service.SurveillanceService;
-import com.jw.edge.util.LayuiTableResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +29,12 @@ public class SurveillanceController {
     @ResponseBody
     public List<Surveillance> getTypeOfValue(@RequestParam String type, @RequestParam int from, @RequestParam int to){
         return surveillanceService.findByTypeAndValue(type,from,to);
+    }
+
+    @GetMapping("/surnum")
+    @ResponseBody
+    public int getSurNum(){
+        return surveillanceService.findAll().size();
     }
 
 
