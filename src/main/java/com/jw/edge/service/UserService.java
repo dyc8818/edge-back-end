@@ -10,4 +10,4 @@ public interface UserService {
     User findUser(String name);
     void updateUser(User user);
     List<User> findAllUsers();
- }
+}
