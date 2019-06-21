@@ -43,8 +43,7 @@
 </dd>
 
 <div th:fragment="scripts">
-
-    <script th:src="@{/echarts-4.2.1/echarts.js}"></script>
+    <script th:src="@{/echarts-4.2.1/echarts.min.js}"></script>
     <script>
         // 基于准备好的dom，初始化echarts实例
         var numChart = echarts.init(document.getElementById('numchart'));
