@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface SurveillanceRepository extends MongoRepository<Surveillance,String>{
     //自定义的查询方法
-    Surveillance findBySurveillanceFeatureType(String type);
+    List<Surveillance> findBySurveillanceFeatureType(String type);
     Surveillance findBySurveillanceName(String name);
     List<Surveillance> findBySurveillanceFeatureValueBetween(int from, int to);
     List<Surveillance> findBySurveillanceFeatureTypeAndSurveillanceFeatureValueIsBetween(String type, int from, int to);

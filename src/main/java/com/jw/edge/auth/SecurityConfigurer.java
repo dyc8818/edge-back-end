@@ -39,7 +39,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 //登录
                 .and().formLogin().loginPage("/pages/login").defaultSuccessUrl("/").permitAll()
                 //登出
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").and().csrf().disable();
 //                deleteCookies("JSESSIONID").logoutSuccessHandler(logoutSuccessHandler());
         //启用remember me功能
 //        .and().rememberMe().tokenValiditySeconds(86400).key("remember-me-key");

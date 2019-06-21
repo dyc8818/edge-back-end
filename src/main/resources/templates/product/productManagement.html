@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productList},_,_,_,_,~{::scripts})}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productMenu},_,_,_,_,~{::scripts})}">
 
 <title>产品列表</title>
 <content>
@@ -28,7 +28,7 @@
 
 </content>
 
-<dd class="layui-this" th:fragment="productList">
+<dd class="layui-this" th:fragment="productMenu">
     <a href="/pages/products">产品列表</a>
 </dd>
 <div th:fragment="scripts">
@@ -126,7 +126,13 @@
                                     layer.msg(ev.data);
                                     layer.close(index);
                                 }
+                            },
+                            error:function(ev){
+                                console.log("删除失败"+ev.responseText);
+                                layer.msg("删除失败");
+                                layer.close(index);
                             }
+
                         });
                     });
                 }

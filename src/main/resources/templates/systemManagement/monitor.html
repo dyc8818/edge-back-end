@@ -1,26 +1,97 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,~{::monitor},~{::scripts})}">
-
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,~{::monitorMenu},~{::scripts})}">
 <title>实时监控</title>
-<content>
 
-    我是实时监控
+<content>
+    <div class="layui-fluid" style="padding: 15px;">
+
+        <div class="layui-row">
+
+            <div class="layui-tab layui-tab-brief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">设备监控</li>
+                    <li>数据分布</li>
+                </ul>
+
+                <div class="layui-tab-content">
+
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-col-lg10 layui-col-lg-offset1">
+                            <div id="numchart" style="width: 1200px;height:600px;"></div>
+                            <p id="mark">hahaha</p>
+                        </div>
+                    </div>
+
+                    <div class="layui-tab-item">
+                        内容2
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
 
 </content>
 
 
-<dd class="layui-this" th:fragment="monitor">
+<dd class="layui-this" th:fragment="monitorMenu">
     <a href="/pages/monitor">实时监控</a>
 </dd>
 
 <div th:fragment="scripts">
-
-     <script>
+    <script th:src="@{/echarts-4.2.1/echarts.min.js}"></script>
+    <script>
+        // 基于准备好的dom，初始化echarts实例
+        var numChart = echarts.init(document.getElementById('numchart'));
+        var num = new Array();
+        //var xtime = new Array();
+        setInterval(function(){
+            layui.use('jquery', function(){
+                var $ = layui.$;
+                //后面就跟你平时使用jQuery一样
+                $.get("/api/surnum/",
+                    function(data){
+                        var date = new Date();
+                        //xtime.push(date.getHours().toString()+"时"+date.getMinutes().toString()+"分"+date.getSeconds().toString()+"秒");
+                        num.push([date,data]);
+                        //alert(xtime+":" + num );
+                        // 指定图表的配置项和数据
+                        //if(xtime.length>30){
+                           // xtime.shift();
+                            //num.shift();
+                        //}
+                        var option = {
+                            title: {
+                                text: '设备在线数量',
+                                left:'center'
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            xAxis: {
+                                type:'time',
+                                name:'时间'
+                                //data:xtime
+                            },
+                            yAxis: {},
+                            series: [{
+                                name: '数量',
+                                type: 'line',
+                                data: num
+                            }]
+                        };
+                        // 使用刚指定的配置项和数据显示图表。
+                        numChart.setOption(option);
+                });
+            });
+        },1000)
 
     </script>
 
 
 </div>
 </html>
-
