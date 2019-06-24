@@ -9,24 +9,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("/pages")
+@Controller
 public class FunctionPagesController {
     @Autowired
     FunctionService functionService;
 
     @GetMapping("/functions")
     public String functionList(Model model) throws Exception {
-        return "function/functionManagement";
+        return "product/functionManagement";
     }
 
     @GetMapping("/functionCreate")
     public String functionCreate(Model model) throws Exception {
-        return "function/functionCreate";
+        return "product/functionCreate";
     }
 
     @GetMapping("/functionDetails")
     public String functionDetails(Model model, String functionName) throws Exception {
         Function function = functionService.findFunctionByFunctionName(functionName);
         model.addAttribute("function", function);
-        return "function/functionDetails";
+        return "product/functionDetails";
     }
 }
