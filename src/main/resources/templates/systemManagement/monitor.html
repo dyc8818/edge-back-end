@@ -60,10 +60,10 @@
                         num.push([date,data]);
                         //alert(xtime+":" + num );
                         // 指定图表的配置项和数据
-                        //if(xtime.length>30){
-                           // xtime.shift();
-                            //num.shift();
-                        //}
+                        if(num.length>30){
+                         //  xtime.shift();
+                            num.shift();
+                        }
                         var option = {
                             title: {
                                 text: '设备在线数量',
