@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::deviceList},_,_,_,_,~{::scripts})}">
+
+<title>设备列表</title>
+<content>
+
+    <div class="layui-tab-brief layui-tab">
+        <ul class="layui-tab-title site-demo-title">
+            <li><a href="/pages/devices">设备列表</a></li>
+            <li class="layui-this"><a><cite>设备详情</cite></a></li>
+        </ul>
+    </div>
+    <div class="layui-fluid">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <br>
+                <!--/*@thymesVar id="device" type="com.jw.edge.entity.Device"*/-->
+                <h1 th:text="${device.getDeviceName()}"></h1>
+                <br>
+                <div class="layui-card-body">
+                    <div class="layui-row">
+                        <div class="layui-col-md4">
+                            <b>DeviceKey:</b> <span th:text="${device.getDeviceId()}"></span>
+                        </div>
+<!--                        <div class="layui-col-md4"><b>设备数：</b> 1</div>-->
+<!--                        <div class="layui-col-md4"><a href="" class="layui-btn">添加设备</a></div>-->
+                    </div>
+                    <br>
+                    <!--卡片风格tab选项卡-->
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">设备信息</li>
+                            <li>功能定义</li>
+                        </ul>
+                        <div class="layui-tab-content" style="height: 100px;">
+                            <div class="layui-tab-item layui-show">
+                                <br/>
+                                <b><h2>设备信息</h2></b>
+                                <br/>
+                                <table border="0" class="layui-table">
+
+                                    <tr>
+                                        <th><b>设备名称</b></th>
+                                        <td th:text="${device.getDeviceName()}"></td>
+                                        <th><b>设备类型</b></th>
+                                        <td th:text="${device.getDeviceType()}"></td>
+                                        <th><b>创建时间</b></th>
+                                        <td th:text="${#dates.format(device.getDeviceCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>所属分类</b></th>
+                                        <td th:text="${device.getDeviceType()}"></td>
+                                        <th><b>数据格式</b></th>
+                                        <td colspan="5">ICA 标准数据格式 (Alink JSON)</td>
+                                    </tr>
+                                    <tr>
+<!--                                        <th><b>状态</b></th>-->
+<!--                                        <td>-->
+<!--                                            <div style="margin: 0px;"><span-->
+<!--                                                    class="deviceInfo_development_41C1I"></span><span>开发中</span></div>-->
+<!--                                        </td>-->
+                                        <th><b>是否开启</b></th>
+                                        <td th:text="${device.getDeviceStatus()=='ON'}?'是':'否'"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>设备描述</b></th>
+                                        <td colspan="5" th:text="${device.getDeviceDesc()}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="layui-tab-item">内容2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <h1></h1>
+</content>
+
+<dd class="layui-this" th:fragment="deviceList">
+    <a href="/pages/devices">设备列表</a>
+</dd>
+<div th:fragment="scripts">
+
+
+</div>
+</html>
+
