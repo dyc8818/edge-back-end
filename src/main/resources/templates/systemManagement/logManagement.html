@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,~{::logManagement},_,~{::scripts})}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,~{::logManagementMenu},_,~{::scripts})}">
 
 <title>日志列表</title>
 <content>
@@ -10,7 +10,7 @@
 </content>
 
 
-<dd class="layui-this" th:fragment="logManagement">
+<dd class="layui-this" th:fragment="logManagementMenu">
     <a href="/pages/logManagement">日志管理</a>
 </dd>
 

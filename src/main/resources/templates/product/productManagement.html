@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productList},_,_,_,_,~{::scripts})}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productMenu},_,_,_,_,~{::scripts})}">
 
 <title>产品列表</title>
 <content>
@@ -9,7 +9,7 @@
             <li class="layui-this"><a><cite>产品列表</cite></a></li>
         </ul>
     </div>
-    <div class="layui-fluid" style="padding: 15px;">
+    <div class="layui-fluid"layui-card-body style="padding: 15px;">
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md12">
                 <div class="layui-card">
@@ -28,7 +28,7 @@
 
 </content>
 
-<dd class="layui-this" th:fragment="productList">
+<dd class="layui-this" th:fragment="productMenu">
     <a href="/pages/products">产品列表</a>
 </dd>
 <div th:fragment="scripts">

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html th:fragment="Layout (content,title,users,productList, deviceList,
-rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org"
+<html th:fragment="Layout (content,title,users,productMenu, deviceMenu,
+ruleMenu,logManagementMenu,monitorMenu,script)" lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title th:replace="${title}">边缘计算平台</title>
@@ -76,14 +76,14 @@ rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org
                 </li>
                 <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">产品管理</a>
                     <dl class="layui-nav-child">
-                        <dd th:replace="${productList}">
+                        <dd th:replace="${productMenu}">
                             <a href="/pages/products">产品列表</a>
                         </dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">设备管理</a>
                     <dl class="layui-nav-child">
-                        <dd th:replace="${deviceList}">
+                        <dd th:replace="${deviceMenu}">
                             <a href="/pages/devices">设备列表</a>
                         </dd>
 
@@ -91,7 +91,7 @@ rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org
                 </li>
                 <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">规则引擎</a>
                     <dl class="layui-nav-child">
-                        <dd th:replace="${rule}">
+                        <dd th:replace="${ruleMenu}">
                             <a href="/pages/rules">规则列表</a>
                         </dd>
                         <!--                        <dd th:replace="${rule2}">-->
@@ -101,10 +101,10 @@ rule,logManagement,monitor,script)" lang="en" xmlns:th="http://www.thymeleaf.org
                 </li>
                 <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">系统管理</a>
                     <dl class="layui-nav-child">
-                        <dd th:replace="${logManagement}">
+                        <dd th:replace="${logManagementMenu}">
                             <a href="/pages/logManagement">日志管理</a>
                         </dd>
-                        <dd th:replace="${monitor}">
+                        <dd th:replace="${monitorMenu}">
                             <a href="/pages/monitor">实时监控</a>
                         </dd>
 

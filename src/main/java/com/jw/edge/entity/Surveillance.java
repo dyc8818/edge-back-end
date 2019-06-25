@@ -19,9 +19,9 @@ public class Surveillance {
     public Surveillance() {
     }
 
-    public Surveillance(String name, String feature, int value) {
+    public Surveillance(String name, String type, int value) {
         this.surveillanceName = name;
-        this.surveillanceFeatureType = feature;
+        this.surveillanceFeatureType = type;
         this.surveillanceFeatureValue = value;
     }
 
@@ -37,8 +37,8 @@ public class Surveillance {
         return surveillanceFeatureType;
     }
 
-    public void setSurveillanceFeatureType(String feature) {
-        this.surveillanceFeatureType = feature;
+    public void setSurveillanceFeatureType(String type) {
+        this.surveillanceFeatureType = type;
     }
 
     public String getSurveillanceId() {
