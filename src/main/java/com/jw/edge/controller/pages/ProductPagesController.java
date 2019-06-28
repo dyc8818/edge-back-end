@@ -28,6 +28,7 @@ public class ProductPagesController {
     @GetMapping("/productDetails")
     public String productDetails(Model model, String productId) throws Exception {
         Product product = productServie.findProductByProductId(productId);
+
         model.addAttribute("product", product);
         return "product/productDetails";
     }
