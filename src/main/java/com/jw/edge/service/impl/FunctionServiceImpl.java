@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FunctionServiceImpl implements FunctionService{
+public class FunctionServiceImpl implements FunctionService {
     @Autowired
     FunctionRepository functionRepository;
 
@@ -38,19 +38,19 @@ public class FunctionServiceImpl implements FunctionService{
     }
 
     @Override
-    public String deleteFunction(String functionName) {
-        Function function = functionRepository.findFunctionByFunctionName(functionName);
+    public String deleteFunction(String functionId) {
+        Function function = functionRepository.findFunctionByFunctionId(functionId);
         if (function == null) {
             return "不存在该功能";
         } else {
-            functionRepository.deleteByFunctionName(functionName);
+            functionRepository.deleteById(functionId);
             return "删除成功";
         }
     }
 
     @Override
-    public Function findFunctionByFunctionName(String functionName) {
-        return functionRepository.findFunctionByFunctionName(functionName);
+    public Function findFunctionByFunctionId(String functionId) {
+        return functionRepository.findFunctionByFunctionName(functionId);
     }
 
 
