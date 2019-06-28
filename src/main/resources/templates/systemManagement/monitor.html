@@ -4,7 +4,7 @@
 <title>实时监控</title>
 
 <content>
-    <div class="layui-fluid" style="padding: 15px;">
+    <div class="layui-fluid" style="padding: 0px;">
 
         <div class="layui-row">
 
@@ -19,7 +19,6 @@
                     <div class="layui-tab-item layui-show">
                         <div class="layui-col-lg10 layui-col-lg-offset1">
                             <div id="numchart" style="width: 1200px;height:600px;"></div>
-                            <p id="mark">hahaha</p>
                         </div>
                     </div>
 
@@ -56,12 +55,9 @@
                 $.get("/api/surnum/",
                     function(data){
                         var date = new Date();
-                        //xtime.push(date.getHours().toString()+"时"+date.getMinutes().toString()+"分"+date.getSeconds().toString()+"秒");
                         num.push([date,data]);
-                        //alert(xtime+":" + num );
                         // 指定图表的配置项和数据
-                        if(num.length>30){
-                         //  xtime.shift();
+                        if(num.length>60){
                             num.shift();
                         }
                         var option = {
@@ -81,7 +77,12 @@
                             series: [{
                                 name: '数量',
                                 type: 'line',
-                                data: num
+                                data: num,
+                                symbol:'emptyDiamond',
+                                symbolSize: 8,
+                                lineStyle:{
+                                    width: 4
+                                }
                             }]
                         };
                         // 使用刚指定的配置项和数据显示图表。
