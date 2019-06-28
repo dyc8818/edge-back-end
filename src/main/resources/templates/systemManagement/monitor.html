@@ -23,7 +23,10 @@
                     </div>
 
                     <div class="layui-tab-item">
-                        内容2
+                        <div class="layui-col-lg10 layui-col-lg-offset1">
+                            <p>数据分布</p>
+                            <div id="dischart" style="width: 1200px;height:600px;"></div>
+                        </div>
                     </div>
 
                 </div>
@@ -46,8 +49,8 @@
     <script>
         // 基于准备好的dom，初始化echarts实例
         var numChart = echarts.init(document.getElementById('numchart'));
+        var disChart = echarts.init(document.getElementById('dischart'));
         var num = new Array();
-        //var xtime = new Array();
         setInterval(function(){
             layui.use('jquery', function(){
                 var $ = layui.$;
@@ -71,7 +74,6 @@
                             xAxis: {
                                 type:'time',
                                 name:'时间'
-                                //data:xtime
                             },
                             yAxis: {},
                             series: [{
