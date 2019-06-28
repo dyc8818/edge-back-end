@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface FunctionService {
     public boolean addFunction(Function function);
-    public String deleteFunction(String functionName);
-    public Function findFunctionByFunctionName(String functionName);
+    public String deleteFunction(String functionId);
+    public Function findFunctionByFunctionId(String functionId);
     //void updateFunction(Function function);
     public List<Function> findAllFunction();
     public Page<Function> findAllFunction(Pageable pageable);

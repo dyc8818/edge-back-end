@@ -22,8 +22,7 @@
                         <div class="layui-col-md4">
                             <b>ProductKey:</b> <span th:text="${product.getProductId()}"></span>
                         </div>
-                        <div class="layui-col-md4"><b>设备数：</b> 1</div>
-                        <div class="layui-col-md4"><a href="" class="layui-btn">添加设备</a></div>
+
                     </div>
                     <br>
                     <!--卡片风格tab选项卡-->
@@ -47,40 +46,12 @@
                                         <th><b>创建时间</b></th>
                                         <td th:text="${#dates.format(product.getProductCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
                                     </tr>
-                                    <tr>
-                                        <th><b>所属分类</b></th>
-                                        <td th:text="${product.getProductType()}"></td>
-                                        <th><b>数据格式</b></th>
-                                        <td colspan="5">ICA 标准数据格式 (Alink JSON)</td>
-                                    </tr>
-                                    <tr>
-                                        <th><b>状态</b></th>
-                                        <td>
-                                            <div style="margin: 0px;"><span
-                                                    class="productInfo_development_41C1I"></span><span>开发中</span></div>
-                                        </td>
-                                        <th><b>是否接入网关</b></th>
-                                        <td th:text="${product.getProductAccessForGateway()==true}?'是':'否'"></td>
-                                        <th><b>连网协议</b></th>
-                                        <td th:text="${product.getProductConnectWay()}"></td>
-                                    </tr>
+
                                     <tr>
                                         <th><b>产品描述</b></th>
-                                            <td colspan="5" th:text="${product.getProductDesc()}"></td>
+                                        <td colspan="5" th:text="${product.getProductDesc()}"></td>
                                     </tr>
                                 </table>
-                            </div>
-                            <div class="layui-tab-item">
-                                <div class="layui-card">
-                                    <!--                    <div class="layui-card-header ">-->
-                                    <!--                        <h1>产品列表</h1>-->
-                                    <!--                    </div>-->
-
-
-                                    <div class="layui-card-body">
-                                        <table class="layui-hide" id="functionTable" lay-filter="buttons"></table>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,7 +67,7 @@
     <a href="/pages/products">产品列表</a>
 </dd>
 <div th:fragment="scripts">
-    <script th:inline="none" type="text/html" id="barDemo">
+    <!--<script th:inline="none" type="text/html" id="barDemo">
         <button class="layui-btn layui-btn-xs" lay-event="detail">查看</button>
         <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
     </script>
@@ -304,7 +275,7 @@
             }
         });
 
-    </script>
+    </script>-->
 
 </div>
 </html>

@@ -13,6 +13,7 @@ public class Function {
     private String functionType;
     private String functionName;
     private String functionIdentifier;
+    private String functionDesc;
 
 
     /*public Function() {
@@ -55,7 +56,13 @@ public class Function {
         this.functionIdentifier = functionIdentifier;
     }
 
+    public String getFunctionDesc() {
+        return functionDesc;
+    }
 
+    public void setFunctionDesc(String functionDesc) {
+        this.functionDesc = functionDesc;
+    }
 
 
 
