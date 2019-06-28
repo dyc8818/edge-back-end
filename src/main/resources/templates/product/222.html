@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-      //th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::functionMenu},_,_,_,_,~{::scripts})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::functionMenu},_,_,_,_,~{::scripts})}">
 
 <title>功能列表</title>
 <content>
 
     <div class="layui-tab-brief layui-tab">
         <ul class="layui-tab-title site-demo-title">
-            <li><a href="/pages/functions">功能列表</a></li>
-            <li class="layui-this"><a><cite>功能详情</cite></a></li>
+            <li><a href="/pages/functions">产品列表</a></li>
+            <li class="layui-this"><a><cite>产品详情</cite></a></li>
         </ul>
     </div>
     <div class="layui-fluid">
@@ -34,7 +34,7 @@
                         <div class="layui-tab-content" style="height: 100px;">
                             <div class="layui-tab-item layui-show">
                                 <br/>
-                                <b><h2>功能信息</h2></b>
+                                <b><h2>产品信息</h2></b>
                                 <br/>
                                 <table border="0" class="layui-table">
 
@@ -52,7 +52,7 @@
                                     </tr>
 
                                     <tr>
-                                        <th><b>功能描述</b></th>
+                                        <th><b>产品描述</b></th>
                                         <td colspan="5" th:text="${function.getFunctionDesc()}"></td>
                                     </tr>
                                 </table>
@@ -67,9 +67,9 @@
     <h1></h1>
 </content>
 
-<!--<dd class="layui-this" th:fragment="functionMenu">-->
-<!--    <a href="/pages/functions">功能列表</a>-->
-<!--</dd>-->
+<dd class="layui-this" th:fragment="functionMenu">
+    <a href="/pages/functions">功能列表</a>
+</dd>
 <div th:fragment="scripts">
     <!--<script th:inline="none" type="text/html" id="barDemo">
         <button class="layui-btn layui-btn-xs" lay-event="detail">查看</button>
