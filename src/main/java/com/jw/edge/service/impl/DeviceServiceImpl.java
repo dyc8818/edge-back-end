@@ -68,4 +68,12 @@ public class DeviceServiceImpl implements DeviceService {
         Page<Device> devicesByType = deviceRepository.findDeviceByDeviceType(deviceType,pageable);
         return devicesByType;
     }
+
+    @Override
+    public void changeDeviceStatus(Device dev, int status){
+        System.out.println("DeviceService currentstatus:"+status);
+        dev.setDeviceStatus(status);
+        deviceRepository.save(dev);
+
+    }
 }

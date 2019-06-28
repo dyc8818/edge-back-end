@@ -1,7 +1,10 @@
 package com.jw.edge.controller.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.jw.edge.entity.Device;
+import com.jw.edge.entity.Product;
 import com.jw.edge.service.DeviceService;
+import com.jw.edge.service.ProductServie;
 import com.jw.edge.util.LayuiTableResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,8 +19,16 @@ import java.util.List;
 public class DeviceController {
     @Autowired
     DeviceService deviceService;
+    @Autowired
+    ProductServie productServie;
 
-
+    @GetMapping("/deviceTypes")
+    @ResponseBody
+    public List<Product> getdeviceTypes() {
+        List<Product> products =  productServie.findAllProduct();
+        // LayuiTableResultUtil<List<Product>> productsTable=new LayuiTableResultUtil<List<Product>>();
+        return products;
+    }
     @GetMapping("/devices")
     @ResponseBody
     public LayuiTableResultUtil<List<Device>> getDevices(@RequestParam Integer page, @RequestParam Integer limit) {
@@ -29,16 +40,21 @@ public class DeviceController {
     //控制设备激活
     @PutMapping("/changeStatus")
     @ResponseBody
-    public String changeStatus(@RequestBody String deviceID){
-        Device dev = deviceService.findDeviceByDeviceId(deviceID);
-        String currentStatus;
-        if(dev.getDeviceStatus() == "on"){
-            currentStatus = "off";
+    public int changeStatus(@RequestBody JSONObject deviceID){
+        JSONObject obj = new JSONObject(deviceID);//将json字符串转换为json对象
+
+        System.out.println("deviceid:"+deviceID);
+        System.out.println("deviceid:"+deviceID.getString("deviceId"));
+        Device dev = deviceService.findDeviceByDeviceId(deviceID.getString("deviceId"));
+        int currentStatus;
+        if(dev.getDeviceStatus() == 1){
+            currentStatus = 0;
         }else {
-            currentStatus = "on";
+            currentStatus = 1;
         }
-        dev.setDeviceStatus(currentStatus);
-        return "current status:"+currentStatus;
+        System.out.println("DeviceController currentstatus:"+currentStatus);
+        deviceService.changeDeviceStatus(dev, currentStatus);
+        return currentStatus;
     }
 
     @GetMapping("/devicesByType")

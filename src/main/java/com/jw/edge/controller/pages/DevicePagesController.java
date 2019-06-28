@@ -25,10 +25,9 @@ public class DevicePagesController {
     }
 
     @GetMapping("/deviceDetails")
-    public String deviceDetails(Model model, String deviceId) throws Exception {
+    public String productDetails(Model model, String deviceId) throws Exception {
         Device device = deviceService.findDeviceByDeviceId(deviceId);
         model.addAttribute("device", device);
         return "device/deviceDetails";
     }
-
 }
