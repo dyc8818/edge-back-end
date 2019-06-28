@@ -12,7 +12,7 @@ public class Device {
     private String deviceName;
     private String deviceDesc;
     private String deviceType;
-    private String deviceStatus;
+    private int deviceStatus;
     private Date deviceCreateTime;
 
     public Date getDeviceCreateTime() {
@@ -54,8 +54,8 @@ public class Device {
     public void setDeviceType(String deviceType) {
         this.deviceType = deviceType;
     }
-    public String getDeviceStatus() { return deviceStatus; }
+    public int getDeviceStatus() { return deviceStatus; }
 
-    public void setDeviceStatus(String deviceStatus) {this.deviceStatus = deviceStatus; }
+    public void setDeviceStatus(int deviceStatus) {this.deviceStatus = deviceStatus; }
 
 }

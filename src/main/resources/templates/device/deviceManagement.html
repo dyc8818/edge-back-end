@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,~{::deviceMenu},_,_,_,~{::scripts})}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,~{::deviceList},_,_,_,~{::scripts})}">
 
 <title>设备列表</title>
 <content>
@@ -24,7 +24,7 @@
 </content>
 
 
-<dd class="layui-this" th:fragment="deviceMenu">
+<dd class="layui-this" th:fragment="deviceList">
     <a href="/pages/devices">设备列表</a>
 </dd>
 
@@ -33,7 +33,6 @@
         <button class="layui-btn layui-btn-xs" lay-event="detail">查看</button>
         <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
     </script>
-
     <script type="text/html" id="layerRefresh">
         <div class="layui-btn-container">
             <button id="createButton"
@@ -69,7 +68,13 @@
                         {field: 'deviceType', title: '设备类型', align: 'center'},
                         {field: 'deviceCreateTime', title: '添加时间', sort: true, align: 'center'},
                         {field: 'deviceDesc', title: '设备描述', align: 'center'},
-                        {field: 'deviceStatus', title: '设备状态', sort: true, align: 'center'},
+                        //   {field: 'deviceStatus', title: '设备状态', sort: true, align: 'center'},
+                        {
+                            field:'deviceStatus',
+                            title:'设备状态',
+                            align:'center',
+                            templet:statusTpl
+                        },
                         {
                             title: '操作', align: 'center',
                             toolbar: '#barDemo'
@@ -77,7 +82,27 @@
                     ]
                 ]
             });
-
+            //表内开关
+            layui.use(['form'], function() {
+                var form = layui.form
+                    , layer = layui.layer;
+                //监听指定开关
+                form.on('switch(changeDeviceStatus)', function changeDeviceStatus(data) {
+                    $.ajax({
+                        type: "put",
+                        url: "/api/changeStatus",
+                        async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                        data: JSON.stringify({'deviceId': data.elem.attributes['switch_device_id'].nodeValue}),
+                        contentType: "application/json",
+                        success: function (ev) {
+                            console.log(ev.data);
+                        },
+                        error: function (ev) {
+                            console.log("开关失败" + ev.responseText);
+                        }
+                    });
+                });
+            });
             // 头工具栏事件
             table.on('toolbar(buttons)', function (obj) {
 
@@ -131,9 +156,24 @@
                     });
                 }
             });
-
+            function getselect() {
+                $.ajax({
+                    type: "get",
+                    url: "/api/deviceTypes",
+                    async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                    contentType: "application/json",
+                    success: function (data) {
+                        sessionStorage.setItem("productNames", JSON.stringify(data));
+                        //console.log(data);
+                        //console.log(sessionStorage.getItem("productNames"));
+                    },
+                    error:function(data){
+                        console.log("获取产品失败"+data.responseText);
+                        layer.msg("获取产品识别失败");
+                    }
+                });
+            }
             //触发创建产品弹出层
-
             function notice(){
                 //示范一个公告层
                 layer.open({
@@ -164,6 +204,9 @@
                     //         , target: '_blank'
                     //     });
                     // }
+                    success:function(){
+                        getselect();
+                    },
                     yes: function (index, layero) {
 
                         // 获取弹出层中的form表单元素
@@ -188,7 +231,16 @@
                 });
             };
         });
-
+        var statusTpl = function (d) { // 参数d是当前行数据
+            var tgtid = d.deviceId;
+            var str = '<input type="checkbox" lay-filter="changeDeviceStatus" lay-skin="switch" lay-text="启用|禁用" ';
+            if(d.deviceStatus == 1){
+                str = str + 'checked switch_device_id='+tgtid+'> ';
+            }else{
+                str = str + 'switch_device_id='+tgtid+'> ';
+            }
+            return str;
+        };
     </script>
 
 </div>

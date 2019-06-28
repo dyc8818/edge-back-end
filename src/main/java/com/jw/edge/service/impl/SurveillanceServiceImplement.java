@@ -18,19 +18,16 @@ public class SurveillanceServiceImplement implements SurveillanceService{
 
     @Override
     public List<Surveillance> findAll(){
-        List<Surveillance> all = surveillanceRepository.findAll();
-        return all;
+        return surveillanceRepository.findAll();
     }
 
     @Override
     public List<Surveillance> findByType(String type){
-        List<Surveillance> sametype = surveillanceRepository.findBySurveillanceFeatureType(type);
-        return sametype;
+        return surveillanceRepository.findBySurveillanceFeatureType(type);
     }
 
     @Override
     public List<Surveillance> findByTypeAndValue(String type, int from, int to){
-        List<Surveillance> typevalue = surveillanceRepository.findBySurveillanceFeatureTypeAndSurveillanceFeatureValueIsBetween(type, from, to);
-        return typevalue;
+        return surveillanceRepository.findBySurveillanceFeatureTypeAndSurveillanceFeatureValueIsBetween(type, from, to);
     }
 }

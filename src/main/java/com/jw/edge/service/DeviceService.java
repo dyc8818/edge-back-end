@@ -13,5 +13,5 @@ public interface DeviceService {
     public String deleteDevice(String deviceId);
     public Device findDeviceByDeviceId(String deviceId);
     public Page<Device> findDeviceByDeviceType(String deviceType, Pageable pageable);
+    public void changeDeviceStatus(Device dev, int status);
 }
-
