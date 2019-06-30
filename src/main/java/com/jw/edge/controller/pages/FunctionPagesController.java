@@ -27,7 +27,9 @@ public class FunctionPagesController {
 
     @GetMapping("/functionDetails")
     public String functionDetails(Model model, String functionId) throws Exception {
+        System.out.println(functionId);
         Function function = functionService.findFunctionByFunctionId(functionId);
+        System.out.println(function.getFunctionName());
         model.addAttribute("function", function);
         return "product/functionDetails";
     }

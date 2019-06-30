@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-      //th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::functionMenu},_,_,_,_,~{::scripts})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productMenu},_,_,_,_,~{::scripts})}">
 
-<title>功能列表</title>
+<title>产品列表</title>
 <content>
 
     <div class="layui-tab-brief layui-tab">
         <ul class="layui-tab-title site-demo-title">
-            <li><a href="/pages/functions">功能列表</a></li>
+            <li><a href="/pages/products">产品列表</a></li>
+            <li><a href="/pages/productDetails">产品详情</a></li>
             <li class="layui-this"><a><cite>功能详情</cite></a></li>
         </ul>
     </div>
@@ -20,17 +21,17 @@
                 <div class="layui-card-body">
                     <div class="layui-row">
                         <div class="layui-col-md4">
-                            <b>ProductKey:</b> <span th:text="${function.getFunctionId()}"></span>
+                            <b>FunctionKey:</b> <span th:text="${function.getFunctionId()}"></span>
                         </div>
 
                     </div>
                     <br>
                     <!--卡片风格tab选项卡-->
                     <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-                        <ul class="layui-tab-title">
-                            <li class="layui-this">产品信息</li>
-                            <li>功能定义</li>
-                        </ul>
+<!--                        <ul class="layui-tab-title">-->
+<!--                            <li class="layui-this">产品信息</li>-->
+<!--                            <li>功能定义</li>-->
+<!--                        </ul>-->
                         <div class="layui-tab-content" style="height: 100px;">
                             <div class="layui-tab-item layui-show">
                                 <br/>
@@ -48,7 +49,7 @@
                                     </tr>
                                     <tr>
                                         <th><b>标识符</b></th>
-                                        <td th:text="${#dates.format(function.getFunctionIdentifier()}"></td>
+                                        <td th:text="${function.getFunctionIdentifier()}"></td>
                                     </tr>
 
                                     <tr>
@@ -67,9 +68,9 @@
     <h1></h1>
 </content>
 
-<!--<dd class="layui-this" th:fragment="functionMenu">-->
-<!--    <a href="/pages/functions">功能列表</a>-->
-<!--</dd>-->
+<dd class="layui-this" th:fragment="productMenu">
+    <a href="/pages/products">产品列表</a>
+</dd>
 <div th:fragment="scripts">
     <!--<script th:inline="none" type="text/html" id="barDemo">
         <button class="layui-btn layui-btn-xs" lay-event="detail">查看</button>
