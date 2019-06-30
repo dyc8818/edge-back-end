@@ -50,7 +50,7 @@ public class FunctionServiceImpl implements FunctionService {
 
     @Override
     public Function findFunctionByFunctionId(String functionId) {
-        return functionRepository.findFunctionByFunctionName(functionId);
+        return functionRepository.findFunctionByFunctionId(functionId);
     }
 
 
