@@ -48,10 +48,49 @@
                                         <td th:text="${function.getFunctionType()}"></td>
                                     </tr>
                                     <tr>
-                                        <th><b>标识符</b></th>
-                                        <td th:text="${function.getFunctionIdentifier()}"></td>
+                                        <th><b>寄存器</b></th>
+                                        <td th:text="${function.getHoldingRegister()}"></td>
                                     </tr>
-
+                                    <tr>
+                                        <th><b>数据类型</b></th>
+                                        <td th:text="${function.getHoldingRegister()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>寄存器</b></th>
+                                        <td th:text="${function.getHoldingRegister()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>读写方式</b></th>
+                                        <td th:text="${function.getReadWrite()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>数据大小</b></th>
+                                        <td th:text="${function.getValueSize()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>数据规模</b></th>
+                                        <td th:text="${function.getValueScale()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>数据最小值</b></th>
+                                        <td th:text="${function.getValueMinimum()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>数据最大值</b></th>
+                                        <td th:text="${function.getValueMaximum()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>默认数据</b></th>
+                                        <td th:text="${function.getDefaultValue()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>单位类型</b></th>
+                                        <td th:text="${function.getUnitsType()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>默认单位</b></th>
+                                        <td th:text="${function.getDefaultUnits()}"></td>
+                                    </tr>
                                     <tr>
                                         <th><b>功能描述</b></th>
                                         <td colspan="5" th:text="${function.getFunctionDesc()}"></td>
