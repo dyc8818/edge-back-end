@@ -84,7 +84,7 @@
                                 symbol:'emptyDiamond',
                                 symbolSize: 8,
                                 lineStyle:{
-                                    width: 3
+                                    width: 2
                                 }
                             }]
                         };
@@ -97,7 +97,7 @@
                         // alert(data[0]+'  '+data[1]);
                         hum.push([date,data[0]]);
                         tem.push([date,data[1]]);
-                        if(hum.length>120){
+                        if(hum.length>60){
                             hum.shift();
                             tem.shift();
                         }
@@ -115,15 +115,22 @@
                                 name:'时间'
                             },
                             yAxis: {},
+                            legend: {
+                                orient:'vertical',
+                                right: 0,
+                                top: '30%',
+                                itemHeight: 28,
+                                itemWidth: 70
+                            },
                             series: [
                                 {
                                     name:'温度',
                                     type:'line',
                                     data:tem,
                                     symbol:'emptyTriangle',
-                                    symbolSize: 8,
+                                    symbolSize: 4,
                                     lineStyle:{
-                                        width: 3
+                                        width: 2
                                     }
                                 },
                                 {
@@ -131,9 +138,9 @@
                                     type: 'line',
                                     data: hum,
                                     symbol:'emptyCircle',
-                                    symbolSize: 8,
+                                    symbolSize: 4,
                                     lineStyle:{
-                                        width: 3
+                                        width: 2
                                     }
                                 }
                             ]
