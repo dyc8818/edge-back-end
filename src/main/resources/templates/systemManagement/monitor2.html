@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,~{::monitorMenu},_,~{::scripts})}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,~{::monitor2Menu},~{::scripts})}">
 <title>实时监控</title>
 
 <content>
@@ -39,8 +39,8 @@
 </content>
 
 
-<dd class="layui-this" th:fragment="monitorMenu">
-    <a href="/pages/monitor">实时监控</a>
+<dd class="layui-this" th:fragment="monitor2Menu">
+    <a href="/pages/monitor2">实时监控2</a>
 </dd>
 
 <div th:fragment="scripts">
@@ -90,7 +90,7 @@
                         };
                         // 使用刚指定的配置项和数据显示图表。
                         numChart.setOption(option);
-                });
+                    });
 
                 $.get("/api/surdetails/",
                     function(data){

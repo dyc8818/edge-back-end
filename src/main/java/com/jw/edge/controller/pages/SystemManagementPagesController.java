@@ -13,6 +13,11 @@ public class SystemManagementPagesController {
         return "systemManagement/monitor";
     }
 
+    @GetMapping("/monitor2")
+    public String systemManagementList2(Model model) throws Exception {
+        return "systemManagement/monitor2";
+    }
+
     @GetMapping("/logManagement")
     public String logManagement(Model model) throws Exception {
         return "systemManagement/logManagement";
