@@ -14,6 +14,11 @@ public class Device {
     private String deviceType;
     private int deviceStatus;
     private Date deviceCreateTime;
+    private String deviceAddress;
+
+    public String getDeviceAddress() { return deviceAddress; }
+
+    public void setDeviceAddress(String deviceAddress) { this.deviceAddress = deviceAddress; }
 
     public Date getDeviceCreateTime() {
         return deviceCreateTime;

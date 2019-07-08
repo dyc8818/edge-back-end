@@ -21,10 +21,16 @@
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">设备类型</label>
-        <div class="layui-input-block">
+        <div class="layui-input-inline">
             <select name="deviceType" id="deviceType" lay-filter="required">
                 <option value=""></option>
             </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址设定</label>
+        <div class="layui-input-inline" id="setAddress">
+            <input type="text"id="addressPlaceholder" autocomplete="off" placeholder="请输入选择产品类型" class="layui-input" disabled="">
         </div>
     </div>
     <div class="layui-form-item">
@@ -61,6 +67,7 @@
     layui.use(['form', 'layedit', 'laydate', 'layer'], function () {
 
         var form = layui.form;
+        var pp;
         //自定义验证规则
         // form.verify({
         //     title: function (value) {
@@ -80,15 +87,36 @@
         $ = layui.jquery;
         $(document).ready(function() {
             var hh = sessionStorage.getItem("productNames");
-            var pp = JSON.parse(hh);
+            pp = JSON.parse(hh);
             for(k=0;k<pp.length;k++){
                 var option = document.createElement("option");  // 创建添加option属性
                 option.setAttribute("value",pp[k].productName); // 给option的value添加值
                 option.innerText=pp[k].productName;     // 打印option对应的纯文本
                 deviceType.appendChild(option);           //给select添加option子标签
-                form.render("select");            // 刷性select，显示出数据
+
                 //console.log(pp[k].productName);
             }
+            form.render("select");            // 刷性select，显示出数据
+        });
+        //地址设定 根据不同设备类型设置地址
+        form.on('select(required)', function (obj) {
+            var data = obj.data;
+            var addressObj = document.getElementById("setAddress");
+            if(document.getElementById("addressPlaceholder") ){
+                var addressPlaceholder = document.getElementById("addressPlaceholder");
+                addressPlaceholder.style.display="none";
+            }
+            if (obj.elem.selectedIndex-1 < 0){
+                addressObj.innerHTML='<input type="text"id="addressPlaceholder" autocomplete="off" placeholder="请输入选择产品类型" class="layui-input" disabled="">';
+            } else {
+                if (pp[obj.elem.selectedIndex-1].productType == "网关"){
+                    addressObj.innerHTML='<input type="text" name="deviceAddress" autocomplete="off" placeholder="请输入设备IP地址" class="layui-input">';
+                }else{
+                    addressObj.innerHTML='<select name="deviceAddress" lay-filter="aihao"><option value=""></option><option value="COM1" selected="">COM1</option><option value="COM2">COM2</option></select>';
+                }
+            }
+
+            form.render();
         });
 
         form.on('submit(formVerify)', function (obj) {
