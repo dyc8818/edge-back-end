@@ -8,28 +8,11 @@
 
         <div class="layui-row">
 
-            <div class="layui-tab layui-tab-brief">
-                <ul class="layui-tab-title">
-                    <li class="layui-this">设备监控</li>
-                    <li>数据详情</li>
-                </ul>
-
-                <div class="layui-tab-content">
-
-                    <div class="layui-tab-item layui-show">
-                        <div class="layui-col-lg10 layui-col-lg-offset1">
-                            <div id="numchart" style="width: 1200px;height:600px;"></div>
-                        </div>
-                    </div>
-
                     <div class="layui-tab-item">
                         <div class="layui-col-lg10 layui-col-lg-offset1">
                             <div id="detailchart" style="width: 1400px;height:600px;"></div>
                         </div>
                     </div>
-
-                </div>
-            </div>
 
         </div>
 
@@ -47,9 +30,8 @@
     <script th:src="@{/echarts-4.2.1/echarts.min.js}"></script>
     <script>
         // 基于准备好的dom，初始化echarts实例
-        var numChart = echarts.init(document.getElementById('numchart'));
+        var interval = 3000;
         var detailChart = echarts.init(document.getElementById('detailchart'));
-        var num = new Array();
         var data1 = new Array();
         var data2 = new Array();
         setInterval(function(){
@@ -57,41 +39,6 @@
             layui.use('jquery', function(){
                 var $ = layui.$;
                 //后面就跟你平时使用jQuery一样
-                $.get("/api/surnum/",
-                    function(data){
-                        num.push([date,data]);
-                        // 指定图表的配置项和数据
-                        if(num.length>60){
-                            num.shift();
-                        }
-                        var option = {
-                            title: {
-                                text: '设备在线数量',
-                                left:'center'
-                            },
-                            tooltip: {
-                                trigger: 'axis'
-                            },
-                            xAxis: {
-                                type:'time',
-                                name:'时间'
-                            },
-                            yAxis: {},
-                            series: [{
-                                name: '数量',
-                                type: 'line',
-                                data: num,
-                                symbol:'emptyDiamond',
-                                symbolSize: 8,
-                                lineStyle:{
-                                    width: 2
-                                }
-                            }]
-                        };
-                        // 使用刚指定的配置项和数据显示图表。
-                        numChart.setOption(option);
-                    });
-
                 $.get("/api/surdetails/",
                     function(data){
                         var type = Object.keys(data);
@@ -149,7 +96,7 @@
                     });
 
             });
-        },1000)
+        },interval)
 
     </script>
 

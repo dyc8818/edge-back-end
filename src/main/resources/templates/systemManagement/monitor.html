@@ -8,28 +8,10 @@
 
         <div class="layui-row">
 
-            <div class="layui-tab layui-tab-brief">
-                <ul class="layui-tab-title">
-                    <li class="layui-this">设备监控</li>
-                    <li>数据详情</li>
-                </ul>
-
-                <div class="layui-tab-content">
-
-                    <div class="layui-tab-item layui-show">
                         <div class="layui-col-lg10 layui-col-lg-offset1">
                             <div id="numchart" style="width: 1200px;height:600px;"></div>
                         </div>
-                    </div>
 
-                    <div class="layui-tab-item">
-                        <div class="layui-col-lg10 layui-col-lg-offset1">
-                            <div id="detailchart" style="width: 1400px;height:600px;"></div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
 
         </div>
 
@@ -48,10 +30,37 @@
     <script>
         // 基于准备好的dom，初始化echarts实例
         var numChart = echarts.init(document.getElementById('numchart'));
-        var detailChart = echarts.init(document.getElementById('detailchart'));
+        var interval = 3000;
         var num = new Array();
-        var data1 = new Array();
-        var data2 = new Array();
+        num.push([new Date(), 0]);
+
+        var option = {
+            title: {
+                text: '设备在线数量',
+                left:'center'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            xAxis: {
+                type:'time',
+                name:'时间'
+            },
+            yAxis: {},
+            series: [{
+                name: '数量',
+                type: 'line',
+                data: num,
+                symbol:'emptyDiamond',
+                symbolSize: 8,
+                lineStyle:{
+                    width: 2
+                }
+            }]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        numChart.setOption(option);
+
         setInterval(function(){
             var date = new Date();
             layui.use('jquery', function(){
@@ -64,92 +73,13 @@
                         if(num.length>60){
                             num.shift();
                         }
-                        var option = {
-                            title: {
-                                text: '设备在线数量',
-                                left:'center'
-                            },
-                            tooltip: {
-                                trigger: 'axis'
-                            },
-                            xAxis: {
-                                type:'time',
-                                name:'时间'
-                            },
-                            yAxis: {},
-                            series: [{
-                                name: '数量',
-                                type: 'line',
-                                data: num,
-                                symbol:'emptyDiamond',
-                                symbolSize: 8,
-                                lineStyle:{
-                                    width: 2
-                                }
-                            }]
-                        };
+
                         // 使用刚指定的配置项和数据显示图表。
                         numChart.setOption(option);
                 });
 
-                $.get("/api/surdetails/",
-                    function(data){
-                        var type = Object.keys(data);
-                        data1.push([date,data[type[0]]]);
-                        data2.push([date,data[type[1]]]);
-                        if(data1.length>60){
-                            data1.shift();
-                            data2.shift();
-                        }
-                        // 指定图表的配置项和数据
-                        var option1 = {
-                            title: {
-                                text: '设备监控情况',
-                                left:'10%'
-                            },
-                            tooltip: {
-                                trigger: 'axis'
-                            },
-                            xAxis: {
-                                type:'time',
-                                name:'时间'
-                            },
-                            yAxis: {},
-                            legend: {
-                                right: '20%',
-                                top: 0,
-                                itemHeight: 28,
-                                itemWidth: 70
-                            },
-                            series: [
-                                {
-                                    name: type[0],
-                                    type:'line',
-                                    data:data1,
-                                    symbol:'emptyTriangle',
-                                    symbolSize: 8,
-                                    lineStyle:{
-                                        width: 2
-                                    }
-                                },
-                                {
-                                    name: type[1],
-                                    type: 'line',
-                                    data: data2,
-                                    symbol:'emptyCircle',
-                                    symbolSize: 8,
-                                    lineStyle:{
-                                        width: 2
-                                    }
-                                }
-                            ]
-                        };
-                        // 使用刚指定的配置项和数据显示图表。
-                        detailChart.setOption(option1);
-                    });
-
             });
-        },1000)
+        },interval)
 
     </script>
 
