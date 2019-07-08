@@ -24,7 +24,7 @@
 
                     <div class="layui-tab-item">
                         <div class="layui-col-lg10 layui-col-lg-offset1">
-                            <div id="detailchart" style="width: 1200px;height:600px;"></div>
+                            <div id="detailchart" style="width: 1400px;height:600px;"></div>
                         </div>
                     </div>
 
@@ -50,8 +50,8 @@
         var numChart = echarts.init(document.getElementById('numchart'));
         var detailChart = echarts.init(document.getElementById('detailchart'));
         var num = new Array();
-        var hum = new Array();
-        var tem = new Array();
+        var data1 = new Array();
+        var data2 = new Array();
         setInterval(function(){
             var date = new Date();
             layui.use('jquery', function(){
@@ -84,7 +84,7 @@
                                 symbol:'emptyDiamond',
                                 symbolSize: 8,
                                 lineStyle:{
-                                    width: 3
+                                    width: 2
                                 }
                             }]
                         };
@@ -94,18 +94,18 @@
 
                 $.get("/api/surdetails/",
                     function(data){
-                        // alert(data[0]+'  '+data[1]);
-                        hum.push([date,data[0]]);
-                        tem.push([date,data[1]]);
-                        if(hum.length>120){
-                            hum.shift();
-                            tem.shift();
+                        var type = Object.keys(data);
+                        data1.push([date,data[type[0]]]);
+                        data2.push([date,data[type[1]]]);
+                        if(data1.length>60){
+                            data1.shift();
+                            data2.shift();
                         }
                         // 指定图表的配置项和数据
                         var option1 = {
                             title: {
                                 text: '设备监控情况',
-                                left:'center'
+                                left:'10%'
                             },
                             tooltip: {
                                 trigger: 'axis'
@@ -115,25 +115,31 @@
                                 name:'时间'
                             },
                             yAxis: {},
+                            legend: {
+                                right: '20%',
+                                top: 0,
+                                itemHeight: 28,
+                                itemWidth: 70
+                            },
                             series: [
                                 {
-                                    name:'温度',
+                                    name: type[0],
                                     type:'line',
-                                    data:tem,
+                                    data:data1,
                                     symbol:'emptyTriangle',
                                     symbolSize: 8,
                                     lineStyle:{
-                                        width: 3
+                                        width: 2
                                     }
                                 },
                                 {
-                                    name: '湿度',
+                                    name: type[1],
                                     type: 'line',
-                                    data: hum,
+                                    data: data2,
                                     symbol:'emptyCircle',
                                     symbolSize: 8,
                                     lineStyle:{
-                                        width: 3
+                                        width: 2
                                     }
                                 }
                             ]
