@@ -12,16 +12,15 @@ public class Rule {
     private String ruleName;
 
     private String ruleDescribe;
-    private String ruleFormat;
-    private String ruleState;
-    private String ruleSQL;
     private Date ruleCreateTime;
 
     private String ruleParaThreshold;
     private String rulePara;
     private String ruleToDevice;
+    private String ruleToFunction;
     private int ruleJudge;
     private int ruleStatus;
+    private int ruleExecute;
 
 
     public String getRuleId() {
@@ -64,11 +63,23 @@ public class Rule {
         this.ruleToDevice = ruleToDevice;
     }
 
+    public String ruleToFunction() {
+        return ruleToFunction;
+    }
+
+    public void setRuleToFunction(String ruleToFunction) {
+        this.ruleToFunction = ruleToFunction;
+    }
+
     public int getRuleJudge() { return ruleJudge; }
 
     public void setRuleJudge(int ruleJudge) {this.ruleJudge = ruleJudge; }
 
     public int getRuleStatus() { return ruleStatus; }
+
+    public void setRuleExecute(int ruleExecute) {this.ruleExecute = ruleExecute; }
+
+    public int getRuleExecute() { return ruleExecute; }
 
     public void setRuleStatus(int ruleStatus) {this.ruleStatus = ruleStatus; }
 
@@ -78,30 +89,6 @@ public class Rule {
 
     public void setRuleDescribe(String ruleDescribe) {
         this.ruleDescribe = ruleDescribe;
-    }
-
-    public String getRuleFormat() {
-        return ruleFormat;
-    }
-
-    public void setRuleFormat(String ruleFormat) {
-        this.ruleFormat = ruleFormat;
-    }
-
-    public String getRuleState() {
-        return ruleState;
-    }
-
-    public void setRuleState(String ruleState) {
-        this.ruleState = ruleState;
-    }
-
-    public String getRuleSQL() {
-        return ruleSQL;
-    }
-
-    public void setRuleSQL(String ruleSQL) {
-        this.ruleSQL = ruleSQL;
     }
 
     public Date getRuleCreateTime() {

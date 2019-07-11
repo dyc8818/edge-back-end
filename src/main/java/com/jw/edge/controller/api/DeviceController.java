@@ -67,7 +67,6 @@ public class DeviceController {
     }
 
 
-
     @PostMapping("/addDevice")
     @ResponseBody
     public Boolean addDevice(@RequestBody Device device) {

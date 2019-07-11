@@ -31,18 +31,20 @@
                                 <div class="layui-tab-item layui-show">
                                     <table border="0" class="layui-table">
                                         <tr>
-                                            <th><b>数据格式</b></th>
-                                            <td th:text="${rule.getRuleFormat()}"></td>
                                             <th><b>创建时间</b></th>
                                             <td th:text="${#dates.format(rule.getRuleCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
+                                            <th><b>设备功能</b></th>
+                                            <td th:text="${rule.getRulePara()}"></td>
                                         </tr>
                                         <tr>
                                             <th><b>规则描述</b></th>
                                             <td colspan="5" th:text="${rule.getRuleDescribe()}"></td>
                                         </tr>
                                         <tr>
-                                            <th><b>规则执行语句</b></th>
-                                            <td colspan="5" th:text="${rule.getRuleSQL()}"></td>
+                                            <th><b>规则条件</b></th>
+                                            <td colspan="5" th:text="${rule.getRuleJudge()}"></td>
+                                            <th><b>参数门限</b></th>
+                                            <td colspan="5" th:text="${rule.getRulePara()}"></td>
                                         </tr>
                                     </table>
                                 </div>
