@@ -15,6 +15,21 @@ public class Device {
     private int deviceStatus;
     private Date deviceCreateTime;
     private String deviceAddress;
+    private int deviceAddressPort;
+    private String deviceProfile;
+    private String deviceFailDate;
+
+    public String getDeviceFailDate() { return deviceFailDate; }
+
+    public void setDeviceFailDate(String deviceFailDate) { this.deviceFailDate = deviceFailDate; }
+
+    public int getDeviceAddressPort() { return deviceAddressPort; }
+
+    public void setDeviceAddressPort(int deviceAddressPort) { this.deviceAddressPort = deviceAddressPort; }
+
+    public String getDeviceProfile() { return deviceProfile; }
+
+    public void setDeviceProfile(String deviceProfile) { this.deviceProfile = deviceProfile; }
 
     public String getDeviceAddress() { return deviceAddress; }
 
@@ -59,6 +74,7 @@ public class Device {
     public void setDeviceType(String deviceType) {
         this.deviceType = deviceType;
     }
+
     public int getDeviceStatus() { return deviceStatus; }
 
     public void setDeviceStatus(int deviceStatus) {this.deviceStatus = deviceStatus; }

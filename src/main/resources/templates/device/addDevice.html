@@ -28,9 +28,25 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label">配置文件</label>
+        <div class="layui-input-inline">
+            <select name="deviceProfile" id="deviceProfile" lay-filter="devProfile">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
         <label class="layui-form-label">地址设定</label>
         <div class="layui-input-inline" id="setAddress">
             <input type="text"id="addressPlaceholder" autocomplete="off" placeholder="请输入选择产品类型" class="layui-input" disabled="">
+        </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">有效期至</label>
+        <div class="layui-input-inline">
+            <input type="text" name="deviceFailDate" id="deviceFailDate" lay-verify="deviceFailDate" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" lay-event="dateFormat">
         </div>
     </div>
     <div class="layui-form-item">
@@ -83,18 +99,28 @@
         //         layedit.sync(editIndex);
         //     }
         // });
+
         //动态加载设备类型
         $ = layui.jquery;
         $(document).ready(function() {
+            var laydate = layui.laydate;
             var hh = sessionStorage.getItem("productNames");
             pp = JSON.parse(hh);
+            laydate.render({
+                elem: '#deviceFailDate'
+            });
             for(k=0;k<pp.length;k++){
                 var option = document.createElement("option");  // 创建添加option属性
                 option.setAttribute("value",pp[k].productName); // 给option的value添加值
                 option.innerText=pp[k].productName;     // 打印option对应的纯文本
                 deviceType.appendChild(option);           //给select添加option子标签
-
                 //console.log(pp[k].productName);
+            }
+            for(k=0;k<pp.length;k++){
+                var option = document.createElement("option");  // 创建添加option属性
+                option.setAttribute("value",pp[k].productName+"的配置文件");
+                option.innerText=pp[k].productName+"的配置文件";
+                deviceProfile.appendChild(option);
             }
             form.render("select");            // 刷性select，显示出数据
         });
@@ -110,14 +136,26 @@
                 addressObj.innerHTML='<input type="text"id="addressPlaceholder" autocomplete="off" placeholder="请输入选择产品类型" class="layui-input" disabled="">';
             } else {
                 if (pp[obj.elem.selectedIndex-1].productType == "网关"){
-                    addressObj.innerHTML='<input type="text" name="deviceAddress" autocomplete="off" placeholder="请输入设备IP地址" class="layui-input">';
+                    addressObj.innerHTML='<div class="layui-input-inline"> <input type="text" name="deviceAddress" autocomplete="off" placeholder="请输入设备IP地址" class="layui-input"></div><div class="layui-input-inline" style="width: 75px;"><input type="text" name="deviceAddressPort" placeholder="端口号" autocomplete="off" class="layui-input"></div>';
                 }else{
-                    addressObj.innerHTML='<select name="deviceAddress" lay-filter="aihao"><option value=""></option><option value="COM1" selected="">COM1</option><option value="COM2">COM2</option></select>';
+                    addressObj.innerHTML='<div class="layui-input-inline"> <input type="text" name="deviceAddress" autocomplete="off" placeholder="请输入设备地址" class="layui-input"></div><div class="layui-input-inline" style="width: 75px;"><input type="text" name="deviceAddressPort" placeholder="端口号" autocomplete="off" class="layui-input"></div>';
                 }
             }
-
             form.render();
         });
+
+        //选择配置文件
+//        form.on('select(devProfile)', function (obj) {
+//            var hh = sessionStorage.getItem("productNames");
+//            pp = JSON.parse(hh);
+//            for(k=0;k<pp.length;k++){
+//                var option = document.createElement("option");  // 创建添加option属性
+//                option.setAttribute("value",pp[k].productName+"的配置文件"); // 给option的value添加值
+//                option.innerText=pp[k].productName;     // 打印option对应的纯文本
+//                deviceType.appendChild(option);           //给select添加option子标签
+//            }
+//            form.render();
+//        });
 
         form.on('submit(formVerify)', function (obj) {
             $ = layui.jquery;
