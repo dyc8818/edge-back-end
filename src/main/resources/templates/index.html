@@ -1,12 +1,119 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,_)}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,~{::scripts})}">
 
 <head>
     <title>主页</title>
 </head>
 <content>
-    我是主页君
+    <div class="layui-fluid" style="padding: 0px;">
+
+        <div class="layui-row">
+
+            <div class="layui-col-lg8">
+                <div class="layui-carousel" id="part1">
+                    <div carousel-item>
+                        <div style="background-color: #FFB800">
+                            <strong>
+                                <p style="font-size: 60px;text-align: left;margin-left: 40px; margin-bottom: 100px;margin-top: 40px">已注册的设备总数</p>
+                                <p id="totalNum" style="font-size: 100px; text-align: center">0</p>
+                            </strong>
+                        </div>
+                        <div id="numchart" style="width: 1200px;height:400px;"></div>
+                        <div>三个月内需更换的设备</div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
 </content>
 
+<div th:fragment="scripts">
+    <script th:src="@{/echarts-4.2.1/echarts.min.js}"></script>
+    <script>
+        layui.use('jquery', function(){
+            var $ = layui.$;
+            //后面就跟你平时使用jQuery一样
+            $.get("/api/totalnum/",
+                function(data){
+                    document.getElementById("totalNum").innerHTML=data;
+                });
+
+        });
+
+        // 基于准备好的dom，初始化echarts实例
+        var numChart = echarts.init(document.getElementById('numchart'));
+        var num = new Array();
+        num.push([new Date(), 0]);
+
+        var option = {
+            title: {
+                text: '设备在线数量',
+                left:'center'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            xAxis: {
+                type:'time',
+                name:'时间'
+            },
+            yAxis: {},
+            series: [{
+                name: '数量',
+                type: 'line',
+                data: num,
+                symbol:'emptyDiamond',
+                symbolSize: 8,
+                lineStyle:{
+                    width: 2
+                }
+            }]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        numChart.setOption(option);
+
+
+        layui.use('carousel', function(){
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#part1',
+                width: '100%',
+                height:'400px',
+                interval:'4500',
+                arrow: 'always',
+                anim: 'default',
+                indicator:'outside',
+                index:3
+            });
+        });
+
+        setInterval(function(){
+            var date = new Date();
+            layui.use('jquery', function(){
+                var $ = layui.$;
+                //后面就跟你平时使用jQuery一样
+                $.get("/api/surnum/",
+                    function(data){
+                        num.push([date,data]);
+                        // 指定图表的配置项和数据
+                        if(num.length>60){
+                            num.shift();
+                        }
+
+                        // 使用刚指定的配置项和数据显示图表。
+                        numChart.setOption(option);
+                    });
+
+            });
+        },8000)
+
+    </script>
+
+
+</div>
 </html>
