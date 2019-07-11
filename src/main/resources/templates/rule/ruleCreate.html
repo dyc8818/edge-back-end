@@ -10,7 +10,7 @@
 
 <form class="layui-form layui-fluid" action="">
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-<!--        <legend>规则信息</legend>-->
+        <legend>规则信息</legend>
     </fieldset>
     <div class="layui-form-item">
         <label class="layui-form-label">规则名称</label>
@@ -20,37 +20,77 @@
         </div>
     </div>
 
-<!--    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">-->
-<!--        <legend>规则类型</legend>-->
-<!--    </fieldset>-->
     <div class="layui-form-item">
-        <label class=" layui-form-label">数据格式</label>
-        <div class=" layui-input-inline">
-            <input type="radio" name="ruleFormat" value="Json" title="Json" checked="">
-            <input type="radio" name="ruleFormat" value="二进制" title="二进制">
+        <label class="layui-form-label">初始状态</label>
+        <div class="layui-input-inline">
+            <select name="ruleStatus" lay-filter="aihao">
+                <option value=""></option>
+                <option value=1 selected="">开启</option>
+                <option value=0>关闭</option>
+            </select>
+        </div>
+    </div>
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>规则指令</legend>
+    </fieldset>
+<!--    <div class="layui-form-item">-->
+<!--        <label class=" layui-form-label">数据格式</label>-->
+<!--        <div class=" layui-input-inline">-->
+<!--            <input type="radio" name="ruleFormat" value="Json" title="Json" checked="">-->
+<!--            <input type="radio" name="ruleFormat" value="二进制" title="二进制">-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">设备名</label>
+        <div class="layui-input-block">
+            <select name="ruleToDevice" id="ruleToDevice" lay-filter="required">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">设备参数</label>
+        <div class="layui-input-block">
+            <select name="rulePara" id="rulePara" lay-filter="required">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">判决规则</label>
+        <div class="layui-input-inline">
+            <select name="ruleJudge" lay-filter="aihao">
+                <option value=""></option>
+                <option value=1 selected="">大于</option>
+                <option value=0>小于</option>
+            </select>
         </div>
     </div>
 
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">规则描述</label>
-        <div class="layui-input-block">
-            <textarea name="ruleDescribe"placeholder="请输入规则描述" class="layui-textarea"></textarea>
+        <label class="layui-form-label">参数阈值</label>
+        <div class="layui-input-inline">
+            <input type="text" name="ruleParaThreshold" lay-verify="title" autocomplete="off" placeholder="请输入阈值"
+                   class="layui-input">
         </div>
     </div>
 
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">执行语句</label>
-        <div class="layui-input-block">
-            <textarea name="ruleSQL"placeholder="请输入规则执行语句" class="layui-textarea"></textarea>
-        </div>
-    </div>
+<!--    <div class="layui-form-item layui-form-text">-->
+<!--        <label class="layui-form-label">执行语句</label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <textarea name="ruleSQL"placeholder="请输入规则执行语句" class="layui-textarea"></textarea>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <div class="layui-form-item" style="display: none">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="formVerify">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-        </div>
-    </div>
+<!--    <div class="layui-form-item" style="display: none">-->
+<!--        <div class="layui-input-block">-->
+<!--            <button class="layui-btn" lay-submit="" lay-filter="formVerify">立即提交</button>-->
+<!--            <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+<!--        </div>-->
+<!--    </div>-->
 </form>
 </body>
 <script th:src="@{/layui/layui.js}"></script>
@@ -72,6 +112,33 @@
         //         layedit.sync(editIndex);
         //     }
         // });
+
+        //动态加载设备名称
+        $ = layui.jquery;
+        $(document).ready(function() {
+            var hh = sessionStorage.getItem("productNames");
+            var pp = JSON.parse(hh);
+            for(k=0;k<pp.length;k++){
+                var option = document.createElement("option");  // 创建添加option属性
+                option.setAttribute("value",pp[k].productName); // 给option的value添加值
+                option.innerText=pp[k].productName;     // 打印option对应的纯文本
+                ruleToDevice.appendChild(option);           //给select添加option子标签
+                form.render("select");            // 刷性select，显示出数据
+                //console.log(pp[k].productName);
+            }
+
+            var hh1 = sessionStorage.getItem("productNames");
+            var pp1 = JSON.parse(hh1);
+            for(k=0;k<pp1.length;k++){
+                var option = document.createElement("option");  // 创建添加option属性
+                option.setAttribute("value",pp1[k].productName); // 给option的value添加值
+                option.innerText=pp1[k].productName;     // 打印option对应的纯文本
+                devicePara.appendChild(option);           //给select添加option子标签
+                form.render("select");            // 刷性select，显示出数据
+                //console.log(pp1[k].productName);
+            }
+        });
+
         //监听提交
         form.on('submit(formVerify)', function (data) {
 

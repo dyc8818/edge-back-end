@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,~{::rule},_,_,~{::scripts})}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,~{::rule},_,_,_,~{::scripts})}">
 
 <title>规则列表</title>
 <content>
@@ -71,10 +71,10 @@
                     [ //表头
                         // {type: 'checkbox'},
                         {field: 'ruleName', title: '规则名称', sort: true, align: 'center'},
-                        {field: 'ruleFormat', title: '数据格式', align: 'center'},
+                        {field: 'ruleToDevice', title: '设备名称', align: 'center'},
                         // {field: 'ruleDescribe', title: '规则描述', align: 'center'},
                         {field: 'ruleCreateTime', title: '创建时间', sort: true, align: 'center'},
-                        {field: 'ruleState', title: '状态', sort: true, align: 'center'},
+                        {field: 'ruleStatus', title: '状态', sort: true, align: 'center'},
                         {
                             title: '操作', align: 'center',
                             toolbar: '#barDemo'
@@ -139,7 +139,7 @@
                 layer.open({
                     type: 2
                     ,
-                    title: "创建数据流转规则"
+                    title: "创建规则"
                     ,
                     closeBtn: 1
                     ,

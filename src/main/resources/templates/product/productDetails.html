@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productMenu},_,_,_,_,~{::scripts})}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productMenu},_,_,_,_,_,~{::scripts})}">
 
 <title>产品列表</title>
 <content>
@@ -136,7 +136,7 @@
                         {field: 'functionId', title: 'FunctionKey', sort: true, align: 'center'},
                         {field: 'functionType', title: '功能类型', align: 'center'},
                         {field: 'functionName', title: '功能名称', align: 'center'},
-                        {field: 'functionIdentifier', title: '标识符', sort: true, align: 'center'},
+                        {field: 'holdingRegister', title: '寄存器', sort: true, align: 'center'},
                         {
                             title: '操作', align: 'center',
                             toolbar: '#barDemo'
@@ -220,6 +220,8 @@
                     ,
                     content: '/pages/functionCreate'
                     ,
+                    // content: '/pages/functionCreate?productId='+ [[${product.getProductId()}]]
+                    // ,
                     // success: function (layero) {
                     //     var btn = layero.find('.layui-layer-btn');
                     //     btn.find('.layui-layer-btn0').attr({

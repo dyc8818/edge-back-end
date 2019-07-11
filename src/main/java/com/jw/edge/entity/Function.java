@@ -9,6 +9,8 @@ import java.util.Date;
 @Document
 public class Function {
     @Id
+//    private String productId;
+//    private String productName;
     private String functionId;
     private String functionType;
     private String functionName;
@@ -24,6 +26,27 @@ public class Function {
     private String defaultValue;
     private String unitsType;
     private String defaultUnits;
+    private String resourceIndex;
+    private String resourceOperation;
+    private String resourceObject;
+    private String resourceParameter;
+    private String resourceProperty;
+    private String responseCode1;
+    private String responseCode2;
+    private String responseDec1;
+    private String responseDec2;
+    private String responseDec3;
+    private String responseDec4;
+//    private String ;
+//    private String ;
+
+    public String getFunctionIdentifier() {
+        return functionIdentifier;
+    }
+
+    public void setFunctionIdentifier(String functionIdentifier) {
+        this.functionIdentifier = functionIdentifier;
+    }
 
     public String getValueType() {
         return valueType;
@@ -148,7 +171,93 @@ public class Function {
         this.functionDesc = functionDesc;
     }
 
+    public String getResourceIndex() {
+        return resourceIndex;
+    }
 
+    public void setResourceIndex() {
+        this.resourceIndex = "1";
+    }
+
+    public String getResourceOperation() {
+        return resourceOperation;
+    }
+
+    public void setResourceOperation() {
+        this.resourceOperation = "get";
+    }
+
+    public String getResourceObject() {
+        return resourceObject;
+    }
+
+    public void setResourceObject(String functionName) {
+        this.resourceObject = functionName;
+    }
+
+    public String getResourceParameter() {
+        return resourceParameter;
+    }
+
+    public void setResourceParameter(String functionName) {
+        this.resourceParameter = functionName;
+    }
+
+    public String getResourceProperty() {
+        return resourceProperty;
+    }
+
+    public void setResourceProperty() {
+        this.resourceProperty = "value";
+    }
+
+    public String getResponseCode1() {
+        return responseCode1;
+    }
+
+    public void setResponseCode1() {
+        this.responseCode1 = "200";
+    }
+
+    public String getResponseCode2() {
+        return responseCode2;
+    }
+
+    public void setResponseCode2() {
+        this.responseCode2 = "503";
+    }
+
+    public String getResponseDec1() {
+        return responseDec1;
+    }
+
+    public void setResponseDec1() {
+        this.responseDec1 = "Get the temperature in degrees F";
+    }
+
+    public String getResponseDec2() {
+        return responseDec2;
+    }
+
+    public void setResponseDec2() {
+        this.responseDec2 = "Get the temperature in degrees C";
+    }
+
+    public String getResponseDec3() {
+        return responseDec3;
+    }
+
+    public void setResponseDec3() {
+        this.responseDec3 = "Get the humidity in %RH";
+    }
+
+    public String getResponseDec4() {
+        return responseDec4;
+    }
+
+    public void setResponseDec4() {
+        this.responseDec4 = "service unavailable";
+    }
 
 }
 

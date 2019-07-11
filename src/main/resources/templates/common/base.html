@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html th:fragment="Layout (content,title,users,productMenu, deviceMenu,
-ruleMenu,logManagementMenu,monitorMenu,script)" lang="en" xmlns:th="http://www.thymeleaf.org"
+ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title th:replace="${title}">边缘计算平台</title>
@@ -106,6 +106,9 @@ ruleMenu,logManagementMenu,monitorMenu,script)" lang="en" xmlns:th="http://www.t
                         </dd>
                         <dd th:replace="${monitorMenu}">
                             <a href="/pages/monitor">实时监控</a>
+                        </dd>
+                        <dd th:replace="${monitor2Menu}">
+                            <a href="/pages/monitor2">实时监控2</a>
                         </dd>
 
                     </dl>

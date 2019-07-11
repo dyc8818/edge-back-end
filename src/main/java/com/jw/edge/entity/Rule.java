@@ -10,11 +10,19 @@ public class Rule {
     @Id
     private String ruleId;
     private String ruleName;
+
     private String ruleDescribe;
     private String ruleFormat;
     private String ruleState;
     private String ruleSQL;
     private Date ruleCreateTime;
+
+    private String ruleParaThreshold;
+    private String rulePara;
+    private String ruleToDevice;
+    private int ruleJudge;
+    private int ruleStatus;
+
 
     public String getRuleId() {
         return ruleId;
@@ -31,6 +39,38 @@ public class Rule {
     public void setRuleName(String ruleName) {
         this.ruleName = ruleName;
     }
+
+    public String getRuleParaThreshold() {
+        return ruleParaThreshold;
+    }
+
+    public void setRuleParaThreshold(String ruleParaThreshold) {
+        this.ruleParaThreshold = ruleParaThreshold;
+    }
+
+    public String getRulePara() {
+        return rulePara;
+    }
+
+    public void setRulePara(String rulePara) {
+        this.rulePara = rulePara;
+    }
+
+    public String ruleToDevice() {
+        return ruleToDevice;
+    }
+
+    public void setRuleToDevice(String ruleToDevice) {
+        this.ruleToDevice = ruleToDevice;
+    }
+
+    public int getRuleJudge() { return ruleJudge; }
+
+    public void setRuleJudge(int ruleJudge) {this.ruleJudge = ruleJudge; }
+
+    public int getRuleStatus() { return ruleStatus; }
+
+    public void setRuleStatus(int ruleStatus) {this.ruleStatus = ruleStatus; }
 
     public String getRuleDescribe() {
         return ruleDescribe;
@@ -71,4 +111,5 @@ public class Rule {
     public void setRuleCreateTime(Date ruleCreateTime) {
         this.ruleCreateTime = ruleCreateTime;
     }
+
 }
