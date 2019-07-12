@@ -1,7 +1,10 @@
 package com.jw.edge.controller.api;
 
+import com.alibaba.fastjson.JSONObject;
+import com.jw.edge.entity.Function;
 import com.jw.edge.entity.Rule;
 import com.jw.edge.service.RuleService;
+import com.jw.edge.service.FunctionService;
 import com.jw.edge.util.LayuiTableResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +19,37 @@ import java.util.List;
 public class RuleController {
     @Autowired
     RuleService ruleService;
+    @Autowired
+    FunctionService functionService;
+
+    //设备功能映射
+    @GetMapping("/ruleParas")
+    @ResponseBody
+    public List<Function> getruleParas() {
+        List<Function> functions =  functionService.findAllFunction();
+        // LayuiTableResultUtil<List<Product>> productsTable=new LayuiTableResultUtil<List<Product>>();
+        return functions;
+    }
+
+    //控制设备激活
+    @PutMapping("/changeRuleStatus")
+    @ResponseBody
+    public int changeStatus(@RequestBody JSONObject ruleID){
+        JSONObject obj = new JSONObject(ruleID);//将json字符串转换为json对象
+
+        System.out.println("ruleid:"+ruleID);
+        System.out.println("ruleid:"+ruleID.getString("ruleId"));
+        Rule rule = ruleService.findRuleByRuleId(ruleID.getString("ruleId"));
+        int currentStatus;
+        if(rule.getRuleStatus() == 1){
+            currentStatus = 0;
+        }else {
+            currentStatus = 1;
+        }
+        System.out.println("RuleController CurrentStatus:"+currentStatus);
+        ruleService.changeRuleStatus(rule, currentStatus);
+        return currentStatus;
+    }
 
     @GetMapping("/rules")
     @ResponseBody
@@ -26,7 +60,7 @@ public class RuleController {
         return rulesTable;
     }
 
-    @PostMapping("/rule")
+    @PostMapping("/ruleCreate")
     @ResponseBody
     public Boolean addRule(@RequestBody Rule rule) {
         if (rule != null) {

@@ -66,8 +66,6 @@ public class DeviceController {
         return devicesByTypeTable;
     }
 
-
-
 //    @PostMapping("/addDevice")
 //    @ResponseBody
 //    public Boolean addDevice(@RequestBody Device device) {
@@ -78,6 +76,7 @@ public class DeviceController {
 //        }
 //        return false;
 //    }
+
     @PostMapping("/addDevice")
     @ResponseBody
     public Object addDevice(@RequestBody Device device) {
