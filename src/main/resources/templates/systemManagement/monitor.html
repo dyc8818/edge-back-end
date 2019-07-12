@@ -7,9 +7,28 @@
     <div class="layui-fluid" style="padding: 0px;">
 
         <div class="layui-row" style="margin-top: 60px">
-            <div class="layui-col-lg10 layui-col-lg-offset1">
+
+            <div class="layui-col-lg10 ">
                 <div id="numchart" style="width: 1400px;height:600px;"></div>
             </div>
+
+            <div class="layui-col-lg2">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">选择框</label>
+                        <div class="layui-input-block">
+                            <select name="interval" lay-filter="interval">
+                                <option value="3000">3秒</option>
+                                <option value="5000">5秒</option>
+                                <option value="10000">10秒</option>
+                                <option value="20000">20秒</option>
+                                <option value="30000">30秒</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
 
     </div>
@@ -27,8 +46,8 @@
     <script>
         // 基于准备好的dom，初始化echarts实例
         var numChart = echarts.init(document.getElementById('numchart'));
-        var interval = 3000;
         var num = new Array();
+        var interval = 3000;
         num.push([new Date(), 0]);
 
         var option = {
@@ -58,7 +77,7 @@
         // 使用刚指定的配置项和数据显示图表。
         numChart.setOption(option);
 
-        setInterval(function(){
+        var getNum = function(){
             var date = new Date();
             layui.use('jquery', function(){
                 var $ = layui.$;
@@ -70,13 +89,45 @@
                         if(num.length>60){
                             num.shift();
                         }
-
                         // 使用刚指定的配置项和数据显示图表。
                         numChart.setOption(option);
-                });
-
+                    }
+                );
             });
-        },interval)
+        };
+
+        var update = setInterval(getNum,interval);
+
+        layui.use('form', function(){
+            var form = layui.form;
+            //监听提交
+            form.on('select(interval)', function(data){
+                clearInterval(update);
+                interval = data.value;
+                // alert(interval);
+                update = setInterval(getNum,interval);
+            });
+        });
+
+        // setInterval(function getNum(){
+        //     var date = new Date();
+        //     layui.use('jquery', function(){
+        //         var $ = layui.$;
+        //         //后面就跟你平时使用jQuery一样
+        //         $.get("/api/surnum/",
+        //             function(data){
+        //                 num.push([date,data]);
+        //                 // 指定图表的配置项和数据
+        //                 if(num.length>60){
+        //                     num.shift();
+        //                 }
+        //
+        //                 // 使用刚指定的配置项和数据显示图表。
+        //                 numChart.setOption(option);
+        //             });
+        //
+        //     });
+        // },interval);
 
     </script>
 
