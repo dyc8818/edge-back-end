@@ -36,6 +36,15 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label">通信协议</label>
+        <div class="layui-input-inline">
+            <select name="deviceProtocol" id="deviceProtocol">
+                <option value="HTTP">HTTP</option>
+                <option value="OTHER">OTHER</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
         <div class="layui-inline">
         <label class="layui-form-label">地址设定</label>
         <div class="layui-input-inline" id="setAddress">
@@ -175,6 +184,7 @@
                 // processData: false,
                 // cache: false,
                 success: function (ev) {
+                    console.log(ev);//返回的addressable Json文件
                     code = ev.code;
                 }
 

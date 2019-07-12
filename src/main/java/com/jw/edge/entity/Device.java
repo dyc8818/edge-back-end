@@ -18,6 +18,11 @@ public class Device {
     private int deviceAddressPort;
     private String deviceProfile;
     private String deviceFailDate;
+    private String deviceProtocol;
+
+    public String getDeviceProtocol() { return deviceProtocol; }
+
+    public void setDeviceProtocol(String deviceProtocol) { this.deviceProtocol = deviceProtocol; }
 
     public String getDeviceFailDate() { return deviceFailDate; }
 
