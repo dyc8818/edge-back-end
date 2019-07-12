@@ -156,23 +156,23 @@
                     });
                 }
             });
-            // function getselect() {
-            //     $.ajax({
-            //         type: "get",
-            //         url: "/api/deviceTypes",
-            //         async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-            //         contentType: "application/json",
-            //         success: function (data) {
-            //             sessionStorage.setItem("productNames", JSON.stringify(data));
-            //             //console.log(data);
-            //             //console.log(sessionStorage.getItem("productNames"));
-            //         },
-            //         error:function(data){
-            //             console.log("获取产品失败"+data.responseText);
-            //             layer.msg("获取产品识别失败");
-            //         }
-            //     });
-            // }
+            function getselect() {
+                $.ajax({
+                    type: "get",
+                    url: "/api/deviceTypes",
+                    async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                    contentType: "application/json",
+                    success: function (data) {
+                        sessionStorage.setItem("productNames", JSON.stringify(data));
+                        //console.log(data);
+                        //console.log(sessionStorage.getItem("productNames"));
+                    },
+                    error:function(data){
+                        console.log("获取产品失败"+data.responseText);
+                        layer.msg("获取产品识别失败");
+                    }
+                });
+            }
             //触发创建产品弹出层
             function notice(){
                 //示范一个公告层
