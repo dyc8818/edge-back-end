@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productMenu},_,_,_,_,_,~{::scripts})}">
 
-<title>产品列表</title>
+<title>设备模板列表</title>
 <content>
     <div class="layui-tab-brief layui-tab">
         <ul class="layui-tab-title site-demo-title">
-            <li class="layui-this"><a><cite>产品列表</cite></a></li>
+            <li class="layui-this"><a><cite>设备模板列表</cite></a></li>
         </ul>
     </div>
     <div class="layui-fluid"layui-card-body style="padding: 15px;">
@@ -14,7 +14,7 @@
             <div class="layui-col-md12">
                 <div class="layui-card">
                     <!--                    <div class="layui-card-header ">-->
-                    <!--                        <h1>产品列表</h1>-->
+                    <!--                        <h1>设备模板列表</h1>-->
                     <!--                    </div>-->
 
 
@@ -29,7 +29,7 @@
 </content>
 
 <dd class="layui-this" th:fragment="productMenu">
-    <a href="/pages/products">产品列表</a>
+    <a href="/pages/products">设备模板列表</a>
 </dd>
 <div th:fragment="scripts">
 
@@ -43,7 +43,7 @@
             <button id="createButton"
                     class="layui-btn layui-btn-normal layui-btn-radius"
                     lay-event="createProduct">
-                创建产品
+                创建设备模板
             </button>
             <button id="refreshButton"
                     class="layui-btn layui-btn-checked layui-btn-radius"
@@ -70,8 +70,8 @@
                 cols: [
                     [ //表头
                         // {type: 'checkbox'},
-                        {field: 'productId', title: 'ProductKey', sort: true, align: 'center'},
-                        {field: 'productName', title: '产品名称', align: 'center'},
+                        {field: 'productId', title: '设备模板Key', sort: true, align: 'center'},
+                        {field: 'productName', title: '设备模板名称', align: 'center'},
                         {field: 'productType', title: '节点类型', align: 'center'},
                         {field: 'productCreateTime', title: '添加时间', sort: true, align: 'center'},
                         {
@@ -145,7 +145,7 @@
                 layer.open({
                     type: 2
                     ,
-                    title: "新建产品"
+                    title: "新建设备模板"
                     ,
                     closeBtn: 1
                     ,

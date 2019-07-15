@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productMenu},_,_,_,_,_,~{::scripts})}">
 
-<title>产品列表</title>
+<title>设备模板列表</title>
 <content>
 
     <div class="layui-tab-brief layui-tab">
         <ul class="layui-tab-title site-demo-title">
-            <li><a href="/pages/products">产品列表</a></li>
-            <li class="layui-this"><a><cite>产品详情</cite></a></li>
+            <li><a href="/pages/products">设备模板列表</a></li>
+            <li class="layui-this"><a><cite>设备模板详情</cite></a></li>
         </ul>
     </div>
     <div class="layui-fluid">
@@ -20,7 +20,7 @@
                 <div class="layui-card-body">
                     <div class="layui-row">
                         <div class="layui-col-md4">
-                            <b>ProductKey:</b> <span th:text="${product.getProductId()}"></span>
+                            <b>设备模板Key:</b> <span th:text="${product.getProductId()}"></span>
                         </div>
                         <div class="layui-col-md4"><b>设备数：</b> 1</div>
                         <div class="layui-col-md4"><a href="" class="layui-btn">添加设备</a></div>
@@ -29,18 +29,18 @@
                     <!--卡片风格tab选项卡-->
                     <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
                         <ul class="layui-tab-title">
-                            <li class="layui-this">产品信息</li>
+                            <li class="layui-this">设备模板信息</li>
                             <li>功能定义</li>
                         </ul>
                         <div class="layui-tab-content" style="height: 100px;">
                             <div class="layui-tab-item layui-show">
                                 <br/>
-                                <b><h2>产品信息</h2></b>
+                                <b><h2>设备模板信息</h2></b>
                                 <br/>
                                 <table border="0" class="layui-table">
 
                                     <tr>
-                                        <th><b>产品名称</b></th>
+                                        <th><b>设备模板名称</b></th>
                                         <td th:text="${product.getProductName()}"></td>
                                         <th><b>节点类型</b></th>
                                         <td th:text="${product.getProductType()}"></td>
@@ -65,7 +65,7 @@
                                         <td th:text="${product.getProductConnectWay()}"></td>
                                     </tr>
                                     <tr>
-                                        <th><b>产品描述</b></th>
+                                        <th><b>设备模板描述</b></th>
                                             <td colspan="5" th:text="${product.getProductDesc()}"></td>
                                     </tr>
                                 </table>
@@ -73,7 +73,7 @@
                             <div class="layui-tab-item">
                                 <div class="layui-card">
                                     <!--                    <div class="layui-card-header ">-->
-                                    <!--                        <h1>产品列表</h1>-->
+                                    <!--                        <h1>设备模板列表</h1>-->
                                     <!--                    </div>-->
 
 
@@ -93,7 +93,7 @@
 </content>
 
 <dd class="layui-this" th:fragment="productMenu">
-    <a href="/pages/products">产品列表</a>
+    <a href="/pages/products">设备模板列表</a>
 </dd>
 <div th:fragment="scripts">
     <script th:inline="none" type="text/html" id="barDemo">
@@ -113,16 +113,11 @@
                     lay-event="refresh">
                 刷新
             </button>
-            <button id="generateButton"
-                    class="layui-btn layui-btn-checked layui-btn-radius"
-                    lay-event="generate">
-                生成配置文件
-            </button>
         </div>
     </script>
 
 
-    <script th:inline="javascript">
+    <script th:inline="none">
         layui.use('table', function () {
             var table = layui.table;
 
@@ -130,8 +125,7 @@
             //第一个实例
             table.render({
                 elem: '#functionTable',
-                url:'/api/functions/',
-                //url:'/api/functionsByProductName?productName='+ [[${product.getProductName()}]], //数据接口
+                url: '/api/functions/', //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
@@ -160,7 +154,8 @@
                         notice();
                         break;
                     case 'refresh':
-                        table.reload("functionTable");
+                        table.reload("functionTable")
+
                         break;
                 }
                 ;
@@ -200,7 +195,7 @@
                 }
             });
 
-            //触发创建产品弹出层
+            //触发创建设备模板弹出层
 
             function notice(){
                 //示范一个公告层
@@ -223,10 +218,10 @@
                     ,
                     moveType: 1 //拖拽模式，0或者1
                     ,
-                    // content: '/pages/functionCreate'
-                    // ,
-                    content: '/pages/functionCreate?productName='+ [[${product.getProductName()}]]
+                    content: '/pages/functionCreate'
                     ,
+                    // content: '/pages/functionCreate?productId='+ [[${product.getProductId()}]]
+                    // ,
                     // success: function (layero) {
                     //     var btn = layero.find('.layui-layer-btn');
                     //     btn.find('.layui-layer-btn0').attr({
