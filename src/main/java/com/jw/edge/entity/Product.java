@@ -82,4 +82,12 @@ public class Product {
     public void setProductDataFormat(String productDataFormat) {
         this.productDataFormat = productDataFormat;
     }
+
+    public List<Function> getFunctionList() {
+        return functionList;
+    }
+
+    public void setFunctionList(List<Function> functionList) {
+        this.functionList = functionList;
+    }
 }

@@ -21,7 +21,7 @@ target/*
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
-
+**/.DS_Store
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
