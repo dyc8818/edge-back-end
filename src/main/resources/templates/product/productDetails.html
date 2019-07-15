@@ -117,7 +117,7 @@
     </script>
 
 
-    <script th:inline="none">
+    <script th:inline="javascript">
         layui.use('table', function () {
             var table = layui.table;
 
@@ -218,10 +218,10 @@
                     ,
                     moveType: 1 //拖拽模式，0或者1
                     ,
-                    content: '/pages/functionCreate'
-                    ,
-                    // content: '/pages/functionCreate?productId='+ [[${product.getProductId()}]]
+                    // content: '/pages/functionCreate'
                     // ,
+                    content: '/pages/functionCreate?productName='+ [[${product.getProductName()}]]
+                    ,
                     // success: function (layero) {
                     //     var btn = layero.find('.layui-layer-btn');
                     //     btn.find('.layui-layer-btn0').attr({
