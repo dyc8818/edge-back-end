@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,~{::monitorMenu},_,~{::scripts})}">
-<title>实时监控</title>
+<title>在线设备统计</title>
 
 <content>
     <div class="layui-fluid" style="padding: 0px;">
@@ -14,7 +14,7 @@
             <div class="layui-col-lg2 " style="margin-top: 180px">
                 <form class="layui-form">
                     <div class="layui-form-item">
-                        <label class="layui-form-label" style="font-size: 20px">更新周期</label>
+                        <label class="layui-form-label" style="font-size: 20px"><strong>更新周期</strong></label>
                         <div class="layui-input-block">
                             <select name="interval" lay-filter="interval">
                                 <option value="3000">3秒</option>
@@ -37,7 +37,7 @@
 
 
 <dd class="layui-this" th:fragment="monitorMenu">
-    <a href="/pages/monitor">实时监控</a>
+    <a href="/pages/monitor">在线设备统计</a>
 </dd>
 
 <div th:fragment="scripts">

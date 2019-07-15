@@ -105,10 +105,10 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th=
                             <a href="/pages/logManagement">日志管理</a>
                         </dd>
                         <dd th:replace="${monitorMenu}">
-                            <a href="/pages/monitor">实时监控</a>
+                            <a href="/pages/monitor">在线设备统计</a>
                         </dd>
                         <dd th:replace="${monitor2Menu}">
-                            <a href="/pages/monitor2">实时监控2</a>
+                            <a href="/pages/monitor2">监控数据详情</a>
                         </dd>
 
                     </dl>
@@ -116,7 +116,7 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th=
             </ul>
         </div>
     </div>
-    <div class="layui-body" th:insert="${content}">
+    <div class="layui-body" th:insert="${content}" style="background-color: #EEEEEE">
         Base模板
     </div>
     <div class="layui-footer">
