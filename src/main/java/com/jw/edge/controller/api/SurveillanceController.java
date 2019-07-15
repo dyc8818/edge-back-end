@@ -57,6 +57,29 @@ public class SurveillanceController {
         return num;
     }
 
+    @GetMapping("/surid")
+    @ResponseBody
+    public JSONArray getId(){
+        String allUrl = "http://202.112.146.168:48082/api/v1/device";
+        JSONArray all = new JSONArray(restTemplate.getForObject(allUrl,JSONArray.class));
+        JSONArray idArr = new JSONArray();
+        for(int i = 0; i<all.size();i++) {
+            JSONObject deviceObj = all.getJSONObject(i);
+            String deviceId = deviceObj.getString("id");
+            JSONArray commandsArr = deviceObj.getJSONArray("commands");
+            String commandsId= commandsArr.getJSONObject(0).getString("id");
+            try {
+                String url = "http://202.112.146.168:48082/api/v1/device/"+deviceId+"/command/"+commandsId;
+                JSONObject get = new JSONObject(restTemplate.getForObject(url, JSONObject.class));
+                JSONObject id = new JSONObject();
+                id.put("id",deviceId);
+                idArr.add(id);
+            } catch (Exception e) {
+            }
+        }
+        return idArr;
+    }
+
     @GetMapping("/totalnum")
     @ResponseBody
     public int getTotalNum(){
