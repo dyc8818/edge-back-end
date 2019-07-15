@@ -184,7 +184,20 @@
                 // processData: false,
                 // cache: false,
                 success: function (ev) {
-                    console.log(ev);//返回的addressable Json文件
+                    var url1 = "";
+                    var data1 = JSON.stringify(ev.field);
+                    layui.jquery.ajax({
+                        type: "post",
+                        url: url1,
+                        async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                        data: data1,
+                        contentType: "application/json",
+                        success: function (evs) {
+                            console.log(evs);//返回的addressable Json文件
+                            code = evs.code;
+                        }
+
+                    });
                     code = ev.code;
                 }
 
