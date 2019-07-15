@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
 @Document
 public class Product {
@@ -16,6 +17,7 @@ public class Product {
     private String productConnectWay;
     private String productDataFormat;
     private Date productCreateTime;
+    private List<Function> functionList;
 
     public Date getProductCreateTime() {
         return productCreateTime;
