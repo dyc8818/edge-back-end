@@ -74,6 +74,5 @@ public class DeviceServiceImpl implements DeviceService {
         System.out.println("DeviceService currentstatus:"+status);
         dev.setDeviceStatus(status);
         deviceRepository.save(dev);
-
     }
 }

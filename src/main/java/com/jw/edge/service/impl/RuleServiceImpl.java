@@ -59,10 +59,10 @@ public class RuleServiceImpl implements RuleService {
     }
 
     @Override
-    public void changeRuleStatus(Rule dev, int status){
+    public void changeRuleStatus(Rule rule, int status){
         System.out.println("RuleService CurrentStatus:"+status);
-        dev.setRuleStatus(status);
-        ruleRepository.save(dev);
+        rule.setRuleStatus(status);
+        ruleRepository.save(rule);
 
     }
 

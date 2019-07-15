@@ -55,7 +55,7 @@ public class Rule {
         this.rulePara = rulePara;
     }
 
-    public String ruleToDevice() {
+    public String getRuleToDevice() {
         return ruleToDevice;
     }
 
@@ -63,7 +63,7 @@ public class Rule {
         this.ruleToDevice = ruleToDevice;
     }
 
-    public String ruleToFunction() {
+    public String getRuleToFunction() {
         return ruleToFunction;
     }
 
