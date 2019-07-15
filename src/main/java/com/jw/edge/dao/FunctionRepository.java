@@ -12,11 +12,9 @@ import java.util.List;
 public interface FunctionRepository extends MongoRepository<Function,String> {
     //自定义的查询方法
     public Function findFunctionByFunctionName(String functionName);
-
     public void deleteByFunctionName(String functionName);
-
     public Page<Function> findAll(Pageable pageable);
-
     public Function findFunctionByFunctionId(String functionId);
+    public Page<Function> findFunctionByProductName(String productName,Pageable pageable);
 }
 

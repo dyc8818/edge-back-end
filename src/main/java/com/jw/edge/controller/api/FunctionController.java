@@ -32,6 +32,14 @@ public class FunctionController {
         return functionsTable;
     }
 
+    @GetMapping("/functionsByProductName")
+    @ResponseBody
+    public LayuiTableResultUtil<List<Function>> getFunctionsByProductName(@RequestParam Integer page, @RequestParam Integer limit,@RequestParam String productName) {
+        Pageable pageable = PageRequest.of(page-1, limit);
+        Page<Function> functions =  functionService.findFunctionByProductName(productName,pageable);
+        LayuiTableResultUtil<List<Function>> functionsTable=new LayuiTableResultUtil<List<Function>>("",functions.getContent(),0,(int)functions.getTotalElements());
+        return functionsTable;
+    }
 
     @PostMapping("/function")
     @ResponseBody

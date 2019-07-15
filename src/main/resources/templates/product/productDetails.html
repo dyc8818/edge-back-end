@@ -113,11 +113,16 @@
                     lay-event="refresh">
                 刷新
             </button>
+            <button id="generateButton"
+                    class="layui-btn layui-btn-checked layui-btn-radius"
+                    lay-event="generate">
+                生成配置文件
+            </button>
         </div>
     </script>
 
 
-    <script th:inline="none">
+    <script th:inline="javascript">
         layui.use('table', function () {
             var table = layui.table;
 
@@ -125,7 +130,8 @@
             //第一个实例
             table.render({
                 elem: '#functionTable',
-                url: '/api/functions/', //数据接口
+                url:'/api/functions/',
+                //url:'/api/functionsByProductName?productName='+ [[${product.getProductName()}]], //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
@@ -154,8 +160,7 @@
                         notice();
                         break;
                     case 'refresh':
-                        table.reload("functionTable")
-
+                        table.reload("functionTable");
                         break;
                 }
                 ;
@@ -218,10 +223,10 @@
                     ,
                     moveType: 1 //拖拽模式，0或者1
                     ,
-                    content: '/pages/functionCreate'
-                    ,
-                    // content: '/pages/functionCreate?productId='+ [[${product.getProductId()}]]
+                    // content: '/pages/functionCreate'
                     // ,
+                    content: '/pages/functionCreate?productName='+ [[${product.getProductName()}]]
+                    ,
                     // success: function (layero) {
                     //     var btn = layero.find('.layui-layer-btn');
                     //     btn.find('.layui-layer-btn0').attr({

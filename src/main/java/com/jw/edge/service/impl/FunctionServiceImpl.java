@@ -23,6 +23,12 @@ public class FunctionServiceImpl implements FunctionService {
     }
 
     @Override
+    public Page<Function> findFunctionByProductName(String productName,Pageable pageable) {
+        Page<Function> functions = functionRepository.findFunctionByProductName(productName,pageable);
+        return functions;
+    }
+
+    @Override
     public boolean addFunction(Function function) {
         Function findFunction = functionRepository.findFunctionByFunctionName(function.getFunctionName() );
         if (findFunction == null) {
