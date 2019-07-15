@@ -35,7 +35,7 @@
 <div th:fragment="scripts">
 
     <script th:inline="none" type="text/html" id="barDemo">
-        <button class="layui-btn layui-btn-xs" lay-event="detail">查看</button>
+<!--        <button class="layui-btn layui-btn-xs" lay-event="detail">查看</button>-->
         <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
     </script>
 
@@ -71,9 +71,9 @@
                     [ //表头
                         // {type: 'checkbox'},
                         {field: 'ruleName', title: '规则名称', sort: true, align: 'center'},
-                        {field: 'ruleToDevice', title: '对应设备', align: 'center'},
+                        {field: 'ruleToDevice', title: '对应设备', align: 'center'}, //, templet:ruletodev
                         {field: 'ruleToFunction', title: '规则设定', align: 'center', templet:setting},
-                        {field: 'ruleExecute', title: '执行功能', align: 'center'},
+                        {field: 'ruleExecute', title: '执行功能', align: 'center', templet:exeSet},
                         // {field: 'ruleDescribe', title: '规则描述', align: 'center'},
                         // {field: 'ruleCreateTime', title: '创建时间', sort: true, align: 'center'},
                         // {field: 'ruleStatus', title: '规则状态', sort: true, align: 'center'},
@@ -97,7 +97,7 @@
                         type: "put",
                         url: "/api/changeRuleStatus",
                         async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                        data: JSON.stringify({'deviceId': data.elem.attributes['switch_device_id'].nodeValue}),
+                        data: JSON.stringify({'ruleId': data.elem.attributes['switch_rule_id'].nodeValue}),
                         contentType: "application/json",
                         success: function (ev) {
                             console.log(ev.data);
@@ -132,7 +132,6 @@
                     location.href = "/pages/ruleDetails?ruleId=" + data.ruleId;
                 } else if (obj.event === 'del') {
                     layer.confirm('确定删除吗', function (index) {
-
                         $.ajax({
                             type: "delete",
                             url: "/api/rule",
@@ -156,6 +155,42 @@
                     });
                 }
             });
+
+            function getselect() {
+                $.ajax({
+                    type: "get",
+                    url: "/api/ruleToDevices",
+                    async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                    contentType: "application/json",
+                    success: function (data) {
+                        sessionStorage.setItem("deviceNames", JSON.stringify(data));
+                        //console.log(data);
+                        //console.log(sessionStorage.getItem("productNames"));
+                    },
+                    error:function(data){
+                        console.log("获取设备失败"+data.responseText);
+                        layer.msg("获取设备识别失败");
+                    }
+                });
+            }
+
+            function getselect2() {
+                $.ajax({
+                    type: "get",
+                    url: "/api/ruleParas",
+                    async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                    contentType: "application/json",
+                    success: function (data) {
+                        sessionStorage.setItem("functionNames", JSON.stringify(data));
+                        //console.log(data);
+                        //console.log(sessionStorage.getItem("productNames"));
+                    },
+                    error:function(data){
+                        console.log("获取功能失败"+data.responseText);
+                        layer.msg("获取功能识别失败");
+                    }
+                });
+            }
 
             //触发创建规则弹出层
 
@@ -189,6 +224,10 @@
                     //         , target: '_blank'
                     //     });
                     // }
+                    success:function(){
+                        getselect();
+                        getselect2();
+                    },
                     yes: function (index, layero) {
 
                         // 获取弹出层中的form表单元素
@@ -227,12 +266,24 @@
 
         var setting = function (d) {
             var rulePara = d.rulePara;
-            var ruleJudge = d.ruleJudge;
+            var para=['=','<','>'];
+            var ruleJudge = para[d.ruleJudge];
             var ruleParaThreshold = d.ruleParaThreshold;
             var strg = rulePara + ruleJudge + ruleParaThreshold;
             return strg;
         }
 
+        var exeSet = function (d) {
+            if(d.ruleExecute==1){
+                var exestr = '警告日志';}
+            if(d.ruleExecute==0){
+                exestr = '关闭设备';}
+            return exestr;
+        }
+        // var ruletodev = function (d) {
+        //     var devstr = d.ruleToDevice;
+        //     return devstr;
+        // }
     </script>
 
 </div>
