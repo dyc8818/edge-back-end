@@ -66,14 +66,30 @@ public class DeviceController {
         return devicesByTypeTable;
     }
 
-
+//    @PostMapping("/addDevice")
+//    @ResponseBody
+//    public Boolean addDevice(@RequestBody Device device) {
+//        if (device != null) {
+//            if (deviceService.addDevice(device)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     @PostMapping("/addDevice")
     @ResponseBody
-    public Boolean addDevice(@RequestBody Device device) {
+    public Object addDevice(@RequestBody Device device) {
         if (device != null) {
             if (deviceService.addDevice(device)) {
-                return true;
+                JSONObject jo = new JSONObject();
+                jo.put("name",device.getDeviceName());
+                jo.put("method","GET");
+                jo.put("protocol","HTTP");
+                jo.put("address",device.getDeviceAddress());
+                jo.put("port",device.getDeviceAddressPort());
+                System.out.println(jo);
+                return jo;
             }
         }
         return false;

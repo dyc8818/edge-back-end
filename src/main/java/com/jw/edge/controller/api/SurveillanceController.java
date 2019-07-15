@@ -57,6 +57,14 @@ public class SurveillanceController {
         return num;
     }
 
+    @GetMapping("/totalnum")
+    @ResponseBody
+    public int getTotalNum(){
+        String allUrl = "http://202.112.146.168:48082/api/v1/device";
+        JSONArray all = new JSONArray(restTemplate.getForObject(allUrl,JSONArray.class));
+        return all.size();
+    }
+
     @GetMapping("/surdetails")
     @ResponseBody
     public JSONObject getDetails(){

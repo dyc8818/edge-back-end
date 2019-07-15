@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,~{::monitor2Menu},~{::scripts})}">
+<title>实时监控</title>
+
+<content>
+    <div class="layui-fluid" style="padding: 0px;">
+
+        <div class="layui-row">
+
+                    <div class="layui-tab-item">
+                        <div class="layui-col-lg10 layui-col-lg-offset1">
+                            <div id="detailchart" style="width: 1400px;height:600px;"></div>
+                        </div>
+                    </div>
+
+        </div>
+
+    </div>
+
+
+</content>
+
+
+<dd class="layui-this" th:fragment="monitor2Menu">
+    <a href="/pages/monitor2">实时监控2</a>
+</dd>
+
+<div th:fragment="scripts">
+    <script th:src="@{/echarts-4.2.1/echarts.min.js}"></script>
+    <script>
+        // 基于准备好的dom，初始化echarts实例
+        var interval = 3000;
+        var detailChart = echarts.init(document.getElementById('detailchart'));
+        var data1 = new Array();
+        var data2 = new Array();
+        setInterval(function(){
+            var date = new Date();
+            layui.use('jquery', function(){
+                var $ = layui.$;
+                //后面就跟你平时使用jQuery一样
+                $.get("/api/surdetails/",
+                    function(data){
+                        var type = Object.keys(data);
+                        data1.push([date,data[type[0]]]);
+                        data2.push([date,data[type[1]]]);
+                        if(data1.length>60){
+                            data1.shift();
+                            data2.shift();
+                        }
+                        // 指定图表的配置项和数据
+                        var option1 = {
+                            title: {
+                                text: '设备监控情况',
+                                left:'10%'
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            xAxis: {
+                                type:'time',
+                                name:'时间'
+                            },
+                            yAxis: {},
+                            legend: {
+                                right: '20%',
+                                top: 0,
+                                itemHeight: 28,
+                                itemWidth: 70
+                            },
+                            series: [
+                                {
+                                    name: type[0],
+                                    type:'line',
+                                    data:data1,
+                                    symbol:'emptyTriangle',
+                                    symbolSize: 8,
+                                    lineStyle:{
+                                        width: 2
+                                    }
+                                },
+                                {
+                                    name: type[1],
+                                    type: 'line',
+                                    data: data2,
+                                    symbol:'emptyCircle',
+                                    symbolSize: 8,
+                                    lineStyle:{
+                                        width: 2
+                                    }
+                                }
+                            ]
+                        };
+                        // 使用刚指定的配置项和数据显示图表。
+                        detailChart.setOption(option1);
+                    });
+
+            });
+        },interval)
+
+    </script>
+
+
+</div>
+</html>
