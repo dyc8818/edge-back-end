@@ -117,7 +117,8 @@
             //第一个实例
             table.render({
                 elem: '#functionTable',
-                url: '/api/functions/', //数据接口
+                url: '/api/functionsByProductName?productName='+ [[${product.getProductName()}]], //数据接口
+                //url: '/api/functions/', //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
