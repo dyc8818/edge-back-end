@@ -5,40 +5,42 @@
 
 <content>
     <div class="layui-fluid" style="padding: 0px;">
-
         <div class="layui-row">
-
-            <div class="layui-col-lg8">
-                <div id="detailchart" style="width: 1000px;height:600px;margin-top: 50px"></div>
-            </div>
-
-            <div class="layui-col-lg3 " style="margin-top: 180px">
+            <div class="layui-col-sm3 layui-col-md3 layui-col-lg3 layui-col-lg-offset6 layui-col-md-offset6 layui-col-sm-offset6 " style="margin-top: 180px">
                 <form class="layui-form">
                     <div class="layui-form-item">
-                        <div class="layui-row">
                             <div class="layui-input-block">
                                 <select name="deviceIdList" lay-filter="deviceId" id="idList">
                                     <option value="0">请选择一个设备</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="layui-row" style="margin-top: 40px">
-                            <label class="layui-form-label" style="font-size: 20px"><strong>更新周期</strong></label>
-                            <div class="layui-input-block">
-                                <select name="interval" lay-filter="interval">
-                                    <option value="1000">1秒</option>
-                                    <option value="3000">3秒</option>
-                                    <option value="5000">5秒</option>
-                                    <option value="10000">10秒</option>
-                                    <option value="20000">20秒</option>
-                                    <option value="30000">30秒</option>
-                                </select>
-                            </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-col-sm3 layui-col-md3 layui-col-lg3 layui-col-lg-offset9 layui-col-md-offset9 layui-col-sm-offset9 ">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                    <label class="layui-form-label" style="font-size: 20px"><strong>更新周期</strong></label>
+                        <div class="layui-input-block">
+                            <select name="interval" lay-filter="interval">
+                                <option value="1000">1秒</option>
+                                <option value="3000">3秒</option>
+                                <option value="5000">5秒</option>
+                                <option value="10000">10秒</option>
+                                <option value="20000">20秒</option>
+                                <option value="30000">30秒</option>
+                            </select>
                         </div>
                     </div>
                 </form>
             </div>
+        </div>
 
+        <div class="layui-row">
+
+            <div class="layui-col-sm8 layui-col-md8 layui-col-lg8">
+                <div id="detailchart" style="width: 1000px;height:600px;margin-top: 20px"></div>
+            </div>
 
         </div>
 
