@@ -100,7 +100,7 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th=
                 </li>
                 <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">系统管理</a>
                     <dl class="layui-nav-child">
-                        <dd th:replace="${logManagementMenu}">
+                        <dd th:replace="${logManagementMenu}" style="display:none">
                             <a href="/pages/logManagement">日志管理</a>
                         </dd>
                         <dd th:replace="${monitorMenu}">
