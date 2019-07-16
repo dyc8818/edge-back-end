@@ -11,16 +11,15 @@
             <li class="layui-this"><a><cite>设备模板详情</cite></a></li>
         </ul>
     </div>
+
     <div class="layui-fluid">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <br>
-                <h1 th:text="${product.getProductName()}"></h1>
-                <br>
+                <div class="layui-card-header"><h1 th:text="${product.getProductName()}"></h1></div>
                 <div class="layui-card-body">
                     <div class="layui-row">
                         <div class="layui-col-md4">
-                            <b>ProductKey:</b> <span th:text="${product.getProductId()}"></span>
+                            <b>设备模板Key:</b> <span th:text="${product.getProductId()}"></span>
                         </div>
                         <div class="layui-col-md4"><b>设备数：</b> 1</div>
                         <div class="layui-col-md4"><a href="" class="layui-btn">添加设备</a></div>
@@ -32,7 +31,7 @@
                             <li class="layui-this">设备模板信息</li>
                             <li>功能定义</li>
                         </ul>
-                        <div class="layui-tab-content" style="height: 100px;">
+                        <div class="layui-tab-content">
                             <div class="layui-tab-item layui-show">
                                 <br/>
                                 <b><h2>设备模板信息</h2></b>
@@ -71,29 +70,22 @@
                                 </table>
                             </div>
                             <div class="layui-tab-item">
-                                <div class="layui-card">
                                     <!--                    <div class="layui-card-header ">-->
-                                    <!--                        <h1>产品列表</h1>-->
+                                    <!--                        <h1>设备模板列表</h1>-->
                                     <!--                    </div>-->
-
-
-                                    <div class="layui-card-body">
-                                        <table class="layui-hide" id="functionTable" lay-filter="buttons"></table>
-                                    </div>
-                                </div>
+                                <table class="layui-hide" id="functionTable" lay-filter="buttons"></table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <h1></h1>
 </content>
 
 <dd class="layui-this" th:fragment="productMenu">
-    <a href="/pages/products">产品列表</a>
+    <a href="/pages/products">设备模板列表</a>
 </dd>
 <div th:fragment="scripts">
     <script th:inline="none" type="text/html" id="barDemo">
@@ -117,7 +109,7 @@
     </script>
 
 
-    <script th:inline="none">
+    <script th:inline="javascript">
         layui.use('table', function () {
             var table = layui.table;
 
@@ -125,7 +117,8 @@
             //第一个实例
             table.render({
                 elem: '#functionTable',
-                url: '/api/functions/', //数据接口
+                url: '/api/functionsByProductName?productName='+ [[${product.getProductName()}]], //数据接口
+                //url: '/api/functions/', //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
@@ -195,7 +188,7 @@
                 }
             });
 
-            //触发创建产品弹出层
+            //触发创建设备模板弹出层
 
             function notice(){
                 //示范一个公告层
@@ -218,10 +211,10 @@
                     ,
                     moveType: 1 //拖拽模式，0或者1
                     ,
-                    content: '/pages/functionCreate'
-                    ,
-                    // content: '/pages/functionCreate?productId='+ [[${product.getProductId()}]]
+                    // content: '/pages/functionCreate'
                     // ,
+                    content: '/pages/functionCreate?productName='+ [[${product.getProductName()}]]
+                    ,
                     // success: function (layero) {
                     //     var btn = layero.find('.layui-layer-btn');
                     //     btn.find('.layui-layer-btn0').attr({

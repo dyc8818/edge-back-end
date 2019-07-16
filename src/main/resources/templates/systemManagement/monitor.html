@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,~{::monitorMenu},_,~{::scripts})}">
-<title>实时监控</title>
+<title>在线设备统计</title>
 
 <content>
     <div class="layui-fluid" style="padding: 0px;">
-
+        <div class="layui-row">
+            <div class="layui-col-md2 layui-col-sm2 layui-col-lg2 layui-col-sm-offset8 layui-col-md-offset8 layui-col-lg-offset8 " style="margin-top: 180px">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="font-size: 20px"><strong>更新周期</strong></label>
+                        <div class="layui-input-block">
+                            <select name="interval" lay-filter="interval">
+                                <option value="1000">1秒</option>
+                                <option value="3000">3秒</option>
+                                <option value="5000">5秒</option>
+                                <option value="10000">10秒</option>
+                                <option value="20000">20秒</option>
+                                <option value="30000">30秒</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="layui-row">
 
-                        <div class="layui-col-lg10 layui-col-lg-offset1">
-                            <div id="numchart" style="width: 1200px;height:600px;"></div>
-                        </div>
-
+            <div class="layui-col-md8">
+                <div id="numchart" style="width: 1000px;height:600px;margin-top: 20px"></div>
+            </div>
 
         </div>
 
@@ -22,7 +39,7 @@
 
 
 <dd class="layui-this" th:fragment="monitorMenu">
-    <a href="/pages/monitor">实时监控</a>
+    <a href="/pages/monitor">在线设备统计</a>
 </dd>
 
 <div th:fragment="scripts">
@@ -30,8 +47,8 @@
     <script>
         // 基于准备好的dom，初始化echarts实例
         var numChart = echarts.init(document.getElementById('numchart'));
-        var interval = 3000;
         var num = new Array();
+        var interval = 1000;
         num.push([new Date(), 0]);
 
         var option = {
@@ -61,7 +78,7 @@
         // 使用刚指定的配置项和数据显示图表。
         numChart.setOption(option);
 
-        setInterval(function(){
+        var getNum = function(){
             var date = new Date();
             layui.use('jquery', function(){
                 var $ = layui.$;
@@ -73,13 +90,24 @@
                         if(num.length>60){
                             num.shift();
                         }
-
                         // 使用刚指定的配置项和数据显示图表。
                         numChart.setOption(option);
-                });
-
+                    }
+                );
             });
-        },interval)
+        };
+
+        var update = setInterval(getNum,interval);
+
+        layui.use('form', function(){
+            var form = layui.form;
+            //监听提交
+            form.on('select(interval)', function(data){
+                clearInterval(update);
+                interval = data.value;
+                update = setInterval(getNum,interval);
+            });
+        });
 
     </script>
 

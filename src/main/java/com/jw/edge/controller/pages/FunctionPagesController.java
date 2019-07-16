@@ -21,7 +21,9 @@ public class FunctionPagesController {
     }
 
     @GetMapping("/functionCreate")
-    public String functionCreate(Model model) throws Exception {
+    public String functionCreate(Model model, String productName) throws Exception {
+        System.out.println(productName);
+        model.addAttribute("productName", productName);
         return "product/functionCreate";
     }
 

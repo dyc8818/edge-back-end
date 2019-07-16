@@ -21,6 +21,7 @@
 <!--                        <div class="layui-col-md4">-->
 <!--                            <b>RuleKey:</b> <span th:text="${rule.getRuleId()}"></span>-->
 <!--                        </div>-->
+                    </div>
                         <br>
                         <!--卡片风格tab选项卡-->
                         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
@@ -31,18 +32,22 @@
                                 <div class="layui-tab-item layui-show">
                                     <table border="0" class="layui-table">
                                         <tr>
-                                            <th><b>数据格式</b></th>
-                                            <td th:text="${rule.getRuleFormat()}"></td>
-                                            <th><b>创建时间</b></th>
-                                            <td th:text="${#dates.format(rule.getRuleCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
+                                            <th><b>对应设备</b></th>
+                                            <td th:text="${rule.getRuleToDevice()}"></td>
+                                            <th><b>设备功能</b></th>
+                                            <td th:text="${rule.getRulePara()}"></td>
                                         </tr>
                                         <tr>
+<!--                                            <th><b>创建时间</b></th>-->
+<!--                                            <td th:text="${#dates.format(rule.getRuleCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>-->
                                             <th><b>规则描述</b></th>
-                                            <td colspan="5" th:text="${rule.getRuleDescribe()}"></td>
+                                            <td th:text="${rule.getRuleDescribe()}"></td>
                                         </tr>
                                         <tr>
-                                            <th><b>规则执行语句</b></th>
-                                            <td colspan="5" th:text="${rule.getRuleSQL()}"></td>
+                                            <th><b>规则条件</b></th>
+                                            <td th:text="${rule.getRuleJudge()}"></td>
+                                            <th><b>参数门限</b></th>
+                                            <td th:text="${rule.getRuleParaThreshold()}"></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -54,14 +59,10 @@
             </div>
         </div>
         <h1></h1>
-    </div>
 
 <dd class="layui-this" th:fragment="ruleMenu">
     <a href="/pages/rules">规则列表</a>
 </dd>
-<div th:fragment="scripts">
 
-
-</div>
 </html>
 

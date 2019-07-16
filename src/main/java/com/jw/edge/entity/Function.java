@@ -9,9 +9,9 @@ import java.util.Date;
 @Document
 public class Function {
     @Id
-//    private String productId;
-//    private String productName;
     private String functionId;
+    private String productId;
+    private String productName;
     private String functionType;
     private String functionName;
     private String functionIdentifier;
@@ -39,7 +39,21 @@ public class Function {
     private String responseDec4;
 //    private String ;
 //    private String ;
+    public String getProductId() {
+    return productId;
+    }
 
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setFunctionproName(String productName) {
+        this.productName = productName;
+    }
     public String getFunctionIdentifier() {
         return functionIdentifier;
     }

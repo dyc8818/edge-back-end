@@ -58,4 +58,12 @@ public class RuleServiceImpl implements RuleService {
         return ruleRepository.findRuleByRuleId(ruleId);
     }
 
+    @Override
+    public void changeRuleStatus(Rule rule, int status){
+        System.out.println("RuleService CurrentStatus:"+status);
+        rule.setRuleStatus(status);
+        ruleRepository.save(rule);
+
+    }
+
 }

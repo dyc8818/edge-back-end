@@ -12,4 +12,6 @@ public interface RuleService {
     public boolean addRule(Rule rule);
     public String deleteRule(String ruleId);
     public Rule findRuleByRuleId(String ruleId);
+//    public Page<Rule> findRuleByRuleToDevice(String ruleToDevice, Pageable pageable);
+    public void changeRuleStatus(Rule rule, int status);
 }

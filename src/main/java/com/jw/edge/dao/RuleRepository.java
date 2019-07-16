@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface RuleRepository extends MongoRepository<Rule,String> {
     public Rule findRuleByRuleName(String ruleName);
+    public Rule findRuleByRuleExecute(int ruleExecute);
     public Page<Rule> findAll(Pageable pageable);
     public Rule findRuleByRuleId(String ruleId);
 }

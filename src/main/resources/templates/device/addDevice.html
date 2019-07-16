@@ -36,11 +36,26 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <div class="layui-inline">
-        <label class="layui-form-label">地址设定</label>
-        <div class="layui-input-inline" id="setAddress">
-            <input type="text"id="addressPlaceholder" autocomplete="off" placeholder="请输入选择产品类型" class="layui-input" disabled="">
+        <label class="layui-form-label">通信协议</label>
+        <div class="layui-input-inline">
+            <select name="deviceProtocol" id="deviceProtocol">
+                <option value="HTTP">HTTP</option>
+                <option value="OTHER">Modbus</option>
+            </select>
         </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">地址设定</label>
+            <div class="layui-input-inline" id="setAddress">
+                <input type="text"id="addressPlaceholder" autocomplete="off" placeholder="请输入选择产品类型" class="layui-input" disabled="">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">设备路径</label>
+        <div class="layui-input-inline">
+            <input type="text" name="devicePath"  autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -116,12 +131,10 @@
                 deviceType.appendChild(option);           //给select添加option子标签
                 //console.log(pp[k].productName);
             }
-            for(k=0;k<pp.length;k++){
-                var option = document.createElement("option");  // 创建添加option属性
-                option.setAttribute("value",pp[k].productName+"的配置文件");
-                option.innerText=pp[k].productName+"的配置文件";
-                deviceProfile.appendChild(option);
-            }
+            var option = document.createElement("option");  // 创建添加option属性
+            option.setAttribute("value","temp.profile");
+            option.innerText="temperature and humidity sensor profile";
+            deviceProfile.appendChild(option);
             form.render("select");            // 刷性select，显示出数据
         });
         //地址设定 根据不同设备类型设置地址
@@ -175,21 +188,29 @@
                 // processData: false,
                 // cache: false,
                 success: function (ev) {
+                    var url1 = "";
+                    var data1 = JSON.stringify(ev.field);
+                    layui.jquery.ajax({
+                        type: "post",
+                        url: url1,
+                        async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                        data: data1,
+                        contentType: "application/json",
+                        success: function (evs) {
+                            console.log(evs);//返回的addressable Json文件
+                            code = evs.code;
+                        }
+                    });
                     code = ev.code;
                 }
-
             });
             if (code == 500) {
                 console.log("提交失败");
             }
-
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-
             parent.layer.close(index);
-
             // 刷新表格（即点击分页控件的“确定”按钮）
             parent.layui.table.reload("deviceTable");
-
         });
     });
 </script>

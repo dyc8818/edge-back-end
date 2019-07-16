@@ -23,18 +23,26 @@ public class FunctionServiceImpl implements FunctionService {
     }
 
     @Override
-    public boolean addFunction(Function function) {
-        Function findFunction = functionRepository.findFunctionByFunctionName(function.getFunctionName() );
-        if (findFunction == null) {
-            Function function1 = functionRepository.save(function);
-            ObjectId objectId = new ObjectId(function1.getFunctionId());
-            //function1.setFunctionCreateTime(objectId.getDate());
-            functionRepository.save(function1);
-            return true;
+    public Page<Function> findFunctionByProductName(String productName,Pageable pageable) {
+        System.out.println(productName);
+        Page<Function> functions = functionRepository.findByProductName(productName,pageable);
+        System.out.println(functions);
+        return functions;
+    }
 
-        } else {
-            return false;
-        }
+    @Override
+    public boolean addFunction(Function function) {
+//        Function findFunction = functionRepository.findFunctionByFunctionName(function.getFunctionName() );
+//        if (findFunction == null) {
+        Function function1 = functionRepository.save(function);
+        ObjectId objectId = new ObjectId(function1.getFunctionId());
+        //function1.setFunctionCreateTime(objectId.getDate());
+        functionRepository.save(function1);
+        return true;
+
+//        } else {
+//            return false;
+//        }
     }
 
     @Override
@@ -68,5 +76,11 @@ public class FunctionServiceImpl implements FunctionService {
         return functionRepository.findAll();
     }
 
-
+    @Override
+    public List<Function> findFunctionByProductName(String productName) {
+        System.out.println(productName);
+        return functionRepository.findByProductName(productName);
+        //System.out.println(functions);
+        //return functions;
+    }
 }

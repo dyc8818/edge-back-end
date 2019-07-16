@@ -12,5 +12,8 @@ public interface FunctionService {
     public Function findFunctionByFunctionId(String functionId);
     //void updateFunction(Function function);
     public List<Function> findAllFunction();
+    //public List<Function> findFunctionByProductName(String productName);
     public Page<Function> findAllFunction(Pageable pageable);
+    public Page<Function> findFunctionByProductName(String productName,Pageable pageable);
+    public List<Function> findFunctionByProductName(String productName);
 }

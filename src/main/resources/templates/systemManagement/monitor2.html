@@ -1,18 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,~{::monitor2Menu},~{::scripts})}">
-<title>实时监控</title>
+<title>监控数据详情</title>
 
 <content>
     <div class="layui-fluid" style="padding: 0px;">
+        <div class="layui-row">
+            <div class="layui-col-sm3 layui-col-md3 layui-col-lg3 layui-col-lg-offset6 layui-col-md-offset6 layui-col-sm-offset6 " style="margin-top: 180px">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <select name="deviceIdList" lay-filter="deviceId" id="idList">
+                                    <option value="0">请选择一个设备</option>
+                                </select>
+                            </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-col-sm3 layui-col-md3 layui-col-lg3 layui-col-lg-offset9 layui-col-md-offset9 layui-col-sm-offset9 ">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                    <label class="layui-form-label" style="font-size: 20px"><strong>更新周期</strong></label>
+                        <div class="layui-input-block">
+                            <select name="interval" lay-filter="interval">
+                                <option value="1000">1秒</option>
+                                <option value="3000">3秒</option>
+                                <option value="5000">5秒</option>
+                                <option value="10000">10秒</option>
+                                <option value="20000">20秒</option>
+                                <option value="30000">30秒</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <div class="layui-row">
 
-                    <div class="layui-tab-item">
-                        <div class="layui-col-lg10 layui-col-lg-offset1">
-                            <div id="detailchart" style="width: 1400px;height:600px;"></div>
-                        </div>
-                    </div>
+            <div class="layui-col-sm8 layui-col-md8 layui-col-lg8">
+                <div id="detailchart" style="width: 1000px;height:600px;margin-top: 20px"></div>
+            </div>
 
         </div>
 
@@ -23,81 +51,112 @@
 
 
 <dd class="layui-this" th:fragment="monitor2Menu">
-    <a href="/pages/monitor2">实时监控2</a>
+    <a href="/pages/monitor2">监控数据详情</a>
 </dd>
 
 <div th:fragment="scripts">
     <script th:src="@{/echarts-4.2.1/echarts.min.js}"></script>
     <script>
         // 基于准备好的dom，初始化echarts实例
-        var interval = 3000;
+        var interval = 1000;
         var detailChart = echarts.init(document.getElementById('detailchart'));
         var data1 = new Array();
         var data2 = new Array();
-        setInterval(function(){
-            var date = new Date();
-            layui.use('jquery', function(){
-                var $ = layui.$;
-                //后面就跟你平时使用jQuery一样
-                $.get("/api/surdetails/",
-                    function(data){
-                        var type = Object.keys(data);
-                        data1.push([date,data[type[0]]]);
-                        data2.push([date,data[type[1]]]);
-                        if(data1.length>60){
-                            data1.shift();
-                            data2.shift();
-                        }
-                        // 指定图表的配置项和数据
-                        var option1 = {
-                            title: {
-                                text: '设备监控情况',
-                                left:'10%'
-                            },
-                            tooltip: {
-                                trigger: 'axis'
-                            },
-                            xAxis: {
-                                type:'time',
-                                name:'时间'
-                            },
-                            yAxis: {},
-                            legend: {
-                                right: '20%',
-                                top: 0,
-                                itemHeight: 28,
-                                itemWidth: 70
-                            },
-                            series: [
-                                {
-                                    name: type[0],
-                                    type:'line',
-                                    data:data1,
-                                    symbol:'emptyTriangle',
-                                    symbolSize: 8,
-                                    lineStyle:{
-                                        width: 2
-                                    }
-                                },
-                                {
-                                    name: type[1],
-                                    type: 'line',
-                                    data: data2,
-                                    symbol:'emptyCircle',
-                                    symbolSize: 8,
-                                    lineStyle:{
-                                        width: 2
-                                    }
-                                }
-                            ]
-                        };
-                        // 使用刚指定的配置项和数据显示图表。
-                        detailChart.setOption(option1);
-                    });
-
+        var id = '0';
+        var update = setInterval('drawCharts(id)',interval);
+        layui.use(['jquery','form'],function () {
+            var $ = layui.$;
+            var form = layui.form;
+            var select = document.getElementById('idList');
+            //后面就跟你平时使用jQuery一样
+            $.get("/api/surid/",function (data) {
+                for(i=0;i<data.length;i++){
+                    var device = data[i];
+                    var option = document.createElement('option');
+                    option.setAttribute('value',device.id);
+                    option.innerText=device.name;
+                    select.appendChild(option);
+                    form.render('select');
+                }
             });
-        },interval)
+            form.on('select(deviceId)', function(data){
+                data1 = [];
+                data2 = [];
+                detailChart.clear();
+                clearInterval(update);
+                id = data.value;
+                update = setInterval('drawCharts(id)',interval);
+            });
+            form.on('select(interval)', function(data){
+                clearInterval(update);
+                interval = data.value;
+                update = setInterval('drawCharts(id)',interval);
+            });
+        });
 
+        function drawCharts(id){
+                var date = new Date();
+                layui.use('jquery', function () {
+                    var $ = layui.$;
+                    //后面就跟你平时使用jQuery一样
+                    $.get("/api/surdetails" + "?id=" + id,
+                        function (data) {
+                            var type = Object.keys(data);
+                            data1.push([date, data[type[0]]]);
+                            data2.push([date, data[type[1]]]);
+                            if (data1.length > 60) {
+                                data1.shift();
+                                data2.shift();
+                            }
+                            // 指定图表的配置项和数据
+                            var option = {
+                                title: {
+                                    text: '设备监控情况',
+                                    left:'10%'
+                                },
+                                tooltip: {
+                                    trigger: 'axis'
+                                },
+                                xAxis: {
+                                    type:'time',
+                                    name:'时间'
+                                },
+                                yAxis: {},
+                                legend: {
+                                    right: '20%',
+                                    top: 0,
+                                    itemHeight: 28,
+                                    itemWidth: 70
+                                },
+                                series: [
+                                    {
+                                        name: type[0],
+                                        type:'line',
+                                        data:data1,
+                                        symbol:'emptyTriangle',
+                                        symbolSize: 8,
+                                        lineStyle:{
+                                            width: 2
+                                        }
+                                    },
+                                    {
+                                        name: type[1],
+                                        type: 'line',
+                                        data: data2,
+                                        symbol:'emptyCircle',
+                                        symbolSize: 8,
+                                        lineStyle:{
+                                            width: 2
+                                        }
+                                    }
+                                ]
+                            };
+                            // 使用刚指定的配置项和数据显示图表。
+                            detailChart.setOption(option);
+                        }
+                    );
+                });
+        }
     </script>
 
 

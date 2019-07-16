@@ -2,28 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productMenu},_,_,_,_,_,~{::scripts})}">
 
-<title>产品列表</title>
+<title>功能详情列表</title>
 <content>
 
     <div class="layui-tab-brief layui-tab">
         <ul class="layui-tab-title site-demo-title">
-            <li><a href="/pages/products">产品列表</a></li>
-            <li><a href="javascript:history.back(-1)">产品详情</a></li>
+            <li><a href="/pages/products">设备模板列表</a></li>
+            <li><a href="javascript:history.back(-1)">设备模板详情</a></li>
             <li class="layui-this"><a><cite>功能详情</cite></a></li>
         </ul>
     </div>
     <div class="layui-fluid">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <br>
-                <h1 th:text="${function.getFunctionName()}"></h1>
-                <br>
+                <div class="layui-card-header"><h1 th:text="${function.getFunctionName()}"></h1></div>
                 <div class="layui-card-body">
                     <div class="layui-row">
                         <div class="layui-col-md4">
                             <b>FunctionKey:</b> <span th:text="${function.getFunctionId()}"></span>
                         </div>
-
                     </div>
                     <br>
                     <!--卡片风格tab选项卡-->
@@ -32,13 +29,17 @@
 <!--                            <li class="layui-this">产品信息</li>-->
 <!--                            <li>功能定义</li>-->
 <!--                        </ul>-->
-                        <div class="layui-tab-content" style="height: 100px;">
+                        <div class="layui-tab-content">
                             <div class="layui-tab-item layui-show">
                                 <br/>
                                 <b><h2>功能信息</h2></b>
                                 <br/>
                                 <table border="0" class="layui-table">
 
+                                    <tr>
+                                        <th><b>设备模板名称</b></th>
+                                        <td th:text="${function.getProductName()}"></td>
+                                    </tr>
                                     <tr>
                                         <th><b>功能名称</b></th>
                                         <td th:text="${function.getFunctionName()}"></td>
@@ -108,7 +109,7 @@
 </content>
 
 <dd class="layui-this" th:fragment="productMenu">
-    <a href="/pages/products">产品列表</a>
+    <a href="/pages/products">设备模板列表</a>
 </dd>
 <div th:fragment="scripts">
     <!--<script th:inline="none" type="text/html" id="barDemo">

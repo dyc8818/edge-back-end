@@ -4,20 +4,11 @@
 
 <title>设备列表</title>
 <content>
-
-    <div class="layui-tab-brief layui-tab">
-        <ul class="layui-tab-title site-demo-title">
-            <li><a href="/pages/devices">设备列表</a></li>
-            <li class="layui-this"><a><cite>设备详情</cite></a></li>
-        </ul>
-    </div>
     <div class="layui-fluid">
         <div class="layui-col-md12">
-            <div class="layui-card">
-                <br>
+            <div class="layui-card" style="margin-top: 20px">
                 <!--/*@thymesVar id="device" type="com.jw.edge.entity.Device"*/-->
-                <h1 th:text="${device.getDeviceName()}"></h1>
-                <br>
+                <div class="layui-card-header"><h1 th:text="${device.getDeviceName()}"></h1></div>
                 <div class="layui-card-body">
                     <div class="layui-row">
                         <div class="layui-col-md4">
@@ -29,9 +20,9 @@
                     <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
                         <ul class="layui-tab-title">
                             <li class="layui-this">设备信息</li>
-                            <li>功能定义</li>
+                            <!--                            <li>功能定义</li>-->
                         </ul>
-                        <div class="layui-tab-content" style="height: 100px;">
+                        <div class="layui-tab-content">
                             <div class="layui-tab-item layui-show">
                                 <br/>
                                 <b><h2>设备信息</h2></b>
@@ -41,29 +32,86 @@
                                     <tr>
                                         <th><b>设备名称</b></th>
                                         <td th:text="${device.getDeviceName()}"></td>
-                                        <th><b>节点类型</b></th>
+                                        <th><b>产品名称</b></th>
                                         <td th:text="${device.getDeviceType()}"></td>
-                                        <th><b>创建时间</b></th>
-                                        <td th:text="${#dates.format(device.getDeviceCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
+                                        <th><b>DeviceKey</b></th>
+                                        <td th:text="${device.getDeviceId()}"></td>
                                     </tr>
                                     <tr>
-                                        <th><b>所属分类</b></th>
-                                        <td th:text="${device.getDeviceType()}"></td>
-                                        <th><b>数据格式</b></th>
-                                        <td colspan="5">ICA 标准数据格式 (Alink JSON)</td>
+                                        <th><b>节点类型</b></th>
+                                        <td>设备</td>
+                                        <th><b>IP地址</b></th>
+                                        <td th:text="${device.getDeviceAddress()}"></td>
+                                        <th><b>有效期</b></th>
+                                        <td colspan="5" th:text="${device.getDeviceFailDate()}"></td>
                                     </tr>
                                     <tr>
                                         <th><b>当前状态</b></th>
                                         <td th:text="${device.getDeviceStatus()==1}?'启用':'禁用'"></td>
-<!--                                        <th><b>是否接入网关</b></th>-->
-<!--                                        <td th:text="${device.getDeviceAccessForGateway()==true}?'是':'否'"></td>-->
-<!--                                        <th><b>连网协议</b></th>-->
-<!--                                        <td th:text="${device.getDeviceConnectWay()}"></td>-->
+                                        <th><b>端口</b></th>
+                                        <td th:text="${device.getDeviceAddressPort()}"></td>
+                                        <th><b>创建时间</b></th>
+                                        <td colspan="5" th:text="${#dates.format(device.getDeviceCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
                                     </tr>
                                     <tr>
                                         <th><b>设备描述</b></th>
                                         <td colspan="5" th:text="${device.getDeviceDesc()}"></td>
                                     </tr>
+                                </table>
+                                <br/>
+                                <b><h2>数据读取与发送</h2></b>
+                                <br/>
+                                <table border="0" class="layui-table">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">湿度  </label>
+                                        <div class="layui-input-inline">
+                                            <input class="layui-input" style="width: 100px" type="text" id="receiveData1"/>
+                                            <button class="layui-btn"  style="margin: 10px" id="getData" onclick="handelClick()">获取</button>
+                                        </div>
+                                    <script>
+                                            function handelClick() {
+                                                layui.use('jquery', function () {
+                                                    var $ = layui.$;
+                                                    $.get("/api/surdetails/?id=94e46d91-b4f5-465b-a4ce-28e379ef97fb",
+                                                        function (data) {
+                                                            var type = Object.keys(data);
+                                                            document.getElementById("receiveData1").value = data[type[0]]+"%"+"  ";
+                                                        });
+                                                })
+                                            }
+                                        </script>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">温度  </label>
+                                    <div class="layui-input-inline">
+                                        <input class="layui-input" style="width: 100px" type="text" id="receiveData"/>
+                                        <button class="layui-btn"  style="margin: 10px" id="getData1" onclick="handelClick1()">获取</button>
+                                    </div>
+                                    <script>
+                                        function handelClick1() {
+                                            layui.use('jquery', function () {
+                                                var $ = layui.$;
+                                                $.get("/api/surdetails/?id=94e46d91-b4f5-465b-a4ce-28e379ef97fb",
+                                                    function (data) {
+                                                        var type = Object.keys(data);
+                                                        document.getElementById("receiveData").value = data[type[1]]+"℃"+"  ";
+                                                    });
+                                            })
+                                        }
+                                    </script>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">湿度</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="input"   autocomplete="off" class="layui-input">
+                                            <button style="margin: 10px" type="button" class="layui-btn">发送</button>
+                                        </div>
+                                    </div>
+                                    <label class="layui-form-label">温度</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="input"   autocomplete="off" class="layui-input">
+                                        <button style="margin: 10px" type="button" class="layui-btn">发送</button>
+                                    </div>
                                 </table>
                             </div>
                             <div class="layui-tab-item">
@@ -71,8 +119,6 @@
                                     <!--                    <div class="layui-card-header ">-->
                                     <!--                        <h1>设备列表</h1>-->
                                     <!--                    </div>-->
-
-
                                     <div class="layui-card-body">
                                         <table class="layui-hide" id="functionTable" lay-filter="buttons"></table>
                                     </div>
@@ -82,11 +128,16 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <h1></h1>
 </content>
+<div class="layui-tab-brief layui-tab">
+    <ul class="layui-tab-title site-demo-title">
+        <li><a href="/pages/devices">设备列表</a></li>
+        <li class="layui-this"><a><cite>设备详情</cite></a></li>
+    </ul>
+</div>
 
 <dd class="layui-this" th:fragment="deviceMenu">
     <a href="/pages/devices">设备列表</a>
@@ -111,7 +162,6 @@
             </button>
         </div>
     </script>
-
 
     <script th:inline="none">
         layui.use('table', function () {
