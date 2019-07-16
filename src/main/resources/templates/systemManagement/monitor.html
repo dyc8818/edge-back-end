@@ -103,7 +103,6 @@
             form.on('select(interval)', function(data){
                 clearInterval(update);
                 interval = data.value;
-                // alert(interval);
                 update = setInterval(getNum,interval);
             });
         });
