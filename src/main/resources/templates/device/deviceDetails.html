@@ -4,13 +4,6 @@
 
 <title>设备列表</title>
 <content>
-
-    <div class="layui-tab-brief layui-tab">
-        <ul class="layui-tab-title site-demo-title">
-            <li><a href="/pages/devices">设备列表</a></li>
-            <li class="layui-this"><a><cite>设备详情</cite></a></li>
-        </ul>
-    </div>
     <div class="layui-fluid">
         <div class="layui-col-md12">
             <div class="layui-card">
@@ -29,7 +22,7 @@
                     <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
                         <ul class="layui-tab-title">
                             <li class="layui-this">设备信息</li>
-                            <li>功能定义</li>
+                            <!--                            <li>功能定义</li>-->
                         </ul>
                         <div class="layui-tab-content" style="height: 100px;">
                             <div class="layui-tab-item layui-show">
@@ -41,29 +34,86 @@
                                     <tr>
                                         <th><b>设备名称</b></th>
                                         <td th:text="${device.getDeviceName()}"></td>
-                                        <th><b>节点类型</b></th>
+                                        <th><b>产品名称</b></th>
                                         <td th:text="${device.getDeviceType()}"></td>
-                                        <th><b>创建时间</b></th>
-                                        <td th:text="${#dates.format(device.getDeviceCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
+                                        <th><b>DeviceKey</b></th>
+                                        <td th:text="${device.getDeviceId()}"></td>
                                     </tr>
                                     <tr>
-                                        <th><b>所属分类</b></th>
-                                        <td th:text="${device.getDeviceType()}"></td>
-                                        <th><b>数据格式</b></th>
-                                        <td colspan="5">ICA 标准数据格式 (Alink JSON)</td>
+                                        <th><b>节点类型</b></th>
+                                        <td>设备</td>
+                                        <th><b>IP地址</b></th>
+                                        <td th:text="${device.getDeviceAddress()}"></td>
+                                        <th><b>有效期</b></th>
+                                        <td colspan="5" th:text="${device.getDeviceFailDate()}"></td>
                                     </tr>
                                     <tr>
                                         <th><b>当前状态</b></th>
                                         <td th:text="${device.getDeviceStatus()==1}?'启用':'禁用'"></td>
-<!--                                        <th><b>是否接入网关</b></th>-->
-<!--                                        <td th:text="${device.getDeviceAccessForGateway()==true}?'是':'否'"></td>-->
-<!--                                        <th><b>连网协议</b></th>-->
-<!--                                        <td th:text="${device.getDeviceConnectWay()}"></td>-->
+                                        <th><b>创建时间</b></th>
+                                        <td th:text="${#dates.format(device.getDeviceCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
+                                        <th><b>数据格式</b></th>
+                                        <td colspan="5">ICA 标准数据格式 (Alink JSON)</td>
                                     </tr>
                                     <tr>
                                         <th><b>设备描述</b></th>
                                         <td colspan="5" th:text="${device.getDeviceDesc()}"></td>
                                     </tr>
+                                </table>
+                                <br/>
+                                <b><h2>数据读取与发送</h2></b>
+                                <br/>
+                                <table border="0" class="layui-table">
+                                    <div>
+                                        <input type="text" name="title" id="txt" placeholder=" " class="layui-input">
+                                    </div>
+                                    <div class="layui-button">
+                                        <button id="btnLayUI" onclick="clickme()"
+                                                class="layui-btn layui-btn-normal">
+                                            读取数据
+                                        </button>
+                                    </div>
+                                    <script>
+                                        // 基于准备好的dom，初始化echarts实例
+                                        var interval = 3000;
+                                        var detailChart = echarts.init(document.getElementById('detailchart'));
+                                        var data1 = new Array();
+                                        var data2 = new Array();
+                                        setInterval(function(){
+                                            var date = new Date();
+                                            layui.use('jquery', function(){
+                                                var $ = layui.$;
+                                                //后面就跟你平时使用jQuery一样
+                                                $.get("/api/surdetails/",
+                                                    function(data){
+                                                        var type = Object.keys(data);
+                                                        data1.push([date,data[type[0]]]);
+                                                        data2.push([date,data[type[1]]]);
+                                                        if(data1.length>60){
+                                                            data1.shift();
+                                                            data2.shift();
+                                                        }
+                                                    });
+
+                                            });
+                                        },interval)
+
+                                    </script>
+                                    <div>
+                                        <input type="text" name="title" id="txt-shuchu" placeholder="输入" class="layui-input">
+                                    </div>
+                                    <div class="layui-button">
+                                        <button id="btnLayUI-shuchu" onclick="clickme1()"
+                                                class="layui-btn layui-btn-normal">
+                                            发送数据
+                                        </button>
+                                    </div>
+                                    <script type="text/javascript">
+                                        function clickme() {
+                                            var input = document.getElementById("txt-shuchu");
+                                            var value = input.value;
+                                        }
+                                    </script>
                                 </table>
                             </div>
                             <div class="layui-tab-item">
@@ -71,8 +121,6 @@
                                     <!--                    <div class="layui-card-header ">-->
                                     <!--                        <h1>设备列表</h1>-->
                                     <!--                    </div>-->
-
-
                                     <div class="layui-card-body">
                                         <table class="layui-hide" id="functionTable" lay-filter="buttons"></table>
                                     </div>
@@ -87,6 +135,12 @@
     </div>
     <h1></h1>
 </content>
+<div class="layui-tab-brief layui-tab">
+    <ul class="layui-tab-title site-demo-title">
+        <li><a href="/pages/devices">设备列表</a></li>
+        <li class="layui-this"><a><cite>设备详情</cite></a></li>
+    </ul>
+</div>
 
 <dd class="layui-this" th:fragment="deviceMenu">
     <a href="/pages/devices">设备列表</a>
