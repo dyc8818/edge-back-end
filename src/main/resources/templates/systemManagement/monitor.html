@@ -7,16 +7,17 @@
     <div class="layui-fluid" style="padding: 0px;">
         <div class="layui-row">
 
-            <div class="layui-col-lg8">
-                <div id="numchart" style="width: 1200px;height:600px;margin-top: 30px"></div>
+            <div class="layui-col-md8">
+                <div id="numchart" style="width: 1000px;height:600px;margin-top: 50px"></div>
             </div>
 
-            <div class="layui-col-lg2 " style="margin-top: 180px">
+            <div class="layui-col-md2 " style="margin-top: 180px">
                 <form class="layui-form">
                     <div class="layui-form-item">
                         <label class="layui-form-label" style="font-size: 20px"><strong>更新周期</strong></label>
                         <div class="layui-input-block">
                             <select name="interval" lay-filter="interval">
+                                <option value="1000">1秒</option>
                                 <option value="3000">3秒</option>
                                 <option value="5000">5秒</option>
                                 <option value="10000">10秒</option>
@@ -46,7 +47,7 @@
         // 基于准备好的dom，初始化echarts实例
         var numChart = echarts.init(document.getElementById('numchart'));
         var num = new Array();
-        var interval = 3000;
+        var interval = 1000;
         num.push([new Date(), 0]);
 
         var option = {
