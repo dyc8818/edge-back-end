@@ -63,9 +63,9 @@
                                 <br/>
                                 <table border="0" class="layui-table">
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">读取数值</label>
+                                        <label class="layui-form-label">湿度  </label>
                                         <div class="layui-input-inline">
-                                            <input class="layui-input" style="width: 500px" type="text" id="receiveData"/>
+                                            <input class="layui-input" style="width: 100px" type="text" id="receiveData1"/>
                                             <button class="layui-btn"  style="margin: 10px" id="getData" onclick="handelClick()">获取</button>
                                         </div>
                                     <script>
@@ -75,19 +75,42 @@
                                                     $.get("/api/surdetails/?id=94e46d91-b4f5-465b-a4ce-28e379ef97fb",
                                                         function (data) {
                                                             var type = Object.keys(data);
-                                                            document.getElementById("receiveData").value = type[0]+":"+data[type[0]]+"  "+type[1]+":"+data[type[1]];
+                                                            document.getElementById("receiveData1").value = data[type[0]]+"%"+"  ";
                                                         });
                                                 })
                                             }
                                         </script>
                                     </div>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">发送数据</label>
+                                        <label class="layui-form-label">温度  </label>
+                                    <div class="layui-input-inline">
+                                        <input class="layui-input" style="width: 100px" type="text" id="receiveData"/>
+                                        <button class="layui-btn"  style="margin: 10px" id="getData1" onclick="handelClick1()">获取</button>
+                                    </div>
+                                    <script>
+                                        function handelClick1() {
+                                            layui.use('jquery', function () {
+                                                var $ = layui.$;
+                                                $.get("/api/surdetails/?id=94e46d91-b4f5-465b-a4ce-28e379ef97fb",
+                                                    function (data) {
+                                                        var type = Object.keys(data);
+                                                        document.getElementById("receiveData").value = data[type[1]]+"℃"+"  ";
+                                                    });
+                                            })
+                                        }
+                                    </script>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">湿度</label>
                                         <div class="layui-input-inline">
                                             <input type="text" name="input"   autocomplete="off" class="layui-input">
                                             <button style="margin: 10px" type="button" class="layui-btn">发送</button>
                                         </div>
-
+                                    </div>
+                                    <label class="layui-form-label">温度</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="input"   autocomplete="off" class="layui-input">
+                                        <button style="margin: 10px" type="button" class="layui-btn">发送</button>
                                     </div>
                                 </table>
                             </div>

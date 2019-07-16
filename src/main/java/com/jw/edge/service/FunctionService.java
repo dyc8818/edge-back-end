@@ -15,4 +15,5 @@ public interface FunctionService {
     //public List<Function> findFunctionByProductName(String productName);
     public Page<Function> findAllFunction(Pageable pageable);
     public Page<Function> findFunctionByProductName(String productName,Pageable pageable);
+    public List<Function> findFunctionByProductName(String productName);
 }

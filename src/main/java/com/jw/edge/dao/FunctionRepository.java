@@ -15,6 +15,7 @@ public interface FunctionRepository extends MongoRepository<Function,String> {
     public void deleteByFunctionName(String functionName);
     public Page<Function> findAll(Pageable pageable);
     public Function findFunctionByFunctionId(String functionId);
-    public Page<Function> findFunctionByProductName(String productName,Pageable pageable);
+    public Page<Function> findByProductName(String productName,Pageable pageable);
+    public List<Function> findByProductName(String productName);
 }
 
