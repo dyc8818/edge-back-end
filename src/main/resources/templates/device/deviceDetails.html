@@ -7,9 +7,9 @@
     <div class="layui-fluid">
         <div class="layui-col-md12">
             <div class="layui-card" style="margin-top: 20px">
+                <!--/*@thymesVar id="device" type="com.jw.edge.entity.Device"*/-->
                 <div class="layui-card-header"><h1 th:text="${device.getDeviceName()}"></h1></div>
                 <div class="layui-card-body">
-                <!--/*@thymesVar id="device" type="com.jw.edge.entity.Device"*/-->
                     <div class="layui-row">
                         <div class="layui-col-md4">
                             <b>DeviceKey:</b> <span th:text="${device.getDeviceId()}"></span>
@@ -48,10 +48,10 @@
                                     <tr>
                                         <th><b>当前状态</b></th>
                                         <td th:text="${device.getDeviceStatus()==1}?'启用':'禁用'"></td>
+                                        <th><b>端口</b></th>
+                                        <td th:text="${device.getDeviceAddressPort()}"></td>
                                         <th><b>创建时间</b></th>
-                                        <td th:text="${#dates.format(device.getDeviceCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
-                                        <th><b>数据格式</b></th>
-                                        <td colspan="5">ICA 标准数据格式 (Alink JSON)</td>
+                                        <td colspan="5" th:text="${#dates.format(device.getDeviceCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
                                     </tr>
                                     <tr>
                                         <th><b>设备描述</b></th>
@@ -62,56 +62,46 @@
                                 <b><h2>数据读取与发送</h2></b>
                                 <br/>
                                 <table border="0" class="layui-table">
-                                    <div>
-                                        <input type="text" name="title" id="txt" placeholder=" " class="layui-input">
-                                    </div>
-                                    <div class="layui-button">
-                                        <button id="btnLayUI" onclick="clickme()"
-                                                class="layui-btn layui-btn-normal" style="margin: 10px">
-                                            读取数据
-                                        </button>
-                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">读取数值</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="receiveData"/>
+                                            <button id="getData" onclick="handelClick()">获取</button>
+                                        </div>
                                     <script>
-                                        // 基于准备好的dom，初始化echarts实例
-                                        var interval = 3000;
-                                        var detailChart = echarts.init(document.getElementById('detailchart'));
-                                        var data1 = new Array();
-                                        var data2 = new Array();
-                                        setInterval(function(){
-                                            var date = new Date();
-                                            layui.use('jquery', function(){
-                                                var $ = layui.$;
-                                                //后面就跟你平时使用jQuery一样
-                                                $.get("/api/surdetails/",
-                                                    function(data){
-                                                        var type = Object.keys(data);
-                                                        data1.push([date,data[type[0]]]);
-                                                        data2.push([date,data[type[1]]]);
-                                                        if(data1.length>60){
-                                                            data1.shift();
-                                                            data2.shift();
-                                                        }
-                                                    });
-
-                                            });
-                                        },interval)
-
-                                    </script>
-                                    <div>
-                                        <input type="text" name="title" id="txt-shuchu" placeholder="输入" class="layui-input">
+                                            function handelClick() {
+                                                var data1 = new Array();
+                                                var data2 = new Array();
+                                                var date = new Date();
+                                                layui.use('jquery', function () {
+                                                    var $ = layui.$;
+                                                    $.get("/api/surdetails/",
+                                                        function (data) {
+                                                            var type = Object.keys(data);
+                                                            data1.push(date,data[type[0]]);
+                                                            data2.push(date,data[type[1]]);
+                                                            if (data1.length > 60) {
+                                                                data1.shift();
+                                                                data2.shift();
+                                                            }
+                                                        })
+                                                    console.log(data1, data2)
+                                                    var obj = {
+                                                        a: data1[0,1],
+                                                        b: data2[0,1]
+                                                    }
+                                                    document.getElementById("receiveData").value = obj.a;
+                                                })
+                                            }
+                                        </script>
                                     </div>
-                                    <div class="layui-button">
-                                        <button id="btnLayUI-shuchu" onclick="clickme1()"
-                                                class="layui-btn layui-btn-normal" style="margin: 10px">
-                                            发送数据
-                                        </button>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">发送数据</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="input"   autocomplete="off" class="layui-input">
+                                        </div>
+                                        <button style="float: left;" type="button" class="layui-btn">发送</button>
                                     </div>
-                                    <script type="text/javascript">
-                                        function clickme() {
-                                            var input = document.getElementById("txt-shuchu");
-                                            var value = input.value;
-                                        }
-                                    </script>
                                 </table>
                             </div>
                             <div class="layui-tab-item">
@@ -162,7 +152,6 @@
             </button>
         </div>
     </script>
-
 
     <script th:inline="none">
         layui.use('table', function () {
