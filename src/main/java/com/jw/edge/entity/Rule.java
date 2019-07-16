@@ -14,7 +14,7 @@ public class Rule {
     private String ruleDescribe;
     private Date ruleCreateTime;
 
-    private String ruleParaThreshold;
+    private int ruleParaThreshold;
     private String rulePara;
     private String ruleToDevice;
     private String ruleToFunction;
@@ -39,11 +39,11 @@ public class Rule {
         this.ruleName = ruleName;
     }
 
-    public String getRuleParaThreshold() {
+    public int getRuleParaThreshold() {
         return ruleParaThreshold;
     }
 
-    public void setRuleParaThreshold(String ruleParaThreshold) {
+    public void setRuleParaThreshold(int ruleParaThreshold) {
         this.ruleParaThreshold = ruleParaThreshold;
     }
 

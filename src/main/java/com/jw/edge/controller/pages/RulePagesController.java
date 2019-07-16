@@ -24,6 +24,11 @@ public class RulePagesController {
         return "rule/ruleCreate";
     }
 
+    @GetMapping("/ruleAlert")
+    public String ruleAlert(Model model) throws Exception {
+        return "rule/ruleAlert";
+    }
+
     @GetMapping("/ruleDetails")
     public String ruleDetails(Model model, String ruleId) throws Exception {
         Rule rule = ruleService.findRuleByRuleId(ruleId);
