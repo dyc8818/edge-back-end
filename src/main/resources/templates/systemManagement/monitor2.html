@@ -6,21 +6,25 @@
 <content>
     <div class="layui-fluid" style="padding: 0px;">
         <div class="layui-row">
-            <div class="layui-col-sm3 layui-col-md3 layui-col-lg3 layui-col-lg-offset6 layui-col-md-offset6 layui-col-sm-offset6 " style="margin-top: 180px">
+
+            <div class="layui-col-md1 layui-col-lg1 layui-col-sm1">
+                <div id="detailchart" style="width: 1200px;height:600px;margin-top: 20px"></div>
+            </div>
+            <div class="layui-col-sm3 layui-col-md3 layui-col-lg3 layui-col-lg-offset4 layui-col-md-offset4 layui-col-sm-offset4 " style="margin-top: 20px;margin-right: 20px">
                 <form class="layui-form">
                     <div class="layui-form-item">
-                            <div class="layui-input-block">
-                                <select name="deviceIdList" lay-filter="deviceId" id="idList">
-                                    <option value="0">请选择一个设备</option>
-                                </select>
-                            </div>
+                        <div class="layui-input-block">
+                            <select name="deviceIdList" lay-filter="deviceId" id="idList">
+                                <option value="0">请选择一个设备</option>
+                            </select>
+                        </div>
                     </div>
                 </form>
             </div>
-            <div class="layui-col-sm3 layui-col-md3 layui-col-lg3 layui-col-lg-offset9 layui-col-md-offset9 layui-col-sm-offset9 ">
+            <div class="layui-col-sm3 layui-col-md3 layui-col-lg3  " style="margin-top: 20px">
                 <form class="layui-form">
                     <div class="layui-form-item">
-                    <label class="layui-form-label" style="font-size: 20px"><strong>更新周期</strong></label>
+                        <label class="layui-form-label" style="font-size: 20px"><strong>更新周期</strong></label>
                         <div class="layui-input-block">
                             <select name="interval" lay-filter="interval">
                                 <option value="1000">1秒</option>
@@ -34,14 +38,6 @@
                     </div>
                 </form>
             </div>
-        </div>
-
-        <div class="layui-row">
-
-            <div class="layui-col-sm8 layui-col-md8 layui-col-lg8">
-                <div id="detailchart" style="width: 1000px;height:600px;margin-top: 20px"></div>
-            </div>
-
         </div>
 
     </div>
@@ -112,7 +108,10 @@
                             var option = {
                                 title: {
                                     text: '设备监控情况',
-                                    left:'10%'
+                                    left:80,
+                                    textStyle:{
+                                        fontSize:22
+                                    }
                                 },
                                 tooltip: {
                                     trigger: 'axis'
@@ -123,8 +122,8 @@
                                 },
                                 yAxis: {},
                                 legend: {
-                                    right: '20%',
-                                    top: 0,
+                                    left: 200,
+                                    bottom: 0,
                                     itemHeight: 28,
                                     itemWidth: 70
                                 },
@@ -134,7 +133,7 @@
                                         type:'line',
                                         data:data1,
                                         symbol:'emptyTriangle',
-                                        symbolSize: 8,
+                                        symbolSize: 6,
                                         lineStyle:{
                                             width: 2
                                         }
@@ -144,7 +143,7 @@
                                         type: 'line',
                                         data: data2,
                                         symbol:'emptyCircle',
-                                        symbolSize: 8,
+                                        symbolSize: 6,
                                         lineStyle:{
                                             width: 2
                                         }

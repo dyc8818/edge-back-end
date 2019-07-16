@@ -6,7 +6,12 @@
 <content>
     <div class="layui-fluid" style="padding: 0px;">
         <div class="layui-row">
-            <div class="layui-col-md2 layui-col-sm2 layui-col-lg2 layui-col-sm-offset8 layui-col-md-offset8 layui-col-lg-offset8 " style="margin-top: 180px">
+
+            <div class="layui-col-md1 layui-col-lg1 layui-col-sm1">
+                <div id="numchart" style="width: 1200px;height:600px;margin-top: 20px"></div>
+            </div>
+
+            <div class="layui-col-md3 layui-col-sm3 layui-col-lg3 layui-col-sm-offset7 layui-col-md-offset7 layui-col-lg-offset7 " style="margin-top: 20px;margin-right: 20px">
                 <form class="layui-form">
                     <div class="layui-form-item">
                         <label class="layui-form-label" style="font-size: 20px"><strong>更新周期</strong></label>
@@ -22,12 +27,6 @@
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
-        <div class="layui-row">
-
-            <div class="layui-col-md8">
-                <div id="numchart" style="width: 1000px;height:600px;margin-top: 20px"></div>
             </div>
 
         </div>
@@ -54,7 +53,10 @@
         var option = {
             title: {
                 text: '设备在线数量',
-                left:'center'
+                left:80,
+                textStyle:{
+                    fontSize:22
+                }
             },
             tooltip: {
                 trigger: 'axis'
