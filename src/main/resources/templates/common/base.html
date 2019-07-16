@@ -14,12 +14,12 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th=
         <div class="layui-logo">边缘计算平台
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
+        <ul class="layui-nav layui-layout-left" >
             <li class="layui-nav-item"><a href="/">首页</a></li>
-            <li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
-            <li class="layui-nav-item"><a href="javascript:;">其它系统</a>
+            <li class="layui-nav-item"><a href="/pages/users" >用户管理</a></li>
+            <li class="layui-nav-item"><a href="" style="display:none">商品管理</a></li>
+            <li class="layui-nav-item"><a href="" style="display:none">用户</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" style="display:none">其它系统</a>
                 <dl class="layui-nav-child">
                     <dd>
                         <a href="">邮件管理</a>
@@ -67,21 +67,19 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th=
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">用户管理</a>
+                <li class="layui-nav-item layui-nav-itemed" style="display:none"><a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${users}">
                             <a href="/pages/users">用户列表</a>
                         </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">设备模板管理</a>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">设备管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${productMenu}">
                             <a href="/pages/products">设备模板列表</a>
                         </dd>
                     </dl>
-                </li>
-                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">设备管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${deviceMenu}">
                             <a href="/pages/devices">设备列表</a>
@@ -89,6 +87,7 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th=
 
                     </dl>
                 </li>
+
                 <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">规则引擎</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${ruleMenu}">
