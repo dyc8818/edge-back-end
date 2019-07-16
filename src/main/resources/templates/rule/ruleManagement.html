@@ -105,11 +105,15 @@
                             var type = Object.keys(data);
                             var alt;
                             // [Status,Execute,ruleJudge,Threshold,Temperature] = data[type];
-                            Status = data[type[0]];
-                            Execute = data[type[1]];
-                            ruleJudge = data[type[2]];
-                            Threshold = data[type[3]];
-                            Temperature = data[type[4]];
+                            Status = data["ruleCurrentStatus"];
+                            // System.out.println("type[0]:"+type[0]);
+                            Execute = data["ruleExecuteStatus"];
+                            ruleJudge = data["ruleJudge"];
+                            Threshold = data["ruleThreshold"];
+                            ident = data["ident"];
+                            if(ident == 1){Temperature = data["Humidity"];}
+                            if(ident == 0){Temperature = data["TemperatureDeg"];}
+                            // Temperature = data[type[4]];
                             if(Status == 1 & Execute == 1){
                                 switch (ruleJudge) {
                                     case 0:

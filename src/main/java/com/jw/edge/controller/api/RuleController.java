@@ -77,8 +77,15 @@ public class RuleController {
         String commandsId = "71dc7a67-c13b-4606-9dbf-9522efeea173";
         String TemperCommandsId = "71dc7a67-c13b-4606-9dbf-9522efeea173";
         String HumidityCommandsId = "5a4bb0ff-d1a8-4cbf-bd70-0c15307f64b6";
-        if(rulePara == "TemperatureDegC"){ commandsId = TemperCommandsId; }
-        if(rulePara=="HumidityPercentRH"){ commandsId = HumidityCommandsId; }
+        int ident = 0;
+        if(rulePara.equals("TemperatureDegC")){
+            commandsId = TemperCommandsId;
+            ident = 0;
+        }
+        if(rulePara.equals("HumidityPercentRH")){
+            commandsId = HumidityCommandsId;
+            ident = 1;
+        }
 
         String url = "http://202.205.101.151:48082/api/v1/device/"+deviceId+"/command/"+commandsId;
 
@@ -91,6 +98,7 @@ public class RuleController {
         result.put(("ruleThreshold"), (ruleThreshold));
         result.put(("ruleExecuteStatus"), (ruleExecuteStatus));
         result.put(("ruleCurrentStatus"), (ruleCurrentStatus));
+        result.put(("ident"), (ident));
         return result;
     }
 
