@@ -11,12 +11,11 @@
             <li class="layui-this"><a><cite>设备模板详情</cite></a></li>
         </ul>
     </div>
+
     <div class="layui-fluid">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <br>
-                <h1 th:text="${product.getProductName()}"></h1>
-                <br>
+                <div class="layui-card-header"><h1 th:text="${product.getProductName()}"></h1></div>
                 <div class="layui-card-body">
                     <div class="layui-row">
                         <div class="layui-col-md4">
@@ -32,7 +31,7 @@
                             <li class="layui-this">设备模板信息</li>
                             <li>功能定义</li>
                         </ul>
-                        <div class="layui-tab-content" style="height: 100px;">
+                        <div class="layui-tab-content">
                             <div class="layui-tab-item layui-show">
                                 <br/>
                                 <b><h2>设备模板信息</h2></b>
@@ -71,22 +70,15 @@
                                 </table>
                             </div>
                             <div class="layui-tab-item">
-                                <div class="layui-card">
                                     <!--                    <div class="layui-card-header ">-->
                                     <!--                        <h1>设备模板列表</h1>-->
                                     <!--                    </div>-->
-
-
-                                    <div class="layui-card-body">
-                                        <table class="layui-hide" id="functionTable" lay-filter="buttons"></table>
-                                    </div>
-                                </div>
+                                <table class="layui-hide" id="functionTable" lay-filter="buttons"></table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <h1></h1>
