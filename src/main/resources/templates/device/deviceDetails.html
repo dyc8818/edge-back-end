@@ -71,27 +71,30 @@
                                             <button id="getData" onclick="handelClick()">获取</button>
                                         </div>
                                         <script>
-                                            var data1 = new Array();
-                                            var data2 = new Array();
-                                            layui.use('jquery',function handelClick(){
-                                                var $ = layui.$;
-                                                $.get("/api/surdetails/",
-                                                    function(data) {
-                                                        var type = Object.keys(data);
-                                                        data1.push(data[type[0]]);
-                                                        data2.push(date, data[type[1]]);
-                                                        if (data1.length > 60) {
-                                                            data1.shift();
-                                                            data2.shift();
-                                                        }
-                                                    })
-                                                console.log(data[type[0]],data[type[1]])
-                                                var obj = {
-                                                    a : 1,
-                                                    b : 2
-                                                }
-                                                document.getElementById("receiveData").value = obj.a;
-                                            })
+                                            function handelClick() {
+                                                var data1 = new Array();
+                                                var data2 = new Array();
+                                                var date = new Date();
+                                                layui.use('jquery', function () {
+                                                    var $ = layui.$;
+                                                    $.get("/api/surdetails/",
+                                                        function (data) {
+                                                            var type = Object.keys(data);
+                                                            data1.push(date,data[type[0]]);
+                                                            data2.push(date,data[type[1]]);
+                                                            if (data1.length > 60) {
+                                                                data1.shift();
+                                                                data2.shift();
+                                                            }
+                                                        })
+                                                    console.log(data1, data2)
+                                                    var obj = {
+                                                        a: data1[0,1],
+                                                        b: data2[0,1]
+                                                    }
+                                                    document.getElementById("receiveData").value = obj.a;
+                                                })
+                                            }
                                         </script>
                                     </div>
                                     <div class="layui-form-item">
