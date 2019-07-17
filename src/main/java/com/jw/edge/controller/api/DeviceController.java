@@ -137,7 +137,7 @@ public class DeviceController {
                             jo4.put("name","edgex-device-modbus");
                             jo2.put("service",jo4);
                             JSONObject jo5 = new JSONObject();
-                            jo5.put("name",device.getDeviceProfile());
+                            jo5.put("name","temp.profile");
                             jo2.put("profile",jo5);
                             JSONArray submitProfile2 = new JSONArray(restTemplate.postForObject(url3,jo2,JSONArray.class));
                         }catch (Exception e3){

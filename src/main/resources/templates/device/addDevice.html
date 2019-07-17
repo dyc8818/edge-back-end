@@ -15,7 +15,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">设备名称</label>
         <div class="layui-input-inline">
-            <input type="text" name="deviceName" lay-verify="title" autocomplete="off" placeholder="请输入您的产品名称"
+            <input type="text" name="deviceName" lay-verify="title" autocomplete="off" placeholder="请输入您的设备名称"
                    class="layui-input">
         </div>
     </div>
@@ -28,19 +28,14 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">配置文件</label>
-        <div class="layui-input-inline">
-            <select name="deviceProfile" id="deviceProfile" lay-filter="devProfile">
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
-    <div class="layui-form-item">
         <label class="layui-form-label">通信协议</label>
         <div class="layui-input-inline">
             <select name="deviceProtocol" id="deviceProtocol">
+                <option value="OTHER" selected="">Modbus</option>
                 <option value="HTTP">HTTP</option>
-                <option value="OTHER">Modbus</option>
+                <option value="WIFI" >WIFI</option>
+                <option value="CELLULAR">蜂窝(2G/3G/4G)</option>
+                <option value="OTHER">其他</option>
             </select>
         </div>
     </div>
@@ -48,7 +43,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">地址设定</label>
             <div class="layui-input-inline" id="setAddress">
-                <input type="text"id="addressPlaceholder" autocomplete="off" placeholder="请输入选择产品类型" class="layui-input" disabled="">
+                <input type="text"id="addressPlaceholder" autocomplete="off" placeholder="请选择设备类型" class="layui-input" disabled="">
             </div>
         </div>
     </div>
