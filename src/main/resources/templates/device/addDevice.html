@@ -43,7 +43,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">地址设定</label>
             <div class="layui-input-inline" id="setAddress">
-                <input type="text"id="addressPlaceholder" autocomplete="off" placeholder="请选择设备类型" class="layui-input" disabled="">
+                <input type="text"id="addressPlaceholder" autocomplete="off" placeholder="请选择设备模板" class="layui-input" disabled="">
             </div>
         </div>
     </div>
@@ -126,10 +126,6 @@
                 deviceType.appendChild(option);           //给select添加option子标签
                 //console.log(pp[k].productName);
             }
-            var option = document.createElement("option");  // 创建添加option属性
-            option.setAttribute("value","temp.profile");
-            option.innerText="temperature and humidity sensor profile";
-            deviceProfile.appendChild(option);
             form.render("select");            // 刷性select，显示出数据
         });
         //地址设定 根据不同设备类型设置地址
