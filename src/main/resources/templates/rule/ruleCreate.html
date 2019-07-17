@@ -124,8 +124,8 @@
             pa = JSON.parse(ha);
             for(ka=0;ka<pa.length;ka++){
                 var option = document.createElement("option");  // 创建添加option属性
-                option.setAttribute("value",pa[ka].deviceName); // 给option的value添加值
-                option.innerText=pa[ka].deviceName;     // 打印option对应的纯文本
+                option.setAttribute("value",pa[ka].productName); // 给option的value添加值
+                option.innerText=pa[ka].productName;     // 打印option对应的纯文本
                 ruleToDevice.appendChild(option);           //给select添加option子标签
                 //console.log(pp[ka].productName);
             }

@@ -5,8 +5,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.jw.edge.dao.DeviceRepository;
 import com.jw.edge.dao.RuleRepository;
 import com.jw.edge.entity.Function;
+import com.jw.edge.entity.Product;
 import com.jw.edge.entity.Rule;
 import com.jw.edge.entity.Device;
+import com.jw.edge.service.ProductServie;
 import com.jw.edge.service.RuleService;
 import com.jw.edge.service.DeviceService;
 import com.jw.edge.service.FunctionService;
@@ -29,6 +31,8 @@ public class RuleController {
     @Autowired
     DeviceService deviceService;
     @Autowired
+    ProductServie productServie;
+    @Autowired
     DeviceRepository deviceRepository;
     @Autowired
     RuleRepository ruleRepository;
@@ -47,10 +51,14 @@ public class RuleController {
     //对应设备映射
     @GetMapping("/ruleToDevices")
     @ResponseBody
-    public List<Device> getruleToDevices() {
-        List<Device> devices =  deviceService.findAllDevice();
-        // LayuiTableResultUtil<List<Product>> productsTable=new LayuiTableResultUtil<List<Product>>();
-        return devices;
+//    public List<Device> getruleToDevices() {
+//        List<Device> devices =  deviceService.findAllDevice();
+//        // LayuiTableResultUtil<List<Product>> productsTable=new LayuiTableResultUtil<List<Product>>();
+//        return devices;
+//    }
+    public List<Product> getruleToDevices(){
+        List<Product> products = productServie.findAllProduct();
+        return products;
     }
 
     //监听告警
@@ -71,6 +79,7 @@ public class RuleController {
         int ruleExecuteStatus = rule.getRuleExecute();
         int ruleJudge = rule.getRuleJudge();
         String rulePara = rule.getRulePara();
+        String alertDeviceName = rule.getRuleToDevice();
 //        int deviceCurrentStatus = rule.getRuleStatus();
 //        int ruleThreshold = 20;
         String deviceId = "94e46d91-b4f5-465b-a4ce-28e379ef97fb";
@@ -98,6 +107,7 @@ public class RuleController {
         result.put(("ruleThreshold"), (ruleThreshold));
         result.put(("ruleExecuteStatus"), (ruleExecuteStatus));
         result.put(("ruleCurrentStatus"), (ruleCurrentStatus));
+        result.put(("alertDeviceName"), (alertDeviceName));
         result.put(("ident"), (ident));
         return result;
     }

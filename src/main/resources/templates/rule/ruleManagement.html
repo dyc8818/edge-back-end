@@ -111,6 +111,7 @@
                             ruleJudge = data["ruleJudge"];
                             Threshold = data["ruleThreshold"];
                             ident = data["ident"];
+                            alertDeviceName = data["alertDeviceName"]
                             if(ident == 1){Temperature = data["Humidity"];}
                             if(ident == 0){Temperature = data["TemperatureDeg"];}
                             // Temperature = data[type[4]];
@@ -118,19 +119,19 @@
                                 switch (ruleJudge) {
                                     case 0:
                                         if (Temperature = Threshold) {
-                                            alt = alert();
+                                            alt = alert(alertDeviceName);
                                             if(alt = 1){clearInterval(updateAlert);}
                                         };
                                         break;
                                     case 1:
                                         if (Temperature < Threshold) {
-                                            alt = alert();
+                                            alt = alert(alertDeviceName);
                                             if(alt = 1){clearInterval(updateAlert);}
                                         };
                                         break;
                                     case 2:
                                         if (Temperature > Threshold) {
-                                            alt = alert();
+                                            alt = alert(alertDeviceName);
                                             if(alt = 1){clearInterval(updateAlert);}
                                         };
                                         break;
@@ -275,7 +276,7 @@
             }
 
             //触发告警信息
-            function alert() {
+            function alert(alertDeviceName) {
                 //示范一个公告层
                 layer.open({
                     type: 2
@@ -299,6 +300,8 @@
                     content: '/pages/ruleAlert'
                     ,
                     success:function(){
+                        sessionStorage.setItem("alertDeviceName", alertDeviceName);
+
                         return 1;
                     },
                     // success: function (layero) {

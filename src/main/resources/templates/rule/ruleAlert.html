@@ -5,6 +5,12 @@
     <title>设备告警信息</title>
 </head>
 <body>
+<p id="demo" style="text-align:center;"></p>
 <div class="text" style="text-align:center;">警告！设备值异常</div>
 </body>
+<script>
+    // sessionStorage.setItem("alertDeviceName", "设备1");
+    var alert = sessionStorage.getItem("alertDeviceName");
+    document.getElementById("demo").innerHTML = alert;
+</script>
 </html>
