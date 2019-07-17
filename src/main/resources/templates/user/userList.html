@@ -4,21 +4,37 @@
 
 <title>用户列表</title>
 <content>
-    <h1 th:text="${hello}"></h1>
-    <table class="layui-table">
-        <tr>
-            <th>ID</th>
-            <th>姓名</th>
-            <th>remark</th>
-        </tr>
-        <!--/*@thymesVar id="userList" type="java.util.List<User>"*/-->
-        <tr th:each="user : ${userList}">
-            <td th:text="${user.userId}">0</td>
+    <div class="layui-tab-brief layui-tab">
+        <ul class="layui-tab-title site-demo-title">
+            <li class="layui-this"><a><h1>用户列表</h1></a></li>
+        </ul>
+    </div>
+    <div class="layui-fluid"layui-card-body style="padding: 15px;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <table class="layui-table">
+                            <tr>
+                                <th>ID</th>
+                                <th>姓名</th>
+                                <th>remark</th>
+                            </tr>
+                            <!--/*@thymesVar id="userList" type="java.util.List<User>"*/-->
+                            <tr th:each="user : ${userList}">
+                                <td th:text="${user.userId}">0</td>
 
-            <td th:text="${user.username}">zhansan</td>
-            <td th:text="${user.userRemark}">remark</td>
-        </tr>
-    </table>
+                                <td th:text="${user.username}">zhansan</td>
+                                <td th:text="${user.userRemark}">remark</td>
+                            </tr>
+                        </table>
+
+                         </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </content>
 
 <dd class="layui-this" th:fragment="users">

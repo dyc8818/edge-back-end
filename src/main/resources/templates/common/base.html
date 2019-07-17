@@ -14,9 +14,9 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th=
         <div class="layui-logo">边缘计算平台
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left" >
+        <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item"><a href="/">首页</a></li>
-            <li class="layui-nav-item"><a href="/pages/users" >用户管理</a></li>
+            <li class="layui-nav-item"><a href="/pages/users">用户管理</a></li>
             <li class="layui-nav-item"><a href="" style="display:none">商品管理</a></li>
             <li class="layui-nav-item"><a href="" style="display:none">用户</a></li>
             <li class="layui-nav-item"><a href="javascript:;" style="display:none">其它系统</a>
@@ -67,7 +67,8 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th=
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed" style="display:none"><a class="" href="javascript:;">用户管理</a>
+                <li class="layui-nav-item layui-nav-itemed" style="display:none"><a class=""
+                                                                                    href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${users}">
                             <a href="/pages/users">用户列表</a>
@@ -102,17 +103,39 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th=
                 </li>
                 <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">系统管理</a>
                     <dl class="layui-nav-child">
-                        <dd th:replace="${logManagementMenu}" style="display:none">
-                            <a href="/pages/logManagement">日志管理</a>
-                        </dd>
+
                         <dd th:replace="${monitorMenu}">
                             <a href="/pages/monitor">在线设备统计</a>
                         </dd>
                         <dd th:replace="${monitor2Menu}">
                             <a href="/pages/monitor2">监控数据详情</a>
                         </dd>
-
+                        <dd th:replace="${logManagementMenu}">
+                            <!--                            <a href="/pages/logManagement">日志管理</a>-->
+                            <a href="javascript:;">日志管理</a>
+                        </dd>
                     </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">消息路由</a>
+                    <!--                    <dl class="layui-nav-child">-->
+                    <!--                        <dd >-->
+                    <!--                            <a href="javascript:;">数据导出管理</a>-->
+                    <!--                        </dd>-->
+                    <!--                    </dl>-->
+                </li>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">函数计算</a>
+                    <!--                    <dl class="layui-nav-child">-->
+                    <!--                        <dd >-->
+                    <!--                            <a href="javascript:;">数据导出管理</a>-->
+                    <!--                        </dd>-->
+                    <!--                    </dl>-->
+                </li>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">应用场景</a>
+                    <!--                    <dl class="layui-nav-child">-->
+                    <!--                        <dd >-->
+                    <!--                            <a href="javascript:;">数据导出管理</a>-->
+                    <!--                        </dd>-->
+                    <!--                    </dl>-->
                 </li>
             </ul>
         </div>
