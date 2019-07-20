@@ -60,7 +60,7 @@ public class YmlUtil {
     public static void main(String[] args) throws Exception{
 
         /*设备对象包括设备名(name)，制造商(manufacture)，设备型号(model)，设备描述(description），设备资源列表（deviceResources）,设备操作列表(resources),设备命令列表（commands）*/
-        YmlUtil modelprofile = new YamlModel();
+        YmlUtil modelprofile = new YmlUtil();
         modelprofile.setName("MBUS_RTH_LCD");
         modelprofile.setManufacture("DATANAB");
         modelprofile.setModel("MBUS_RTH_LCD");
@@ -296,11 +296,10 @@ public class YmlUtil {
 
         /*设备命令属性设置*/
         modelprofile.setCommands(commands);
-
         /*生成yaml配置文件*/
         Yaml yaml = new Yaml();
         try {
-            yaml.dump(modelprofile,new FileWriter("~/IdeaProjects/edge-back-end/src/main/resources/deviceProfile/modelprofile.yaml"));/*设置生成文件的路径及名称*/
+            yaml.dump(modelprofile,new FileWriter("src/main/resources/deviceProfile/remodelprofile.yaml"));/*设置生成文件的路径及名称*/
         }catch (FileNotFoundException e) {
             e.printStackTrace();
         }
