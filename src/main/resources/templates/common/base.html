@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html th:fragment="Layout (content,title,users,productMenu, deviceMenu,
-ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th="http://www.thymeleaf.org"
+ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script,messageMenu)" lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title th:replace="${title}">边缘计算平台</title>
@@ -91,6 +91,14 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th=
                     </dl>
                 </li>
 
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">消息路由</a>
+                    <dl class="layui-nav-child">
+                        <dd th:replace="${messageMenu}">
+                            <a href="/pages/messageRouting">消息路由管理</a>
+                        </dd>
+                    </dl>
+                </li>
+
                 <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">规则引擎</a>
                     <dl class="layui-nav-child">
                         <dd th:replace="${ruleMenu}">
@@ -115,13 +123,6 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script)" lang="en" xmlns:th=
                             <a href="javascript:;">日志管理</a>
                         </dd>
                     </dl>
-                </li>
-                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">消息路由</a>
-                    <!--                    <dl class="layui-nav-child">-->
-                    <!--                        <dd >-->
-                    <!--                            <a href="javascript:;">数据导出管理</a>-->
-                    <!--                        </dd>-->
-                    <!--                    </dl>-->
                 </li>
                 <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">函数计算</a>
                     <!--                    <dl class="layui-nav-child">-->

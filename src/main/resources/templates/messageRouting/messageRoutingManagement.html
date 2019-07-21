@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,~{::scripts},~{::messageMenu})}">
+
+<title>消息路由管理</title>
+<content>
+    <div class="layui-tab-brief layui-tab">
+        <ul class="layui-tab-title site-demo-title">
+            <li class="layui-this"><a><cite>路由列表</cite></a></li>
+        </ul>
+    </div>
+    <div class="layui-fluid"layui-card-body style="padding: 15px;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <!--                    <div class="layui-card-header ">-->
+                    <!--                        <h1>设备模板列表</h1>-->
+                    <!--                    </div>-->
+
+
+                    <div class="layui-card-body">
+                        <table class="layui-hide" id="productTable" lay-filter="buttons"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</content>
+
+<dd class="layui-this" th:fragment="messageMenu">
+    <a href="/pages/messageRouting">消息路由管理</a>
+</dd>
+<div th:fragment="scripts">
+
+    <script th:inline="none">
+
+    </script>
+
+
+</div>
+</html>
+
