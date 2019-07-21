@@ -7,9 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/pages")
 @Controller
-public class MessageRoutingController {
+public class MessageRoutingPagesController {
     @GetMapping("/messageRouting")
-    public String productList(Model model) throws Exception {
+    public String messageRoutingList(Model model) throws Exception {
         return "/messageRouting/messageRoutingManagement";
+    }
+
+    @GetMapping("/messageRoutingCreate")
+    public String messageRoutingCreate(Model model) throws Exception {
+        return "messageRouting/messageRoutingCreate";
     }
 }

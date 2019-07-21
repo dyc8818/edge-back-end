@@ -38,7 +38,7 @@
         <div class="layui-btn-container">
             <button id="createButton"
                     class="layui-btn layui-btn-normal layui-btn-radius"
-                    lay-event="createProduct">
+                    lay-event="createMessageRouting">
                 添加路由
             </button>
             <button id="refreshButton"
@@ -58,7 +58,7 @@
             //第一个实例
             table.render({
                 elem: '#messageRoutingTable',
-                url: '/api/messages/', //数据接口
+                url: '/api/messageRoutings/', //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
@@ -67,12 +67,12 @@
                     [ //表头
                         // {type: 'checkbox'},
 
-                        {field: 'productId', title: '路由Key', sort: true, align: 'center'},
+                        {field: 'messageRoutingId', title: '路由Key', sort: true, align: 'center'},
 
-                        {field: 'productName', title: '路由名称', align: 'center'},
-                        {field: 'productType', title: '路由类型', align: 'center'},
-                        {field: 'productType', title: '路由地址', align: 'center'},
-                        {field: 'productCreateTime', title: '添加时间', sort: true, align: 'center'},
+                        {field: 'messageRoutingName', title: '路由名称', align: 'center'},
+                        {field: 'messageRoutingType', title: '路由类型', align: 'center'},
+                        {field: 'messageRoutingAdress', title: '路由地址', align: 'center'},
+                        {field: 'messageRoutingCreateTime', title: '添加时间', sort: true, align: 'center'},
                         {
                             title: '操作', align: 'center',
                             toolbar: '#barDemo'
@@ -86,11 +86,11 @@
 
                 var checkStatus = table.checkStatus('test');
                 switch (obj.event) {
-                    case 'createProduct':
+                    case 'createMessageRouting':
                         notice();
                         break;
                     case 'refresh':
-                        table.reload("productTable")
+                        table.reload("messageRoutingTable")
 
                         break;
                 }
@@ -144,7 +144,7 @@
                 layer.open({
                     type: 2
                     ,
-                    title: "新建设备模板"
+                    title: "添加消息路由"
                     ,
                     closeBtn: 1
                     ,
@@ -160,7 +160,7 @@
                     ,
                     moveType: 1 //拖拽模式，0或者1
                     ,
-                    content: '/pages/productCreate'
+                    content: '/pages/messageRoutingCreate'
                     ,
                     // success: function (layero) {
                     //     var btn = layero.find('.layui-layer-btn');
