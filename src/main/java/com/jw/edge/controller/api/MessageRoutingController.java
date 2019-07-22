@@ -27,4 +27,15 @@ public class MessageRoutingController {
         LayuiTableResultUtil<List<MessageRouting>> messageRouingTable=new LayuiTableResultUtil<List<MessageRouting>>("",messageRoutings.getContent(),0,(int)messageRoutings.getTotalElements());
         return messageRouingTable;
     }
+
+    @PostMapping("/messageRouting")
+    @ResponseBody
+    public Boolean addMessageRouting(@RequestBody MessageRouting messageRouting) {
+        if (messageRouting != null) {
+            if (messageRoutingService.addMessageRouting(messageRouting)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

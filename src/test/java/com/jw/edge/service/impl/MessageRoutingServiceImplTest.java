@@ -1,6 +1,7 @@
 package com.jw.edge.service.impl;
 
 import com.jw.edge.entity.MessageRouting;
+import com.jw.edge.service.DeviceService;
 import com.jw.edge.service.MessageRoutingService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,8 @@ public class MessageRoutingServiceImplTest {
 
     @Autowired
     MessageRoutingService messageRoutingService;
+    @Autowired
+    DeviceService deviceService;
 
     @Test
     public void findAllMessageRouting() {
@@ -30,6 +33,7 @@ public class MessageRoutingServiceImplTest {
         MessageRouting messageRouting = new MessageRouting();
         messageRouting.setMessageRoutingAdress("服务器");
         messageRouting.setMessageRoutingType("mq");
+        messageRouting.setDeviceId(deviceService.findAllDevice().get(0).getDeviceId());
         messageRoutingService.addMessageRouting(messageRouting);
     }
 }

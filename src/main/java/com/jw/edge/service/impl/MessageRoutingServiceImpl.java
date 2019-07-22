@@ -2,6 +2,7 @@ package com.jw.edge.service.impl;
 
 import com.jw.edge.dao.MessageRoutingRepository;
 import com.jw.edge.entity.MessageRouting;
+import com.jw.edge.service.DeviceService;
 import com.jw.edge.service.MessageRoutingService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class MessageRoutingServiceImpl implements MessageRoutingService
     @Autowired
     MessageRoutingRepository messageRoutingRepository;
 
+    @Autowired
+    DeviceService deviceService;
+
     @Override
     public Page<MessageRouting> findAllMessageRouting(Pageable pageable) {
         return messageRoutingRepository.findAll(pageable);
@@ -27,6 +31,7 @@ public class MessageRoutingServiceImpl implements MessageRoutingService
             MessageRouting messageRoutingSaved =messageRoutingRepository.save(messageRouting);
             ObjectId objectId =new  ObjectId(messageRoutingSaved.getMessageRoutingId());
             messageRoutingSaved.setMessageRoutingCreateTime(objectId.getDate());
+            messageRoutingSaved.setDeviceName(deviceService.findDeviceByDeviceId(messageRoutingSaved.getDeviceId()).getDeviceName());
             messageRoutingRepository.save(messageRoutingSaved);
             return true;
         }
