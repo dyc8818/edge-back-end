@@ -38,4 +38,12 @@ public class MessageRoutingController {
         }
         return false;
     }
+
+    @DeleteMapping("/messageRouting")
+    @ResponseBody
+    public LayuiTableResultUtil<String> deleteMessageRouting(@RequestBody MessageRouting messageRouting){
+        // System.out.println(product.getProductId());
+        String msg = messageRoutingService.deleteMessageRouting(messageRouting.getMessageRoutingId());
+        return  new LayuiTableResultUtil<String>("",msg,0,1);
+    }
 }

@@ -37,4 +37,15 @@ public class MessageRoutingServiceImpl implements MessageRoutingService
         }
         return false;
     }
+
+    @Override
+    public String deleteMessageRouting(String messageRoutingId) {
+        MessageRouting messageRouting = messageRoutingRepository.findProductByMessageRoutingId(messageRoutingId);
+        if(messageRouting!=null){
+            messageRoutingRepository.deleteById(messageRoutingId);
+            return "删除成功";
+        }else{
+            return "删除失败";
+        }
+    }
 }

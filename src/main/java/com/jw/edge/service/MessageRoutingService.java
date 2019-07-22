@@ -8,4 +8,5 @@ public interface MessageRoutingService {
     public Page<MessageRouting> findAllMessageRouting(Pageable pageable);
 
     public boolean addMessageRouting(MessageRouting messageRouting);
+    public String deleteMessageRouting(String messageRoutingId);
 }
