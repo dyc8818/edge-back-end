@@ -7,48 +7,65 @@
 </head>
 <content>
     <div class="layui-fluid" style="padding: 0px;">
-
         <div class="layui-row">
-
-            <div class="layui-col-lg9" style="margin: 20px">
-                <div class="layui-card">
-                    <div class="layui-card-header" style="font-size: 20px"><strong>设备概览</strong></div>
-                    <div class="layui-card-body">
-                    <div class="layui-carousel" id="part1">
-                        <div carousel-item>
-                            <div style="background-color: #FFB800">
-                                <strong>
-                                    <p style="font-size: 60px;text-align: left;margin-left: 40px; margin-bottom: 100px;margin-top: 80px">已注册的设备总数</p>
-                                    <p id="totalNum" style="font-size: 100px; text-align: center">0</p>
-                                </strong>
+            <div class="layui-col-sm8 layui-col-md8 layui-col-lg8" style="margin: 20px">
+                <div class="layui-row">
+                    <div class="layui-card">
+                        <div class="layui-card-header" style="font-size: 20px"><strong>设备概览</strong></div>
+                        <div class="layui-card-body">
+                            <div class="layui-carousel" id="part1">
+                                <div carousel-item>
+                                    <div style="background-color: #FFB800">
+                                        <strong>
+                                            <p style="font-size: 40px;margin-left: 40px; margin-bottom: 60px;margin-top: 30px">
+                                                已注册的设备总数</p>
+                                            <p id="totalNum" style="font-size: 100px;text-align: center;margin-bottom: 40px">0</p>
+                                            <p style="text-align: right">
+                                                <button class="layui-btn layui-btn-warm"  style="font-size: 40px; color: #000000;margin-right: 20px">点击查看详情</button></p>
+                                        </strong>
+                                    </div>
+                                    <div><p style="font-size: 30px;;text-align: center;margin-top: 50px">
+                                        三个月内需更换的设备:0</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div id="numchart" style="width: 1300px;height:400px;"></div>
-                            <div><p style="font-size: 30px; text-align: center;margin-top: 150px">三个月内需更换的设备(占坑)</p></div>
                         </div>
                     </div>
+                </div>
+                <div class="layui-row" style="margin-top: 20px">
+                    <div class="layui-card">
+                        <div class="layui-card-header" style="font-size: 20px"><strong>设备概览</strong></div>
+                        <div class="layui-card-body">
+                            <div id="numchart" style="width: 800px;height:400px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="layui-col-lg2" style="margin: 20px">
+            <div class="layui-col-sm3 layui-col-md3 layui-col-lg3" style="margin: 20px">
                 <div class="layui-card">
-                    <div class="layui-card-header" style="font-size: 20px"><strong>常用功能</strong></div>
+                    <div class="layui-card-header" style="font-size: 20px"><strong>通知</strong></div>
                     <div class="layui-card-body">
-                        <div class="layui-btn-container">
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
+<!--            <div class="layui-col-lg2" style="margin: 20px">-->
+<!--                <div class="layui-card">-->
+<!--                    <div class="layui-card-header" style="font-size: 20px"><strong>常用功能</strong></div>-->
+<!--                    <div class="layui-card-body">-->
+<!--                        <div class="layui-btn-container">-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
 </content>
 
 <div th:fragment="scripts">
@@ -103,8 +120,8 @@
             carousel.render({
                 elem: '#part1',
                 width: '100%',
-                height:'400px',
-                interval:'4500',
+                height:'250px',
+                interval:'3000',
                 arrow: 'always',
                 anim: 'default',
                 indicator:'outside'
