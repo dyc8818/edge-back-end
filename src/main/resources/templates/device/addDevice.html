@@ -22,7 +22,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">设备模板</label>
         <div class="layui-input-inline">
-            <select name="deviceType" id="deviceType" lay-filter="required">
+            <select name="deviceType" id="deviceType" lay-filter="required" lay-search="">
                 <option value=""></option>
             </select>
         </div>
@@ -51,6 +51,12 @@
         <label class="layui-form-label">设备路径</label>
         <div class="layui-input-inline">
             <input type="text" name="devicePath"  autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">位置信息</label>
+        <div class="layui-input-inline">
+            <input type="text" name="deviceLocation"  autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
