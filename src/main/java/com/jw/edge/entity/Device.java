@@ -20,6 +20,12 @@ public class Device {
     private String deviceFailDate;
     private String deviceProtocol;
     private String devicePath;
+    private String deviceLocation;
+
+    public String getDeviceLocation() { return deviceLocation; }
+
+    public void setDeviceLocation(String deviceLocation) { this.deviceLocation = deviceLocation; }
+
     public String getDevicePath() { return devicePath; }
 
     public void setDevicePath(String devicePath) { this.devicePath = devicePath; }

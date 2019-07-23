@@ -96,7 +96,7 @@ public class DeviceController {
             if (deviceService.addDevice(device)) {
                 JSONObject jo = new JSONObject();
                 jo.put("name",device.getDeviceName());
-                jo.put("method","GET");
+                jo.put("method","POST");
                 jo.put("protocol",device.getDeviceProtocol());
                 jo.put("address",device.getDeviceAddress());
                 jo.put("port",device.getDeviceAddressPort());
