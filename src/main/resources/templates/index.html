@@ -16,29 +16,14 @@
                             <div class="layui-carousel" id="part1">
                                 <div carousel-item>
                                     <div style="background-color: #FFB800">
-                                        <p style="font-size: 40px;margin-left: 40px; margin-bottom: 30px;margin-top: 30px">
-                                            已注册的设备总数
-                                        </p>
-                                        <p id="totalNum"
-                                           style="font-size: 100px;text-align: center;margin-bottom: 20px">0</p>
-                                        <p style="text-align: right">
-                                            <button class="layui-btn layui-btn-warm"
-                                                    style="font-size: 40px; color: #000000;margin-right: 20px">点此查看详情
-                                            </button>
-                                        </p>
+                                        <p style="font-size: 40px;margin-left: 40px; margin-bottom: 30px;margin-top: 30px">已注册的设备总数</p>
+                                        <p id="totalNum" style="font-size: 100px;text-align: center;margin-bottom: 20px">0</p>
+                                        <p style="text-align: right;font-size: 40px; color: #000000;margin-right: 20px">点击查看详情</p>
                                     </div>
-                                    <div style="background-color: #FF5722">
-                                        <p style="font-size: 40px;margin-left: 40px; margin-bottom: 30px;margin-top: 30px">
-                                            近期需更换的设备
-                                        </p>
-                                        <p id="renewNum"
-                                           style="font-size: 100px;text-align: center;margin-bottom: 20px">0</p>
-                                        <p style="text-align: right">
-                                            <button class="layui-btn layui-btn-danger"
-                                                    style="font-size: 40px; color: #000000;margin-right: 20px"
-                                                    onclick="expiringDetails()">点此查看详情
-                                            </button>
-                                        </p>
+                                    <div style="background-color: #FF5722" onclick="expiringDetails()">
+                                        <p style="font-size: 40px;margin-left: 40px; margin-bottom: 30px;margin-top: 30px">近期需更换的设备</p>
+                                        <p id="renewNum" style="font-size: 100px;text-align: center;margin-bottom: 20px">0</p>
+                                        <p style="text-align: right;font-size: 40px; color: #000000;margin-right: 20px">点击查看详情</p>
                                     </div>
                                 </div>
                             </div>
@@ -161,14 +146,14 @@
         }, 1000);
 
         function expiringDetails() {
-            var $ = layui.$;
-            $.get("/api/expiringdetails", function (data) {
-                layui.use('layer', function () {
-                    var layer = layui.layer;
-                    layer.open({
-                        type: 1,
-                        content: JSON.stringify(data)
-                    });
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.open({
+                    type: 2,
+                    title: '详情',
+                    content: '/pages/expiringDetails',
+                    area: ['600px', '800px'],
+                    id: 'expiringTable'
                 });
             });
         }

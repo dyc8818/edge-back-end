@@ -9,18 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SystemManagementPagesController {
     @GetMapping("/monitor")
-    public String systemManagementList(Model model) throws Exception {
+    public String systemManagementList() throws Exception {
         return "systemManagement/monitor";
     }
 
     @GetMapping("/monitor2")
-    public String systemManagementList2(Model model) throws Exception {
+    public String systemManagementList2() throws Exception {
         return "systemManagement/monitor2";
     }
 
     @GetMapping("/logManagement")
     public String logManagement(Model model) throws Exception {
         return "systemManagement/logManagement";
+    }
+
+    @GetMapping("/expiringDetails")
+    public String getExpiringPage()throws Exception{
+        return "systemManagement/expiringDetails";
     }
 
 }

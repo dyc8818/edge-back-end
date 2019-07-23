@@ -3,6 +3,7 @@ package com.jw.edge.controller.api;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jw.edge.service.SurveillanceService;
+import com.jw.edge.util.LayuiTableResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +47,8 @@ public class SurveillanceController {
 
     @GetMapping("/expiringdetails")
     @ResponseBody
-    public JSONArray getExpiring(){
-        return surveillanceService.getExpiringDevice();
+    public LayuiTableResultUtil getExpiring(@RequestParam Integer page, @RequestParam Integer limit){
+        LayuiTableResultUtil<JSONArray> table = new LayuiTableResultUtil<>("",surveillanceService.getExpiringDevice(),0,surveillanceService.getExpiringDevice().size());
+        return table;
     }
 }
