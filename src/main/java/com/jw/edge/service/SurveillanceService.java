@@ -8,4 +8,5 @@ public interface SurveillanceService {
     JSONArray getOnlineDevices();
     int getTotalNum();
     JSONObject getDeviceDetail(String id);
+    JSONArray getExpiringDevice();
 }

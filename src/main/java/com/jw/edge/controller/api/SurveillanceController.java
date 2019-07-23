@@ -2,13 +2,10 @@ package com.jw.edge.controller.api;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.jw.edge.entity.Surveillance;
 import com.jw.edge.service.SurveillanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 
 @RequestMapping("/api")
 @RestController
@@ -39,5 +36,17 @@ public class SurveillanceController {
     @ResponseBody
     public JSONObject getDetails(@RequestParam String id){
         return surveillanceService.getDeviceDetail(id);
+    }
+
+    @GetMapping("/expiringnum")
+    @ResponseBody
+    public int getExpiringNum(){
+        return surveillanceService.getExpiringDevice().size();
+    }
+
+    @GetMapping("/expiringdetails")
+    @ResponseBody
+    public JSONArray getExpiring(){
+        return surveillanceService.getExpiringDevice();
     }
 }
