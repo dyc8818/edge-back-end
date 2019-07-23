@@ -23,6 +23,7 @@ public class  ProductController {
     public LayuiTableResultUtil<List<Product>> getProducts(@RequestParam Integer page, @RequestParam Integer limit) {
         Pageable pageable = PageRequest.of(page-1, limit);
         Page<Product> products =  productServie.findAllProduct(pageable);
+        //System.out.println("啊哈哈哈哈");
         LayuiTableResultUtil<List<Product>> productsTable=new LayuiTableResultUtil<List<Product>>("",products.getContent(),0,(int)products.getTotalElements());
         return productsTable;
     }
