@@ -16,16 +16,28 @@
                             <div class="layui-carousel" id="part1">
                                 <div carousel-item>
                                     <div style="background-color: #FFB800">
-                                        <strong>
-                                            <p style="font-size: 40px;margin-left: 40px; margin-bottom: 60px;margin-top: 30px">
-                                                已注册的设备总数</p>
-                                            <p id="totalNum" style="font-size: 100px;text-align: center;margin-bottom: 40px">0</p>
-                                            <p style="text-align: right">
-                                                <button class="layui-btn layui-btn-warm"  style="font-size: 40px; color: #000000;margin-right: 20px">点击查看详情</button></p>
-                                        </strong>
+                                        <p style="font-size: 40px;margin-left: 40px; margin-bottom: 30px;margin-top: 30px">
+                                            已注册的设备总数
+                                        </p>
+                                        <p id="totalNum"
+                                           style="font-size: 100px;text-align: center;margin-bottom: 20px">0</p>
+                                        <p style="text-align: right">
+                                            <button class="layui-btn layui-btn-warm"
+                                                    style="font-size: 40px; color: #000000;margin-right: 20px">点此查看详情
+                                            </button>
+                                        </p>
                                     </div>
-                                    <div><p style="font-size: 30px;;text-align: center;margin-top: 50px">
-                                        三个月内需更换的设备:0</p>
+                                    <div style="background-color: #FF5722">
+                                        <p style="font-size: 40px;margin-left: 40px; margin-bottom: 30px;margin-top: 30px">
+                                            近期需更换的设备
+                                        </p>
+                                        <p id="renewNum"
+                                           style="font-size: 100px;text-align: center;margin-bottom: 20px">0</p>
+                                        <p style="text-align: right">
+                                            <button class="layui-btn layui-btn-danger"
+                                                    style="font-size: 40px; color: #000000;margin-right: 20px">点此查看详情
+                                            </button>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +132,7 @@
             carousel.render({
                 elem: '#part1',
                 width: '100%',
-                height:'250px',
+                height:'200px',
                 interval:'3000',
                 arrow: 'always',
                 anim: 'default',
