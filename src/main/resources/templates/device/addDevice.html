@@ -4,7 +4,7 @@
     <title>边缘计算平台</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all"/>
 </head>
 <body>
 
@@ -20,12 +20,27 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">设备模板</label>
-        <div class="layui-input-inline">
-            <select name="deviceType" id="deviceType" lay-filter="required" lay-search="">
-                <option value="">请输入关键字</option>
-            </select>
-        </div>
+        <table>
+            <tr>
+                <td>
+                    <label class="layui-form-label">设备模板</label>
+                </td>
+                <td width="190">
+                    <select name="deviceType" id="deviceType" lay-filter="required" lay-search="">
+                        <option value="">请输入关键字</option>
+                    </select>
+                </td>
+                <td width="5"></td>
+                <td>
+                    <div id="layerDemo">
+                        <div id="setProductDetail" class="site-demo-button">
+                            <button type="button" class="layui-btn layui-btn-md layui-btn-disabled">详情</button>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        </table>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">通信协议</label>
@@ -97,27 +112,10 @@
 <script th:src="@{/layui/layui.js}"></script>
 <script>
     layui.use(['form', 'layedit', 'laydate', 'layer'], function () {
-
+        var $= layui.jquery, layer = layui.layer;
         var form = layui.form;
         var pp;
-        //自定义验证规则
-        // form.verify({
-        //     title: function (value) {
-        //         if (value.length < 5) {
-        //             return '标题至少得5个字符啊';
-        //         }
-        //     }
-        //     , pass: [
-        //         /^[\S]{6,12}$/
-        //         , '密码必须6到12位，且不能出现空格'
-        //     ]
-        //     , content: function (value) {
-        //         layedit.sync(editIndex);
-        //     }
-        // });
-
         //动态加载设备类型
-        $ = layui.jquery;
         $(document).ready(function() {
             var laydate = layui.laydate;
             var hh = sessionStorage.getItem("productNames");
@@ -127,10 +125,9 @@
             });
             for(k=0;k<pp.length;k++){
                 var option = document.createElement("option");  // 创建添加option属性
-                option.setAttribute("value",pp[k].productName); // 给option的value添加值
+                option.setAttribute("value",pp[k].productId); // 给option的value添加值
                 option.innerText=pp[k].productName;     // 打印option对应的纯文本
                 deviceType.appendChild(option);           //给select添加option子标签
-                //console.log(pp[k].productName);
             }
             form.render("select");            // 刷性select，显示出数据
         });
@@ -138,34 +135,24 @@
         form.on('select(required)', function (obj) {
             var data = obj.data;
             var addressObj = document.getElementById("setAddress");
+            var addressObj1 = document.getElementById("setProductDetail");
             if(document.getElementById("addressPlaceholder") ){
                 var addressPlaceholder = document.getElementById("addressPlaceholder");
                 addressPlaceholder.style.display="none";
             }
             if (obj.elem.selectedIndex-1 < 0){
                 addressObj.innerHTML='<input type="text"id="addressPlaceholder" autocomplete="off" placeholder="请选择设备模板" class="layui-input" disabled="">';
+                addressObj1.innerHTML='<button type="button" class="layui-btn layui-btn-md layui-btn-disabled">详情</button>';
             } else {
+//                addressObj1.innerHTML='<button type="button" data-method="setTop" class="layui-btn layui-btn-md">详情</button>';
+                addressObj1.innerHTML='<button type="button"  data-method="setTop" class="layui-btn layui-btn-md" onclick="devProductDetail()">详情</button>';
                 if (pp[obj.elem.selectedIndex-1].productType == "网关"){
                     addressObj.innerHTML='<div class="layui-input-inline"> <input type="text" name="deviceAddress" autocomplete="off" placeholder="请输入设备IP地址" class="layui-input"></div><div class="layui-input-inline" style="width: 75px;"><input type="text" name="deviceAddressPort" placeholder="端口号" autocomplete="off" class="layui-input"></div>';
                 }else{
                     addressObj.innerHTML='<div class="layui-input-inline"> <input type="text" name="deviceAddress" autocomplete="off" placeholder="请输入设备地址" class="layui-input"></div><div class="layui-input-inline" style="width: 75px;"><input type="text" name="deviceAddressPort" placeholder="端口号" autocomplete="off" class="layui-input"></div>';
-                }
-            }
+             }
             form.render();
-        });
-
-        //选择配置文件
-//        form.on('select(devProfile)', function (obj) {
-//            var hh = sessionStorage.getItem("productNames");
-//            pp = JSON.parse(hh);
-//            for(k=0;k<pp.length;k++){
-//                var option = document.createElement("option");  // 创建添加option属性
-//                option.setAttribute("value",pp[k].productName+"的配置文件"); // 给option的value添加值
-//                option.innerText=pp[k].productName;     // 打印option对应的纯文本
-//                deviceType.appendChild(option);           //给select添加option子标签
-//            }
-//            form.render();
-//        });
+        }});
 
         form.on('submit(formVerify)', function (obj) {
             $ = layui.jquery;
@@ -210,6 +197,40 @@
             parent.layui.table.reload("deviceTable");
         });
     });
+    function devProductDetail() {
+        var obj0 = document.getElementById("deviceType");
+        console.log('url:   '+'/pages/productDetails?productId?='+obj0.options[obj0.selectedIndex].value);
+        layui.use(['layer'], function () {
+            var $ = layui.jquery, layer = layui.layer;
+            var that = this;
+            layer.open({
+                type: 2,
+                title: "模板详情",
+                closeBtn: 1,
+                area: ['390px', '260px'],
+                shade: 0,
+                maxmin:true,
+                offset: [ //为了演示，随机坐标
+                    Math.random()*($(window).height()-300)
+                    ,Math.random()*($(window).width()-390)
+                ],
+                id: 'LAY_layuipro1', //设定一个id，防止重复弹出
+                btn: ['关闭'],
+                btn2: function(){
+                    layer.closeAll();
+                },
+                btnAlign: 'c',
+                moveType: 1, //拖拽模式，0或者1
+//                content: '//layer.layui.com/test/settop.html',
+                content: '/pages/productDetails?productId='+obj0.options[obj0.selectedIndex].value,
+                zIndex: layer.zIndex //重点1
+                ,success: function(layero){
+                    layer.setTop(layero); //重点2
+                }
+
+            });
+        });
+    }
 </script>
 
 </html>
