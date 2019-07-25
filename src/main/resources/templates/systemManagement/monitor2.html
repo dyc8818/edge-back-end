@@ -90,71 +90,71 @@
             });
         });
 
-        function drawCharts(id){
-                var date = new Date();
-                layui.use('jquery', function () {
-                    var $ = layui.$;
-                    //后面就跟你平时使用jQuery一样
-                    $.get("/api/surdetails" + "?id=" + id,
-                        function (data) {
-                            var type = Object.keys(data);
-                            data1.push([date, data[type[0]]]);
-                            data2.push([date, data[type[1]]]);
-                            if (data1.length > 60) {
-                                data1.shift();
-                                data2.shift();
+        function drawCharts(id) {
+            var date = new Date();
+
+            var $ = layui.$;
+            //后面就跟你平时使用jQuery一样
+            $.get("/api/surdetails" + "?id=" + id,
+                function (data) {
+                    var type = Object.keys(data);
+                    data1.push([date, data[type[0]]]);
+                    data2.push([date, data[type[1]]]);
+                    if (data1.length > 60) {
+                        data1.shift();
+                        data2.shift();
+                    }
+                    // 指定图表的配置项和数据
+                    var option = {
+                        title: {
+                            text: '设备监控情况',
+                            left: 80,
+                            textStyle: {
+                                fontSize: 22
                             }
-                            // 指定图表的配置项和数据
-                            var option = {
-                                title: {
-                                    text: '设备监控情况',
-                                    left:80,
-                                    textStyle:{
-                                        fontSize:22
-                                    }
-                                },
-                                tooltip: {
-                                    trigger: 'axis'
-                                },
-                                xAxis: {
-                                    type:'time',
-                                    name:'时间'
-                                },
-                                yAxis: {},
-                                legend: {
-                                    left: 200,
-                                    bottom: 0,
-                                    itemHeight: 28,
-                                    itemWidth: 70
-                                },
-                                series: [
-                                    {
-                                        name: type[0],
-                                        type:'line',
-                                        data:data1,
-                                        symbol:'emptyTriangle',
-                                        symbolSize: 6,
-                                        lineStyle:{
-                                            width: 2
-                                        }
-                                    },
-                                    {
-                                        name: type[1],
-                                        type: 'line',
-                                        data: data2,
-                                        symbol:'emptyCircle',
-                                        symbolSize: 6,
-                                        lineStyle:{
-                                            width: 2
-                                        }
-                                    }
-                                ]
-                            };
-                            // 使用刚指定的配置项和数据显示图表。
-                            detailChart.setOption(option);
-                        }
-                    );
-                });
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        xAxis: {
+                            type: 'time',
+                            name: '时间'
+                        },
+                        yAxis: {},
+                        legend: {
+                            left: 200,
+                            bottom: 0,
+                            itemHeight: 28,
+                            itemWidth: 70
+                        },
+                        series: [
+                            {
+                                name: type[0],
+                                type: 'line',
+                                data: data1,
+                                symbol: 'emptyTriangle',
+                                symbolSize: 6,
+                                lineStyle: {
+                                    width: 2
+                                }
+                            },
+                            {
+                                name: type[1],
+                                type: 'line',
+                                data: data2,
+                                symbol: 'emptyCircle',
+                                symbolSize: 6,
+                                lineStyle: {
+                                    width: 2
+                                }
+                            }
+                        ]
+                    };
+                    // 使用刚指定的配置项和数据显示图表。
+                    detailChart.setOption(option);
+                }
+            );
+
         }
     </script>
 

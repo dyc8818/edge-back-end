@@ -7,72 +7,93 @@
 </head>
 <content>
     <div class="layui-fluid" style="padding: 0px;">
-
         <div class="layui-row">
-
-            <div class="layui-col-lg9" style="margin: 20px">
-                <div class="layui-card">
-                    <div class="layui-card-header" style="font-size: 20px"><strong>设备概览</strong></div>
-                    <div class="layui-card-body">
-                    <div class="layui-carousel" id="part1">
-                        <div carousel-item>
-                            <div style="background-color: #FFB800">
-                                <strong>
-                                    <p style="font-size: 60px;text-align: left;margin-left: 40px; margin-bottom: 100px;margin-top: 80px">已注册的设备总数</p>
-                                    <p id="totalNum" style="font-size: 100px; text-align: center">0</p>
-                                </strong>
+            <div class="layui-col-sm8 layui-col-md8 layui-col-lg8" style="margin: 20px">
+                <div class="layui-row">
+                    <div class="layui-card">
+                        <div class="layui-card-header" style="font-size: 20px"><strong>设备概览</strong></div>
+                        <div class="layui-card-body">
+                            <div class="layui-carousel" id="part1">
+                                <div carousel-item>
+                                    <div style="background-color: #FFB800">
+                                        <p style="font-size: 40px;margin-left: 40px; margin-bottom: 30px;margin-top: 30px">已注册的设备总数</p>
+                                        <p id="totalNum" style="font-size: 100px;text-align: center;margin-bottom: 20px">0</p>
+                                        <p style="text-align: right;font-size: 40px; color: #000000;margin-right: 20px">点击查看详情</p>
+                                    </div>
+                                    <div style="background-color: #FF5722" onclick="expiringDetails()">
+                                        <p style="font-size: 40px;margin-left: 40px; margin-bottom: 30px;margin-top: 30px">近期需更换的设备</p>
+                                        <p id="renewNum" style="font-size: 100px;text-align: center;margin-bottom: 20px">0</p>
+                                        <p style="text-align: right;font-size: 40px; color: #000000;margin-right: 20px">点击查看详情</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div id="numchart" style="width: 1300px;height:400px;"></div>
-                            <div><p style="font-size: 30px; text-align: center;margin-top: 150px">三个月内需更换的设备(占坑)</p></div>
                         </div>
                     </div>
+                </div>
+                <div class="layui-row" style="margin-top: 20px">
+                    <div class="layui-card">
+                        <div class="layui-card-header" style="font-size: 20px;height: 40px">
+                            <div class="layui-form">
+                            <select name="city" lay-filter="change">
+                                <option value="0">设备在线情况</option>
+                                <option value="1">设备寿命情况</option>
+                            </select>
+                        </div></div>
+                        <div class="layui-card-body">
+                            <div id="chart" style="width: 800px;height:400px"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="layui-col-lg2" style="margin: 20px">
+            <div class="layui-col-sm3 layui-col-md3 layui-col-lg3" style="margin: 20px">
                 <div class="layui-card">
-                    <div class="layui-card-header" style="font-size: 20px"><strong>常用功能</strong></div>
+                    <div class="layui-card-header" style="font-size: 20px"><strong>通知</strong></div>
                     <div class="layui-card-body">
-                        <div class="layui-btn-container">
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>
-                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
+<!--            <div class="layui-col-lg2" style="margin: 20px">-->
+<!--                <div class="layui-card">-->
+<!--                    <div class="layui-card-header" style="font-size: 20px"><strong>常用功能</strong></div>-->
+<!--                    <div class="layui-card-body">-->
+<!--                        <div class="layui-btn-container">-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                            <a href="http://www.layui.com" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-fluid"><strong style="font-size: 20px;color: #000000">占坑</strong></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
 </content>
 
 <div th:fragment="scripts">
     <script th:src="@{/echarts-4.2.1/echarts.min.js}"></script>
     <script>
-        layui.use('jquery', function(){
-            var $ = layui.$;
-            //后面就跟你平时使用jQuery一样
-            $.get("/api/totalnum/",
-                function(data){
-                    document.getElementById("totalNum").innerHTML=data;
-                });
-
+        var $ = layui.$;
+        //后面就跟你平时使用jQuery一样
+        $.get("/api/totalnum/", function (data) {
+            document.getElementById("totalNum").innerHTML = data;
+        });
+        $.get("/api/expiringnum", function (data) {
+            document.getElementById("renewNum").innerHTML = data;
         });
 
+
         // 基于准备好的dom，初始化echarts实例
-        var numChart = echarts.init(document.getElementById('numchart'));
+        var chart = echarts.init(document.getElementById('chart'));
         var num = new Array();
         num.push([new Date(), 0]);
 
         var option = {
             title: {
                 text: '设备在线数量',
-                left:'center'
+                left:'10%'
             },
             tooltip: {
                 trigger: 'axis'
@@ -93,44 +114,90 @@
                 }
             }]
         };
+
+        var option1 = {
+            title: {
+                text: '设备寿命分布',
+                left:'10%'
+            }
+        };
+
         // 使用刚指定的配置项和数据显示图表。
-        numChart.setOption(option);
+        chart.setOption(option);
+        var update = setInterval(draw1,3000);
 
-
-        layui.use('carousel', function(){
+        layui.use(['carousel','form'], function(){
             var carousel = layui.carousel;
+            var form = layui.form;
             //建造实例
             carousel.render({
                 elem: '#part1',
                 width: '100%',
-                height:'400px',
-                interval:'4500',
+                height:'200px',
+                interval:'3000',
                 arrow: 'always',
                 anim: 'default',
                 indicator:'outside'
             });
+            //下拉菜单监听
+            form.on('select(change)', function(data){
+                if(data.value==0){
+                    clearInterval(update);
+                    update = setInterval(draw1,3000);
+                }else {
+                    clearInterval(update);
+                    update = setInterval(draw2,5000)
+                }
+            });
         });
 
-        setInterval(function(){
+        function draw1() {
             var date = new Date();
-            layui.use('jquery', function(){
-                var $ = layui.$;
-                //后面就跟你平时使用jQuery一样
-                $.get("/api/surnum/",
-                    function(data){
-                        num.push([date,data]);
-                        // 指定图表的配置项和数据
-                        if(num.length>60){
-                            num.shift();
-                        }
+            var $ = layui.$;
+            //后面就跟你平时使用jQuery一样
+            $.get("/api/surnum/",
+                function (data) {
+                    num.push([date, data]);
+                    // 指定图表的配置项和数据
+                    if (num.length > 60) {
+                        num.shift();
+                    }
+                    // 使用刚指定的配置项和数据显示图表。
+                    chart.setOption(option);
+                }
+            );
+        }
+        function draw2() {
+            var date = new Date();
+            var $ = layui.$;
+            //后面就跟你平时使用jQuery一样
+            $.get("/api/surnum/",
+                function (data) {
+                    num.push([date, data]);
+                    // 指定图表的配置项和数据
+                    if (num.length > 60) {
+                        num.shift();
+                    }
+                    // 使用刚指定的配置项和数据显示图表。
+                    chart.setOption(option1);
+                }
+            );
+        }
 
-                        // 使用刚指定的配置项和数据显示图表。
-                        numChart.setOption(option);
-                    });
 
+
+        function expiringDetails() {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.open({
+                    type: 2,
+                    title: '需更换设备详情',
+                    content: '/pages/expiringDetails',
+                    area: ['600px', '800px'],
+                    id: 'expiringTable'
+                });
             });
-        },1000)
-
+        }
     </script>
 
 

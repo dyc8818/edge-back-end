@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>边缘计算平台</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
+</head>
+<body>
+<table id="details" ></table>
+</body>
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#details'
+            ,height: 'full-20'
+            ,url: '/api/expiringdetails'
+            ,page: true
+            ,cols: [
+                [
+                {field: 'name', title: '名称', width:'30%', fixed: 'left'},
+                {field: 'failDate', title: '到期时间', width:'20%'},
+                {field: 'description', title: '描述', width:'50%'}
+                ]
+            ]
+        });
+    });
+</script>
+
+</html>

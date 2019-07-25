@@ -1,10 +1,12 @@
 package com.jw.edge.service;
 
-import com.jw.edge.entity.Surveillance;
-import java.util.List;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 
 public interface SurveillanceService {
-    List<Surveillance> findAll();
-    List<Surveillance> findByType(String type);
-    List<Surveillance> findByTypeAndValue(String type, int from, int to);
+    JSONArray getOnlineDevices();
+    int getTotalNum();
+    JSONObject getDeviceDetail(String id);
+    JSONArray getExpiringDevice();
 }
