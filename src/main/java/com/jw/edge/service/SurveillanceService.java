@@ -11,4 +11,5 @@ public interface SurveillanceService {
     JSONArray getExpiringDevice();
     int getRegNum();
     JSONArray getRegDevice();
+    JSONObject getAge();
 }

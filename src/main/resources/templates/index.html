@@ -115,13 +115,6 @@
             }]
         };
 
-        var option1 = {
-            title: {
-                text: '设备寿命分布',
-                left:'10%'
-            }
-        };
-
         // 使用刚指定的配置项和数据显示图表。
         chart.setOption(option);
         var update = setInterval(draw1,3000);
@@ -173,9 +166,27 @@
             var date = new Date();
             var $ = layui.$;
             //后面就跟你平时使用jQuery一样
-            $.get("/api/surnum/",
+            $.get("/api/agedis/",
                 function (data) {
-                    num.push([date, data]);
+                    var option1 = {
+                        title: {
+                            text: '设备寿命分布',
+                            left:'10%'
+                        },
+                        tooltip : {
+                            trigger: 'item',
+                        },
+                        series:[{
+                            type:'pie',
+                            data:[
+                                {value:data['veteranGood'],name:'正常'},
+                                {value:data['veteranFix'],name:'即将到期'},
+                                {value:data['rookieGood'],name:'新注册'},
+                                {value:data['rookieFix'],name:'你怎么新注册了个快嗝屁的设备'}
+                            ]
+                            }
+                        ]
+                    };
                     // 指定图表的配置项和数据
                     if (num.length > 60) {
                         num.shift();

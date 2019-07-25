@@ -92,10 +92,10 @@ public class SurveillanceServiceImplement implements SurveillanceService{
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = simpleDateFormat.parse(dateStr);
                 Calendar failDate = Calendar.getInstance();
-                Calendar after = Calendar.getInstance();
+                Calendar afterThree = Calendar.getInstance();
                 failDate.setTime(date);
-                after.add(Calendar.MONTH,3);
-                if(after.compareTo(failDate)>0){
+                afterThree.add(Calendar.MONTH,3);
+                if(afterThree.compareTo(failDate)>=0){
                     JSONObject deviceObj = new JSONObject();
                     deviceObj.put("name",device.getDeviceName());
                     deviceObj.put("failDate",dateStr);
@@ -128,6 +128,46 @@ public class SurveillanceServiceImplement implements SurveillanceService{
             arr.add(deviceObj);
         }
         return arr;
+    }
+
+    @Override
+    public JSONObject getAge(){
+        JSONObject obj = new JSONObject();
+        int rookieGood = 0;
+        int rookieFix = 0;
+        int veteranGood = 0;
+        int veteranFix = 0;
+        List<Device> list = deviceRepository.findAll();
+        for(int i=0;i<list.size();i++){
+            try {
+                Device device = list.get(i);
+                String fixStr = device.getDeviceFailDate();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date faildate = simpleDateFormat.parse(fixStr);
+                Date birthdate = device.getDeviceCreateTime();
+
+                Calendar failDate = Calendar.getInstance();
+                Calendar afterThree = Calendar.getInstance();
+                Calendar birthDate = Calendar.getInstance();
+                Calendar beforeOne = Calendar.getInstance();
+                failDate.setTime(faildate);
+                birthDate.setTime(birthdate);
+                beforeOne.add(Calendar.MONTH,-1);
+                afterThree.add(Calendar.MONTH,3);
+                if(afterThree.compareTo(failDate)>=0){
+                    if(beforeOne.compareTo(birthDate)>=0){veteranFix++;}else{rookieFix++;}
+                }else {
+                    if(beforeOne.compareTo(birthDate)>=0){veteranGood++;}else{rookieGood++;}
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        obj.put("rookieGood",rookieGood);
+        obj.put("rookieFix",rookieFix);
+        obj.put("veteranGood",veteranGood);
+        obj.put("veteranFix",veteranFix);
+        return obj;
     }
 
 }

@@ -64,4 +64,8 @@ public class SurveillanceController {
         LayuiTableResultUtil<JSONArray> table = new LayuiTableResultUtil<>("",surveillanceService.getRegDevice(),0,surveillanceService.getRegDevice().size());
         return table;
     }
+
+    @GetMapping("/agedis")
+    @ResponseBody
+    public JSONObject getAgeDistribution(){return surveillanceService.getAge();}
 }
