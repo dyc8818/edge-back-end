@@ -9,4 +9,5 @@ public interface SurveillanceService {
     int getTotalNum();
     JSONObject getDeviceDetail(String id);
     JSONArray getExpiringDevice();
+    int getRegNum();
 }

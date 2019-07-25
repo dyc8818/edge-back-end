@@ -51,4 +51,10 @@ public class SurveillanceController {
         LayuiTableResultUtil<JSONArray> table = new LayuiTableResultUtil<>("",surveillanceService.getExpiringDevice(),0,surveillanceService.getExpiringDevice().size());
         return table;
     }
+
+    @GetMapping("/regnum")
+    @ResponseBody
+    public int getRegNum(){
+        return surveillanceService.getRegNum();
+    }
 }

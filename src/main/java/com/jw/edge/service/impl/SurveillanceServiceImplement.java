@@ -108,4 +108,9 @@ public class SurveillanceServiceImplement implements SurveillanceService{
         }
         return arr;
     }
+
+    @Override
+    public int getRegNum(){
+        return deviceRepository.findAll().size();
+    }
 }
