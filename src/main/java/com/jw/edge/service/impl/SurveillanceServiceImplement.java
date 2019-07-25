@@ -113,4 +113,21 @@ public class SurveillanceServiceImplement implements SurveillanceService{
     public int getRegNum(){
         return deviceRepository.findAll().size();
     }
+
+    @Override
+    public JSONArray getRegDevice(){
+        JSONArray arr = new JSONArray();
+        List<Device> list = deviceRepository.findAll();
+        for(int i=0;i<list.size();i++){
+            Device device = list.get(i);
+            JSONObject deviceObj = new JSONObject();
+            deviceObj.put("id",device.getDeviceId());
+            deviceObj.put("name", device.getDeviceName());
+            deviceObj.put("type",device.getDeviceType());
+            deviceObj.put("description", device.getDeviceDesc());
+            arr.add(deviceObj);
+        }
+        return arr;
+    }
+
 }

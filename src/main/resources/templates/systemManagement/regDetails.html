@@ -17,12 +17,13 @@
         table.render({
             elem: '#details'
             ,height: 'full-20'
-            ,url: '/api/expiringdetails'
+            ,url: '/api/regdetails'
             ,cols: [
                 [
-                {field: 'name', title: '名称', width:'30%', fixed: 'left'},
-                {field: 'failDate', title: '到期时间', width:'20%'},
-                {field: 'description', title: '描述', width:'50%'}
+                    {field: 'name', title: '名称', width:'30%', fixed: 'left'},
+                    {field: 'id', title: 'ID', width:'20%'},
+                    {field: 'type', title: '模板类型', width:'20%'},
+                    {field: 'description', title: '描述', width:'30%'}
                 ]
             ]
         });

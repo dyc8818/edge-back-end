@@ -57,4 +57,11 @@ public class SurveillanceController {
     public int getRegNum(){
         return surveillanceService.getRegNum();
     }
+
+    @GetMapping("/regdetails")
+    @ResponseBody
+    public LayuiTableResultUtil<JSONArray> getReg(@RequestParam Integer page, @RequestParam Integer limit){
+        LayuiTableResultUtil<JSONArray> table = new LayuiTableResultUtil<>("",surveillanceService.getRegDevice(),0,surveillanceService.getRegDevice().size());
+        return table;
+    }
 }

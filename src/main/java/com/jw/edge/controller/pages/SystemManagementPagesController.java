@@ -28,4 +28,9 @@ public class SystemManagementPagesController {
         return "systemManagement/expiringDetails";
     }
 
+    @GetMapping("/regDetails")
+    public String getRegPage()throws Exception{
+        return "systemManagement/regDetails";
+    }
+
 }
