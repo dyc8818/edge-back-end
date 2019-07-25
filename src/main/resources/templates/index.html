@@ -35,8 +35,8 @@
                         <div class="layui-card-header" style="font-size: 20px;height: 40px">
                             <div class="layui-form">
                             <select name="city" lay-filter="change">
+                                <option value="1" selected>设备寿命情况</option>
                                 <option value="0">设备在线情况</option>
-                                <option value="1">设备寿命情况</option>
                             </select>
                         </div></div>
                         <div class="layui-card-body">
@@ -88,7 +88,6 @@
         // 基于准备好的dom，初始化echarts实例
         var chart = echarts.init(document.getElementById('chart'));
         var num = new Array();
-        num.push([new Date(), 0]);
 
         var option = {
             title: {
@@ -115,9 +114,7 @@
             }]
         };
 
-        // 使用刚指定的配置项和数据显示图表。
-        chart.setOption(option);
-        var update = setInterval(draw1,3000);
+        var update = draw2();
 
         layui.use(['carousel','form'], function(){
             var carousel = layui.carousel;
@@ -137,7 +134,7 @@
                 if(data.value==0){
                     clearInterval(update);
                     chart.clear();
-                    update = setInterval(draw1,3000);
+                    update = setInterval(draw1,2000);
                 }else {
                     clearInterval(update);
                     chart.clear();
