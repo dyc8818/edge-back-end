@@ -149,15 +149,15 @@ public class SurveillanceServiceImplement implements SurveillanceService{
                 Calendar failDate = Calendar.getInstance();
                 Calendar afterThree = Calendar.getInstance();
                 Calendar birthDate = Calendar.getInstance();
-                Calendar beforeOne = Calendar.getInstance();
+                Calendar beforeWeek = Calendar.getInstance();
                 failDate.setTime(faildate);
                 birthDate.setTime(birthdate);
-                beforeOne.add(Calendar.MONTH,-1);
+                beforeWeek.add(Calendar.DATE,-7);
                 afterThree.add(Calendar.MONTH,3);
                 if(afterThree.compareTo(failDate)>=0){
-                    if(beforeOne.compareTo(birthDate)>=0){veteranFix++;}else{rookieFix++;}
+                    if(beforeWeek.compareTo(birthDate)>=0){veteranFix++;}else{rookieFix++;}
                 }else {
-                    if(beforeOne.compareTo(birthDate)>=0){veteranGood++;}else{rookieGood++;}
+                    if(beforeWeek.compareTo(birthDate)>=0){veteranGood++;}else{rookieGood++;}
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
