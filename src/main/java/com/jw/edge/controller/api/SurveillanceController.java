@@ -2,6 +2,7 @@ package com.jw.edge.controller.api;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.jw.edge.mq.Producer;
 import com.jw.edge.service.SurveillanceService;
 import com.jw.edge.util.LayuiTableResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,15 @@ import org.springframework.web.bind.annotation.*;
 public class SurveillanceController {
     @Autowired
     SurveillanceService surveillanceService;
+    @Autowired
+    Producer producer;
+
+    @GetMapping("/mqtest")
+    @ResponseBody
+    public String mqTest(){for (int i = 0; i < 5; i++) {
+        producer.sendMsg("test.queue", "Queue Message " + i);}
+        return new String("提交发送");
+    }
 
 
     @GetMapping("/surnum")

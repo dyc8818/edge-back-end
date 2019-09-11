@@ -12,7 +12,7 @@ public class Producer {
     private JmsMessagingTemplate jmsMessagingTemplate;
 
     public void sendMsg(String destinationName, Object message) {
-        System.out.println("============>>>>> 发送queue消息 " + message);
+        System.out.println("发送"+destinationName+"消息： " + message);
         Destination destination = new ActiveMQQueue(destinationName);
         jmsMessagingTemplate.convertAndSend(destination, message);
     }

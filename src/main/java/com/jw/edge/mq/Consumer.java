@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 public class Consumer {
 
     @JmsListener(destination = "test.queue")
-    public void receiveMsg(String text) {
-        System.out.println("<<<<<<============ 收到消息： " + text);
+    public void receiveTest(String text) {
+        System.out.println("收到消息： " + text);
     }
+
 }
