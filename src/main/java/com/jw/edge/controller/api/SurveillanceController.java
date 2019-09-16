@@ -19,8 +19,8 @@ public class SurveillanceController {
 
     @GetMapping("/mqtest")
     @ResponseBody
-    public String mqTest(){for (int i = 0; i < 5; i++) {
-        mqService.sendMsg("test.queue", "Queue Message " + i);}
+    public String mqTest(){
+        mqService.publish("test.topic",surveillanceService.getAge());
         return new String("提交发送");
     }
 
@@ -77,5 +77,5 @@ public class SurveillanceController {
 
     @GetMapping("/agedis")
     @ResponseBody
-    public JSONObject getAgeDistribution(){return surveillanceService.getAge();}
+    public JSONObject getAgeDistribution(){        return surveillanceService.getAge();}
 }

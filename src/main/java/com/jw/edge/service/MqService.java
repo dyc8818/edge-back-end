@@ -1,8 +1,6 @@
 package com.jw.edge.service;
 
 public interface MqService {
-    void sendMsg(String destinationName, Object message);
-    void receiveTest(String msg);
+    void send(String destinationName, Object message);
     void publish(String destinationName, Object message);
-    void subscribe(String msg);
 }
