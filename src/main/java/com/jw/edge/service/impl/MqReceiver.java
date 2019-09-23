@@ -28,7 +28,7 @@ public class MqReceiver {
         System.out.println("收到消息： " + msg);
     }
 
-    @JmsListener(destination = "test.topic", containerFactory = "containerFactory")
+    @JmsListener(destination = "test.topic", containerFactory = "topicContainerFactory")
     public void subscribeTest(JSONObject msg) {
         System.out.println("收到订阅的消息:" + msg.get("veteranFix"));}
 
