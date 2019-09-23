@@ -22,4 +22,4 @@ spring:
     user: admin
     password: admin
 server:
-  edgex: 202.205.101.151
+  edgex: localhost
