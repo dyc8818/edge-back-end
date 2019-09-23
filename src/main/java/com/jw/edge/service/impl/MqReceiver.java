@@ -20,7 +20,7 @@ public class MqReceiver {
     }
 
     @JmsListener(destination = "test.queue")
-    public void receiveTest(Object msg) {
+    public void receiveTest(String msg) {
         System.out.println("收到消息： " + msg);
     }
 

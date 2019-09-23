@@ -14,6 +14,7 @@ import com.jw.edge.service.DeviceService;
 import com.jw.edge.service.FunctionService;
 import com.jw.edge.util.LayuiTableResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +39,8 @@ public class RuleController {
     RuleRepository ruleRepository;
     @Autowired
     private RestTemplate restTemplate;
+    @Value("${server.edgex}")
+    private String ip;
 
     //设备功能映射
     @GetMapping("/ruleParas")
@@ -96,7 +99,7 @@ public class RuleController {
             ident = 1;
         }
 
-        String url = "http://202.205.101.151:48082/api/v1/device/"+deviceId+"/command/"+commandsId;
+        String url = "http://"+ip+":48082/api/v1/device/"+deviceId+"/command/"+commandsId;
 
 //        if(ruleStatus == 1) {}
         JSONObject result = new JSONObject();

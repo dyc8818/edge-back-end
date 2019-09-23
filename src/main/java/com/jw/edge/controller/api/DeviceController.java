@@ -8,6 +8,7 @@ import com.jw.edge.service.DeviceService;
 import com.jw.edge.service.ProductServie;
 import com.jw.edge.util.LayuiTableResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +34,8 @@ public class DeviceController {
     ProductServie productServie;
     @Autowired
     private RestTemplate restTemplate;
+    @Value("${server.edgex}")
+    private String ip;
 
     @GetMapping("/deviceTypes")
     @ResponseBody
@@ -103,9 +106,9 @@ public class DeviceController {
                 System.out.println(jo);
 
 
-                String url1 = "http://202.205.101.151:48081/api/v1/deviceprofile/uploadfile";
-                String url3 = "http://202.205.101.151:48081/api/v1/addressable";
-                String url2 = "http://202.205.101.151:48081/api/v1/device";
+                String url1 = "http://"+ip+":48081/api/v1/deviceprofile/uploadfile";
+                String url3 = "http://"+ip+":48081/api/v1/addressable";
+                String url2 = "http://"+ip+":48081/api/v1/device";
                 try {
                     //File file = new File ("deviceProfile/temp.profile.yml");
                     RestTemplate restTemplate = new RestTemplate();

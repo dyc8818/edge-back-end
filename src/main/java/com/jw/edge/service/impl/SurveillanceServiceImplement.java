@@ -7,6 +7,7 @@ import com.jw.edge.dao.SurveillanceRepository;
 import com.jw.edge.entity.Device;
 import com.jw.edge.service.SurveillanceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,8 +26,8 @@ public class SurveillanceServiceImplement implements SurveillanceService{
     DeviceRepository deviceRepository;
     @Autowired
     private RestTemplate restTemplate;
-
-    private String ip = "202.205.101.151";
+    @Value("${server.edgex}")
+    private String ip;
 
     @Override
     public JSONArray getOnlineDevices(){
