@@ -21,6 +21,15 @@ public class Device {
     private String deviceProtocol;
     private String devicePath;
     private String deviceLocation;
+    private String edgexId;
+
+    public String getEdgexId() {
+        return edgexId;
+    }
+
+    public void setEdgexId(String edgexId) {
+        this.edgexId = edgexId;
+    }
 
     public String getDeviceLocation() { return deviceLocation; }
 
