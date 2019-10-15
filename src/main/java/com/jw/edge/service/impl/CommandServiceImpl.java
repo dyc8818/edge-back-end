@@ -56,4 +56,10 @@ public class CommandServiceImpl implements CommandService {
         restTemplate.put(url,jsonObject,String.class);
     }
 
+    @Override
+    public void sendDelete(Command command){
+        String url = "http://"+ip+":48082/api/v1/device/" + command.getDeviceId() + "/command/" + command.getCommandId();
+        restTemplate.delete(url);
+    }
+
 }

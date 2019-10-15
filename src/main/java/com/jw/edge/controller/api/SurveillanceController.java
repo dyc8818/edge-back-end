@@ -20,7 +20,8 @@ public class SurveillanceController {
     @GetMapping("/mqtest")
     @ResponseBody
     public String mqTest(){
-        mqService.publish("test.topic",surveillanceService.getAge());
+        mqService.publish("test1",surveillanceService.getAge());
+        mqService.publish("test2",surveillanceService.getAge());
         return new String("提交发送");
     }
 

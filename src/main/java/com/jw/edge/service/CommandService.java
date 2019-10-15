@@ -8,5 +8,5 @@ public interface CommandService {
     String deleteCommand(String thisId);
     JSONObject sendGet(Command command);
     void sendPut(Command command, JSONObject jsonObject);
-//    boolean sendDelete(Command command);
+    void sendDelete(Command command);
 }
