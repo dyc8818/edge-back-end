@@ -47,6 +47,9 @@ public class Raw implements Runnable {
                     Map content = activeMQMapMessage.getContentMap();
                     JSONObject msg = new JSONObject(content);
                     System.out.println("收到"+destination+msg);
+                    //TO DO CACULATION HERE
+
+                    mqService.publish(target,msg);
 
                 }catch (Exception e){e.printStackTrace();break;}
             }
