@@ -1,6 +1,7 @@
 package com.jw.edge.util.dataAnalysis;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONArray;
 import com.jw.edge.controller.api.DataAnalysisController;
 import com.jw.edge.service.MqService;
 import org.apache.activemq.command.ActiveMQMapMessage;
@@ -40,7 +41,7 @@ public class Raw implements Runnable {
             Session session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
             Destination destination = session.createTopic(this.destination);
             MessageConsumer consumer = session.createConsumer(destination);
-            while (true) {
+            while (check()) {
                 try {
                     ActiveMQMapMessage activeMQMapMessage = (ActiveMQMapMessage) consumer.receive();
                     Map content = activeMQMapMessage.getContentMap();
@@ -51,5 +52,16 @@ public class Raw implements Runnable {
             }
             connection.close();
         }catch (Exception e){e.printStackTrace();}
+    }
+
+    public boolean check(){
+        boolean flag = false;
+        JSONArray array = DataAnalysisController.status;
+        for (int i = 0; i < array.size(); i++){
+            if(name.equals(array.getJSONObject(i).getString("name"))){
+                flag = true;
+            }
+        }
+        return flag;
     }
 }
