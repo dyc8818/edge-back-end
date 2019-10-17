@@ -1,0 +1,23 @@
+//package com.yss.drools
+import com.jw.edge.entity.Terminal
+
+rule "temperature>"
+/*salience 2
+no-loop true*/
+when
+    $terminal : Terminal(temperature.number>parameter && temperature.name==name && temperature.symbol==symbol && temperature.func==operation)
+
+    then
+        $terminal.setFlag1(1);
+    end
+
+
+rule "wet>"
+salience 2
+no-loop true
+when
+    $terminal : Terminal(wet.number>parameter && wet.name==name && wet.symbol==symbol && wet.func==operation)
+
+    then
+        $terminal.setFlag2(2);
+    end
