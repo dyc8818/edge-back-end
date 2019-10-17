@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class EdgeApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(EdgeApplication.class, args);
     }
@@ -16,5 +15,5 @@ public class EdgeApplication {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-}
+    }
 
