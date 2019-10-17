@@ -15,5 +15,5 @@ public class EdgeApplication {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-    }
+}
 

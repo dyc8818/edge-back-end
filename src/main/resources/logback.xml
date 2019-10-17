@@ -7,7 +7,7 @@
             <pattern>%d [%thread] %-5level %logger{68} %line - logId[[%X{client}][%X{request_id}]] - %msg%n</pattern>
         </encoder>
     </appender>
-    <appender name="MONGODB" class="com.jw.edge.logback.MongoDBAppender">
+    <appender name="MONGODB" class="com.jw.edge.util.MongoDBAppender">
     </appender>
     <root level="INFO">
         <appender-ref ref="STDOUT" />

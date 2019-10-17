@@ -1,4 +1,4 @@
-package com.jw.edge.logback;
+package com.jw.edge.util;
 
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.UnsynchronizedAppenderBase;

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface LogRepository extends MongoRepository<MyLog,String> {
-        public List<MyLog> findByMsgLike(String msg);
-        public List<MyLog> findByLevel(String level);
-        public List<MyLog> findByThread(String thread);
+    public List<MyLog> findByMsgLike(String msg);
+    public List<MyLog> findByLevel(String level);
+    public List<MyLog> findByThread(String thread);
 }
