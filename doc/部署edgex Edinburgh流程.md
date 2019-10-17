@@ -135,8 +135,6 @@ coreCommands:（这个在老版本写得是commands，爱丁堡改成了coreComm
 
 然后添加value descriptor，按照官方文档来就好。
 
-再然后，按照官方文档的说法要给即将连的设备添加addressable，但是我加了之后再get看信息发现完全没加上，而且没加也能用，我不是很清楚到底怎么说，但是我就撒手不管了哈哈哈哈哈。
-
 添加设备之前一定要确定设备服务在运行，这里用的是device-modbus 。
 
 最后通过POST TO http://localhost:48081/api/v1/device
@@ -169,13 +167,21 @@ coreCommands:（这个在老版本写得是commands，爱丁堡改成了coreComm
     },
     "profile": {
         "name": "temperature and humidity sensor profile"
+    },
+    "AutoEvents": {
+        "Resource": "Humidity",
+        "OnChange": true,
+        "Frequency": "1s"
     }
 }
 ```
+**根据edgexfoundry/go-mod-core-contracts的历史版本记录能查到，现在device中addressable
+已经变更名称为protocols，如果看的是网上老版本的示例的话，一定要注意addressable目前在device中
+已不再使用**
+
+**同时device新加了AutoEvents，可以实现设置一定周期自动读取数据向上推送。并且可以选择是否在数据发生变化时才推送。**
 
 Profile和 service 名称要与之前的一致。
-
-Protocols这一项如果没有，post的时候会报错，而且特意还说是少protocol字段。我猜可能是因为之前addressable没加上。所以这一块虽然官方文档没加在API的例子里，但是一定要有。现在不确定是因为modbus-rtu不走tcp所以不需要addressable而是要指定protocols具体参数，还是因为文档没更新，所以这块建议根据设备试一下。
 
 Protocols里面的address是docker挂载宿主机设备之后，新的路径，具体设置在docker-compose.yml中，相应的设备服务模块下面，devices这一项里做路径映射。我因为太菜了差点被这个映射搞死。请一定要注意。
 
