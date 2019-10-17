@@ -8,18 +8,18 @@ deviceResources:
   name: TemperatureDeg
   properties:
     value:
-      type: INT16（注意数据类型，根据设备说明书看要读几个字节，还有要不要小数啥的）
+      type: INT16
       readWrite: R
       defaultValue: "0"
       size: "1"
-      scale: "0.1"（数据是否需要乘以系数来矫正）
+      scale: "0.1"
       mediatype: ""
     units:
       type: String
       readWrite: R
   attributes:
     primaryTable: HOLDING_REGISTERS
-    startingAddress: "2"（起始地址的顺序根据设备说明书来）
+    startingAddress: "2"
 - description: sensor humidity
   name: Humidity
   properties:
@@ -36,7 +36,7 @@ deviceResources:
   attributes:
     primaryTable: HOLDING_REGISTERS
     startingAddress: "1"
-deviceCommands:（这个在老版本写得是resources，爱丁堡改成了deviceCommands，如果参照网上的模板，一定要注意）
+deviceCommands:
 - name: TemperatureDeg
   get:
   - index: "1"
@@ -49,7 +49,7 @@ deviceCommands:（这个在老版本写得是resources，爱丁堡改成了devic
     operation: get
     object: Humidity
     parameter: Humidity
-coreCommands:（这个在老版本写得是commands，爱丁堡改成了coreCommands，如果参照网上的模板，一定要注意）
+coreCommands:
 - name: TemperatureDeg
   get:
     path: /api/v1/device/{deviceId}/TemperatureDeg
