@@ -9,7 +9,7 @@ nohup.out
 .idea/**/shelf
 .idea/*
 .mvn/*
-outgoingQueue/*
+target/*
 # Generated files
 .idea/**/contentModel.xml
 
