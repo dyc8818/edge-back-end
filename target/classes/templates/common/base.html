@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html th:fragment="Layout (content,title,users,productMenu, deviceMenu,
+ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script,messageMenu)" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title th:replace="${title}">边缘计算平台</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">边缘计算平台
+        </div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="/">首页</a></li>
+            <li class="layui-nav-item"><a href="/pages/users">用户管理</a></li>
+            <li class="layui-nav-item"><a href="" style="display:none">商品管理</a></li>
+            <li class="layui-nav-item"><a href="" style="display:none">用户</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" style="display:none">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="">邮件管理</a>
+                    </dd>
+                    <dd>
+                        <a href="">消息管理</a>
+                    </dd>
+                    <dd>
+                        <a href="">授权管理</a>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+
+            <li class="layui-nav-item">
+
+                <a href="javascript:;">
+                    <div sec:authorize="isAuthenticated()">
+                        <p>你好：<span sec:authentication="name"></span>!</p>
+                    </div>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="">基本资料</a>
+                    </dd>
+                    <dd>
+                        <a href="">安全设置</a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="#" onclick="document.getElementById('logout').submit()">登出</a>
+
+                <form id="logout" action="/logout" method="post">
+                    <input type="hidden"/>
+
+                    <!--                           th:name="${_csrf.parameterName}" th:value="${_csrf.token}"-->
+
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed" style="display:none"><a class=""
+                                                                                    href="javascript:;">用户管理</a>
+                    <dl class="layui-nav-child">
+                        <dd th:replace="${users}">
+                            <a href="/pages/users">用户列表</a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">设备管理</a>
+                    <dl class="layui-nav-child">
+                        <dd th:replace="${productMenu}">
+                            <a href="/pages/products">设备模板列表</a>
+
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd th:replace="${deviceMenu}">
+                            <a href="/pages/devices">设备列表</a>
+                        </dd>
+
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">消息路由</a>
+                    <dl class="layui-nav-child">
+                        <dd th:replace="${messageMenu}">
+                            <a href="/pages/messageRouting">消息路由管理</a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">规则引擎</a>
+                    <dl class="layui-nav-child">
+                        <dd th:replace="${ruleMenu}">
+                            <a href="/pages/rules">规则列表</a>
+                        </dd>
+                        <!--                        <dd th:replace="${rule2}">-->
+                        <!--                            <a href="javascript:;">列表二</a>-->
+                        <!--                        </dd>-->
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+
+                        <dd th:replace="${monitorMenu}">
+                            <a href="/pages/monitor">在线统计</a>
+                        </dd>
+                        <dd th:replace="${monitor2Menu}">
+                            <a href="/pages/monitor2">监控详情</a>
+                        </dd>
+                        <dd th:replace="${logManagementMenu}">
+                            <!--                            <a href="/pages/logManagement">日志管理</a>-->
+                            <a href="javascript:;">日志管理</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">函数计算</a>
+                    <!--                    <dl class="layui-nav-child">-->
+                    <!--                        <dd >-->
+                    <!--                            <a href="javascript:;">数据导出管理</a>-->
+                    <!--                        </dd>-->
+                    <!--                    </dl>-->
+                </li>
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">应用场景</a>
+                    <!--                    <dl class="layui-nav-child">-->
+                    <!--                        <dd >-->
+                    <!--                            <a href="javascript:;">数据导出管理</a>-->
+                    <!--                        </dd>-->
+                    <!--                    </dl>-->
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body" th:insert="${content}" style="background-color: #EEEEEE">
+        Base模板
+    </div>
+    <div class="layui-footer">
+        © jw.com - 北京交通大学 , xx实验室
+    </div>
+</div>
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+
+    });
+</script>
+<script th:replace="${script}">
+
+</script>
+</body>
+
+</html>

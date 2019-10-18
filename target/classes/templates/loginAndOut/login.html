@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/layui/css/admin.css}"/>
+    <link rel="stylesheet" th:href="@{/layui/css/login.css}"/>
+</head>
+<body>
+
+<div class="layadmin-user-login layadmin-user-display-show" id="userLogin">
+
+    <div class="layadmin-user-login-main">
+        <div class="layadmin-user-login-box layadmin-user-login-header">
+            <h2>边缘计算平台</h2>
+        </div>
+        <form action="/pages/login" method="post" class="layadmin-user-login-box layadmin-user-login-body layui-form">
+            <!--            用户名-->
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-username"
+                       for="LAY-user-login-username"></label>
+                <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名"
+                       class="layui-input">
+            </div>
+            <!--            密码-->
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-password"
+                       for="LAY-user-login-password"></label>
+                <input type="password" name="password" id="LAY-user-login-password" lay-verify="required"
+                       placeholder="密码" class="layui-input">
+            </div>
+
+            <div class="layui-form-item" style="margin-bottom: 20px;">
+                <a href="/pages/register" class="layadmin-link" >用户注册</a>
+                <a href="/pages/forget" class="layadmin-user-jump-change layadmin-link"  >忘记密码？</a>
+            </div>
+            <div class="layui-form-item">
+                <input type="submit" class="layui-btn layui-btn-fluid" value="登录">
+            </div>
+            <!-- csrf-->
+<!--            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+
+        </form>
+    </div>
+
+    <div class="layui-trans layadmin-user-login-footer">
+
+        © jw.com - 北京交通大学 , xx实验室
+    </div>
+
+
+</div>
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+    layui.use('element', function () {
+        var element = layui.element;
+
+    });
+    layui.use(['form', 'layedit', 'laydate'], function () {
+    });
+
+</script>
+</body>
+</html>

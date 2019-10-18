@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,~{::scripts},_)}">
+
+<head>
+    <title>主页</title>
+</head>
+<content>
+    <div class="layui-fluid" style="padding: 0px;">
+        <div class="layui-row">
+            <div class="layui-col-sm8 layui-col-md8 layui-col-lg8" style="margin: 20px">
+                <div class="layui-row">
+                    <div class="layui-card">
+                        <div class="layui-card-header" style="font-size: 20px"><strong>设备概览</strong></div>
+                        <div class="layui-card-body">
+                            <div class="layui-carousel" id="part1">
+                                <div carousel-item>
+                                    <div style="background-color: #FFB800" onclick="regDetails()">
+                                        <p style="font-size: 40px;margin-left: 40px; margin-bottom: 30px;margin-top: 30px">已注册的设备总数</p>
+                                        <p id="totalNum" style="font-size: 100px;text-align: center;margin-bottom: 20px">0</p>
+                                        <p style="text-align: right;font-size: 40px; color: #000000;margin-right: 20px">点击查看详情</p>
+                                    </div>
+                                    <div style="background-color: #FF5722" onclick="expiringDetails()">
+                                        <p style="font-size: 40px;margin-left: 40px; margin-bottom: 30px;margin-top: 30px">近期需更换的设备</p>
+                                        <p id="renewNum" style="font-size: 100px;text-align: center;margin-bottom: 20px">0</p>
+                                        <p style="text-align: right;font-size: 40px; color: #000000;margin-right: 20px">点击查看详情</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row" style="margin-top: 20px">
+                    <div class="layui-card">
+                        <div class="layui-card-header" style="font-size: 20px;height: 40px">
+                            <div class="layui-form">
+                            <select name="city" lay-filter="change">
+                                <option value="1" selected>设备寿命情况</option>
+                                <option value="0">设备在线情况</option>
+                            </select>
+                        </div></div>
+                        <div class="layui-card-body">
+                            <div id="chart" style="width: 800px;height:400px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm3 layui-col-md3 layui-col-lg3" style="margin: 20px">
+                <div class="layui-card">
+                    <div class="layui-card-header" style="font-size: 20px"><strong>通知</strong></div>
+                    <div class="layui-card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</content>
+
+<div th:fragment="scripts">
+    <script th:src="@{/echarts-4.2.1/echarts.min.js}"></script>
+    <script>
+        var $ = layui.$;
+        //后面就跟你平时使用jQuery一样
+        $.get("/api/regnum/", function (data) {
+            document.getElementById("totalNum").innerHTML = data;
+        });
+        $.get("/api/expiringnum", function (data) {
+            document.getElementById("renewNum").innerHTML = data;
+        });
+
+
+        // 基于准备好的dom，初始化echarts实例
+        var chart = echarts.init(document.getElementById('chart'));
+        var num = new Array();
+
+        var option = {
+            title: {
+                text: '设备在线数量',
+                left:'10%'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            xAxis: {
+                type:'time',
+                name:'时间'
+            },
+            yAxis: {},
+            series: [{
+                name: '数量',
+                type: 'line',
+                data: num,
+                symbol:'emptyDiamond',
+                symbolSize: 8,
+                lineStyle:{
+                    width: 2
+                }
+            }]
+        };
+
+        var update = draw2();
+
+        layui.use(['carousel','form'], function(){
+            var carousel = layui.carousel;
+            var form = layui.form;
+            //建造实例
+            carousel.render({
+                elem: '#part1',
+                width: '100%',
+                height:'200px',
+                interval:'3000',
+                arrow: 'always',
+                anim: 'default',
+                indicator:'outside'
+            });
+            //下拉菜单监听
+            form.on('select(change)', function(data){
+                if(data.value==0){
+                    clearInterval(update);
+                    chart.clear();
+                    update = setInterval(draw1,2000);
+                }else {
+                    clearInterval(update);
+                    chart.clear();
+                    update = draw2();
+                }
+            });
+        });
+
+        function draw1() {
+            var date = new Date();
+            var $ = layui.$;
+            //后面就跟你平时使用jQuery一样
+            $.get("/api/surnum/",
+                function (data) {
+                    num.push([date, data]);
+                    // 指定图表的配置项和数据
+                    if (num.length > 60) {
+                        num.shift();
+                    }
+                    // 使用刚指定的配置项和数据显示图表。
+                    chart.setOption(option);
+                }
+            );
+        }
+        function draw2() {
+            var date = new Date();
+            var $ = layui.$;
+            //后面就跟你平时使用jQuery一样
+            $.get("/api/agedis/",
+                function (data) {
+                    var option1 = {
+                        title: {
+                            text: '设备寿命分布',
+                            left:'10%'
+                        },
+                        tooltip : {
+                            trigger: 'item',
+                        },
+                        series:[{
+                            type:'pie',
+                            data:[
+                                {value:data['veteranGood'],name:'正常'},
+                                {value:data['veteranFix'],name:'即将到期'},
+                                {value:data['rookieGood'],name:'新注册'},
+                                {value:data['rookieFix'],name:'你怎么新注册了个快嗝屁的设备'}
+                            ]
+                            }
+                        ]
+                    };
+                    // 指定图表的配置项和数据
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    chart.setOption(option1);
+                }
+            );
+        }
+
+        function expiringDetails() {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.open({
+                    type: 2,
+                    title: '需更换设备详情',
+                    content: '/pages/expiringDetails',
+                    area: ['600px', '800px'],
+                    id: 'expiringTable'
+                });
+            });
+        }
+
+        function regDetails() {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.open({
+                    type: 2,
+                    title: '注册设备详情',
+                    content: '/pages/regDetails',
+                    area: ['600px', '800px'],
+                    id: 'regTable'
+                });
+            });
+        }
+    </script>
+
+
+</div>
+</html>

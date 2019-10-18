@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration >
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>%d [%thread] %-5level %logger{68} %line - logId[[%X{client}][%X{request_id}]] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="MONGODB" class="com.jw.edge.util.MongoDBAppender">
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="MONGODB" />
+    </root>
+</configuration>

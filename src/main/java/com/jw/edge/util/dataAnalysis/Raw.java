@@ -4,32 +4,31 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONArray;
 import com.jw.edge.controller.api.DataAnalysisController;
 import com.jw.edge.service.MqService;
+import com.jw.edge.util.ApplicationContextProvider;
 import org.apache.activemq.command.ActiveMQMapMessage;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jms.*;
 import java.util.Map;
 
 public class Raw implements Runnable {
-    @Autowired
-    MqService mqService;
 
     private String name;
-    private String destination;
-    private String target;
+    private String incomingQueue;
+    private String outgoingQueue;
     private ConnectionFactory connectionFactory = DataAnalysisController.connectionFactory;
+    private MqService mqService = ApplicationContextProvider.getBean(MqService.class);
 
-    public Raw(String name, String destination, String target) {
+    public Raw(String name, String incomingQueue, String outgoingQueue) {
         this.name = name;
-        this.destination = destination;
-        this.target = target;
+        this.incomingQueue = incomingQueue;
+        this.outgoingQueue = outgoingQueue;
     }
 
     public JSONObject getInfo(){
         JSONObject info = new JSONObject();
         info.put("name",this.name);
-        info.put("destination",this.destination);
-        info.put("target",this.target);
+        info.put("incomingQueue",this.incomingQueue);
+        info.put("outgoingQueue",this.outgoingQueue);
         return info;
     }
 
@@ -39,7 +38,7 @@ public class Raw implements Runnable {
             Connection connection = connectionFactory.createConnection();
             connection.start();
             Session session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
-            Destination destination = session.createTopic(this.destination);
+            Destination destination = session.createTopic(this.incomingQueue);
             MessageConsumer consumer = session.createConsumer(destination);
             while (check()) {
                 try {
@@ -49,7 +48,7 @@ public class Raw implements Runnable {
                     System.out.println("收到"+destination+msg);
                     //TO DO CACULATION HERE
 
-                    mqService.publish(target,msg);
+                    mqService.publish(this.outgoingQueue,new JSONObject());
 
                 }catch (Exception e){e.printStackTrace();break;}
             }

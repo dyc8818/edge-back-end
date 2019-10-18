@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>边缘计算平台</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
+</head>
+<body>
+
+<form class="layui-form layui-fluid" action="">
+    <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>功能信息</legend>
+    </fieldset>-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">模板名称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="productName" th:value="${productName}">
+        </div>
+<!--        <div class="layui-input-inline" >-->
+<!--            <input type="text" name="productId" lay-verify="title" autocomplete="off" placeholder="请输入您的功能名称"-->
+<!--                   class="layui-input" value=request.getParameter(productId)>-->
+<!--        </div>-->
+    </div>
+<!--    <div class="layui-form-item">-->
+<!--        <label class="layui-form-label">功能名称</label>-->
+<!--        <div class="layui-input-inline" >-->
+<!--            <input type="text" name="functionName" lay-verify="title" autocomplete="off" placeholder="请输入您的功能名称"-->
+<!--                   class="layui-input">-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">功能名称</label>
+        <div class="layui-input-block">
+            <select name="functionName" lay-filter="aihao">
+                <option value="TemperatureDegF">TemperatureDegF</option>
+                <option value="TemperatureDegC">TemperatureDegC</option>
+                <option value="HumidityPercentRH">HumidityPercentRH</option>
+            </select>
+        </div>
+    </div>
+
+    <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>功能类型</legend>
+    </fieldset>-->
+    <div class="layui-form-item">
+        <label class=" layui-form-label">功能类型</label>
+        <div class=" layui-input-inline" style="width: auto;">
+            <input type="radio" name="functionType" value="属性" title="属性" checked="">
+            <input type="radio" name="functionType" value="服务" title="服务">
+            <input type="radio" name="functionType" value="事件" title="事件">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">寄存器</label>
+        <div class="layui-input-inline">
+            <input type="text" name="holdingRegister" lay-verify="title" autocomplete="off" placeholder="请输入寄存器序号"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据类型</label>
+        <div class="layui-input-block">
+            <select name="valueType" lay-filter="aihao">
+                <option value="float">Float</option>
+                <option value="string">string</option>
+                <option value="double">double</option>
+                <option value="int">int</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">读写方式</label>
+        <div class="layui-input-block">
+            <input type="radio" name="readWrite" value="RW" title="读写">
+            <input type="radio" name="read" value="R" title="只读" checked>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据大小</label>
+        <div class="layui-input-inline">
+            <input type="text" name="valueSize" lay-verify="title" autocomplete="off" placeholder="请输入数值大小"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据规模</label>
+        <div class="layui-input-inline">
+            <input type="text" name="valueScale" lay-verify="title" autocomplete="off" placeholder="请输入数值规模"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数值最小值</label>
+        <div class="layui-input-inline">
+            <input type="text" name="valueMinimum" lay-verify="title" autocomplete="off" placeholder="请输入数值最小值"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数值最大值</label>
+        <div class="layui-input-inline">
+            <input type="text" name="valueMaximum" lay-verify="title" autocomplete="off" placeholder="请输入数值最大值"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">默认数值</label>
+        <div class="layui-input-inline">
+            <input type="text" name="defaultValue" lay-verify="title" autocomplete="off" placeholder="请输入数据默认值"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">单位类型</label>
+        <div class="layui-input-block">
+            <select name="unitsType" lay-filter="aihao">
+                <option value="float">Float</option>
+                <option value="string">String</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">默认单位</label>
+        <div class="layui-input-inline">
+            <input type="text" name="defaultUnits" lay-verify="title" autocomplete="off" placeholder="请输入默认单位"
+                   class="layui-input">
+        </div>
+    </div>
+
+
+    <!--
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否接入网关</label>
+        <div class=" layui-input-inline">
+            <input type="radio" name="productAccessForGateway" value="true" title="是" checked="">
+            <input type="radio" name="productAccessForGateway" value="false" title="否">
+        </div>
+    </div>-->
+
+
+    <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>连网与数据</legend>
+    </fieldset>-->
+    <!--
+    <div class="layui-form-item">
+        <label class="layui-form-label">连网方式</label>
+        <div class="layui-input-inline">
+            <select name="productConnectWay" lay-filter="aihao">
+                <option value=""></option>
+                <option value="WIFI" selected="">WIFI</option>
+                <option value="蜂窝(2G/3G/4G)">蜂窝(2G/3G/4G)</option>
+                <option value="以太网">以太网</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据格式</label>
+        <div class="layui-input-inline">
+            <select name="productDataFormat" lay-filter="aihao">
+                <option value=""></option>
+                <option value="ICA标准数据格式(JSON)" selected="">ICA标准数据格式(JSON)</option>
+                <option value="透传/自定义">透传/自定义</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">使用认证</label>
+        <div class="layui-input-inline">
+            <input type="radio" name="productSafe" value="true" title="是" checked="">
+            <input type="radio" name="productSafe" value="false" title="否">
+        </div>
+    </div>-->
+
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>更多信息</legend>
+    </fieldset>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">功能描述</label>
+        <div class="layui-input-block">
+            <textarea name="functionDesc"placeholder="请输入功能描述" class="layui-textarea"></textarea>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item" style="display: none">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="formVerify">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form;
+        //自定义验证规则
+        // form.verify({
+        //     title: function (value) {
+        //         if (value.length < 5) {
+        //             return '标题至少得5个字符啊';
+        //         }
+        //     }
+        //     , pass: [
+        //         /^[\S]{6,12}$/
+        //         , '密码必须6到12位，且不能出现空格'
+        //     ]
+        //     , content: function (value) {
+        //         layedit.sync(editIndex);
+        //     }
+        // });
+        //监听提交
+        form.on('submit(formVerify)', function (obj) {
+
+            var data = JSON.stringify(obj.field);
+
+            var url = "/api/function";
+
+            var code = 0;
+            layui.jquery.ajax({
+                type: "post",
+                url: url,
+                async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                data: data,
+                contentType: "application/json",
+                // processData: false,
+                // cache: false,
+                success: function (ev) {
+                    code = ev.code;
+                }
+
+            });
+            if (code == 500) {
+                console.log("提交失败");
+            }
+
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+
+            parent.layer.close(index);
+
+            // 刷新表格（即点击分页控件的“确定”按钮）
+            parent.layui.table.reload("functionTable");
+
+        });
+    });
+</script>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,~{::monitorMenu},_,~{::scripts},_)}">
+<title>在线设备统计</title>
+
+<content>
+    <div class="layui-fluid" style="padding: 0px;">
+        <div class="layui-row">
+
+            <div class="layui-col-md1 layui-col-lg1 layui-col-sm1">
+                <div id="numchart" style="width: 1200px;height:600px;margin-top: 20px"></div>
+            </div>
+
+            <div class="layui-col-md3 layui-col-sm3 layui-col-lg3 layui-col-sm-offset7 layui-col-md-offset7 layui-col-lg-offset7 " style="margin-top: 20px;margin-right: 20px">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="font-size: 20px"><strong>更新周期</strong></label>
+                        <div class="layui-input-block">
+                            <select name="interval" lay-filter="interval">
+                                <option value="1000">1秒</option>
+                                <option value="3000">3秒</option>
+                                <option value="5000">5秒</option>
+                                <option value="10000">10秒</option>
+                                <option value="20000">20秒</option>
+                                <option value="30000">30秒</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</content>
+
+
+<dd class="layui-this" th:fragment="monitorMenu">
+    <a href="/pages/monitor">在线统计</a>
+</dd>
+
+<div th:fragment="scripts">
+    <script th:src="@{/echarts-4.2.1/echarts.min.js}"></script>
+    <script>
+        // 基于准备好的dom，初始化echarts实例
+        var numChart = echarts.init(document.getElementById('numchart'));
+        var num = new Array();
+        var interval = 1000;
+        num.push([new Date(), 0]);
+
+        var option = {
+            title: {
+                text: '设备在线数量',
+                left:80,
+                textStyle:{
+                    fontSize:22
+                }
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            xAxis: {
+                type:'time',
+                name:'时间'
+            },
+            yAxis: {},
+            series: [{
+                name: '数量',
+                type: 'line',
+                data: num,
+                symbol:'emptyDiamond',
+                symbolSize: 8,
+                lineStyle:{
+                    width: 2
+                }
+            }]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        numChart.setOption(option);
+
+        var getNum = function () {
+            var date = new Date();
+            var $ = layui.$;
+            //后面就跟你平时使用jQuery一样
+            $.get("/api/surnum/",
+                function (data) {
+                    num.push([date, data]);
+                    // 指定图表的配置项和数据
+                    if (num.length > 60) {
+                        num.shift();
+                    }
+                    // 使用刚指定的配置项和数据显示图表。
+                    numChart.setOption(option);
+                }
+            );
+        };
+
+        var update = setInterval(getNum,interval);
+
+        layui.use('form', function(){
+            var form = layui.form;
+            //监听提交
+            form.on('select(interval)', function(data){
+                clearInterval(update);
+                interval = data.value;
+                update = setInterval(getNum,interval);
+            });
+        });
+
+    </script>
+
+
+</div>
+</html>
