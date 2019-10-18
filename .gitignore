@@ -70,5 +70,3 @@ fabric.properties
 
 *.iml
 mvnw*
-
-/target/
