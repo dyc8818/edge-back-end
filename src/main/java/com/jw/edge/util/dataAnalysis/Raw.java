@@ -48,7 +48,7 @@ public class Raw implements Runnable {
                     System.out.println("收到"+destination+msg);
                     //TO DO CACULATION HERE
 
-                    mqService.publish(this.outgoingQueue,new JSONObject());
+                    mqService.publish(this.outgoingQueue,msg);
 
                 }catch (Exception e){e.printStackTrace();break;}
             }

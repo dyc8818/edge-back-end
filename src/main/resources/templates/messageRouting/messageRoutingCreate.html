@@ -78,7 +78,6 @@
         form.on('submit(formVerify)', function (obj) {
 
             var data = JSON.stringify(obj.field);
-
             var url = "/api/analysis/"+document.getElementById("runFunction").value;
             var code = 0;
             layui.jquery.ajax({
