@@ -2,6 +2,7 @@ package com.jw.edge.controller.api;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.jw.edge.util.LayuiTableResultUtil;
 import com.jw.edge.util.dataAnalysis.Raw;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,13 @@ public class DataAnalysisController {
     @ResponseBody
     public JSONArray allInfo(){
         return status;
+    }
+
+    @GetMapping("/analysis/table")
+    @ResponseBody
+    public LayuiTableResultUtil<JSONArray> allInfoTable(@RequestParam Integer page, @RequestParam Integer limit){
+        LayuiTableResultUtil<JSONArray> table = new LayuiTableResultUtil<>("",status,0,status.size());
+        return table;
     }
 
     @DeleteMapping("/analysis")
