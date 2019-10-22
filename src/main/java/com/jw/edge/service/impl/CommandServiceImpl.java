@@ -1,5 +1,6 @@
 package com.jw.edge.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jw.edge.dao.CommandRepository;
 import com.jw.edge.entity.Command;
@@ -61,5 +62,4 @@ public class CommandServiceImpl implements CommandService {
         String url = "http://"+ip+":48082/api/v1/device/" + command.getDeviceId() + "/command/" + command.getCommandId();
         restTemplate.delete(url);
     }
-
 }
