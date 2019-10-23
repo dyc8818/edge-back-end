@@ -2,7 +2,7 @@ package com.jw.edge.util.dataAnalysis;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONArray;
-import com.jw.edge.controller.api.DataAnalysisController;
+import com.jw.edge.controller.api.MessageRouterController;
 import com.jw.edge.service.MqService;
 import com.jw.edge.util.ApplicationContextProvider;
 import org.apache.activemq.command.ActiveMQMapMessage;
@@ -15,7 +15,7 @@ public class Raw implements Runnable {
     private String name;
     private String incomingQueue;
     private String outgoingQueue;
-    private ConnectionFactory connectionFactory = DataAnalysisController.connectionFactory;
+    private ConnectionFactory connectionFactory = MessageRouterController.connectionFactory;
     private MqService mqService = ApplicationContextProvider.getBean(MqService.class);
 
     public Raw(String name, String incomingQueue, String outgoingQueue) {
@@ -58,7 +58,7 @@ public class Raw implements Runnable {
 
     public boolean check(){
         boolean flag = false;
-        JSONArray array = DataAnalysisController.status;
+        JSONArray array = MessageRouterController.status;
         for (int i = 0; i < array.size(); i++){
             if(name.equals(array.getJSONObject(i).getString("name"))){
                 flag = true;

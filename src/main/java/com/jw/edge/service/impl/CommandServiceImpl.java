@@ -10,18 +10,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class CommandServiceImpl implements CommandService {
     @Autowired
     CommandRepository commandRepository;
-    @Autowired
-    RestTemplate restTemplate;
-    @Value("${server.edgex}")
-    private String ip;
 
     @Override
     public boolean addCommand(Command command){
-        Command findCommand = commandRepository.findByDeviceNameAndCommandTypeAndCommandName(command.getDeviceName(), command.getCommandType(), command.getCommandName());
+        Command findCommand = commandRepository.findByName(command.getName());
         if(findCommand == null){
             commandRepository.save(command);
             return true;
@@ -31,35 +29,46 @@ public class CommandServiceImpl implements CommandService {
     }
 
     @Override
-    public String deleteCommand(String thisId){
-        Command find = commandRepository.findByThisId(thisId);
+    public boolean deleteCommand(String name){
+        Command find = commandRepository.findByName(name);
         if(find == null){
-            return "不存在该命令";
+            return false;
         }else {
-            commandRepository.deleteById(thisId);
-            return "删除成功";        }
+            commandRepository.deleteById(find.getId());
+            return true;        }
     }
 
     @Override
-    public JSONObject sendGet(Command command){
-        String url = "http://"+ip+":48082/api/v1/device/" + command.getDeviceId() + "/command/" + command.getCommandId();
-        try {
-            JSONObject getObj = new JSONObject(restTemplate.getForObject(url, JSONObject.class));
-            return getObj;
-        } catch (Exception e) {
-            return null;
+    public JSONArray showAll(){
+        JSONArray all = new JSONArray();
+        List<Command> allCommands = commandRepository.findAll();
+        for(int i=0; i<allCommands.size();i++){
+            JSONObject command = new JSONObject();
+            command.put("name",allCommands.get(i).getName());
+            command.put("commandId",allCommands.get(i).getCommandId());
+            command.put("commandName",allCommands.get(i).getCommandName());
+            command.put("commandType",allCommands.get(i).getCommandType());
+            command.put("deviceId",allCommands.get(i).getDeviceId());
+            command.put("deviceName",allCommands.get(i).getDeviceName());
+            command.put("jsonObject",allCommands.get(i).getJsonObject());
+            command.put("jsonArray",allCommands.get(i).getJsonArray());
+            all.add(command);
         }
+        return all;
     }
 
     @Override
-    public void sendPut(Command command, JSONObject jsonObject){
-        String url = "http://"+ip+":48082/api/v1/device/" + command.getDeviceId() + "/command/" + command.getCommandId();
-        restTemplate.put(url,jsonObject,String.class);
-    }
-
-    @Override
-    public void sendDelete(Command command){
-        String url = "http://"+ip+":48082/api/v1/device/" + command.getDeviceId() + "/command/" + command.getCommandId();
-        restTemplate.delete(url);
+    public JSONObject find(String name){
+        Command find = commandRepository.findByName(name);
+        JSONObject command = new JSONObject();
+        command.put("name",find.getName());
+        command.put("commandId",find.getCommandId());
+        command.put("commandName",find.getCommandName());
+        command.put("commandType",find.getCommandType());
+        command.put("deviceId",find.getDeviceId());
+        command.put("deviceName",find.getDeviceName());
+        command.put("jsonObject",find.getJsonObject());
+        command.put("jsonArray",find.getJsonArray());
+        return command;
     }
 }

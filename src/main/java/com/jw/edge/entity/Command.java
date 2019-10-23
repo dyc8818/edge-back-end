@@ -1,29 +1,29 @@
 package com.jw.edge.entity;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Command {
     @Id
-    private String thisId;
+    private String id;
+    private String name;
     private String deviceId;
     private String deviceName;
-    private String edgexId;
     private String commandId;
-    private int commandType;
+    private String commandType;
+    private JSONObject jsonObject;
+    private JSONArray jsonArray;
     private String commandName;
-    public static final int GET = 0;
-    public static final int PUT =  1;
-    public static final int POST = 2;
-    public static final int DELETE = 3;
 
-    public String getThisId() {
-        return thisId;
+    public String getId() {
+        return id;
     }
 
-    public void setThisId(String thisId) {
-        this.thisId = thisId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDeviceId() {
@@ -42,14 +42,6 @@ public class Command {
         this.deviceName = deviceName;
     }
 
-    public String getEdgexId() {
-        return edgexId;
-    }
-
-    public void setEdgexId(String edgexId) {
-        this.edgexId = edgexId;
-    }
-
     public String getCommandId() {
         return commandId;
     }
@@ -58,11 +50,11 @@ public class Command {
         this.commandId = commandId;
     }
 
-    public int getCommandType() {
+    public String getCommandType() {
         return commandType;
     }
 
-    public void setCommandType(int commandType) {
+    public void setCommandType(String commandType) {
         this.commandType = commandType;
     }
 
@@ -72,5 +64,29 @@ public class Command {
 
     public void setCommandName(String commandName) {
         this.commandName = commandName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
+    }
+
+    public JSONArray getJsonArray() {
+        return jsonArray;
+    }
+
+    public void setJsonArray(JSONArray jsonArray) {
+        this.jsonArray = jsonArray;
     }
 }

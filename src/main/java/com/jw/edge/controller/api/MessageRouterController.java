@@ -12,9 +12,9 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-@RequestMapping("/api")
+@RequestMapping("/api/message")
 @RestController
-public class DataAnalysisController {
+public class MessageRouterController {
     public static JSONArray status = new JSONArray();
     public static ConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
     private ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1,50,3, TimeUnit.SECONDS,new SynchronousQueue<>());

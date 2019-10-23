@@ -25,7 +25,6 @@ public class SurveillanceController {
         return new String("提交发送");
     }
 
-
     @GetMapping("/surnum")
     @ResponseBody
     public int getSurNum(){

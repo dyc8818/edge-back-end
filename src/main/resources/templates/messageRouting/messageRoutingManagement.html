@@ -58,7 +58,7 @@
             //第一个实例
             table.render({
                 elem: '#messageRoutingTable',
-                url: '/api/analysis/table/', //数据接口
+                url: '/api/message/analysis/table/', //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
@@ -105,7 +105,7 @@
 
                         $.ajax({
                             type: "delete",
-                            url: "/api/analysis",
+                            url: "/api/message/analysis",
                             async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
                             data: JSON.stringify(data),
                             contentType: "application/json",
