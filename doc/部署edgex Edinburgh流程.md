@@ -168,11 +168,16 @@ coreCommands:（这个在老版本写得是commands，爱丁堡改成了coreComm
     "profile": {
         "name": "temperature and humidity sensor profile"
     },
-    "AutoEvents": {
-        "Resource": "Humidity",
-        "OnChange": true,
-        "Frequency": "1s"
-    }
+    "autoEvents":[ 
+        {
+        "resource": "Humidity",
+        "frequency": "3s"
+        },
+        {
+        "resource": "TemperatureDeg",
+        "frequency": "3s"
+        }
+    ]
 }
 ```
 **根据edgexfoundry/go-mod-core-contracts的历史版本记录能查到，现在device中addressable
