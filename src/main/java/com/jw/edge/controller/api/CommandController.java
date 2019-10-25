@@ -109,7 +109,7 @@ public class CommandController {
     }
 
     @GetMapping("/test")
-    public void sendCommand(String name){
+    public void sendCommand(@RequestParam String name){
         JSONObject jsonCommand = commandService.find(name);
         mqService.publish("run.command",jsonCommand);
     }
