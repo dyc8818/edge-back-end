@@ -97,7 +97,7 @@ public class CommandController {
                     mqService.publish("show",getObj);
                 } catch (Exception e) {
                     JSONObject err = new JSONObject();
-                    err.put("commandName",msg.getString("commandName"));
+                    err.put("name",msg.getString("name"));
                     err.put("alert","失败！");
                     mqService.publish("show",err);
                 }
