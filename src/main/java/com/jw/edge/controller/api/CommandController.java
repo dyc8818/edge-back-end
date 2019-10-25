@@ -108,8 +108,9 @@ public class CommandController {
         }
     }
 
-    public void sendCommand(String commandName){
-        JSONObject jsonCommand = commandService.find(commandName);
+    @GetMapping("/test")
+    public void sendCommand(String name){
+        JSONObject jsonCommand = commandService.find(name);
         mqService.publish("run.command",jsonCommand);
     }
 
