@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jw.edge.entity.Command;
 import com.jw.edge.service.CommandService;
+import com.jw.edge.service.MqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +18,8 @@ public class CommandController {
     RestTemplate restTemplate;
     @Autowired
     CommandService commandService;
+    @Autowired
+    MqService mqService;
     @Value("${server.edgex}")
     private String ip;
 
@@ -82,23 +86,31 @@ public class CommandController {
         return table;
     }
 
-    @GetMapping("/command/get")
-    @ResponseBody
-    public JSONObject sendGet(Command command){
-        String url = "http://"+ip+":48082/api/v1/device/" + command.getDeviceId() + "/command/" + command.getCommandId();
-        try {
-            JSONObject getObj = new JSONObject(restTemplate.getForObject(url, JSONObject.class));
-            return getObj;
-        } catch (Exception e) {
-            return null;
+
+    @JmsListener(destination = "run.command", containerFactory = "topicContainerFactory")
+    public void subscribeCommand(JSONObject msg) {
+        String url = "http://"+ip+":48082/api/v1/device/" + msg.getString("deviceId")+ "/command/" + msg.getString("commandId");
+        switch (msg.getString("commandType")){
+            case "get":
+                try {
+                    JSONObject getObj = new JSONObject(restTemplate.getForObject(url, JSONObject.class));
+                    mqService.publish("show",getObj);
+                } catch (Exception e) {
+                    JSONObject err = new JSONObject();
+                    err.put("commandName",msg.getString("commandName"));
+                    err.put("alert","失败！");
+                    mqService.publish("show",err);
+                }
+                break;
+            case "put":
+                restTemplate.put(url,msg.getJSONObject("jsonObject"),String.class);
+                break;
         }
     }
 
-    @GetMapping("/command/put")
-    @ResponseBody
-    public void sendPut(Command command){
-        String url = "http://"+ip+":48082/api/v1/device/" + command.getDeviceId() + "/command/" + command.getCommandId();
-        restTemplate.put(url,command.getJsonObject(),String.class);
+    public void sendCommand(String commandName){
+        JSONObject jsonCommand = commandService.find(commandName);
+        mqService.publish("run.command",jsonCommand);
     }
 
 }
