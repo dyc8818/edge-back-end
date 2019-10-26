@@ -1,4 +1,4 @@
-name: relay
+name: relay profile
 manufacturer: xx
 model: ModBus-1
 labels: [relay]
