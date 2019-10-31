@@ -8,15 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/pages")
 @Controller
-public class MessageRoutingPagesController {
-
-    @GetMapping("/messageRouting")
+public class ScenarioPagesController {
+    @GetMapping("/scenarioManagement")
     public String messageRoutingList(Model model) throws Exception {
-        return "/messageRouting/messageRoutingManagement";
+        return "/scenarioCommand/scenarioCommandManagement";
     }
 
-    @GetMapping("/messageRoutingCreate")
+    @GetMapping("/scenarioCreate")
     public String messageRoutingCreate(Model model) throws Exception {
-        return "messageRouting/messageRoutingCreate";
+        return "scenarioCommand/scenarioCommandCreate";
     }
 }

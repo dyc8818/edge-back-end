@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,~{::deviceList},_,_,_,_,~{::scripts},_,_)}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,~{::scripts},_,~{::scenarioMenu})}">
 
-<title>设备列表</title>
+<title>场景命令管理</title>
 <content>
     <div class="layui-tab-brief layui-tab">
         <ul class="layui-tab-title site-demo-title">
-            <li class="layui-this"><a><cite>设备列表</cite></a></li>
+            <li class="layui-this"><a><cite>场景命令列表</cite></a></li>
         </ul>
     </div>
-    <div class="layui-fluid" style="padding: 15px;">
+    <div class="layui-fluid"layui-card-body style="padding: 15px;">
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md12">
                 <div class="layui-card">
+
                     <div class="layui-card-body">
-                        <table class="layui-hide" id="deviceTable" lay-filter="buttons"></table>
+                        <table class="layui-hide" id="scenarioTable" lay-filter="buttons"></table>
                     </div>
                 </div>
             </div>
@@ -23,22 +24,22 @@
 
 </content>
 
-
-<dd class="layui-this" th:fragment="deviceList">
-    <a href="/pages/devices">设备列表</a>
+<dd class="layui-this" th:fragment="scenarioMenu">
+    <a href="/pages/messageRouting">场景命令管理</a>
 </dd>
-
 <div th:fragment="scripts">
+
     <script th:inline="none" type="text/html" id="barDemo">
-        <button class="layui-btn layui-btn-xs" lay-event="detail">查看</button>
+        <!--        <button class="layui-btn layui-btn-xs" lay-event="detail">查看</button>-->
         <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
     </script>
+
     <script type="text/html" id="layerRefresh">
         <div class="layui-btn-container">
             <button id="createButton"
                     class="layui-btn layui-btn-normal layui-btn-radius"
-                    lay-event="addDevice">
-                添加设备
+                    lay-event="createScenarioCommand">
+                添加场景命令
             </button>
             <button id="refreshButton"
                     class="layui-btn layui-btn-checked layui-btn-radius"
@@ -47,6 +48,8 @@
             </button>
         </div>
     </script>
+
+
     <script th:inline="none">
         layui.use('table', function () {
             var table = layui.table;
@@ -54,8 +57,8 @@
             var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
             //第一个实例
             table.render({
-                elem: '#deviceTable',
-                url: '/api/devices/', //数据接口
+                elem: '#scenarioTable',
+                url: '/api/scenario/command/', //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
@@ -63,18 +66,12 @@
                 cols: [
                     [ //表头
                         // {type: 'checkbox'},
-                        {field: 'deviceId', title: 'Id', sort: true, align: 'center'},
-                        {field: 'deviceName', title: '设备名称', align: 'center'},
-                        {field: 'deviceType', title: '设备模板', align: 'center'},
-                        {field: 'deviceCreateTime', title: '添加时间', sort: true, align: 'center'},
-                        {field: 'deviceDesc', title: '设备描述', align: 'center'},
-                        //   {field: 'deviceStatus', title: '设备状态', sort: true, align: 'center'},
-                        {
-                            field:'deviceStatus',
-                            title:'设备状态',
-                            align:'center',
-                            templet:statusTpl
-                        },
+
+                        {field: 'name', title: '场景命令名称', align: 'center'},
+                        {field: 'deviceName', title: '对应设备名称', align: 'center'},
+                        {field: 'commandName', title: '对应命令名称', align: 'center'},
+                        {field: 'commandType', title: '命令类型', align: 'center'},
+                        {field: 'description', title: '描述', sort: true, align: 'center'},
                         {
                             title: '操作', align: 'center',
                             toolbar: '#barDemo'
@@ -82,67 +79,45 @@
                     ]
                 ]
             });
-            //表内开关
-            layui.use(['form'], function() {
-                var form = layui.form
-                    , layer = layui.layer;
-                //监听指定开关
-                form.on('switch(changeDeviceStatus)', function changeDeviceStatus(data) {
-                    $.ajax({
-                        type: "put",
-                        url: "/api/changeStatus",
-                        async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                        data: JSON.stringify({'deviceId': data.elem.attributes['switch_device_id'].nodeValue}),
-                        contentType: "application/json",
-                        success: function (ev) {
-                            console.log(ev.data);
-                        },
-                        error: function (ev) {
-                            console.log("开关失败" + ev.responseText);
-                        }
-                    });
-                });
-            });
+
             // 头工具栏事件
             table.on('toolbar(buttons)', function (obj) {
 
                 var checkStatus = table.checkStatus('test');
                 switch (obj.event) {
-                    case 'addDevice':
+                    case 'createScenarioCommand':
                         notice();
                         break;
                     case 'refresh':
-                        table.reload("deviceTable")
+                        table.reload("scenarioTable");
+
                         break;
-                };
+                }
             });
 
             //监听工具条
             table.on('tool(buttons)', function (obj) {
 
                 var data = obj.data;
-                if (obj.event === 'detail') {
-                    // layer.('ID：' + data.deviceId + ' 的查看操作');
-                    location.href = "/pages/deviceDetails?deviceId=" + data.deviceId;
-                } else if (obj.event === 'del') {
+                if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
 
                         $.ajax({
                             type: "delete",
-                            url: "/api/device",
+                            url: "/api/scenario/command",
                             async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                            data: JSON.stringify({'deviceId': data.deviceId}),
+                            data: data["name"].toString(),
                             contentType: "application/json",
                             // processData: false,
                             // cache: false,
                             success: function (ev) {
-                                if (ev.data == "删除成功") {
+                                if (Boolean(ev)) {
                                     obj.del();
-                                    layer.msg(ev.data);
+                                    layer.msg("删除成功！");
                                     layer.close(index);
-                                    table.reload("deviceTable");
+                                    table.reload("scenarioTable")
                                 } else {
-                                    layer.msg(ev.data);
+                                    layer.msg(ev);
                                     layer.close(index);
                                 }
                             },
@@ -156,34 +131,19 @@
                     });
                 }
             });
-            function getselect() {
-                $.ajax({
-                    type: "get",
-                    url: "/api/deviceTypes",
-                    async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                    contentType: "application/json",
-                    success: function (data) {
-                        sessionStorage.setItem("productNames", JSON.stringify(data));
-                        //console.log(data);
-                        //console.log(sessionStorage.getItem("productNames"));
-                    },
-                    error:function(data){
-                        console.log("获取产品失败"+data.responseText);
-                        layer.msg("获取产品识别失败");
-                    }
-                });
-            }
+
             //触发创建产品弹出层
+
             function notice(){
                 //示范一个公告层
                 layer.open({
                     type: 2
                     ,
-                    title: "添加设备"
+                    title: "添加场景命令"
                     ,
                     closeBtn: 1
                     ,
-                    area: ['600px', '600px']
+                    area: ['500px', '500px']
                     ,
                     shade: 0.3
                     ,
@@ -195,7 +155,7 @@
                     ,
                     moveType: 1 //拖拽模式，0或者1
                     ,
-                    content: '/pages/addDevice'
+                    content: '/pages/scenarioCreate'
                     ,
                     // success: function (layero) {
                     //     var btn = layero.find('.layui-layer-btn');
@@ -204,14 +164,11 @@
                     //         , target: '_blank'
                     //     });
                     // }
-                    success:function(){
-                        getselect();
-                    },
                     yes: function (index, layero) {
 
                         // 获取弹出层中的form表单元素
                         var formSubmit = layer.getChildFrame('form', index);
-                        // // 获取表单中的提交按钮
+                        // // 获取表单中的提交按钮（在我的表单里第一个button按钮就是提交按钮，使用find方法寻找即可）
                         var submited = formSubmit.find('button')[0];
                         // // 触发点击事件，会对表单进行验证，验证成功则提交表单，失败则返回错误信息
                         submited.click();
@@ -231,17 +188,9 @@
                 });
             };
         });
-        var statusTpl = function (d) { // 参数d是当前行数据
-            var tgtid = d.deviceId;
-            var str = '<input type="checkbox" lay-filter="changeDeviceStatus" lay-skin="switch" lay-text="启用|禁用" ';
-            if(d.deviceStatus == 1){
-                str = str + 'checked switch_device_id='+tgtid+'> ';
-            }else{
-                str = str + 'switch_device_id='+tgtid+'> ';
-            }
-            return str;
-        };
+
     </script>
+
 
 </div>
 </html>

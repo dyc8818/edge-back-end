@@ -18,7 +18,18 @@ public class CommandServiceImpl implements CommandService {
     CommandRepository commandRepository;
 
     @Override
-    public boolean addCommand(Command command){
+    public boolean addCommand(JSONObject info){
+        Command command = new Command();
+        command.setName(info.getString("name"));
+        command.setCommandId(info.getString("commandId"));
+        command.setCommandName(info.getString("commandName"));
+        command.setDeviceId(info.getString("deviceId"));
+        command.setDeviceName(info.getString("deviceName"));
+        command.setCommandType(info.getString("commandType"));
+        command.setJsonObject(info.getJSONObject("jsonObject"));
+        command.setJsonArray(info.getJSONArray("jsonArray"));
+        command.setLevel(info.getIntValue("level"));
+        command.setDescription(info.getString("description"));
         Command findCommand = commandRepository.findByName(command.getName());
         if(findCommand == null){
             commandRepository.save(command);
@@ -52,6 +63,8 @@ public class CommandServiceImpl implements CommandService {
             command.put("deviceName",allCommands.get(i).getDeviceName());
             command.put("jsonObject",allCommands.get(i).getJsonObject());
             command.put("jsonArray",allCommands.get(i).getJsonArray());
+            command.put("level",allCommands.get(i).getLevel());
+            command.put("description",allCommands.get(i).getDescription());
             all.add(command);
         }
         return all;
@@ -69,6 +82,8 @@ public class CommandServiceImpl implements CommandService {
         command.put("deviceName",find.getDeviceName());
         command.put("jsonObject",find.getJsonObject());
         command.put("jsonArray",find.getJsonArray());
+        command.put("level",find.getLevel());
+        command.put("description",find.getDescription());
         return command;
     }
 }
