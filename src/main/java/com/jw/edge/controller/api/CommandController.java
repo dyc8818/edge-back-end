@@ -89,7 +89,8 @@ public class CommandController {
 
     @JmsListener(destination = "run.command", containerFactory = "topicContainerFactory")
     public void subscribeCommand(JSONObject msg) {
-        String url = "http://"+ip+":48082/api/v1/device/" + msg.getString("deviceId")+ "/command/" + msg.getString("commandId");
+        JSONObject command = commandService.find(msg.getString("name"));
+        String url = "http://"+ip+":48082/api/v1/device/" + command.getString("deviceId")+ "/command/" + command.getString("commandId");
         switch (msg.getString("commandType")){
             case "get":
                 try {
