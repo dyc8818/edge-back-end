@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,~{::scripts},~{::messageMenu})}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,~{::scripts},~{::messageMenu},_)}">
 
 <title>消息路由管理</title>
 <content>
@@ -58,7 +58,7 @@
             //第一个实例
             table.render({
                 elem: '#messageRoutingTable',
-                url: '/api/messageRoutings/', //数据接口
+                url: '/api/message/analysis/table/', //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
@@ -67,13 +67,11 @@
                     [ //表头
                         // {type: 'checkbox'},
 
-                        {field: 'messageRoutingId', title: '路由Key', sort: true, align: 'center'},
-                        {field: 'messageRoutingName', title: '路由名称', align: 'center'},
-                        {field: 'deviceName', title: '设备名称', align: 'center'},
-                        {field: 'messageRoutingType', title: '路由类型', align: 'center'},
-                        {field: 'messageRoutingAdress', title: '路由地址', align: 'center'},
-                        {field: 'messageRoutingPort', title: '路由地址端口', align: 'center'},
-                        {field: 'messageRoutingCreateTime', title: '添加时间', sort: true, align: 'center'},
+                        {field: 'name', title: '路由名称', align: 'center'},
+                        {field: 'incomingQueue', title: '消息来源', align: 'center'},
+                        {field: 'outgoingQueue', title: '消息去向', align: 'center'},
+                        {field: 'runFunction', title: '函数计算', align: 'center'},
+                        {field: 'createTime', title: '添加时间', sort: true, align: 'center'},
                         {
                             title: '操作', align: 'center',
                             toolbar: '#barDemo'
@@ -91,11 +89,10 @@
                         notice();
                         break;
                     case 'refresh':
-                        table.reload("messageRoutingTable")
+                        table.reload("messageRoutingTable");
 
                         break;
                 }
-                ;
             });
 
             //监听工具条
@@ -107,20 +104,20 @@
 
                         $.ajax({
                             type: "delete",
-                            url: "/api/messageRouting",
+                            url: "/api/message/analysis",
                             async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                            data: JSON.stringify({'messageRoutingId': data.messageRoutingId}),
+                            data: JSON.stringify(data),
                             contentType: "application/json",
                             // processData: false,
                             // cache: false,
                             success: function (ev) {
-                                if (ev.data == "删除成功") {
+                                if (Boolean(ev)) {
                                     obj.del();
-                                    layer.msg(ev.data);
+                                    layer.msg("删除成功！");
                                     layer.close(index);
                                     table.reload("messageRoutingTable")
                                 } else {
-                                    layer.msg(ev.data);
+                                    layer.msg(ev);
                                     layer.close(index);
                                 }
                             },
@@ -146,7 +143,7 @@
                     ,
                     closeBtn: 1
                     ,
-                    area: ['600px', '600px']
+                    area: ['500px', '500px']
                     ,
                     shade: 0.3
                     ,

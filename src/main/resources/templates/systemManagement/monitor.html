@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,~{::monitorMenu},_,~{::scripts},_)}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,~{::monitorMenu},_,~{::scripts},_,_)}">
 <title>在线设备统计</title>
 
 <content>
@@ -38,7 +38,7 @@
 
 
 <dd class="layui-this" th:fragment="monitorMenu">
-    <a href="/pages/monitor">在线设备统计</a>
+    <a href="/pages/monitor">在线统计</a>
 </dd>
 
 <div th:fragment="scripts">

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommandRepository extends MongoRepository<Command,String> {
+    Command findByName(String name);
     Command findByDeviceName(String name);
-    Command findByThisId(String id);
-    Command findByEdgexId(String id);
     Command findByDeviceId(String id);
-    Command findByDeviceNameAndCommandType(String name, int type);
+    Command findByCommandId(String id);
+    Command findByDeviceNameAndCommandType(String name, String type);
     Command findByDeviceNameAndCommandName(String device, String command);
-    Command findByDeviceNameAndCommandTypeAndCommandName(String device, int type, String command);
+    Command findByDeviceNameAndCommandTypeAndCommandName(String device, String type, String command);
 }

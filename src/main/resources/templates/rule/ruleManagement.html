@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,~{::ruleMenu},_,_,_,~{::scripts},_)}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,~{::ruleMenu},_,_,_,~{::scripts},_,_)}">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
 
 <title>规则列表</title>
 <content>
@@ -72,18 +74,14 @@
                     [ //表头
                         // {type: 'checkbox'},
                         {field: 'ruleName', title: '规则名称', sort: true, align: 'center'},
-                        {field: 'ruleToDevice', title: '对应设备', align: 'center'}, //, templet:ruletodev
+                        // {field: 'ruleToDevice', title: '对应设备', align: 'center'}, //, templet:ruletodev
                         {field: 'ruleToFunction', title: '规则设定', align: 'center', templet:setting},
                         {field: 'ruleExecute', title: '执行功能', align: 'center', templet:exeSet},
                         // {field: 'ruleDescribe', title: '规则描述', align: 'center'},
                         // {field: 'ruleCreateTime', title: '创建时间', sort: true, align: 'center'},
                         // {field: 'ruleStatus', title: '规则状态', sort: true, align: 'center'},
-                        {field:'ruleStatus',
-                            title:'规则状态',
-                            align:'center',
-                            templet:statusTpl},
-                        {title: '操作', align: 'center',toolbar: '#barDemo'
-                        }
+                        {field:'ruleStatus', title:'规则状态', align:'center', templet:statusTpl},
+                        {title: '操作', align: 'center',toolbar: '#barDemo'}
                     ]
                 ]
             });
@@ -170,22 +168,6 @@
             });
 
 
-                 //监听告警
-                // form.on('switch(changeRuleStatus)', function changeRuleAlert(data){
-                //     $.ajax({
-                //         type: "get",
-                //         url: "/api/alertDetails",
-                //         async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                //         data: JSON.stringify({'ruleId': data.elem.attributes['switch_rule_id'].nodeValue}),
-                //         contentType: "application/json",
-                //         success: function (ev) {
-                //             console.log(ev.data);
-                //         },
-                //     });
-                // });
-
-
-
             // 头工具栏事件
             table.on('toolbar(buttons)', function (obj) {
 
@@ -200,7 +182,6 @@
                 }
                 ;
             });
-
 
             //监听工具条
             table.on('tool(buttons)', function (obj) {
@@ -391,25 +372,30 @@
         };
 
         var setting = function (d) {
-            var rulePara = d.rulePara;
-            var para=['=','<','>'];
-            var ruleJudge = para[d.ruleJudge];
+            {
+                if(d.rulePara==0){var para = '>';}
+                if(d.rulePara==1){para = '<';}
+                if(d.rulePara==2){para = '=';}
+            }
+            {
+                if(d.ruleJudge==0){var judge = '温度';}
+                if(d.ruleJudge==1){judge = '湿度';}
+            }
+            // var ruleJudge = para[d.ruleJudge];
             var ruleParaThreshold = d.ruleParaThreshold;
-            var strg = rulePara + ruleJudge + ruleParaThreshold;
+            var strg = judge+ para + ruleParaThreshold;
             return strg;
         }
 
         var exeSet = function (d) {
-            if(d.ruleExecute==1){
-                var exestr = '警告日志';}
             if(d.ruleExecute==0){
+                var exestr = '警告日志';}
+            if(d.ruleExecute==1){
                 exestr = '关闭设备';}
+            if(d.ruleExecute==2){
+                exestr = '强制赋值';}
             return exestr;
         }
-        // var ruletodev = function (d) {
-        //     var devstr = d.ruleToDevice;
-        //     return devstr;
-        // }
     </script>
 
 </div>

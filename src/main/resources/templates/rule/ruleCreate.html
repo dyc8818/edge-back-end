@@ -20,17 +20,6 @@
         </div>
     </div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">初始状态</label>
-        <div class="layui-input-inline">
-            <select name="ruleStatus" lay-filter="aihao">
-                <option value="" selected=""></option>
-<!--                <option value=1 >开启</option>-->
-                <option value=0>关闭</option>
-            </select>
-        </div>
-    </div>
-
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">规则描述</label>
             <div class="layui-input-block">
@@ -41,39 +30,15 @@
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
         <legend>规则指令</legend>
     </fieldset>
-<!--    <div class="layui-form-item">-->
-<!--        <label class=" layui-form-label">数据格式</label>-->
-<!--        <div class=" layui-input-inline">-->
-<!--            <input type="radio" name="ruleFormat" value="Json" title="Json" checked="">-->
-<!--            <input type="radio" name="ruleFormat" value="二进制" title="二进制">-->
-<!--        </div>-->
-<!--    </div>-->
-    <div class="layui-form-item">
-        <label class="layui-form-label">对应设备</label>
-        <div class="layui-input-inline">
-            <select name="ruleToDevice" id="ruleToDevice" lay-filter="required">
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">设备功能</label>
-        <div class="layui-input-inline">
-            <select name="rulePara" id="rulePara" lay-filter="aihao">
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">设备参数</label>
         <div class="layui-input-inline">
             <select name="ruleJudge" lay-filter="aihao">
                 <option value="" selected=""></option>
-                <option value=2> 温度 </option>
+                <option value=0> 温度 </option>
                 <option value=1> 湿度 </option>
-                <option value=0> 等 </option>
             </select>
         </div>
     </div>
@@ -81,11 +46,11 @@
     <div class="layui-form-item">
         <label class="layui-form-label">规则条件</label>
         <div class="layui-input-inline">
-            <select name="ruleJudge" lay-filter="aihao">
+            <select name="rulePara" lay-filter="aihao">
                 <option value="" selected=""></option>
-                <option value=2> > </option>
+                <option value=0> > </option>
                 <option value=1> < </option>
-                <option value=0> = </option>
+                <option value=2> = </option>
             </select>
         </div>
     </div>
@@ -107,8 +72,8 @@
         <div class="layui-input-inline">
             <select name="ruleExecute" lay-filter="aihao">
                 <option value="" selected=""></option>
-                <option value=1> 警告日志 </option>
-                <option value=0> 关闭设备 </option>
+                <option value=0> 警告日志 </option>
+                <option value=1> 关闭设备 </option>
                 <option value=2> 强制赋值 </option>
             </select>
         </div>
@@ -125,7 +90,6 @@
 <script th:src="@{/layui/layui.js}"></script>
 <script>
     layui.use(['form', 'layedit', 'layer'], function () {
-
         var form = layui.form;
         var pa;
 
@@ -195,36 +159,6 @@
 
         });
 
-        // //监听提交
-        // form.on('submit(formVerify)', function (data) {
-        //
-        //     var data = JSON.stringify(data.field);
-        //
-        //     var url = "/api/rule";  //请求数据api
-        //
-        //     var code = 0;
-        //     layui.jquery.ajax({
-        //         type: "post",
-        //         url: url,
-        //         async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-        //         data: data,
-        //         contentType: "application/json",
-        //         // processData: false,
-        //         // cache: false,
-        //         success: function (ev) {
-        //             code = ev.code;
-        //         }
-        //     });
-        //     if (code == 500) {
-        //         console.log("提交失败");
-        //     }
-        //     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        //
-        //     parent.layer.close(index);
-        //
-        //     // 刷新表格（即点击分页控件的“确定”按钮）
-        //     parent.layui.table.reload("ruleTable");
-        // });
     });
 </script>
 </html>

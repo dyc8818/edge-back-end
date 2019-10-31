@@ -12,8 +12,9 @@ public class DataAnalysisImpl implements DataAnalysisService {
     MqService mqService;
     @Override
     public void deviceEventAnalysis(JSONObject deviceEvent){
-        System.out.println(deviceEvent);
-        JSONObject deviceData = deviceEvent.getJSONObject("readings");
-        mqService.publish("device.data",deviceData);
+        System.out.println("数据分析接收"+deviceEvent);
+        JSONObject deviceReadings = deviceEvent.getJSONObject("readings");
+        mqService.publish("device.readings",deviceReadings);
+        System.out.println("数据分析发送"+deviceReadings);
     }
 }

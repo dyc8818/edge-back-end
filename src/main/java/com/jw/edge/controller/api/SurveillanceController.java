@@ -20,10 +20,19 @@ public class SurveillanceController {
     @GetMapping("/mqtest")
     @ResponseBody
     public String mqTest(){
-        mqService.publish("test.topic",surveillanceService.getAge());
-        return new String("提交发送");
+        JSONObject command = new JSONObject();
+        command.put("name","name1");
+        command.put("commandId","cid");
+        command.put("commandName","cn");
+        command.put("commandType","get");
+        command.put("deviceId","did");
+        command.put("deviceName","dn");
+        command.put("jsonObject","jo");
+        command.put("jsonArray","ja");
+        mqService.publish("run.command",command);
+        mqService.publish("test2",command);
+        return "提交发送";
     }
-
 
     @GetMapping("/surnum")
     @ResponseBody

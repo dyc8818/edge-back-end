@@ -1,0 +1,40 @@
+import com.jw.edge.entity.Terminal
+import com.jw.edge.controller.api.WebDataController
+
+rule "温度大于"
+//no-loop true
+when
+    $terminal : Terminal(parameter>=20 && name.equals("tem") && symbol.equals(">") && operation.equals("警告"))
+/*    后面的参数是传感器数据*/
+    then
+        System.out.println("Hello");
+        $terminal.setFlag1(1);
+    end
+
+rule "温度小于"
+//no-loop true
+when
+    $terminal : Terminal(parameter<20 && name.equals("tem") && symbol.equals("<") && operation.equals("警告"))
+
+    then
+        $terminal.setFlag1(2);
+    end
+
+
+rule "湿度大于"
+//no-loop true
+when
+    $terminal : Terminal(parameter>=20 && name.equals("wet") && symbol.equals(">") && operation.equals("警告"))
+
+    then
+        $terminal.setFlag2(1);
+    end
+
+rule "湿度小于"
+//no-loop true
+when
+    $terminal : Terminal(parameter<20 && name.equals("wet") && symbol.equals("<") && operation.equals("警告"))
+
+    then
+        $terminal.setFlag2(2);
+    end
