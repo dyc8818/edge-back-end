@@ -7,58 +7,123 @@
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
 </head>
 <body>
+<div class="layui-tab layui-tab-card">
+    <ul class="layui-tab-title">
+        <li class="layui-this">创建设备服务</li>
+        <li>创建场景服务</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form layui-fluid" action="">
 
-<form class="layui-form layui-fluid" action="">
-    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend>消息路由</legend>
-    </fieldset>
-    <div class="layui-form-item">
-        <label class="layui-form-label" style="margin-right: 30px; width: 120px">消息路由名称</label>
-        <div class="layui-input-inline">
-            <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入消息路由名称"
-                   class="layui-input">
-        </div>
-    </div>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>设备服务</legend>
+                </fieldset>
 
-    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend>路由信息</legend>
-    </fieldset>
-    <div class="layui-form-item">
-        <label class=" layui-form-label" style="margin-right: 30px; width: 120px">函数计算</label>
-        <div class=" layui-input-inline">
-            <select name="runFunction" id="runFunction" >
-                <option value="raw" selected="">raw</option>
-                <option value="other" >其他</option>
-            </select>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label" style="margin-right: 30px; width: 120px">消息来源</label>
-        <div class="layui-input-inline">
-            <input type="text" name="incomingQueue"  autocomplete="off" placeholder="请输入消息来源队列名称"
-                   class="layui-input">
-        </div>
-    </div>
+                <div class="layui-form-item">
+                    <label class=" layui-form-label" style="margin-right: 30px; width: 120px">请选择一个设备</label>
+                    <div class=" layui-input-inline">
+                        <select name="select" id="select" lay-filter="device" >
+                            <option value="0">请选择一个设备和其资源</option>
+                        </select>
+                    </div>
+                </div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label" style="margin-right: 30px; width: 120px">消息去向</label>
-        <div class="layui-input-inline">
-            <input type="text" name="outgoingQueue"  autocomplete="off" placeholder="请输入消息去向队列名称"
-                   class="layui-input">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-right: 30px; width: 120px">设备服务名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入设备服务名称"
+                               class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class=" layui-form-label" style="margin-right: 30px; width: 120px">请选择一个设备</label>
+                    <div class=" layui-input-inline">
+                        <select name="commandType" id="type">
+                            <option value="get">get</option>
+                            <option value="put">put</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-right: 30px; width: 120px">描述</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="description"  autocomplete="off" placeholder="请输入描述"
+                               class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-right: 30px; width: 120px">消息体</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="jsonObject"  autocomplete="off" placeholder="请输入JSON body"
+                               class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item" style="display: none">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit="" lay-filter="l1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </div>
-    <div class="layui-form-item" style="display: none">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="formVerify">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+
+        <div class="layui-tab-item">
+            <form class="layui-form layui-fluid" action="">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>场景服务</legend>
+                </fieldset>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-right: 30px; width: 120px">场景服务名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入场景服务名称"
+                               class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-right: 30px; width: 120px">场景服务内容</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="jsonArray"  autocomplete="off" placeholder="请输入要执行的命令名称JSON数组"
+                               class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item" style="display: none">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit="" lay-filter="l2">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+
+            </form>
         </div>
+
     </div>
-</form>
+</div>
+
+
 </body>
 <script th:src="@{/layui/layui.js}"></script>
 <script>
-    layui.use(['form', 'layedit', 'laydate'], function () {
+    layui.use(['form', 'layedit', 'laydate','element'], function () {
         var form = layui.form;
+        var element = layui.element;
+        layui.$.get("/api/surid/",function (data) {
+            for(i=0;i<data.length;i++){
+                var command = data[i];
+                var option = document.createElement('option');
+                option.setAttribute('value',command);
+                option.innerText="设备名称："+command["deviceName"]+"    资源类型："+command["commandName"];
+                select.appendChild(option);
+                form.render('select','device');
+            }
+        });
         //自定义验证规则
         // form.verify({
         //     title: function (value) {
@@ -75,11 +140,17 @@
         //     }
         // });
         //监听提交
-        form.on('submit(formVerify)', function (obj) {
-
-            var data = JSON.stringify(obj.field);
-            var url = "/api/message/analysis/"+document.getElementById("runFunction").value;
+        form.on('submit(l1)', function (obj) {
+            var jo = obj.field;
+            jo.commandId=jo.select.commandId;
+            jo.commandName=jo.select.commandName;
+            jo.deviceId=jo.select.deviceId;
+            jo.deviceName=jo.select.deviceName;
+            jo.level = 1;
+            var data = JSON.stringify(jo);
+            var url = "/api/scenario/command";
             var code = 0;
+            alert(data);
             layui.jquery.ajax({
                 type: "post",
                 url: url,
@@ -102,7 +173,40 @@
             parent.layer.close(index);
 
             // 刷新表格（即点击分页控件的“确定”按钮）
-            parent.layui.table.reload("messageRoutingTable");
+            parent.layui.table.reload("scenarioTable");
+
+        });
+        form.on('submit(l2)', function (obj) {
+            var jo = obj.field;
+            jo.level = 2;
+            jo.commandType = "scenario";
+            var data = JSON.stringify(jo);
+            var url = "/api/scenario/command";
+            var code = 0;
+            alert(data);
+            layui.jquery.ajax({
+                type: "post",
+                url: url,
+                async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                data: data,
+                contentType: "application/json",
+                // processData: false,
+                // cache: false,
+                success: function (ev) {
+                    code = ev.code;
+                }
+
+            });
+            if (code == 500) {
+                console.log("提交失败");
+            }
+
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+
+            parent.layer.close(index);
+
+            // 刷新表格（即点击分页控件的“确定”按钮）
+            parent.layui.table.reload("scenarioTable");
 
         });
     })

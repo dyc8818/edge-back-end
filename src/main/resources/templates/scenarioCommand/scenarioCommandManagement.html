@@ -104,9 +104,9 @@
 
                         $.ajax({
                             type: "delete",
-                            url: "/api/scenario/command",
+                            url: "/api/scenario/command?name="+data["name"].toString(),
                             async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                            data: data["name"].toString(),
+
                             contentType: "application/json",
                             // processData: false,
                             // cache: false,
@@ -143,7 +143,7 @@
                     ,
                     closeBtn: 1
                     ,
-                    area: ['500px', '500px']
+                    area: ['500px', '800px']
                     ,
                     shade: 0.3
                     ,
