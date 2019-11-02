@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ScenarioPagesController {
     @GetMapping("/scenarioManagement")
-    public String messageRoutingList(Model model) throws Exception {
+    public String getList(Model model) throws Exception {
         return "/scenarioCommand/scenarioCommandManagement";
     }
 
+    @GetMapping("/commandCreate")
+    public String creatCommand(Model model) throws Exception {
+        return "scenarioCommand/commandCreate";
+    }
+
     @GetMapping("/scenarioCreate")
-    public String messageRoutingCreate(Model model) throws Exception {
-        return "scenarioCommand/scenarioCommandCreate";
+    public String createScenario(Model model) throws Exception {
+        return "scenarioCommand/scenarioCreate";
     }
 }
