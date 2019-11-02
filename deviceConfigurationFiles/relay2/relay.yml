@@ -8,18 +8,34 @@ deviceResources:
   name: Relay
   properties:
     value:
-      type: INT16
+      type: INT32
       readWrite: R
       defaultValue: "0"
       size: "1"
-      scale: "0.1"
+      scale: "1"
       mediatype: ""
     units:
       type: String
       readWrite: R
   attributes:
     primaryTable: HOLDING_REGISTERS
-    startingAddress: "2"
+    startingAddress: "1"
+- description: relayStatus
+  name: Status
+  properties:
+    value:
+      type: INT8
+      readWrite: R
+      defaultValue: "0"
+      size: "1"
+      scale: "1"
+      mediatype: ""
+    units:
+      type: String
+      readWrite: R
+  attributes:
+    primaryTable: COILS
+    startingAddress: "1"
 deviceCommands:
 - name: Relay
   get:
@@ -27,6 +43,12 @@ deviceCommands:
     operation: get
     object: Relay
     parameter: Relay
+- name: Status
+  get:
+  - index: "1"
+    operation: get
+    object: Status
+    parameter: Status
 coreCommands:
 - name: Relay
   get:
@@ -36,5 +58,15 @@ coreCommands:
       description: Get the Relay state
       expectedValues:
       - Relay
+    - code: "503"
+      description: service unavailable 
+- name: Status
+  get:
+    path: /api/v1/device/{deviceId}/Status
+    responses:
+    - code: "200"
+      description: Get the Relay state
+      expectedValues:
+      - Status
     - code: "503"
       description: service unavailable 
