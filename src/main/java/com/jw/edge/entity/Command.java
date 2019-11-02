@@ -17,6 +17,8 @@ public class Command {
     private JSONObject jsonObject;
     private JSONArray jsonArray;
     private String commandName;
+    private int level;
+    private String description;
 
     public String getId() {
         return id;
@@ -88,5 +90,21 @@ public class Command {
 
     public void setJsonArray(JSONArray jsonArray) {
         this.jsonArray = jsonArray;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,~{::scripts},~{::messageMenu})}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,~{::scripts},~{::messageMenu},_)}">
 
 <title>消息路由管理</title>
 <content>
@@ -89,11 +89,10 @@
                         notice();
                         break;
                     case 'refresh':
-                        table.reload("messageRoutingTable")
+                        table.reload("messageRoutingTable");
 
                         break;
                 }
-                ;
             });
 
             //监听工具条
@@ -112,7 +111,7 @@
                             // processData: false,
                             // cache: false,
                             success: function (ev) {
-                                if (Boolean(ev) == true) {
+                                if (Boolean(ev)) {
                                     obj.del();
                                     layer.msg("删除成功！");
                                     layer.close(index);

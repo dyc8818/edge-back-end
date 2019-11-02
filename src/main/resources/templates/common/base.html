@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html th:fragment="Layout (content,title,users,productMenu, deviceMenu,
-ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script,messageMenu)" lang="en" xmlns:th="http://www.thymeleaf.org"
+ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script,messageMenu,scenarioMenu)" lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title th:replace="${title}">边缘计算平台</title>
@@ -95,6 +95,14 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script,messageMenu)" lang="e
                     <dl class="layui-nav-child">
                         <dd th:replace="${messageMenu}">
                             <a href="/pages/messageRouting">消息路由管理</a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">场景命令</a>
+                    <dl class="layui-nav-child">
+                        <dd th:replace="${scenarioMenu}">
+                            <a href="/pages/scenarioManagement">场景命令管理</a>
                         </dd>
                     </dl>
                 </li>
