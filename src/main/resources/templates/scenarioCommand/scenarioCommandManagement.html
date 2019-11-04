@@ -60,7 +60,6 @@
     <script th:inline="none">
         layui.use('table', function () {
             var table = layui.table;
-
             var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
             //第一个实例
             table.render({
@@ -92,18 +91,12 @@
 
                 var checkStatus = table.checkStatus('test');
                 switch (obj.event) {
-<<<<<<< HEAD
-                    case 'createScenarioCommand':
-                        notice();
-                        break;
-=======
                     case 'createCommand':
                         notice();
                         break;
                     case 'createScenario':
                         notice1();
                         break;
->>>>>>> 8bdb843855d779a85a262c88182b9a5b14ec948e
                     case 'refresh':
                         table.reload("scenarioTable");
 
@@ -117,13 +110,10 @@
                 var data = obj.data;
                 if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
-
                         $.ajax({
                             type: "delete",
-
                             url: "/api/scenario/command?name="+data["name"].toString(),
                             async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-
                             contentType: "application/json",
                             // processData: false,
                             // cache: false,
@@ -143,7 +133,6 @@
                                 layer.msg("删除失败");
                                 layer.close(index);
                             }
-
                         });
                     });
                 }
@@ -160,7 +149,6 @@
                     ,
                     closeBtn: 1
                     ,
-
                     area: ['800px', '800px']
                     ,
                     shade: 0.3
@@ -192,7 +180,6 @@
                         submited.click();
                         // layer.close(index);
                         // 弹出层关闭的操作在子层的js代码中完成
-
                     },
                     btn2: function (index, layero) {
                         //按钮【重置】的回调
@@ -218,7 +205,6 @@
                     closeBtn: 1
                     ,
                     area: ['800px', '800px']
-
                     ,
                     shade: 0.3
                     ,
@@ -267,7 +253,6 @@
         });
 
     </script>
-
 
 </div>
 </html>
