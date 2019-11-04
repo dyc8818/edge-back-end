@@ -8,7 +8,7 @@ deviceResources:
   name: Relay
   properties:
     value:
-      type: INT32
+      type: INT16
       readWrite: R
       defaultValue: "0"
       size: "1"
@@ -24,7 +24,7 @@ deviceResources:
   name: Status
   properties:
     value:
-      type: INT8
+      type: INT16
       readWrite: R
       defaultValue: "0"
       size: "1"
@@ -49,6 +49,11 @@ deviceCommands:
     operation: get
     object: Status
     parameter: Status
+  set:
+  - index: "1"
+    operation: set
+    object: Status
+    parameter: Status
 coreCommands:
 - name: Relay
   get:
@@ -68,5 +73,14 @@ coreCommands:
       description: Get the Relay state
       expectedValues:
       - Status
+    - code: "503"
+      description: service unavailable 
+  put:
+    path: /api/v1/device/{deviceId}/Status
+    parameterNames: ["Status"]
+    responses:
+    - code: "204"
+      description: Set the Relay state
+      expectedValues: []
     - code: "503"
       description: service unavailable 
