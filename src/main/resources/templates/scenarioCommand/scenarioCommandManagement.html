@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,~{::scripts},_,~{::scenarioMenu})}">
 
-<title>场景命令管理</title>
+<title>场景服务管理</title>
 <content>
     <div class="layui-tab-brief layui-tab">
         <ul class="layui-tab-title site-demo-title">
-            <li class="layui-this"><a><cite>场景命令列表</cite></a></li>
+            <li class="layui-this"><a><cite>场景服务列表</cite></a></li>
         </ul>
     </div>
     <div class="layui-fluid"layui-card-body style="padding: 15px;">
@@ -25,7 +25,7 @@
 </content>
 
 <dd class="layui-this" th:fragment="scenarioMenu">
-    <a href="/pages/messageRouting">场景命令管理</a>
+    <a href="/pages/messageRouting">场景服务管理</a>
 </dd>
 <div th:fragment="scripts">
 
@@ -72,7 +72,7 @@
                     [ //表头
                         // {type: 'checkbox'},
 
-                        {field: 'name', title: '场景命令名称', align: 'center'},
+                        {field: 'name', title: '服务名称', align: 'center'},
                         {field: 'deviceName', title: '对应设备名称', align: 'center'},
                         {field: 'commandName', title: '对应命令名称', align: 'center'},
                         {field: 'commandType', title: '命令类型', align: 'center'},
@@ -151,7 +151,7 @@
                     ,
                     closeBtn: 1
                     ,
-                    area: ['600px', '800px']
+                    area: ['800px', '800px']
                     ,
                     shade: 0.3
                     ,
@@ -207,7 +207,7 @@
                     ,
                     closeBtn: 1
                     ,
-                    area: ['600px', '800px']
+                    area: ['800px', '800px']
                     ,
                     shade: 0.3
                     ,
