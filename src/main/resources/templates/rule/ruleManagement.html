@@ -3,7 +3,6 @@
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,~{::ruleMenu},_,_,_,~{::scripts},_,_)}">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-
 <title>规则列表</title>
 <content>
     <div class="layui-tab-brief layui-tab">
@@ -15,9 +14,6 @@
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md12">
                 <div class="layui-card">
-                    <!--                    <div class="layui-card-header ">-->
-                    <!--                        <h1>规则列表</h1>-->
-                    <!--                    </div>-->
 
                     <div class="layui-card-body">
                         <table class="layui-hide" id="ruleTable" lay-filter="buttons"></table>
@@ -29,11 +25,9 @@
 
 </content>
 
-
 <dd class="layui-this" th:fragment="ruleMenu">
     <a href="/pages/rules">规则列表</a>
 </dd>
-
 <div th:fragment="scripts">
 
     <script th:inline="none" type="text/html" id="barDemo">
@@ -55,6 +49,7 @@
             </button>
         </div>
     </script>
+
 
     <script th:inline="none">
         layui.use(['form', 'table'], function () {
@@ -168,6 +163,22 @@
             });
 
 
+                 //监听告警
+                // form.on('switch(changeRuleStatus)', function changeRuleAlert(data){
+                //     $.ajax({
+                //         type: "get",
+                //         url: "/api/alertDetails",
+                //         async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                //         data: JSON.stringify({'ruleId': data.elem.attributes['switch_rule_id'].nodeValue}),
+                //         contentType: "application/json",
+                //         success: function (ev) {
+                //             console.log(ev.data);
+                //         },
+                //     });
+                // });
+
+
+
             // 头工具栏事件
             table.on('toolbar(buttons)', function (obj) {
 
@@ -182,6 +193,7 @@
                 }
                 ;
             });
+
 
             //监听工具条
             table.on('tool(buttons)', function (obj) {
@@ -373,17 +385,19 @@
 
         var setting = function (d) {
             {
-                if(d.rulePara==0){var para = '>';}
-                if(d.rulePara==1){para = '<';}
+                if(d.rulePara==0){var para = '温度';}
+                if(d.rulePara==1){para = '湿度';}
                 if(d.rulePara==2){para = '=';}
             }
             {
-                if(d.ruleJudge==0){var judge = '温度';}
-                if(d.ruleJudge==1){judge = '湿度';}
+                if(d.ruleJudge==0){var judge = '>';}
+                if(d.ruleJudge==1){judge = '<';}
+                if(d.ruleJudge==2){judge = '=';}
+
             }
             // var ruleJudge = para[d.ruleJudge];
             var ruleParaThreshold = d.ruleParaThreshold;
-            var strg = judge+ para + ruleParaThreshold;
+            var strg = para + judge+ ruleParaThreshold;
             return strg;
         }
 

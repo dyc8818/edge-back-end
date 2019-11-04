@@ -64,7 +64,7 @@ public class RuleController {
         return products;
     }
 
-    //监听告警
+/*    //监听告警 暂时屏蔽了
     @GetMapping("/alertDetails")
     @ResponseBody
 //    public JSONObject getDetails(@RequestBody JSONObject ruleID){
@@ -113,7 +113,7 @@ public class RuleController {
         result.put(("alertDeviceName"), (alertDeviceName));
         result.put(("ident"), (ident));
         return result;
-    }
+    }*/
 
 
     //控制设备激活

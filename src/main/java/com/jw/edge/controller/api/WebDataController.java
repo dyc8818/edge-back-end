@@ -29,12 +29,12 @@ public class WebDataController {
 
     @PostMapping("/webdata")
     @ResponseBody
-    public String Webdata(@RequestBody JSONObject info){
+    public int Webdata(@RequestBody JSONObject info){
 
-        int parameter = info.getIntValue("parameter");
-        String name = info.getString("name");
-        String symbol = info.getString("symbol");
-        String operation = info.getString("operation");
+        int parameter = info.getIntValue("ruleParaThreshold");
+        String name = info.getString("rulePara");
+        String symbol = info.getString("ruleJudge");
+        String operation = info.getString("ruleExecute");
 
         this.name=name;
         this.parameter=parameter;
@@ -44,12 +44,13 @@ public class WebDataController {
 
         Test();
 
-        if(name.equals("tem"))
+        return parameter;
+        /*if(name.equals("tem"))
         {
 
             return "OK";        }
         else
-        {            return name;        }
+        {            return symbol;        }*/
     }
 
 
