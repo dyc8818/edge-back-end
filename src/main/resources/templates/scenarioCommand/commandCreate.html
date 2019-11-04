@@ -15,8 +15,8 @@
 
                 <div class="layui-form-item">
                     <label class=" layui-form-label" style="margin-right: 30px; width: 120px">请选择一个设备</label>
-                    <div class=" layui-input-inline">
-                        <select name="select" id="select" lay-filter="device" >
+                    <div class=" layui-input-inline" style="width: 500px">
+                        <select name="select" id="list" lay-filter="device" >
                             <option value="0">请选择一个设备和资源</option>
                         </select>
                     </div>
@@ -24,14 +24,14 @@
 
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="margin-right: 30px; width: 120px">设备服务名称</label>
-                    <div class="layui-input-inline">
+                    <div class="layui-input-inline" style="width: 500px">
                         <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入设备服务名称"
                                class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
-                    <label class=" layui-form-label" style="margin-right: 30px; width: 120px">请选择一个设备</label>
+                    <label class=" layui-form-label" style="margin-right: 30px; width: 120px">请选择命令类型</label>
                     <div class=" layui-input-inline">
                         <select name="commandType" id="type">
                             <option value="get">get</option>
@@ -41,8 +41,8 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label" style="margin-right: 30px; width: 120px">描述</label>
-                    <div class="layui-input-inline">
+                    <label class="layui-form-label" style="margin-right: 30px; width: 120px  ">描述</label>
+                    <div class="layui-input-inline" style="width: 500px">
                         <input type="text" name="description"  autocomplete="off" placeholder="请输入描述"
                                class="layui-input">
                     </div>
@@ -50,7 +50,7 @@
 
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="margin-right: 30px; width: 120px">消息体</label>
-                    <div class="layui-input-inline">
+                    <div class="layui-input-inline" style="width: 500px">
                         <textarea name="jsonObject"  autocomplete="off" placeholder="请输入JSON body"
                                   class="layui-textarea"></textarea>
                     </div>
@@ -66,17 +66,28 @@
 </body>
 <script th:src="@{/layui/layui.js}"></script>
 <script>
+    var cId, dId, cn, dn, clist;
     layui.use(['form', 'layedit', 'laydate','element'], function () {
         var form = layui.form;
-        layui.$.get("/api/surid/",function (data) {
-            for(i=0;i<data.length;i++){
+        var select = document.getElementById('list');
+        layui.$.get("/api/scenario/list/",function (data) {
+            clist = data;
+            for (i = 0; i < data.length; i++) {
                 var command = data[i];
-                var option = document.createElement('option');
-                option.setAttribute('value',command);
-                option.innerText="设备名称："+command["deviceName"]+"    资源类型："+command["commandName"];
+                option = document.createElement('option');
+                option.setAttribute('value', i);
+                option.innerText = "设备名称:" + command["deviceName"] + "    资源类型:" + command["commandName"];
                 select.appendChild(option);
-                form.render('select','device');
+                form.render('select');
             }
+        });
+        form.on('select(device)', function(data){
+            command = clist[data.value];
+            cId = command["commandId"];
+            dId = command["deviceId"];
+            cn = command["commandName"];
+            dn = command["deviceName"];
+            alert(JSON.stringify(command));
         });
         //自定义验证规则
         // form.verify({
@@ -96,10 +107,10 @@
         //监听提交
         form.on('submit(l1)', function (obj) {
             var jo = obj.field;
-            jo.commandId=jo.select.commandId;
-            jo.commandName=jo.select.commandName;
-            jo.deviceId=jo.select.deviceId;
-            jo.deviceName=jo.select.deviceName;
+            jo.commandId=cId;
+            jo.commandName=cn;
+            jo.deviceId=dId;
+            jo.deviceName=dn;
             jo.level = 1;
             var data = JSON.stringify(jo);
             var url = "/api/scenario/command";

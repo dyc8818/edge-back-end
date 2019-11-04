@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,~{::scripts},_,~{::scenarioMenu})}">
 
-<title>场景命令管理</title>
+<title>场景服务管理</title>
 <content>
     <div class="layui-tab-brief layui-tab">
         <ul class="layui-tab-title site-demo-title">
-            <li class="layui-this"><a><cite>场景命令列表</cite></a></li>
+            <li class="layui-this"><a><cite>场景服务列表</cite></a></li>
         </ul>
     </div>
     <div class="layui-fluid"layui-card-body style="padding: 15px;">
@@ -25,7 +25,7 @@
 </content>
 
 <dd class="layui-this" th:fragment="scenarioMenu">
-    <a href="/pages/messageRouting">场景命令管理</a>
+    <a href="/pages/messageRouting">场景服务管理</a>
 </dd>
 <div th:fragment="scripts">
 
@@ -36,12 +36,7 @@
 
     <script type="text/html" id="layerRefresh">
         <div class="layui-btn-container">
-<<<<<<< HEAD
-            <button id="createButton"
-                    class="layui-btn layui-btn-normal layui-btn-radius"
-                    lay-event="createScenarioCommand">
-                添加场景命令
-=======
+
             <button id="createButton1"
                     class="layui-btn layui-btn-normal layui-btn-radius"
                     lay-event="createCommand">
@@ -51,7 +46,7 @@
                     class="layui-btn layui-btn-normal layui-btn-radius"
                     lay-event="createScenario">
                 添加场景服务
->>>>>>> 8bdb843855d779a85a262c88182b9a5b14ec948e
+
             </button>
             <button id="refreshButton"
                     class="layui-btn layui-btn-checked layui-btn-radius"
@@ -79,7 +74,7 @@
                     [ //表头
                         // {type: 'checkbox'},
 
-                        {field: 'name', title: '场景命令名称', align: 'center'},
+                        {field: 'name', title: '服务名称', align: 'center'},
                         {field: 'deviceName', title: '对应设备名称', align: 'center'},
                         {field: 'commandName', title: '对应命令名称', align: 'center'},
                         {field: 'commandType', title: '命令类型', align: 'center'},
@@ -125,15 +120,10 @@
 
                         $.ajax({
                             type: "delete",
-<<<<<<< HEAD
-                            url: "/api/scenario/command",
-                            async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                            data: data["name"].toString(),
-=======
+
                             url: "/api/scenario/command?name="+data["name"].toString(),
                             async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
 
->>>>>>> 8bdb843855d779a85a262c88182b9a5b14ec948e
                             contentType: "application/json",
                             // processData: false,
                             // cache: false,
@@ -170,10 +160,8 @@
                     ,
                     closeBtn: 1
                     ,
-<<<<<<< HEAD
-                    area: ['500px', '500px']
-=======
-                    area: ['600px', '800px']
+
+                    area: ['800px', '800px']
                     ,
                     shade: 0.3
                     ,
@@ -229,8 +217,8 @@
                     ,
                     closeBtn: 1
                     ,
-                    area: ['600px', '800px']
->>>>>>> 8bdb843855d779a85a262c88182b9a5b14ec948e
+                    area: ['800px', '800px']
+
                     ,
                     shade: 0.3
                     ,
@@ -273,12 +261,9 @@
                         return false;
                     }
                 });
-<<<<<<< HEAD
-            };
-=======
+
             }
 
->>>>>>> 8bdb843855d779a85a262c88182b9a5b14ec948e
         });
 
     </script>
