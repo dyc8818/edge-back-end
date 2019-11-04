@@ -127,10 +127,6 @@
             <artifactId>lombok</artifactId>
             <version>1.16.22</version>
         </dependency>
-<<<<<<< HEAD
-
-=======
->>>>>>> 4a2cf2036324cc6b77e608bc2320f98e0aedf79f
 
     </dependencies>
 
