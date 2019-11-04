@@ -2,10 +2,8 @@ import com.jw.edge.entity.Terminal
 import com.jw.edge.controller.api.WebDataController
 
 /*温度是0，湿度是1
-大于是0，小于是1
+大于是0，小于是1,等于是2
 警告是1*/
-
-
 
 rule "温度大于"
 //no-loop true

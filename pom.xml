@@ -79,7 +79,7 @@
             <artifactId>mongodb-driver</artifactId>
             <version>3.8.2</version>
         </dependency>
-<<<<<<< HEAD
+
 
         <!-- drools -->
         <dependency>
@@ -128,8 +128,7 @@
             <artifactId>lombok</artifactId>
             <version>1.16.22</version>
         </dependency>
-=======
->>>>>>> 8bdb843855d779a85a262c88182b9a5b14ec948e
+
 
     </dependencies>
 
