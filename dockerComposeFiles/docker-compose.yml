@@ -477,7 +477,7 @@ services:
       - data
       - command
     devices:
-      - "/dev/ttyUSB0:/dev/ttyUSB0"
+       - "/dev/ttyUSB0:/dev/ttyUSB0"
   #
   # device-snmp:
   #   image: edgexfoundry/docker-device-snmp-go:1.0.0

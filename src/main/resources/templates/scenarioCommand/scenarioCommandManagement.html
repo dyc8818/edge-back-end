@@ -36,10 +36,22 @@
 
     <script type="text/html" id="layerRefresh">
         <div class="layui-btn-container">
+<<<<<<< HEAD
             <button id="createButton"
                     class="layui-btn layui-btn-normal layui-btn-radius"
                     lay-event="createScenarioCommand">
                 添加场景命令
+=======
+            <button id="createButton1"
+                    class="layui-btn layui-btn-normal layui-btn-radius"
+                    lay-event="createCommand">
+                添加设备服务
+            </button>
+            <button id="createButton2"
+                    class="layui-btn layui-btn-normal layui-btn-radius"
+                    lay-event="createScenario">
+                添加场景服务
+>>>>>>> 8bdb843855d779a85a262c88182b9a5b14ec948e
             </button>
             <button id="refreshButton"
                     class="layui-btn layui-btn-checked layui-btn-radius"
@@ -85,9 +97,18 @@
 
                 var checkStatus = table.checkStatus('test');
                 switch (obj.event) {
+<<<<<<< HEAD
                     case 'createScenarioCommand':
                         notice();
                         break;
+=======
+                    case 'createCommand':
+                        notice();
+                        break;
+                    case 'createScenario':
+                        notice1();
+                        break;
+>>>>>>> 8bdb843855d779a85a262c88182b9a5b14ec948e
                     case 'refresh':
                         table.reload("scenarioTable");
 
@@ -104,9 +125,15 @@
 
                         $.ajax({
                             type: "delete",
+<<<<<<< HEAD
                             url: "/api/scenario/command",
                             async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
                             data: data["name"].toString(),
+=======
+                            url: "/api/scenario/command?name="+data["name"].toString(),
+                            async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+
+>>>>>>> 8bdb843855d779a85a262c88182b9a5b14ec948e
                             contentType: "application/json",
                             // processData: false,
                             // cache: false,
@@ -143,7 +170,67 @@
                     ,
                     closeBtn: 1
                     ,
+<<<<<<< HEAD
                     area: ['500px', '500px']
+=======
+                    area: ['600px', '800px']
+                    ,
+                    shade: 0.3
+                    ,
+                    id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                    ,
+                    btn: ['提交', '重置', '取消']
+                    ,
+                    btnAlign: 'c'
+                    ,
+                    moveType: 1 //拖拽模式，0或者1
+                    ,
+                    content: '/pages/commandCreate'
+                    ,
+                    // success: function (layero) {
+                    //     var btn = layero.find('.layui-layer-btn');
+                    //     btn.find('.layui-layer-btn0').attr({
+                    //         href: 'http://www.layui.com/'
+                    //         , target: '_blank'
+                    //     });
+                    // }
+                    yes: function (index, layero) {
+
+                        // 获取弹出层中的form表单元素
+                        var formSubmit = layer.getChildFrame('form', index);
+                        // // 获取表单中的提交按钮（在我的表单里第一个button按钮就是提交按钮，使用find方法寻找即可）
+                        var submited = formSubmit.find('button')[0];
+                        // // 触发点击事件，会对表单进行验证，验证成功则提交表单，失败则返回错误信息
+                        submited.click();
+                        // layer.close(index);
+                        // 弹出层关闭的操作在子层的js代码中完成
+
+                    },
+                    btn2: function (index, layero) {
+                        //按钮【重置】的回调
+                        // 获取弹出层中的form表单元素
+                        var formSubmit = layer.getChildFrame('form', index);
+                        // // 获取表单中的提交按钮（在我的表单里第一个button按钮就是提交按钮，使用find方法寻找即可）
+                        var submited = formSubmit.find('button')[1];
+                        submited.click();
+                        return false;
+                    }
+                });
+            }
+
+            //触发创建产品弹出层
+
+            function notice1(){
+                //示范一个公告层
+                layer.open({
+                    type: 2
+                    ,
+                    title: "添加场景命令"
+                    ,
+                    closeBtn: 1
+                    ,
+                    area: ['600px', '800px']
+>>>>>>> 8bdb843855d779a85a262c88182b9a5b14ec948e
                     ,
                     shade: 0.3
                     ,
@@ -186,7 +273,12 @@
                         return false;
                     }
                 });
+<<<<<<< HEAD
             };
+=======
+            }
+
+>>>>>>> 8bdb843855d779a85a262c88182b9a5b14ec948e
         });
 
     </script>

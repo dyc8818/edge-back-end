@@ -1,0 +1,86 @@
+name: relay profile
+manufacturer: xx
+model: ModBus-1
+labels: [relay]
+description: relay profile
+deviceResources: 
+- description: relay
+  name: Relay
+  properties:
+    value:
+      type: INT16
+      readWrite: R
+      defaultValue: "0"
+      size: "1"
+      scale: "1"
+      mediatype: ""
+    units:
+      type: String
+      readWrite: R
+  attributes:
+    primaryTable: HOLDING_REGISTERS
+    startingAddress: "1"
+- description: relayStatus
+  name: Status
+  properties:
+    value:
+      type: INT16
+      readWrite: R
+      defaultValue: "0"
+      size: "1"
+      scale: "1"
+      mediatype: ""
+    units:
+      type: String
+      readWrite: R
+  attributes:
+    primaryTable: COILS
+    startingAddress: "1"
+deviceCommands:
+- name: Relay
+  get:
+  - index: "1"
+    operation: get
+    object: Relay
+    parameter: Relay
+- name: Status
+  get:
+  - index: "1"
+    operation: get
+    object: Status
+    parameter: Status
+  set:
+  - index: "1"
+    operation: set
+    object: Status
+    parameter: Status
+coreCommands:
+- name: Relay
+  get:
+    path: /api/v1/device/{deviceId}/Relay
+    responses:
+    - code: "200"
+      description: Get the Relay state
+      expectedValues:
+      - Relay
+    - code: "503"
+      description: service unavailable 
+- name: Status
+  get:
+    path: /api/v1/device/{deviceId}/Status
+    responses:
+    - code: "200"
+      description: Get the Relay state
+      expectedValues:
+      - Status
+    - code: "503"
+      description: service unavailable 
+  put:
+    path: /api/v1/device/{deviceId}/Status
+    parameterNames: ["Status"]
+    responses:
+    - code: "204"
+      description: Set the Relay state
+      expectedValues: []
+    - code: "503"
+      description: service unavailable 
