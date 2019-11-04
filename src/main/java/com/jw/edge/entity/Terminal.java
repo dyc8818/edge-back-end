@@ -23,5 +23,11 @@ public class Terminal {
     private String symbol=WebDataController.symbol;
     private String operation=WebDataController.operation;
 
+    public int getFlag1() {
+        return flag1;
+    }
 
+    public int getFlag2() {
+        return flag2;
+    }
 }
