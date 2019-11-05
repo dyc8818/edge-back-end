@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public class Terminal {
 
-
     private int flag1 = 100;
     private int flag2 = 100;
-    private Temperature temperature;
-//    private Wet wet;
 
     private int parameter=WebDataController.parameter;
 

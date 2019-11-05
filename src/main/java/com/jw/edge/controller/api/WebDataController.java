@@ -1,10 +1,6 @@
 package com.jw.edge.controller.api;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.jw.edge.entity.Temperature;
-import com.jw.edge.util.dataAnalysis.Raw;
-import lombok.Data;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.web.bind.annotation.*;
 import javax.jms.*;
@@ -45,12 +41,6 @@ public class WebDataController {
         Test();
 
         return parameter;
-        /*if(name.equals("tem"))
-        {
-
-            return "OK";        }
-        else
-        {            return symbol;        }*/
     }
 
 
@@ -64,7 +54,7 @@ public class WebDataController {
 
         kieSession.insert(terminal);
 
-        int count = kieSession.fireAllRules();//通知规则引擎执行规则
+        kieSession.fireAllRules();//通知规则引擎执行规则
 
         System.out.println("温度输出是"+terminal.getFlag1());
         System.out.println("湿度输出是"+terminal.getFlag2());
