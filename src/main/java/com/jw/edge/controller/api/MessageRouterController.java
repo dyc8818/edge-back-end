@@ -7,7 +7,6 @@ import com.jw.edge.util.LayuiTableResultUtil;
 import com.jw.edge.util.dataAnalysis.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.annotation.JmsListener;
 import org.springframework.web.bind.annotation.*;
 import javax.jms.*;
 import java.util.Date;
@@ -41,12 +40,6 @@ public class MessageRouterController {
         }else {
             return "名称重复！";
         }
-    }
-
-    @JmsListener(destination = "device/readings", containerFactory = "topicContainerFactory")
-    public void subscribeTest(JSONObject msg) {
-        System.out.println("收到edegx读数" + msg);
-        mqService.publish("edgex.readings",msg);
     }
 
     @GetMapping("/analysis")
