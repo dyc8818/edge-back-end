@@ -6,6 +6,7 @@ import com.jw.edge.controller.api.MessageRouterController;
 import com.jw.edge.service.MqService;
 import com.jw.edge.util.ApplicationContextProvider;
 import org.apache.activemq.command.*;
+import org.apache.activemq.util.ByteSequence;
 
 import javax.jms.*;
 
@@ -43,14 +44,13 @@ public class EdgexReadings implements Runnable {
             while (MessageRouterController.check(name)) {
                 try {
                     ActiveMQBytesMessage activeMQMessage = (ActiveMQBytesMessage) consumer.receive();
-                    byte[] bt = new byte[(int) activeMQMessage.getBodyLength()];
-                    activeMQMessage.readBytes(bt);
-                    System.out.println(bt.toString());
-//                    JSONObject msg = new JSONObject();
-//                    System.out.println("收到"+destination+msg);
+                    ByteSequence content = activeMQMessage.getContent();
+                    String str = new String(content.getData());
+                    JSONObject msg = JSONObject.parseObject(str);
+                    System.out.println("收到"+destination+msg);
                     //TO DO CACULATION HERE
 
-//                    mqService.publish(this.outgoingQueue,msg);
+                    mqService.publish(this.outgoingQueue,msg);
 
                 }catch (Exception e){e.printStackTrace();break;}
             }
