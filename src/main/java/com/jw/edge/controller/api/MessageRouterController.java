@@ -2,9 +2,12 @@ package com.jw.edge.controller.api;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.jw.edge.service.MqService;
 import com.jw.edge.util.LayuiTableResultUtil;
 import com.jw.edge.util.dataAnalysis.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.web.bind.annotation.*;
 import javax.jms.*;
 import java.util.Date;
@@ -15,6 +18,8 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/api/message")
 @RestController
 public class MessageRouterController {
+    @Autowired
+    MqService mqService;
     public static JSONArray status = new JSONArray();
     public static ConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
     private ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1,50,3, TimeUnit.SECONDS,new SynchronousQueue<>());
@@ -38,6 +43,12 @@ public class MessageRouterController {
         }
     }
 
+    @JmsListener(destination = "device/readings", containerFactory = "topicContainerFactory")
+    public void subscribeTest(JSONObject msg) {
+        System.out.println("收到edegx读数" + msg);
+        mqService.publish("edgex.readings",msg);
+    }
+
     @GetMapping("/analysis")
     @ResponseBody
     public JSONArray allInfo(){
@@ -55,6 +66,16 @@ public class MessageRouterController {
     @ResponseBody
     public boolean delete(@RequestBody JSONObject info){
         return status.remove(info);
+    }
+
+    public static boolean check(String name){
+        boolean flag = false;
+        for (int i = 0; i < status.size(); i++){
+            if(name.equals(status.getJSONObject(i).getString("name"))){
+                flag = true;
+            }
+        }
+        return flag;
     }
 
 }

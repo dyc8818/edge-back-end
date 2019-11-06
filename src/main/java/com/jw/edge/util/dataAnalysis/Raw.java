@@ -40,7 +40,7 @@ public class Raw implements Runnable {
             Session session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
             Destination destination = session.createTopic(this.incomingQueue);
             MessageConsumer consumer = session.createConsumer(destination);
-            while (check()) {
+            while (MessageRouterController.check(name)) {
                 try {
                     ActiveMQMapMessage activeMQMapMessage = (ActiveMQMapMessage) consumer.receive();
                     Map content = activeMQMapMessage.getContentMap();
@@ -56,14 +56,4 @@ public class Raw implements Runnable {
         }catch (Exception e){e.printStackTrace();}
     }
 
-    public boolean check(){
-        boolean flag = false;
-        JSONArray array = MessageRouterController.status;
-        for (int i = 0; i < array.size(); i++){
-            if(name.equals(array.getJSONObject(i).getString("name"))){
-                flag = true;
-            }
-        }
-        return flag;
-    }
 }
