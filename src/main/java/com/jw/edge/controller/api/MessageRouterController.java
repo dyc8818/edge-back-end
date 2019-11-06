@@ -27,16 +27,27 @@ public class MessageRouterController {
     @ResponseBody
     public String newRaw(@RequestBody JSONObject info){
         info.put("createTime", new Date().toString());
-        boolean existed = false;
-        for(int i=0; i<status.size(); i++){
-            if(info.getString("name").equals(status.getJSONObject(i).getString("name"))){existed = true;}
-        }
-        if(!existed){
+        if(!MessageRouterController.existed(info.getString("name"))){
             try{
             Raw raw = new Raw(info.getString("name"),info.getString("incomingQueue"),info.getString("outgoingQueue"));
             status.add(info);
             threadPoolExecutor.execute(raw);
             return "启动成功~~";}catch (Exception e){return "参数错误!";}
+        }else {
+            return "名称重复！";
+        }
+    }
+
+    @PostMapping("/analysis/edgexreadings")
+    @ResponseBody
+    public String newEdgexReadings(@RequestBody JSONObject info){
+        info.put("createTime", new Date().toString());
+        if(!MessageRouterController.existed(info.getString("name"))){
+            try{
+                EdgexReadings edgexReadings = new EdgexReadings(info.getString("name"),info.getString("incomingQueue"),info.getString("outgoingQueue"));
+                status.add(info);
+                threadPoolExecutor.execute(edgexReadings);
+                return "启动成功~~";}catch (Exception e){return "参数错误!";}
         }else {
             return "名称重复！";
         }
@@ -71,4 +82,11 @@ public class MessageRouterController {
         return flag;
     }
 
+    public static boolean existed(String name){
+        boolean existed = false;
+        for(int i=0; i<status.size(); i++){
+            if(name.equals(status.getJSONObject(i).getString("name"))){existed = true;}
+        }
+        return existed;
+    }
 }
