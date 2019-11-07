@@ -10,7 +10,6 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
-
 @RequestMapping("/api")
 @RestController
 
@@ -36,13 +35,9 @@ public class WebDataController {
         this.parameter=parameter;
         this.symbol=symbol;
         this.operation=operation;
-
-
         Test();
-
         return parameter;
     }
-
 
     @Test
     public void Test() {
@@ -53,7 +48,6 @@ public class WebDataController {
         Terminal terminal = new Terminal();
 
         kieSession.insert(terminal);
-
         kieSession.fireAllRules();//通知规则引擎执行规则
 
         System.out.println("温度输出是"+terminal.getFlag1());

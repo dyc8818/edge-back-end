@@ -1,14 +1,22 @@
 import com.jw.edge.entity.Terminal
 import com.jw.edge.controller.api.WebDataController
+import com.jw.edge.controller.api.TerminalDataController
 
 /*温度是0，湿度是1
 大于是0，小于是1,等于是2
 警告是1*/
 
+/*rule "test"
+when
+    $terminal : Terminal(parameter>=terminal_value)
+    then
+        System.out.println("Test OK");
+    end*/
+
 rule "温度大于"
 //no-loop true
 when
-    $terminal : Terminal(parameter>=20 && name.equals("0") && symbol.equals("0") && operation.equals("0"))
+    $terminal : Terminal(parameter>=terminal_value && name.equals("0") && symbol.equals("0") && operation.equals("0"))
 /*    后面的参数是传感器数据*/
     then
         $terminal.setFlag1(1);
@@ -17,7 +25,7 @@ when
 rule "温度小于"
 //no-loop true
 when
-    $terminal : Terminal(parameter<20 && name.equals("0") && symbol.equals("1") && operation.equals("0"))
+    $terminal : Terminal(parameter<terminal_value && name.equals("0") && symbol.equals("1") && operation.equals("0"))
 
     then
         $terminal.setFlag1(2);
@@ -27,7 +35,7 @@ when
 rule "湿度大于"
 //no-loop true
 when
-    $terminal : Terminal(parameter>=20 && name.equals("1") && symbol.equals("0") && operation.equals("0"))
+    $terminal : Terminal(parameter>=terminal_value && name.equals("1") && symbol.equals("0") && operation.equals("0"))
 
     then
         $terminal.setFlag2(1);
@@ -36,7 +44,7 @@ when
 rule "湿度小于"
 //no-loop true
 when
-    $terminal : Terminal(parameter<20 && name.equals("1") && symbol.equals("1") && operation.equals("0"))
+    $terminal : Terminal(parameter<terminal_value && name.equals("1") && symbol.equals("1") && operation.equals("0"))
 
     then
         $terminal.setFlag2(2);
