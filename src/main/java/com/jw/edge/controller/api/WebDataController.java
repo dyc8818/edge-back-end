@@ -35,11 +35,11 @@ public class WebDataController {
         this.threshold=threshold;
         this.symbol=symbol;
         this.operation=operation;
-        Test();
+        //Test();
         return threshold;
     }
 
-    @Test
+/*    @Test
     public void Test() {
         KieServices kieServices = KieServices.Factory.get();
         KieContainer kieContainer = kieServices.getKieClasspathContainer();
@@ -69,8 +69,7 @@ public class WebDataController {
         if (flag2==2){System.out.println(wet2+op);}
         //System.out.println("温度输出是"+terminal.getFlag1());
         //System.out.println("湿度输出是"+terminal.getFlag2());
-
         kieSession.dispose();
-    }
+    }*/
 
 }
