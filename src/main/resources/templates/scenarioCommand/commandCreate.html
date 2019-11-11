@@ -87,7 +87,6 @@
             dId = command["deviceId"];
             cn = command["commandName"];
             dn = command["deviceName"];
-            alert(JSON.stringify(command));
         });
         //自定义验证规则
         // form.verify({
@@ -115,7 +114,6 @@
             var data = JSON.stringify(jo);
             var url = "/api/scenario/command";
             var code = 0;
-            alert(data);
             layui.jquery.ajax({
                 type: "post",
                 url: url,
