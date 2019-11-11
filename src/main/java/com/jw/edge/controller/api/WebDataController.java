@@ -1,10 +1,6 @@
 package com.jw.edge.controller.api;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.jw.edge.entity.Temperature;
-import com.jw.edge.util.dataAnalysis.Raw;
-import lombok.Data;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.web.bind.annotation.*;
 import javax.jms.*;
@@ -13,7 +9,6 @@ import org.junit.Test;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
-
 
 @RequestMapping("/api")
 @RestController
@@ -40,19 +35,9 @@ public class WebDataController {
         this.parameter=parameter;
         this.symbol=symbol;
         this.operation=operation;
-
-
         Test();
-
         return parameter;
-        /*if(name.equals("tem"))
-        {
-
-            return "OK";        }
-        else
-        {            return symbol;        }*/
     }
-
 
     @Test
     public void Test() {
@@ -63,8 +48,7 @@ public class WebDataController {
         Terminal terminal = new Terminal();
 
         kieSession.insert(terminal);
-
-        int count = kieSession.fireAllRules();//通知规则引擎执行规则
+        kieSession.fireAllRules();//通知规则引擎执行规则
 
         System.out.println("温度输出是"+terminal.getFlag1());
         System.out.println("湿度输出是"+terminal.getFlag2());
