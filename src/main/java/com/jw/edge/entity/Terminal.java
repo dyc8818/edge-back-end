@@ -15,8 +15,7 @@ public class Terminal {
     private int flag1 = 100;
     private int flag2 = 100;
 
-    private int parameter=WebDataController.parameter;
-
+    private int threshold=WebDataController.threshold;
     private String name=WebDataController.name;
     private String symbol=WebDataController.symbol;
     private String operation=WebDataController.operation;
@@ -30,4 +29,6 @@ public class Terminal {
     public int getFlag2() {
         return flag2;
     }
+    public int setFlag1(int num) { flag1=num; return flag1;}
+    public int setFlag2(int num) { flag2=num; return flag2;}
 }
