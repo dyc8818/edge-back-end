@@ -168,7 +168,7 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script,messageMenu,scenarioM
         //后面就跟你平时使用jQuery一样
         var ajaxTimeout = $.ajax({
             url:'/api/notice/alert/',  //请求的URL
-            timeout : 6000, //超时时间设置，单位毫秒
+            timeout : 5000, //超时时间设置，单位毫秒
             type : 'get',  //请求方式，get或post
             dataType:'text',//返回的数据格式
             success:function(data){ //请求成功的回调函数
