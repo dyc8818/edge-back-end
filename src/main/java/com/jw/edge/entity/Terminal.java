@@ -16,7 +16,7 @@ public class Terminal {
     private int flag2 = 100;
 
     private int threshold=WebDataController.threshold;
-    private String name=WebDataController.name;
+    private String parameterName=WebDataController.parameterName;
     private String symbol=WebDataController.symbol;
     private String operation=WebDataController.operation;
 

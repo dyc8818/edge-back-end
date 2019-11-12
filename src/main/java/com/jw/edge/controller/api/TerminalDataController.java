@@ -42,8 +42,8 @@ public class TerminalDataController {
         String name = jsonpacket.getString("name");
         this.value=value;
         this.name=name;
-
-        Test();
+        try{
+        Test();}catch (Exception e){}
         System.out.println("传感器参数"+value);
     }
 
@@ -71,10 +71,28 @@ public class TerminalDataController {
         if(WebDataController.operation.equals("1")){op="要关闭设备";}
         if(WebDataController.operation.equals("2")){op="要进行赋值";}
 
-        if (flag1==1){System.out.println(tem1+op);}
-        if (flag1==2){System.out.println(tem2+op);}
-        if (flag2==1){System.out.println(wet1+op);}
-        if (flag2==2){System.out.println(wet2+op);}
+        if (flag1==1){
+            System.out.println(tem1+op);
+            JSONObject alert = new JSONObject();
+            alert.put("content",tem1+op);
+            mqService.publish("notice",alert);
+        }
+        if (flag1==2){
+            System.out.println(tem2+op);
+            JSONObject alert = new JSONObject();
+            alert.put("content",tem2+op);
+            mqService.publish("notice",alert);}
+        if (flag2==1){
+            System.out.println(wet1+op);
+            JSONObject alert = new JSONObject();
+            alert.put("content",wet1+op);
+            mqService.publish("notice",alert);}
+        if (flag2==2){
+            System.out.println(wet2+op);
+            JSONObject alert = new JSONObject();
+            alert.put("content",wet2+op);
+            mqService.publish("notice",alert);
+        }
         //System.out.println("温度输出是"+terminal.getFlag1());
         //System.out.println("湿度输出是"+terminal.getFlag2());
         kieSession.dispose();

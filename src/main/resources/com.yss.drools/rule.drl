@@ -16,7 +16,7 @@ when
 rule "温度大于"
 //no-loop true
 when
-    $terminal : Terminal(terminal_value>=threshold && name.equals("0") && symbol.equals("0") && operation.equals("0"))
+    $terminal : Terminal(terminal_value>=threshold && parameterName=="0" && symbol=="0" && operation=="0")
 /*    后面的参数是传感器数据*/
     then
         $terminal.setFlag1(1);
@@ -25,7 +25,7 @@ when
 rule "温度小于"
 //no-loop true
 when
-    $terminal : Terminal(terminal_value<threshold && name.equals("0") && symbol.equals("1") && operation.equals("0"))
+    $terminal : Terminal(terminal_value<threshold && parameterName=="0" && symbol=="1" && operation=="0")
 
     then
         $terminal.setFlag1(2);
@@ -35,7 +35,7 @@ when
 rule "湿度大于"
 //no-loop true
 when
-    $terminal : Terminal(terminal_value>=threshold && name.equals("1") && symbol.equals("0") && operation.equals("0"))
+    $terminal : Terminal(terminal_value>=threshold && parameterName=="1" && symbol=="0" && operation=="0")
 
     then
         $terminal.setFlag2(1);
@@ -44,7 +44,7 @@ when
 rule "湿度小于"
 //no-loop true
 when
-    $terminal : Terminal(terminal_value<threshold && name.equals("1") && symbol.equals("1") && operation.equals("0"))
+    $terminal : Terminal(terminal_value<threshold && parameterName=="1" && symbol=="1" && operation=="0")
 
     then
         $terminal.setFlag2(2);
@@ -56,7 +56,7 @@ when
 rule "温度大于1"
 //no-loop true
 when
-    $terminal : Terminal(terminal_value>=threshold && name.equals("0") && symbol.equals("0"))
+    $terminal : Terminal(terminal_value>=threshold && parameterName=="0" && symbol=="0")
 /*    后面的参数是传感器数据*/
     then
         $terminal.setFlag1(1);
@@ -65,7 +65,7 @@ when
 rule "温度小于1"
 //no-loop true
 when
-    $terminal : Terminal(terminal_value<threshold && name.equals("0") && symbol.equals("1"))
+    $terminal : Terminal(terminal_value<threshold && parameterName=="0" && symbol=="1")
 
     then
         $terminal.setFlag1(2);
@@ -75,7 +75,7 @@ when
 rule "湿度大于1"
 //no-loop true
 when
-    $terminal : Terminal(terminal_value>=threshold && name.equals("1") && symbol.equals("0"))
+    $terminal : Terminal(terminal_value>=threshold && parameterName=="1" && symbol=="0")
 
     then
         $terminal.setFlag2(1);
@@ -84,7 +84,7 @@ when
 rule "湿度小于1"
 //no-loop true
 when
-    $terminal : Terminal(terminal_value<threshold && name.equals("1") && symbol.equals("1"))
+    $terminal : Terminal(terminal_value<threshold && parameterName=="1" && symbol=="1")
 
     then
         $terminal.setFlag2(2);

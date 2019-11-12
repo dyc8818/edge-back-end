@@ -17,7 +17,7 @@ public class WebDataController {
 
     public static ConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 
-    public static String name;
+    public static String parameterName;
     public static int threshold;
     public static String symbol;
     public static String operation;
@@ -31,7 +31,7 @@ public class WebDataController {
         String symbol = info.getString("ruleJudge");
         String operation = info.getString("ruleExecute");
 
-        this.name=name;
+        this.parameterName=name;
         this.threshold=threshold;
         this.symbol=symbol;
         this.operation=operation;
