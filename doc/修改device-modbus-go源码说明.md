@@ -89,7 +89,7 @@
 
    ```go
    var dataBytes []byte
-   	if maxSize-byteCount<0 {
+   	if maxSize>=byteCount {
    		driver.Logger.Info("true")
    		dataBytes = value.NumericValue[maxSize-byteCount : maxSize]
    	}else{
