@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,~{::ruleMenu},_,_,_,~{::scripts},_,_)}">
 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+
 <title>规则列表</title>
 <content>
     <div class="layui-tab-brief layui-tab">
@@ -13,9 +16,6 @@
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md12">
                 <div class="layui-card">
-                    <!--                    <div class="layui-card-header ">-->
-                    <!--                        <h1>规则列表</h1>-->
-                    <!--                    </div>-->
 
                     <div class="layui-card-body">
                         <table class="layui-hide" id="ruleTable" lay-filter="buttons"></table>
@@ -27,11 +27,9 @@
 
 </content>
 
-
 <dd class="layui-this" th:fragment="ruleMenu">
     <a href="/pages/rules">规则列表</a>
 </dd>
-
 <div th:fragment="scripts">
 
     <script th:inline="none" type="text/html" id="barDemo">
@@ -54,6 +52,7 @@
         </div>
     </script>
 
+
     <script th:inline="none">
         layui.use(['form', 'table'], function () {
             var table = layui.table;
@@ -72,18 +71,15 @@
                     [ //表头
                         // {type: 'checkbox'},
                         {field: 'ruleName', title: '规则名称', sort: true, align: 'center'},
-                        {field: 'ruleToDevice', title: '对应设备', align: 'center'}, //, templet:ruletodev
+                        // {field: 'ruleToDevice', title: '对应设备', align: 'center'}, //, templet:ruletodev
                         {field: 'ruleToFunction', title: '规则设定', align: 'center', templet:setting},
                         {field: 'ruleExecute', title: '执行功能', align: 'center', templet:exeSet},
                         // {field: 'ruleDescribe', title: '规则描述', align: 'center'},
                         // {field: 'ruleCreateTime', title: '创建时间', sort: true, align: 'center'},
                         // {field: 'ruleStatus', title: '规则状态', sort: true, align: 'center'},
-                        {field:'ruleStatus',
-                            title:'规则状态',
-                            align:'center',
-                            templet:statusTpl},
-                        {title: '操作', align: 'center',toolbar: '#barDemo'
-                        }
+                        //暂时不需要
+                        // {field:'ruleStatus', title:'规则状态', align:'center', templet:statusTpl},
+                        {title: '操作', align: 'center',toolbar: '#barDemo'}
                     ]
                 ]
             });
@@ -391,25 +387,32 @@
         };
 
         var setting = function (d) {
-            var rulePara = d.rulePara;
-            var para=['=','<','>'];
-            var ruleJudge = para[d.ruleJudge];
+            {
+                if(d.rulePara==0){var para = '温度';}
+                if(d.rulePara==1){para = '湿度';}
+                if(d.rulePara==2){para = '=';}
+            }
+            {
+                if(d.ruleJudge==0){var judge = '>';}
+                if(d.ruleJudge==1){judge = '<';}
+                if(d.ruleJudge==2){judge = '=';}
+
+            }
+            // var ruleJudge = para[d.ruleJudge];
             var ruleParaThreshold = d.ruleParaThreshold;
-            var strg = rulePara + ruleJudge + ruleParaThreshold;
+            var strg = para + judge+ ruleParaThreshold;
             return strg;
         }
 
         var exeSet = function (d) {
-            if(d.ruleExecute==1){
-                var exestr = '警告日志';}
             if(d.ruleExecute==0){
+                var exestr = '警告日志';}
+            if(d.ruleExecute==1){
                 exestr = '关闭设备';}
+            if(d.ruleExecute==2){
+                exestr = '强制赋值';}
             return exestr;
         }
-        // var ruletodev = function (d) {
-        //     var devstr = d.ruleToDevice;
-        //     return devstr;
-        // }
     </script>
 
 </div>

@@ -6,6 +6,7 @@
 
 ## 1.1 安装docker-CE
 
+
 ![img](部署edgex Edinburgh流程.assets/wps0xPJuv.jpg)
 
 ![img](部署edgex Edinburgh流程.assets/wpsUl5nxa.jpg) 

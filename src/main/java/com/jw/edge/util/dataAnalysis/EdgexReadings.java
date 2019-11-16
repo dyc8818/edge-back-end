@@ -1,16 +1,17 @@
 package com.jw.edge.util.dataAnalysis;
 
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONArray;
+
 import com.jw.edge.controller.api.MessageRouterController;
 import com.jw.edge.service.MqService;
 import com.jw.edge.util.ApplicationContextProvider;
-import org.apache.activemq.command.ActiveMQMapMessage;
+import org.apache.activemq.command.*;
+import org.apache.activemq.util.ByteSequence;
 
 import javax.jms.*;
-import java.util.Map;
 
-public class Raw implements Runnable {
+
+public class EdgexReadings implements Runnable {
 
     private String name;
     private String incomingQueue;
@@ -18,7 +19,7 @@ public class Raw implements Runnable {
     private ConnectionFactory connectionFactory = MessageRouterController.connectionFactory;
     private MqService mqService = ApplicationContextProvider.getBean(MqService.class);
 
-    public Raw(String name, String incomingQueue, String outgoingQueue) {
+    public EdgexReadings(String name, String incomingQueue, String outgoingQueue) {
         this.name = name;
         this.incomingQueue = incomingQueue;
         this.outgoingQueue = outgoingQueue;
@@ -42,9 +43,10 @@ public class Raw implements Runnable {
             MessageConsumer consumer = session.createConsumer(destination);
             while (MessageRouterController.check(name)) {
                 try {
-                    ActiveMQMapMessage activeMQMapMessage = (ActiveMQMapMessage) consumer.receive();
-                    Map content = activeMQMapMessage.getContentMap();
-                    JSONObject msg = new JSONObject(content);
+                    ActiveMQBytesMessage activeMQMessage = (ActiveMQBytesMessage) consumer.receive();
+                    ByteSequence content = activeMQMessage.getContent();
+                    String str = new String(content.getData());
+                    JSONObject msg = JSONObject.parseObject(str);
                     System.out.println("收到"+destination+msg);
                     //TO DO CACULATION HERE
 
@@ -55,5 +57,4 @@ public class Raw implements Runnable {
             connection.close();
         }catch (Exception e){e.printStackTrace();}
     }
-
 }

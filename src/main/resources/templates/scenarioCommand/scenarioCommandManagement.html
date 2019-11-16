@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,_,_,_,_,_,~{::scripts},_,~{::scenarioMenu})}">
 
-<title>场景命令管理</title>
+<title>场景服务管理</title>
 <content>
     <div class="layui-tab-brief layui-tab">
         <ul class="layui-tab-title site-demo-title">
-            <li class="layui-this"><a><cite>场景命令列表</cite></a></li>
+            <li class="layui-this"><a><cite>场景服务列表</cite></a></li>
         </ul>
     </div>
     <div class="layui-fluid"layui-card-body style="padding: 15px;">
@@ -25,7 +25,7 @@
 </content>
 
 <dd class="layui-this" th:fragment="scenarioMenu">
-    <a href="/pages/messageRouting">场景命令管理</a>
+    <a href="/pages/messageRouting">场景服务管理</a>
 </dd>
 <div th:fragment="scripts">
 
@@ -36,6 +36,7 @@
 
     <script type="text/html" id="layerRefresh">
         <div class="layui-btn-container">
+
             <button id="createButton1"
                     class="layui-btn layui-btn-normal layui-btn-radius"
                     lay-event="createCommand">
@@ -45,6 +46,7 @@
                     class="layui-btn layui-btn-normal layui-btn-radius"
                     lay-event="createScenario">
                 添加场景服务
+
             </button>
             <button id="refreshButton"
                     class="layui-btn layui-btn-checked layui-btn-radius"
@@ -58,7 +60,6 @@
     <script th:inline="none">
         layui.use('table', function () {
             var table = layui.table;
-
             var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
             //第一个实例
             table.render({
@@ -72,7 +73,7 @@
                     [ //表头
                         // {type: 'checkbox'},
 
-                        {field: 'name', title: '场景命令名称', align: 'center'},
+                        {field: 'name', title: '服务名称', align: 'center'},
                         {field: 'deviceName', title: '对应设备名称', align: 'center'},
                         {field: 'commandName', title: '对应命令名称', align: 'center'},
                         {field: 'commandType', title: '命令类型', align: 'center'},
@@ -109,12 +110,10 @@
                 var data = obj.data;
                 if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
-
                         $.ajax({
                             type: "delete",
                             url: "/api/scenario/command?name="+data["name"].toString(),
                             async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-
                             contentType: "application/json",
                             // processData: false,
                             // cache: false,
@@ -134,7 +133,6 @@
                                 layer.msg("删除失败");
                                 layer.close(index);
                             }
-
                         });
                     });
                 }
@@ -151,7 +149,7 @@
                     ,
                     closeBtn: 1
                     ,
-                    area: ['600px', '800px']
+                    area: ['800px', '800px']
                     ,
                     shade: 0.3
                     ,
@@ -182,7 +180,6 @@
                         submited.click();
                         // layer.close(index);
                         // 弹出层关闭的操作在子层的js代码中完成
-
                     },
                     btn2: function (index, layero) {
                         //按钮【重置】的回调
@@ -207,7 +204,7 @@
                     ,
                     closeBtn: 1
                     ,
-                    area: ['600px', '800px']
+                    area: ['800px', '800px']
                     ,
                     shade: 0.3
                     ,
@@ -250,12 +247,12 @@
                         return false;
                     }
                 });
+
             }
 
         });
 
     </script>
-
 
 </div>
 </html>

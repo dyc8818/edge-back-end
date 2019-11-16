@@ -1,0 +1,40 @@
+name: relay profile
+manufacturer: xx
+model: ModBus-1
+labels: [relay]
+description: relay profile
+deviceResources: 
+- description: relay
+  name: Relay
+  properties:
+    value:
+      type: INT16
+      readWrite: R
+      defaultValue: "0"
+      size: "1"
+      scale: "0.1"
+      mediatype: ""
+    units:
+      type: String
+      readWrite: R
+  attributes:
+    primaryTable: HOLDING_REGISTERS
+    startingAddress: "2"
+deviceCommands:
+- name: Relay
+  get:
+  - index: "1"
+    operation: get
+    object: Relay
+    parameter: Relay
+coreCommands:
+- name: Relay
+  get:
+    path: /api/v1/device/{deviceId}/Relay
+    responses:
+    - code: "200"
+      description: Get the Relay state
+      expectedValues:
+      - Relay
+    - code: "503"
+      description: service unavailable 

@@ -93,7 +93,8 @@ public class ScenarioController {
 
     @GetMapping("/test")
     public void sendTest(@RequestParam String name){
-        JSONObject jsonCommand = commandService.find(name);
+        JSONObject jsonCommand = new JSONObject();
+        jsonCommand.put("name",name);
         mqService.publish("run.command",jsonCommand);
     }
 
