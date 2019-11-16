@@ -24,7 +24,7 @@ deviceResources:
   name: Status
   properties:
     value:
-      type: INT8
+      type: UINT8
       readWrite: R
       defaultValue: "0"
       size: "1"
