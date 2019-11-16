@@ -85,5 +85,19 @@
    		result, err = sdkModel.NewInt8Value(req.DeviceResourceName, resTime, res)
    
    ```
+   函数 TransformCommandValueToDataBytes 修改如下
+
+   ```go
+   var dataBytes []byte
+   	if maxSize-byteCount<0 {
+   		driver.Logger.Info("true")
+   		dataBytes = value.NumericValue[maxSize-byteCount : maxSize]
+   	}else{
+   		driver.Logger.Info("else")
+   		dataBytes = value.NumericValue[0:maxSize]
+   	}
+   ```
+
+   
 
 3. 重新编译即可使用
