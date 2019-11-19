@@ -40,6 +40,7 @@ public class TerminalDataController {
         JSONObject jsonpacket= jsonarray.getJSONObject(0);
         int value = jsonpacket.getIntValue("value");
         String name = jsonpacket.getString("name");
+
         this.value=value;
         this.name=name;
         try{
@@ -68,7 +69,11 @@ public class TerminalDataController {
 
         String op=" ";
         if(WebDataController.operation.equals("0")){op="要进行警告";}
-        if(WebDataController.operation.equals("1")){op="要关闭设备";}
+        if(WebDataController.operation.equals("1"))
+            {op="要关闭设备";
+
+
+            }
         if(WebDataController.operation.equals("2")){op="要进行赋值";}
 
         if (flag1==1){
