@@ -45,7 +45,7 @@ public class TerminalDataController {
         this.name=name;
         try{
         Test();}catch (Exception e){}
-        System.out.println("传感器参数"+value);
+        System.out.println("传感器参数---"+value);
     }
 
     @Test
@@ -62,20 +62,41 @@ public class TerminalDataController {
         int flag1=terminal.getFlag1();
         int flag2=terminal.getFlag2();
 
-        String tem1="温度高了,";
+        int OutThreshold=WebDataController.threshold;
+        String OutName=" ";
+        String OutSymbol=" ";
+        {
+            if(WebDataController.parameterName.equals("0")){OutName = "温度";}
+            if(WebDataController.parameterName.equals("1")){OutName = "湿度";}
+        }
+        {
+            if(WebDataController.symbol.equals("0")){OutSymbol = ">";}
+            if(WebDataController.symbol.equals("1")){OutSymbol = "<";}
+            if(WebDataController.symbol.equals("2")){OutSymbol = "=";}
+        }
+
+        if (flag1!=0 || flag2!=0)
+        {
+            System.out.println("输出条件为："+OutName+OutSymbol+OutThreshold);
+            JSONObject alert = new JSONObject();
+            alert.put("content",OutName+OutSymbol+OutThreshold+"!");
+            mqService.publish("notice",alert);
+
+            if (WebDataController.operation.equals("1"))
+            {
+                JSONObject json = new JSONObject();
+                mqService.publish("run.command",json);
+            }
+        }
+
+/*        String tem1="温度高了,";
         String tem2="温度低了,";
         String wet1="湿度高了,";
         String wet2="湿度高了,";
-
         String op=" ";
         if(WebDataController.operation.equals("0")){op="要进行警告";}
-        if(WebDataController.operation.equals("1"))
-            {op="要关闭设备";
-
-
-            }
+        if(WebDataController.operation.equals("1")){op="要关闭设备";}
         if(WebDataController.operation.equals("2")){op="要进行赋值";}
-
         if (flag1==1){
             System.out.println(tem1+op);
             JSONObject alert = new JSONObject();
@@ -96,10 +117,7 @@ public class TerminalDataController {
             System.out.println(wet2+op);
             JSONObject alert = new JSONObject();
             alert.put("content",wet2+op);
-            mqService.publish("notice",alert);
-        }
-        //System.out.println("温度输出是"+terminal.getFlag1());
-        //System.out.println("湿度输出是"+terminal.getFlag2());
+            mqService.publish("notice",alert);}*/
         kieSession.dispose();
     }
 

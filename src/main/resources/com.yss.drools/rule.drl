@@ -6,12 +6,6 @@ import com.jw.edge.controller.api.TerminalDataController
 大于是0，小于是1,等于是2
 警告是0*/
 
-/*rule "test"
-when
-    $terminal : Terminal(parameter>=terminal_value)
-    then
-        System.out.println("Test OK");
-    end*/
 
 rule "温度大于"
 //no-loop true

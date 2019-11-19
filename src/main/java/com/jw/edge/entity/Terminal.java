@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public class Terminal {
 
-    private int flag1 = 100;
-    private int flag2 = 100;
+    private int flag1 = 0;
+    private int flag2 = 0;
 
     private int threshold=WebDataController.threshold;
     private String parameterName=WebDataController.parameterName;

@@ -390,13 +390,11 @@
             {
                 if(d.rulePara==0){var para = '温度';}
                 if(d.rulePara==1){para = '湿度';}
-                if(d.rulePara==2){para = '=';}
             }
             {
                 if(d.ruleJudge==0){var judge = '>';}
                 if(d.ruleJudge==1){judge = '<';}
                 if(d.ruleJudge==2){judge = '=';}
-
             }
             // var ruleJudge = para[d.ruleJudge];
             var ruleParaThreshold = d.ruleParaThreshold;
@@ -405,12 +403,9 @@
         }
 
         var exeSet = function (d) {
-            if(d.ruleExecute==0){
-                var exestr = '警告日志';}
-            if(d.ruleExecute==1){
-                exestr = '关闭设备';}
-            if(d.ruleExecute==2){
-                exestr = '强制赋值';}
+            if(d.ruleExecute==0){var exestr = '警告日志';}
+            if(d.ruleExecute==1){exestr = '打开设备';}
+            if(d.ruleExecute==2){exestr = '强制赋值';}
             return exestr;
         }
     </script>
