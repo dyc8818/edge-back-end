@@ -85,6 +85,7 @@ public class TerminalDataController {
             if (WebDataController.operation.equals("1"))
             {
                 JSONObject json = new JSONObject();
+                json.put("name",WebDataController.service);
                 mqService.publish("run.command",json);
             }
         }
