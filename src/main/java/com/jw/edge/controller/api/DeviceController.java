@@ -52,6 +52,26 @@ public class DeviceController {
         LayuiTableResultUtil<List<Device>> devicesTable=new LayuiTableResultUtil<List<Device>>("",devices.getContent(),0,(int)devices.getTotalElements());
         return devicesTable;
     }
+
+    @GetMapping("/devices/edgex")
+    @ResponseBody
+    public LayuiTableResultUtil<JSONArray> getEdgeXDevices(){
+        String url = "http://"+ip+":48081/api/v1/device";
+        JSONArray devices = new JSONArray(restTemplate.getForObject(url,JSONArray.class));
+        JSONArray arr = new JSONArray();
+        for(int i=0; i<devices.size();i++){
+            JSONObject jo = devices.getJSONObject(i);
+            String profileName = jo.getJSONObject("profile").getString("name");
+            jo.remove("profile");
+            jo.put("profile",profileName);
+            String serviceName = jo.getJSONObject("service").getString("name");
+            jo.remove("service");
+            jo.put("service",serviceName);
+            arr.add(jo);
+        }
+        return new LayuiTableResultUtil<>("",arr,0,devices.size());
+    }
+
     //控制设备激活
     @PutMapping("/changeStatus")
     @ResponseBody

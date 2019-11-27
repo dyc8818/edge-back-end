@@ -165,6 +165,7 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script,messageMenu,scenarioM
     });
     var getAlert = function () {
         var $ = layui.$;
+        var layer=layui.layer;
         //后面就跟你平时使用jQuery一样
         var ajaxTimeout = $.ajax({
             url:'/api/notice/alert/',  //请求的URL

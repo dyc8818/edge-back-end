@@ -55,7 +55,7 @@
             //第一个实例
             table.render({
                 elem: '#deviceTable',
-                url: '/api/devices/', //数据接口
+                url: '/api/devices/edgex/', //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
@@ -63,18 +63,11 @@
                 cols: [
                     [ //表头
                         // {type: 'checkbox'},
-                        {field: 'deviceId', title: 'Id', sort: true, align: 'center'},
-                        {field: 'deviceName', title: '设备名称', align: 'center'},
-                        {field: 'deviceType', title: '设备模板', align: 'center'},
-                        {field: 'deviceCreateTime', title: '添加时间', sort: true, align: 'center'},
-                        {field: 'deviceDesc', title: '设备描述', align: 'center'},
-                        //   {field: 'deviceStatus', title: '设备状态', sort: true, align: 'center'},
-                        {
-                            field:'deviceStatus',
-                            title:'设备状态',
-                            align:'center',
-                            templet:statusTpl
-                        },
+                        {field: 'id', title: 'Id', sort: true, align: 'center'},
+                        {field: 'name', title: '设备名称', align: 'center'},
+                        {field: 'profile', title: '设备模板', align: 'center'},
+                        {field: 'service', title: '设备协议', align: 'center'},
+                        {field: 'description', title: '设备描述', align: 'center'},
                         {
                             title: '操作', align: 'center',
                             toolbar: '#barDemo'
@@ -123,36 +116,38 @@
                 var data = obj.data;
                 if (obj.event === 'detail') {
                     // layer.('ID：' + data.deviceId + ' 的查看操作');
-                    location.href = "/pages/deviceDetails?deviceId=" + data.deviceId;
+                    // location.href = "/pages/deviceDetails?deviceId=" + data.deviceId;
+                    layer.msg("敬请期待！");
                 } else if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
-
-                        $.ajax({
-                            type: "delete",
-                            url: "/api/device",
-                            async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                            data: JSON.stringify({'deviceId': data.deviceId}),
-                            contentType: "application/json",
-                            // processData: false,
-                            // cache: false,
-                            success: function (ev) {
-                                if (ev.data == "删除成功") {
-                                    obj.del();
-                                    layer.msg(ev.data);
-                                    layer.close(index);
-                                    table.reload("deviceTable");
-                                } else {
-                                    layer.msg(ev.data);
-                                    layer.close(index);
-                                }
-                            },
-                            error:function(ev){
-                                console.log("删除失败"+ev.responseText);
-                                layer.msg("删除失败");
-                                layer.close(index);
-                            }
-
-                        });
+                        layer.msg("敬请期待！");
+                        layer.close(index);
+                        // $.ajax({
+                        //     type: "delete",
+                        //     url: "/api/device",
+                        //     async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                        //     data: JSON.stringify({'deviceId': data.deviceId}),
+                        //     contentType: "application/json",
+                        //     // processData: false,
+                        //     // cache: false,
+                        //     success: function (ev) {
+                        //         if (ev.data == "删除成功") {
+                        //             obj.del();
+                        //             layer.msg(ev.data);
+                        //             layer.close(index);
+                        //             table.reload("deviceTable");
+                        //         } else {
+                        //             layer.msg(ev.data);
+                        //             layer.close(index);
+                        //         }
+                        //     },
+                        //     error:function(ev){
+                        //         console.log("删除失败"+ev.responseText);
+                        //         layer.msg("删除失败");
+                        //         layer.close(index);
+                        //     }
+                        //
+                        // });
                     });
                 }
             });

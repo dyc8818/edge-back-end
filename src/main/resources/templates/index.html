@@ -63,7 +63,7 @@
     <script>
         var $ = layui.$;
         //后面就跟你平时使用jQuery一样
-        $.get("/api/regnum/", function (data) {
+        $.get("/api/totalnum/", function (data) {
             document.getElementById("totalNum").innerHTML = data;
         });
         $.get("/api/expiringnum", function (data) {
