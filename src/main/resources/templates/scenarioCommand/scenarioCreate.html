@@ -7,30 +7,30 @@
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
 </head>
 <body>
-            <form class="layui-form layui-fluid" action="">
+            <form class="layui-form layui-fluid layui-form-pane" action="">
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
                     <legend>场景服务</legend>
                 </fieldset>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label" style="margin-right: 30px; width: 120px">场景服务名称</label>
-                    <div class="layui-input-inline" style="width: 500px">
+                    <label class="layui-form-label" style=" width: 150px">场景服务名称</label>
+                    <div class="layui-input-inline" >
                         <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入场景服务名称"
                                   class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label" style="margin-right: 30px; width: 120px">描述</label>
-                    <div class="layui-input-inline" style="width: 500px">
+                    <label class="layui-form-label" style="width: 150px">描述</label>
+                    <div class="layui-input-inline" >
                         <input type="text" name="description"  autocomplete="off" placeholder="请输入描述"
                                class="layui-input">
                     </div>
                 </div>
 
-                <div class="layui-form-item">
-                    <label class="layui-form-label" style="margin-right: 30px; width: 120px">场景服务内容</label>
-                    <div class="layui-input-inline" style="width: 500px">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">场景服务内容</label>
+                    <div class="layui-input-block" >
                         <textarea name="jsonArray"  autocomplete="off" placeholder='请输入要执行的命令名称JSON数组，如: [{"name":"1"},{"name":"2"}]'
                                   class="layui-textarea"></textarea>
                     </div>

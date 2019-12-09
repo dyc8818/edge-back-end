@@ -39,17 +39,17 @@ public class  ProductController {
     @PostMapping("/yml")
     @ResponseBody
     public String addProduct(@RequestBody String product) {
-        System.out.println("收到"+product);
+        System.out.println("收到\n"+product);
         String url = "http://"+ip+":48081/api/v1/deviceprofile/upload";
         String result = restTemplate.postForObject(url,product,String.class);
         return result;
     }
 
-    @DeleteMapping("/product")
+    @DeleteMapping()
     @ResponseBody
-    public LayuiTableResultUtil<String> deleteProduct(@RequestBody Product product){
-       // System.out.println(product.getProductId());
-        String deleteStatus = productServie.deleteProduct(product.getProductId());
-        return  new LayuiTableResultUtil<String>("",deleteStatus,0,1);
+    public void deleteProduct(@RequestBody String id){
+        String url = "http://"+ip+":48081/api/v1/deviceprofile/id/"+id;
+        System.out.println(url);
+        restTemplate.delete(url);
     }
 }
