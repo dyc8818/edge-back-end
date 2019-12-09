@@ -62,7 +62,7 @@
             //第一个实例
             table.render({
                 elem: '#productTable',
-                url: '/api/products/', //数据接口
+                url: '/api/product/list', //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
@@ -71,11 +71,10 @@
                     [ //表头
                         // {type: 'checkbox'},
 
-                        {field: 'productId', title: '设备模板Key', sort: true, align: 'center'},
-
-                        {field: 'productName', title: '设备模板名称', align: 'center'},
-                        {field: 'productType', title: '节点类型', align: 'center'},
-                        {field: 'productCreateTime', title: '添加时间', sort: true, align: 'center'},
+                        {field: 'id', title: '设备模板Key', sort: true, align: 'center'},
+                        {field: 'name', title: '设备模板名称', align: 'center'},
+                        {field: 'description', title: '描述', align: 'center'},
+                        {field: 'created', title: '添加时间', sort: true, align: 'center'},
                         {
                             title: '操作', align: 'center',
                             toolbar: '#barDemo'

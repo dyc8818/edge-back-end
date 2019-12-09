@@ -30,7 +30,7 @@ public class NoticeController {
                     String alert = msg.getString("content");
                     connection.close();
                     return alert;
-                }catch (Exception e){e.printStackTrace();return null;}
+                }catch (Exception e){return null;}
             }
         }catch (Exception e){e.printStackTrace();return null;}
     }
