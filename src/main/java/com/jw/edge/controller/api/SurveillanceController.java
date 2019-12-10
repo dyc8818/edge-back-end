@@ -17,9 +17,9 @@ public class SurveillanceController {
     @Autowired
     MqService mqService;
 
-    @GetMapping("/mqtest")
+    @GetMapping("/commandtest")
     @ResponseBody
-    public String mqTest(){
+    public String commandTest(){
         JSONObject command = new JSONObject();
         command.put("name","name1");
         command.put("commandId","cid");
@@ -32,6 +32,13 @@ public class SurveillanceController {
         mqService.publish("run.command",command);
         mqService.publish("test2",command);
         return "提交发送";
+    }
+
+    @GetMapping("/mqtest/{destination}")
+    @ResponseBody
+    public String mqTest(@PathVariable String destination,@RequestBody JSONObject jsonObject){
+        mqService.publish(destination,jsonObject);
+        return "向"+destination+"发送"+jsonObject;
     }
 
     @GetMapping("/surnum")

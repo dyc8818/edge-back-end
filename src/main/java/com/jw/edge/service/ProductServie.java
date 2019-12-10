@@ -1,5 +1,7 @@
 package com.jw.edge.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.jw.edge.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,4 +14,5 @@ public interface ProductServie {
     public boolean addProduct(Product product);
     public String deleteProduct(String productId);
     public Product findProductByProductId(String productId);
+    JSONObject stamp2Time(JSONObject jsonObject);
 }

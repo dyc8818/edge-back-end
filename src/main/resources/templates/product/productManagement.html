@@ -104,7 +104,8 @@
                 var data = obj.data;
                 if (obj.event === 'detail') {
                     // layer.('ID：' + data.productId + ' 的查看操作');
-                    location.href = "/pages/productDetails?productId=" + data.productId;
+                    localStorage.id=data.id;
+                    location.href = "/pages/productDetails";
                 } else if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
                         $.ajax({

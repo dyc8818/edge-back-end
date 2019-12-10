@@ -61,50 +61,22 @@
 <div th:fragment="scripts">
     <script th:src="@{/echarts-4.2.1/echarts.min.js}"></script>
     <script>
-        var $ = layui.$;
-        //后面就跟你平时使用jQuery一样
-        $.get("/api/totalnum/", function (data) {
-            document.getElementById("totalNum").innerHTML = data;
-        });
-        $.get("/api/expiringnum", function (data) {
-            document.getElementById("renewNum").innerHTML = data;
-        });
-
-
         // 基于准备好的dom，初始化echarts实例
         var chart = echarts.init(document.getElementById('chart'));
         var num = new Array();
 
-        var option = {
-            title: {
-                text: '设备在线数量',
-                left:'10%'
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            xAxis: {
-                type:'time',
-                name:'时间'
-            },
-            yAxis: {},
-            series: [{
-                name: '数量',
-                type: 'line',
-                data: num,
-                symbol:'emptyDiamond',
-                symbolSize: 8,
-                lineStyle:{
-                    width: 2
-                }
-            }]
-        };
-
-        var update = draw2();
-
-        layui.use(['carousel','form'], function(){
+        layui.use(['carousel','form','jquery'], function(){
             var carousel = layui.carousel;
             var form = layui.form;
+            var $ = layui.$;
+            //后面就跟你平时使用jQuery一样
+            $.get("/api/totalnum/", function (data) {
+                document.getElementById("totalNum").innerHTML = data;
+            });
+            $.get("/api/expiringnum", function (data) {
+                document.getElementById("renewNum").innerHTML = data;
+            });
+            var update = draw2();
             //建造实例
             carousel.render({
                 elem: '#part1',
@@ -140,6 +112,30 @@
                     if (num.length > 60) {
                         num.shift();
                     }
+                    var option = {
+                        title: {
+                            text: '设备在线数量',
+                            left:'10%'
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        xAxis: {
+                            type:'time',
+                            name:'时间'
+                        },
+                        yAxis: {},
+                        series: [{
+                            name: '数量',
+                            type: 'line',
+                            data: num,
+                            symbol:'emptyDiamond',
+                            symbolSize: 8,
+                            lineStyle:{
+                                width: 2
+                            }
+                        }]
+                    };
                     // 使用刚指定的配置项和数据显示图表。
                     chart.setOption(option);
                 }

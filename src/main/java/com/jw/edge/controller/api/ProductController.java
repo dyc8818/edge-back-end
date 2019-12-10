@@ -1,6 +1,7 @@
 package com.jw.edge.controller.api;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.jw.edge.entity.Product;
 import com.jw.edge.service.ProductServie;
 import com.jw.edge.util.LayuiTableResultUtil;
@@ -24,17 +25,27 @@ public class  ProductController {
     @Value("${server.edgex}")
     private String ip;
 
-
     @GetMapping("/list")
     @ResponseBody
     public LayuiTableResultUtil<JSONArray> getProducts(@RequestParam Integer page, @RequestParam Integer limit) {
         String url = "http://"+ip+":48081/api/v1/deviceprofile";
         JSONArray products = new JSONArray(restTemplate.getForObject(url,JSONArray.class));
-        System.out.println("查看所有设备模板"+products);
-        return new LayuiTableResultUtil<>("",products,0,products.size());
+        JSONArray result = new JSONArray();
+        for(int i=0;i<products.size();i++){
+            JSONObject jo = products.getJSONObject(i);
+            jo = productServie.stamp2Time(jo);
+            result.add(jo);
+        }
+        System.out.println("查看所有设备模板"+result);
+        return new LayuiTableResultUtil<>("",result,0,products.size());
     }
 
-
+    @GetMapping("/{id}")
+    @ResponseBody
+    public JSONObject getThisProduct(@PathVariable String id){
+        String url = "http://"+ip+":48081/api/v1/deviceprofile/"+id;
+        return productServie.stamp2Time(restTemplate.getForObject(url,JSONObject.class));
+    }
 
     @PostMapping("/yml")
     @ResponseBody
