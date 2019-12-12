@@ -15,13 +15,17 @@ import org.kie.api.runtime.KieSession;
 
 public class WebDataController {
 
-    public static ConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-
     public static String parameterName;
     public static int threshold;
     public static String symbol;
     public static String operation;
     public static String service;
+
+//    public static String parameterName2;
+//    public static int threshold2;
+//    public static String symbol2;
+//    public static String operation2;
+//    public static String service2;
 
     @PostMapping("/webdata")
     @ResponseBody
@@ -33,13 +37,26 @@ public class WebDataController {
         String operation = info.getString("ruleExecute");
         String service = info.getString("service");
 
-        this.parameterName=name;
-        this.threshold=threshold;
-        this.symbol=symbol;
-        this.operation=operation;
-        this.service=service;
-        //Test();
+        if (this.parameterName==null)
+        {
+            this.parameterName=name;
+            this.threshold=threshold;
+            this.symbol=symbol;
+            this.operation=operation;
+            this.service=service;
+        }
+        /*
+        else if(this.parameterName2==null)
+        {
+            this.parameterName2=name;
+            this.threshold2=threshold;
+            this.symbol2=symbol;
+            this.operation2=operation;
+            this.service2=service;
+        }
+
+         */
+
         return service;
     }
-
 }

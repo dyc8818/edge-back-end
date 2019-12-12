@@ -115,7 +115,6 @@ public class RuleController {
         return result;
     }*/
 
-
     //控制设备激活
     @PutMapping("/changeRuleStatus")
     @ResponseBody

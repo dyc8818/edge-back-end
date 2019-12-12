@@ -52,7 +52,6 @@
         </div>
     </script>
 
-
     <script th:inline="none">
         layui.use(['form', 'table'], function () {
             var table = layui.table;
@@ -74,11 +73,9 @@
                         // {field: 'ruleToDevice', title: '对应设备', align: 'center'}, //, templet:ruletodev
                         {field: 'ruleToFunction', title: '规则设定', align: 'center', templet:setting},
                         {field: 'ruleExecute', title: '执行功能', align: 'center', templet:exeSet},
-                        // {field: 'ruleDescribe', title: '规则描述', align: 'center'},
-                        // {field: 'ruleCreateTime', title: '创建时间', sort: true, align: 'center'},
-                        // {field: 'ruleStatus', title: '规则状态', sort: true, align: 'center'},
-                        //暂时不需要
-                        // {field:'ruleStatus', title:'规则状态', align:'center', templet:statusTpl},
+                        //{field: 'ruleDescribe', title: '规则描述', align: 'center'},
+                        //{field: 'ruleCreateTime', title: '创建时间', sort: true, align: 'center'},
+                        //{field:'ruleStatus', title:'规则状态', align:'center', templet:statusTpl},
                         {title: '操作', align: 'center',toolbar: '#barDemo'}
                     ]
                 ]
@@ -132,10 +129,6 @@
                                         };
                                         break;
                                 }
-                                // if (Temperature > Threshold) {
-                                //     alt = alert();
-                                //     if(alt = 1){clearInterval(updateAlert);}
-                                // }
                             }
                             return alt;
                             //console.log(data);
@@ -165,23 +158,6 @@
                 });
             });
 
-
-                 //监听告警
-                // form.on('switch(changeRuleStatus)', function changeRuleAlert(data){
-                //     $.ajax({
-                //         type: "get",
-                //         url: "/api/alertDetails",
-                //         async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                //         data: JSON.stringify({'ruleId': data.elem.attributes['switch_rule_id'].nodeValue}),
-                //         contentType: "application/json",
-                //         success: function (ev) {
-                //             console.log(ev.data);
-                //         },
-                //     });
-                // });
-
-
-
             // 头工具栏事件
             table.on('toolbar(buttons)', function (obj) {
 
@@ -197,10 +173,8 @@
                 ;
             });
 
-
             //监听工具条
             table.on('tool(buttons)', function (obj) {
-
                 var data = obj.data;
                 if (obj.event === 'detail') {
                     // layer.('ID：' + data.ruleId + ' 的查看操作');
@@ -300,13 +274,6 @@
 
                         return 1;
                     },
-                    // success: function (layero) {
-                    //     var btn = layero.find('.layui-layer-btn');
-                    //     btn.find('.layui-layer-btn0').attr({
-                    //         href: 'http://www.layui.com/'
-                    //         , target: '_blank'
-                    //     });
-                    // }
                 });
             }
 
@@ -347,7 +314,6 @@
                         getselect2();
                     },
                     yes: function (index, layero) {
-
                         // 获取弹出层中的form表单元素
                         var formSubmit = layer.getChildFrame('form', index);
                         // // 获取表单中的提交按钮（在我的表单里第一个button按钮就是提交按钮，使用find方法寻找即可）
@@ -356,7 +322,6 @@
                         submited.click();
                         // layer.close(index);
                         // 弹出层关闭的操作在子层的js代码中完成
-
                     },
                     btn2: function (index, layero) {
                         //按钮【重置】的回调
