@@ -2,310 +2,47 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,~{::deviceMenu},_,_,_,_,~{::scripts},_,_)}">
 
-<title>设备详情</title>
+<title>设备模板详情</title>
 <content>
-    <div class="layui-tab-brief layui-tab">
-        <ul class="layui-tab-title site-demo-title">
-            <li><a href="/pages/devices">设备列表</a></li>
-            <li class="layui-this"><a><cite>设备详情</cite></a></li>
-        </ul>
+    <div class="layui-row ">
+        <div class="layui-col-lg1 layui-col-md1 layui-col-sm1" style="margin-left: 20px;margin-top: 20px">
+            <a href="/pages/profile" class="layui-btn layui-btn-radius layui-btn-warm layui-btn-lg">返回列表</a>
+        </div>
     </div>
-    <div class="layui-fluid">
-        <div class="layui-col-md12">
-            <div class="layui-card" >
-                <!--/*@thymesVar id="device" type="com.jw.edge.entity.Device"*/-->
-                <div class="layui-card-header"><h1 th:text="${device.getDeviceName()}"></h1></div>
-                <div class="layui-card-body">
-                    <div class="layui-row">
-                        <div class="layui-col-md4">
-                            <b>DeviceKey:</b> <span th:text="${device.getDeviceId()}"></span>
-                        </div>
-                    </div>
-                    <br>
-                    <!--卡片风格tab选项卡-->
-                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-                        <ul class="layui-tab-title">
-                            <li class="layui-this">设备信息</li>
-                            <!--                            <li>功能定义</li>-->
-                        </ul>
-                        <div class="layui-tab-content">
-                            <div class="layui-tab-item layui-show">
-                                <br/>
-                                <b><h2>设备信息</h2></b>
-                                <br/>
-                                <table border="0" class="layui-table">
-
-                                    <tr>
-                                        <th><b>设备名称</b></th>
-                                        <td th:text="${device.getDeviceName()}"></td>
-                                        <th><b>设备模板名称</b></th>
-                                        <td th:text="${device.getDeviceType()}"></td>
-                                        <th><b>DeviceKey</b></th>
-                                        <td th:text="${device.getDeviceId()}"></td>
-                                    </tr>
-                                    <tr>
-                                        <th><b>节点类型</b></th>
-                                        <td>设备</td>
-                                        <th><b>IP地址</b></th>
-                                        <td th:text="${device.getDeviceAddress()}"></td>
-                                        <th><b>有效期</b></th>
-                                        <td colspan="5" th:text="${device.getDeviceFailDate()}"></td>
-                                    </tr>
-                                    <tr>
-                                        <th><b>当前状态</b></th>
-                                        <td th:text="${device.getDeviceStatus()==1}?'启用':'禁用'"></td>
-                                        <th><b>端口</b></th>
-                                        <td th:text="${device.getDeviceAddressPort()}"></td>
-                                        <th><b>创建时间</b></th>
-                                        <td colspan="5" th:text="${#dates.format(device.getDeviceCreateTime(), 'yyyy-MM-dd HH:mm')}"></td>
-                                    </tr>
-                                    <tr>
-                                        <th><b>设备描述</b></th>
-                                        <td colspan="5" th:text="${device.getDeviceDesc()}"></td>
-                                    </tr>
-                                </table>
-                                <br/>
-                                <b><h2>数据读取与发送</h2></b>
-                                <br/>
-                                <table border="0" class="layui-table">
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">湿度  </label>
-                                        <div class="layui-input-inline">
-                                            <input class="layui-input" style="width: 100px" type="text" id="receiveData1"/>
-                                            <button class="layui-btn"  style="margin: 10px" id="getData" onclick="handelClick()">获取</button>
-                                        </div>
-                                    <script>
-                                            function handelClick() {
-                                                layui.use('jquery', function () {
-                                                    var $ = layui.$;
-                                                    $.get("/api/surdetails/?id=94e46d91-b4f5-465b-a4ce-28e379ef97fb",
-                                                        function (data) {
-                                                            var type = Object.keys(data);
-                                                            document.getElementById("receiveData1").value = data[type[0]]+"%"+"  ";
-                                                        });
-                                                })
-                                            }
-                                        </script>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">温度  </label>
-                                    <div class="layui-input-inline">
-                                        <input class="layui-input" style="width: 100px" type="text" id="receiveData"/>
-                                        <button class="layui-btn"  style="margin: 10px" id="getData1" onclick="handelClick1()">获取</button>
-                                    </div>
-                                    <script>
-                                        function handelClick1() {
-                                            layui.use('jquery', function () {
-                                                var $ = layui.$;
-                                                $.get("/api/surdetails/?id=94e46d91-b4f5-465b-a4ce-28e379ef97fb",
-                                                    function (data) {
-                                                        var type = Object.keys(data);
-                                                        document.getElementById("receiveData").value = data[type[1]]+"℃"+"  ";
-                                                    });
-                                            })
-                                        }
-                                    </script>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">湿度</label>
-                                        <div class="layui-input-inline">
-                                            <input type="text" name="input"   autocomplete="off" class="layui-input">
-                                            <button style="margin: 10px" type="button" class="layui-btn">发送</button>
-                                        </div>
-                                    </div>
-                                    <label class="layui-form-label">温度</label>
-                                    <div class="layui-input-inline">
-                                        <input type="text" name="input"   autocomplete="off" class="layui-input">
-                                        <button style="margin: 10px" type="button" class="layui-btn">发送</button>
-                                    </div>
-                                </table>
-                            </div>
-                            <div class="layui-tab-item">
-                                <div class="layui-card">
-                                    <!--                    <div class="layui-card-header ">-->
-                                    <!--                        <h1>设备列表</h1>-->
-                                    <!--                    </div>-->
-                                    <div class="layui-card-body">
-                                        <table class="layui-hide" id="functionTable" lay-filter="buttons"></table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="layui-row" style="margin-top: 30px">
+        <div class="layui-col-md10 layui-col-md-offset1 layui-card">
+            <div class="layui-card-header" id="title">设备名称</div>
+            <div class="layui-card-body">
+                <p id="content">无数据</p>
             </div>
         </div>
     </div>
-    <h1></h1>
+
 </content>
-<div class="layui-tab-brief layui-tab">
-    <ul class="layui-tab-title site-demo-title">
-        <li><a href="/pages/devices">设备列表</a></li>
-        <li class="layui-this"><a><cite>设备详情</cite></a></li>
-    </ul>
-</div>
 
 <dd class="layui-this" th:fragment="deviceMenu">
     <a href="/pages/devices">设备列表</a>
 </dd>
 <div th:fragment="scripts">
-    <script th:inline="none" type="text/html" id="barDemo">
-        <button class="layui-btn layui-btn-xs" lay-event="detail">查看</button>
-        <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
-    </script>
-
-    <script type="text/html" id="layerRefresh">
-        <div class="layui-btn-container">
-            <button id="createButton"
-                    class="layui-btn layui-btn-normal layui-btn-radius"
-                    lay-event="createFunction">
-                添加功能
-            </button>
-            <button id="refreshButton"
-                    class="layui-btn layui-btn-checked layui-btn-radius"
-                    lay-event="refresh">
-                刷新
-            </button>
-        </div>
-    </script>
-
-    <script th:inline="none">
-        layui.use('table', function () {
-            var table = layui.table;
-
-            var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
-            //第一个实例
-            table.render({
-                elem: '#functionTable',
-                url: '/api/functions/', //数据接口
-                page: true,  //开启分页
-                toolbar: '#layerRefresh',
-                defaultToolbar:['exports', 'print'],
-                //width: 1200,
-                cols: [
-                    [ //表头
-                        // {type: 'checkbox'},
-                        {field: 'functionId', title: 'FunctionKey', sort: true, align: 'center'},
-                        {field: 'functionType', title: '功能类型', align: 'center'},
-                        {field: 'functionName', title: '功能名称', align: 'center'},
-                        {field: 'functionIdentifier', title: '标识符', sort: true, align: 'center'},
-                        {
-                            title: '操作', align: 'center',
-                            toolbar: '#barDemo'
-                        }
-                    ]
-                ]
-            });
-
-            // 头工具栏事件
-            table.on('toolbar(buttons)', function (obj) {
-
-                var checkStatus = table.checkStatus('test');
-                switch (obj.event) {
-                    case 'createFunction':
-                        notice();
-                        break;
-                    case 'refresh':
-                        table.reload("functionTable")
-
-                        break;
-                }
-                ;
-            });
-
-            //监听工具条
-            table.on('tool(buttons)', function (obj) {
-
-                var data = obj.data;
-                if (obj.event === 'detail') {
-                    // layer.('ID：' + data.functionId + ' 的查看操作');
-                    location.href = "/pages/functionDetails?functionId=" + data.functionId;
-                } else if (obj.event === 'del') {
-                    layer.confirm('真的删除行么', function (index) {
-
-                        $.ajax({
-                            type: "delete",
-                            url: "/api/function",
-                            async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                            data: JSON.stringify({'functionId': data.functionId}),
-                            contentType: "application/json",
-                            // processData: false,
-                            // cache: false,
-                            success: function (ev) {
-                                if (ev.data == "删除成功") {
-                                    obj.del();
-                                    layer.msg(ev.data);
-                                    layer.close(index);
-                                    table.reload("functionTable");
-                                } else {
-                                    layer.msg(ev.data);
-                                    layer.close(index);
-                                }
-                            }
-                        });
-                    });
+    <script>
+        window.onload=function () {
+            layui.$.ajax({
+                type: "get",
+                url: "/api/device/"+localStorage.deviceid,
+                async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                dataType: "json",
+                // processData: false,
+                // cache: false,
+                success: function (data) {
+                    document.getElementById("title").innerHTML=data["name"];
+                    document.getElementById("content").innerHTML=JSON.stringify(data);
+                },
+                error:function(data){
+                    console.log("失败"+data);
                 }
             });
-
-            //触发创建设备弹出层
-
-            function notice(id){
-                //示范一个公告层
-                layer.open({
-                    type: 2
-                    ,
-                    title: "新建功能"
-                    ,
-                    closeBtn: 1
-                    ,
-                    area: ['600px', '600px']
-                    ,
-                    shade: 0.3
-                    ,
-                    id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                    ,
-                    btn: ['提交', '重置', '取消']
-                    ,
-                    btnAlign: 'c'
-                    ,
-                    moveType: 1 //拖拽模式，0或者1
-                    ,
-                    content: '/pages/aaaa?id=' + id
-                    ,
-                    // success: function (layero) {
-                    //     var btn = layero.find('.layui-layer-btn');
-                    //     btn.find('.layui-layer-btn0').attr({
-                    //         href: 'http://www.layui.com/'
-                    //         , target: '_blank'
-                    //     });
-                    // }
-                    yes: function (index, layero) {
-
-                        // 获取弹出层中的form表单元素
-                        var formSubmit = layer.getChildFrame('form', index);
-                        // // 获取表单中的提交按钮（在我的表单里第一个button按钮就是提交按钮，使用find方法寻找即可）
-                        var submited = formSubmit.find('button')[0];
-                        // // 触发点击事件，会对表单进行验证，验证成功则提交表单，失败则返回错误信息
-                        submited.click();
-                        // layer.close(index);
-                        // 弹出层关闭的操作在子层的js代码中完成
-
-                    },
-                    btn2: function (index, layero) {
-                        //按钮【重置】的回调
-                        // 获取弹出层中的form表单元素
-                        var formSubmit = layer.getChildFrame('form', index);
-                        // // 获取表单中的提交按钮（在我的表单里第一个button按钮就是提交按钮，使用find方法寻找即可）
-                        var submited = formSubmit.find('button')[1];
-                        submited.click();
-                        return false;
-                    }
-                });
-            };
-        });
-
+        }
     </script>
-
 </div>
 </html>
 

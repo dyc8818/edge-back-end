@@ -18,19 +18,17 @@ public class DevicePagesController {
     ProfileService productService;
 
     @GetMapping("/devices")
-    public String deviceList(Model model) throws Exception {
+    public String deviceList() throws Exception {
         return "device/deviceManagement";
     }
 
     @GetMapping("/addDevice")
-    public String deviceCreate(Model model) throws Exception {
+    public String deviceCreate() throws Exception {
         return "device/addDevice";
     }
 
     @GetMapping("/deviceDetails")
-    public String deviceDetails(Model model, String deviceId) throws Exception {
-        Device device = deviceService.findDeviceByDeviceId(deviceId);
-        model.addAttribute("device", device);
+    public String deviceDetails() throws Exception {
         return "device/deviceDetails";
     }
 }

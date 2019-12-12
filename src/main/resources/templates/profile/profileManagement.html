@@ -103,8 +103,7 @@
             table.on('tool(buttons)', function (obj) {
                 var data = obj.data;
                 if (obj.event === 'detail') {
-                    // layer.('ID：' + data.productId + ' 的查看操作');
-                    localStorage.id=data.id;
+                    localStorage.profileid=data.id;
                     location.href = "/pages/profileDetails";
                 } else if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
@@ -117,8 +116,8 @@
                             // processData: false,
                             // cache: false,
                             success: function (ev) {
-                                    // obj.del();
                                     layer.close(index);
+                                    layer.msg("删除成功");
                                     table.reload("productTable");
                             },
                             error:function(ev){

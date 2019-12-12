@@ -111,6 +111,18 @@ public class DeviceController {
 //        }
 //        return false;
 //    }
+    @GetMapping("/{id}")
+    @ResponseBody
+    public JSONObject getThisDevice(@PathVariable String id){
+        String url = "http://"+ip+":48081/api/v1/device/"+id;
+        JSONObject jo = restTemplate.getForObject(url,JSONObject.class);
+        try {
+            Device device = deviceService.findByName(jo.getString("name"));
+            Date date = device.getDeviceCreateTime();
+            jo.put("createdTime", date);
+        }catch (Exception ignored){}
+        return jo;
+    }
 
     @PostMapping("/json")
     @ResponseBody
@@ -121,6 +133,7 @@ public class DeviceController {
             System.out.println("添加设备成功 id="+result);
             Device device = new Device();
             device.setDeviceName(jsonObject.getString("name"));
+            device.setEdgexId(result);
             deviceService.addDevice(device);
             return result;
         }catch (HttpClientErrorException e){
@@ -129,11 +142,12 @@ public class DeviceController {
 
     }
 
-    @DeleteMapping("/device")
+    @DeleteMapping()
     @ResponseBody
-    public LayuiTableResultUtil<String> deleteDevice(@RequestBody Device device){
-        // System.out.println(product.getProductId());
-        String deleteStatus = deviceService.deleteDevice(device.getDeviceId());
-        return  new LayuiTableResultUtil<String>("",deleteStatus,0,1);
+    public void deleteDevice(@RequestBody String id){
+        String url = "http://"+ip+":48081/api/v1/device/id/"+id;
+        if (deviceService.deleteByEdgexId(id)){
+        restTemplate.delete(url);
+        }
     }
 }

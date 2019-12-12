@@ -13,6 +13,7 @@ public interface DeviceService {
     public String deleteDevice(String deviceId);
     public Device findDeviceByDeviceId(String deviceId);
     Device findByName(String name);
+    boolean deleteByEdgexId(String id);
     public Page<Device> findDeviceByDeviceType(String deviceType, Pageable pageable);
     public void changeDeviceStatus(Device dev, int status);
 }

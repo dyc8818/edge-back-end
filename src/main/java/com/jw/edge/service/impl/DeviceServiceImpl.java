@@ -80,4 +80,15 @@ public class DeviceServiceImpl implements DeviceService {
     public Device findByName(String name){
         return deviceRepository.findDeviceByDeviceName(name);
     }
+
+    @Override
+    public boolean deleteByEdgexId(String id){
+        Device device = deviceRepository.findByEdgexId(id);
+        if (device == null) {
+            return false;
+        } else {
+            deviceRepository.deleteByEdgexId(id);
+            return true;
+        }
+    }
 }
