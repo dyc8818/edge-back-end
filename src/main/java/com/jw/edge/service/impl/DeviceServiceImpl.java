@@ -75,4 +75,9 @@ public class DeviceServiceImpl implements DeviceService {
         dev.setDeviceStatus(status);
         deviceRepository.save(dev);
     }
+
+    @Override
+    public Device findByName(String name){
+        return deviceRepository.findDeviceByDeviceName(name);
+    }
 }

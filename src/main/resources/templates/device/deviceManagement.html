@@ -55,7 +55,7 @@
             //第一个实例
             table.render({
                 elem: '#deviceTable',
-                url: '/api/list/', //数据接口
+                url: '/api/device/list/', //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
@@ -68,6 +68,7 @@
                         {field: 'profile', title: '设备模板', align: 'center'},
                         {field: 'service', title: '设备协议', align: 'center'},
                         {field: 'description', title: '设备描述', align: 'center'},
+                        {field: 'createdTime', title: '添加时间', align: 'center'},
                         {
                             title: '操作', align: 'center',
                             toolbar: '#barDemo'
@@ -151,23 +152,6 @@
                     });
                 }
             });
-            function getselect() {
-                $.ajax({
-                    type: "get",
-                    url: "/api/deviceTypes",
-                    async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
-                    contentType: "application/json",
-                    success: function (data) {
-                        sessionStorage.setItem("productNames", JSON.stringify(data));
-                        //console.log(data);
-                        //console.log(sessionStorage.getItem("productNames"));
-                    },
-                    error:function(data){
-                        console.log("获取产品失败"+data.responseText);
-                        layer.msg("获取产品识别失败");
-                    }
-                });
-            }
             //触发创建产品弹出层
             function notice(){
                 //示范一个公告层
@@ -200,7 +184,6 @@
                     //     });
                     // }
                     success:function(){
-                        getselect();
                     },
                     yes: function (index, layero) {
 

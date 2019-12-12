@@ -28,7 +28,7 @@
 
 </content>
 
-<dd class="layui-this" th:fragment="productMenu">
+<dd class="layui-this" th:fragment="profileMenu">
     <a href="/pages/profile">设备模板列表</a>
 </dd>
 <div th:fragment="scripts">
@@ -110,7 +110,7 @@
                     layer.confirm('真的删除行么', function (index) {
                         $.ajax({
                             type: "delete",
-                            url: "/api/product",
+                            url: "/api/profile",
                             async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
                             data: obj.data.id,
                             contentType: "text/plain",

@@ -9,21 +9,16 @@ import com.jw.edge.service.ProfileService;
 import com.jw.edge.util.LayuiTableResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.zip.DataFormatException;
 
 @RequestMapping("/api/device")
 @RestController
@@ -61,6 +56,11 @@ public class DeviceController {
         JSONArray arr = new JSONArray();
         for(int i=0; i<devices.size();i++){
             JSONObject jo = devices.getJSONObject(i);
+            try {
+                Device device = deviceService.findByName(jo.getString("name"));
+                Date date = device.getDeviceCreateTime();
+                jo.put("createdTime", date);
+            }catch (Exception ignored){}
             String profileName = jo.getJSONObject("profile").getString("name");
             jo.remove("profile");
             jo.put("profile",profileName);
@@ -115,12 +115,18 @@ public class DeviceController {
     @PostMapping("/json")
     @ResponseBody
     public String addDevice(@RequestBody JSONObject jsonObject) {
-        String url = "http://"+ip+":48081/api/v1/device";
-        String result = restTemplate.postForObject(url,jsonObject,String.class);
-        Device device = new Device();
-        device.setEdgexId(result);
-        deviceService.addDevice(device);
-        return result;
+        try{
+            String url = "http://"+ip+":48081/api/v1/device";
+            String result = restTemplate.postForObject(url,jsonObject,String.class);
+            System.out.println("添加设备成功 id="+result);
+            Device device = new Device();
+            device.setDeviceName(jsonObject.getString("name"));
+            deviceService.addDevice(device);
+            return result;
+        }catch (HttpClientErrorException e){
+            return "失败";
+        }
+
     }
 
     @DeleteMapping("/device")

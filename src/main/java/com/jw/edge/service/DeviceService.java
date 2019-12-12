@@ -12,6 +12,7 @@ public interface DeviceService {
     public boolean addDevice(Device device);
     public String deleteDevice(String deviceId);
     public Device findDeviceByDeviceId(String deviceId);
+    Device findByName(String name);
     public Page<Device> findDeviceByDeviceType(String deviceType, Pageable pageable);
     public void changeDeviceStatus(Device dev, int status);
 }
