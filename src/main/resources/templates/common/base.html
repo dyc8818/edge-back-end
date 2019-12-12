@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:fragment="Layout (content,title,users,productMenu, deviceMenu,
+<html th:fragment="Layout (content,title,users,profileMenu, deviceMenu,
 ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script,messageMenu,scenarioMenu)" lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
@@ -78,8 +78,8 @@ ruleMenu,logManagementMenu,monitorMenu,monitor2Menu,script,messageMenu,scenarioM
 
                 <li class="layui-nav-item layui-nav-itemed"><a class="" href="javascript:;">设备管理</a>
                     <dl class="layui-nav-child">
-                        <dd th:replace="${productMenu}">
-                            <a href="/pages/products">设备模板列表</a>
+                        <dd th:replace="${profileMenu}">
+                            <a href="/pages/profile">设备模板列表</a>
 
                         </dd>
                     </dl>

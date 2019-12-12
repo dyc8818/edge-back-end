@@ -1,33 +1,30 @@
 package com.jw.edge.controller.pages;
 
-import com.jw.edge.entity.Product;
-import com.jw.edge.service.ProductServie;
+import com.jw.edge.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RequestMapping("/pages")
 @Controller
-public class ProductPagesController {
+public class ProfilePagesController {
     @Autowired
-    ProductServie productServie;
+    ProfileService profileService;
 
-    @GetMapping("/products")
+    @GetMapping("/profile")
     public String productList(Model model) throws Exception {
-        return "product/productManagement";
+        return "profile/profileManagement";
     }
 
-    @GetMapping("/productCreate")
+    @GetMapping("/profileCreate")
     public String productCreate(Model model) throws Exception {
-        return "product/productCreate";
+        return "profile/profileCreate";
     }
 
-    @GetMapping("/productDetails")
+    @GetMapping("/profileDetails")
     public String productDetails() throws Exception {
-        return "product/productDetails";
+        return "profile/profileDetails";
     }
 
 }

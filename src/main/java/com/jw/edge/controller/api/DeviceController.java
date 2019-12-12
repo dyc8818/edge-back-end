@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.jw.edge.entity.Device;
 import com.jw.edge.entity.Product;
 import com.jw.edge.service.DeviceService;
-import com.jw.edge.service.ProductServie;
+import com.jw.edge.service.ProfileService;
 import com.jw.edge.util.LayuiTableResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class DeviceController {
     @Autowired
     DeviceService deviceService;
     @Autowired
-    ProductServie productServie;
+    ProfileService profileService;
     @Autowired
     private RestTemplate restTemplate;
     @Value("${server.edgex}")
@@ -40,7 +39,7 @@ public class DeviceController {
     @GetMapping("/deviceTypes")
     @ResponseBody
     public List<Product> getdeviceTypes() {
-        List<Product> products =  productServie.findAllProduct();
+        List<Product> products =  profileService.findAllProduct();
         // LayuiTableResultUtil<List<Product>> productsTable=new LayuiTableResultUtil<List<Product>>();
         return products;
     }

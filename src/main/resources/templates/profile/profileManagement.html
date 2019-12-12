@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::productMenu},_,_,_,_,_,~{::scripts},_,_)}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::profileMenu},_,_,_,_,_,~{::scripts},_,_)}">
 
 <title>设备模板列表</title>
 <content>
@@ -29,7 +29,7 @@
 </content>
 
 <dd class="layui-this" th:fragment="productMenu">
-    <a href="/pages/products">设备模板列表</a>
+    <a href="/pages/profile">设备模板列表</a>
 </dd>
 <div th:fragment="scripts">
 
@@ -62,7 +62,7 @@
             //第一个实例
             table.render({
                 elem: '#productTable',
-                url: '/api/product/list', //数据接口
+                url: '/api/profile/list', //数据接口
                 page: true,  //开启分页
                 toolbar: '#layerRefresh',
                 defaultToolbar:['exports', 'print'],
@@ -105,7 +105,7 @@
                 if (obj.event === 'detail') {
                     // layer.('ID：' + data.productId + ' 的查看操作');
                     localStorage.id=data.id;
-                    location.href = "/pages/productDetails";
+                    location.href = "/pages/profileDetails";
                 } else if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
                         $.ajax({
@@ -156,7 +156,7 @@
                     ,
                     moveType: 1 //拖拽模式，0或者1
                     ,
-                    content: '/pages/productCreate'
+                    content: '/pages/profileCreate'
                     ,
                     // success: function (layero) {
                     //     var btn = layero.find('.layui-layer-btn');

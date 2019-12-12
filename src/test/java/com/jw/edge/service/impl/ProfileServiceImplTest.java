@@ -1,7 +1,7 @@
 package com.jw.edge.service.impl;
 
 import com.jw.edge.entity.Product;
-import com.jw.edge.service.ProductServie;
+import com.jw.edge.service.ProfileService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +10,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProductServiceImplTest {
+public class ProfileServiceImplTest {
 
     @Autowired
-    ProductServie productServie;
+    ProfileService profileService;
 
     @Test
     public void testProductLists() {
-        List<Product> products = productServie.findAllProduct();
+        List<Product> products = profileService.findAllProduct();
         System.out.println(products.get(0).getProductId() + products.get(0).getProductName());
     }
 
@@ -32,7 +30,7 @@ public class ProductServiceImplTest {
             product.setProductName("传感器"+(i+2));
             product.setProductType("设备");
             product.setProductConnectWay("wifi");
-            System.out.println(productServie.addProduct(product));
+            System.out.println(profileService.addProduct(product));
         }
     }
 }
