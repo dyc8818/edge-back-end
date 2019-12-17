@@ -75,4 +75,20 @@ public class DeviceServiceImpl implements DeviceService {
         dev.setDeviceStatus(status);
         deviceRepository.save(dev);
     }
+
+    @Override
+    public Device findByName(String name){
+        return deviceRepository.findDeviceByDeviceName(name);
+    }
+
+    @Override
+    public boolean deleteByEdgexId(String id){
+        Device device = deviceRepository.findByEdgexId(id);
+        if (device == null) {
+            return false;
+        } else {
+            deviceRepository.deleteByEdgexId(id);
+            return true;
+        }
+    }
 }

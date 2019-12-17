@@ -3,7 +3,7 @@ package com.jw.edge.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.jw.edge.dao.ProductRepository;
 import com.jw.edge.entity.Product;
-import com.jw.edge.service.ProductServie;
+import com.jw.edge.service.ProfileService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @Service
-public class ProductServiceImpl implements ProductServie {
+public class ProfileServiceImpl implements ProfileService {
 
     //private final DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

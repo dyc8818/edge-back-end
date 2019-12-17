@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,_,~{::deviceMenu},_,_,_,_,~{::scripts},_,_)}">
+      th:replace="~{common/base :: Layout(~{::content},~{::title}, _,~{::profileMenu},_,_,_,_,_,~{::scripts},_,_)}">
 
 <title>设备模板详情</title>
 <content>
@@ -11,7 +11,7 @@
     </div>
     <div class="layui-row" style="margin-top: 30px">
         <div class="layui-col-md10 layui-col-md-offset1 layui-card">
-            <div class="layui-card-header" id="title">设备名称</div>
+            <div class="layui-card-header" id="title">模板名称</div>
             <div class="layui-card-body">
                 <p id="content">无数据</p>
             </div>
@@ -20,15 +20,15 @@
 
 </content>
 
-<dd class="layui-this" th:fragment="deviceMenu">
-    <a href="/pages/devices">设备列表</a>
+<dd class="layui-this" th:fragment="profileMenu">
+    <a href="/pages/profile">设备模板列表</a>
 </dd>
 <div th:fragment="scripts">
     <script>
         window.onload=function () {
             layui.$.ajax({
                 type: "get",
-                url: "/api/device/"+localStorage.deviceid,
+                url: "/api/profile/"+localStorage.profileid,
                 async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
                 dataType: "json",
                 // processData: false,
@@ -42,6 +42,7 @@
                 }
             });
         }
+
     </script>
 </div>
 </html>

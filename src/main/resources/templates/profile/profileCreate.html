@@ -51,8 +51,8 @@
         form.on('submit(formVerify)', function (obj) {
 
             var data = obj.field.content;
-            var url = "/api/product/yml";
-            var code = 0;
+            var url = "/api/profile/yml";
+            var msg;
             layui.jquery.ajax({
                 type: "post",
                 url: url,
@@ -62,17 +62,14 @@
                 // processData: false,
                 // cache: false,
                 success: function (ev) {
-                    alert(ev);
+                    msg=ev;
                 }
             });
-
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-
             parent.layer.close(index);
-
             // 刷新表格（即点击分页控件的“确定”按钮）
             parent.layui.table.reload("productTable");
-
+            parent.layer.msg("id:"+msg+" 已添加");
         });
     });
 </script>

@@ -2,24 +2,19 @@ package com.jw.edge.controller.api;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.jw.edge.entity.Product;
-import com.jw.edge.service.ProductServie;
+import com.jw.edge.service.ProfileService;
 import com.jw.edge.util.LayuiTableResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 
-@RequestMapping("/api/product")
+@RequestMapping("/api/profile")
 @RestController
-public class  ProductController {
+public class ProfileController {
     @Autowired
-    ProductServie productServie;
+    ProfileService profileService;
     @Autowired
     RestTemplate restTemplate;
     @Value("${server.edgex}")
@@ -33,7 +28,7 @@ public class  ProductController {
         JSONArray result = new JSONArray();
         for(int i=0;i<products.size();i++){
             JSONObject jo = products.getJSONObject(i);
-            jo = productServie.stamp2Time(jo);
+            jo = profileService.stamp2Time(jo);
             result.add(jo);
         }
         System.out.println("查看所有设备模板"+result);
@@ -44,7 +39,7 @@ public class  ProductController {
     @ResponseBody
     public JSONObject getThisProduct(@PathVariable String id){
         String url = "http://"+ip+":48081/api/v1/deviceprofile/"+id;
-        return productServie.stamp2Time(restTemplate.getForObject(url,JSONObject.class));
+        return profileService.stamp2Time(restTemplate.getForObject(url,JSONObject.class));
     }
 
     @PostMapping("/yml")

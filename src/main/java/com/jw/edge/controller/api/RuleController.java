@@ -1,6 +1,5 @@
 package com.jw.edge.controller.api;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jw.edge.dao.DeviceRepository;
 import com.jw.edge.dao.RuleRepository;
@@ -8,7 +7,7 @@ import com.jw.edge.entity.Function;
 import com.jw.edge.entity.Product;
 import com.jw.edge.entity.Rule;
 import com.jw.edge.entity.Device;
-import com.jw.edge.service.ProductServie;
+import com.jw.edge.service.ProfileService;
 import com.jw.edge.service.RuleService;
 import com.jw.edge.service.DeviceService;
 import com.jw.edge.service.FunctionService;
@@ -32,7 +31,7 @@ public class RuleController {
     @Autowired
     DeviceService deviceService;
     @Autowired
-    ProductServie productServie;
+    ProfileService profileService;
     @Autowired
     DeviceRepository deviceRepository;
     @Autowired
@@ -60,7 +59,7 @@ public class RuleController {
 //        return devices;
 //    }
     public List<Product> getruleToDevices(){
-        List<Product> products = productServie.findAllProduct();
+        List<Product> products = profileService.findAllProduct();
         return products;
     }
 
