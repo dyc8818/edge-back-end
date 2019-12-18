@@ -2,6 +2,7 @@ package com.jw.edge;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.context.annotation.Bean;
 
@@ -13,7 +14,11 @@ public class EdgeApplication {
 
     @Bean
     public RestTemplate restTemplate() {
-        return new RestTemplate();
+        SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();
+        simpleClientHttpRequestFactory.setConnectTimeout(10000);
+        simpleClientHttpRequestFactory.setReadTimeout(6000);
+        RestTemplate restTemplate = new RestTemplate(simpleClientHttpRequestFactory);
+        return restTemplate;
     }
 }
 
