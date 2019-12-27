@@ -131,8 +131,6 @@
                                 }
                             }
                             return alt;
-                            //console.log(data);
-                            //console.log(sessionStorage.getItem("productNames"));
                         },
                     });
                 };
@@ -160,7 +158,6 @@
 
             // 头工具栏事件
             table.on('toolbar(buttons)', function (obj) {
-
                 var checkStatus = table.checkStatus('test');
                 switch (obj.event) {
                     case 'createRule':
@@ -195,6 +192,20 @@
                                     layer.msg(ev.data);
                                     layer.close(index);
                                     table.reload("ruleTable");
+
+                                    layui.jquery.ajax({
+                                        type: "post",
+                                        url: "/api/ruleDelete",
+                                        async: false,//同步提交。不设置则默认异步，异步的话，最后执行ajax
+                                        data: JSON.stringify({'ruleName': data.ruleName}),
+                                        contentType: "application/json",
+                                        // processData: false,
+                                        // cache: false,
+                                        success: function (ev) {
+                                            code = ev.code;
+                                        }
+                                    });
+
                                 } else {
                                     layer.msg(ev.data);
                                     layer.close(index);
@@ -271,7 +282,6 @@
                     ,
                     success:function(){
                         sessionStorage.setItem("alertDeviceName", alertDeviceName);
-
                         return 1;
                     },
                 });

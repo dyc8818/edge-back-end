@@ -1,62 +1,42 @@
 package com.jw.edge.controller.api;
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.web.bind.annotation.*;
-import javax.jms.*;
-import com.jw.edge.entity.Terminal;
-import org.junit.Test;
-import org.kie.api.KieServices;
-import org.kie.api.runtime.KieContainer;
-import org.kie.api.runtime.KieSession;
+
 
 @RequestMapping("/api")
 @RestController
 
 public class WebDataController {
 
-    public static String parameterName;
-    public static int threshold;
-    public static String symbol;
-    public static String operation;
-    public static String service;
-
-//    public static String parameterName2;
-//    public static int threshold2;
-//    public static String symbol2;
-//    public static String operation2;
-//    public static String service2;
+    public static String [] parameterName = new String[10];
+    public static int [] threshold= new int [10];
+    public static String [] symbol= new String[10];
+    public static String [] operation= new String[10];
+    public static String [] service= new String[10];
+    public static String [] ruleName= new String[10];
 
     @PostMapping("/webdata")
     @ResponseBody
-    public String Webdata(@RequestBody JSONObject info){
-
+    public void Webdata(@RequestBody JSONObject info)
+    {
         int threshold = info.getIntValue("ruleParaThreshold");
         String name = info.getString("rulePara");
         String symbol = info.getString("ruleJudge");
         String operation = info.getString("ruleExecute");
         String service = info.getString("service");
+        String ruleName = info.getString("ruleName");
 
-        if (this.parameterName==null)
-        {
-            this.parameterName=name;
-            this.threshold=threshold;
-            this.symbol=symbol;
-            this.operation=operation;
-            this.service=service;
-        }
-        /*
-        else if(this.parameterName2==null)
-        {
-            this.parameterName2=name;
-            this.threshold2=threshold;
-            this.symbol2=symbol;
-            this.operation2=operation;
-            this.service2=service;
-        }
-
-         */
-
-        return service;
+        for (int i = 0; i<10; i++)
+            if (this.parameterName[i] == null)
+            {
+                this.parameterName[i] = name;
+                this.threshold[i] = threshold;
+                this.symbol[i] = symbol;
+                this.operation[i] = operation;
+                this.service[i] = service;
+                this.ruleName[i] = ruleName;
+                break;
+            }
     }
 }
